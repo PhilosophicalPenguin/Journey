@@ -1,0 +1,18 @@
+.DS_store
+
+node_modules/
+
+bower_components/
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+#Logs
+logs
+*.log
+
+#compiled dirs
+build/
+dist/

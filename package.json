@@ -1,0 +1,33 @@
+{
+  "name": "Journey",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "lint" : "echo needs to be filled out",
+    "minify" : "ehco needs to be filled out",
+    "browserify" : "echo needs to be filled out",
+    "build" : "echo need to be written! WOO!"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/db222/Journey.git"
+  },
+  "keywords": [
+    "Career",
+    "Path",
+    "Route",
+    "Journey"
+  ],
+  "author": "Philosphical Penguins",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PhilosophicalPenguin/Journey/issues"
+  },
+  "homepage": "https://github.com/PhilosophicalPenguin/Journey",
+  "devDependencies": {
+    "browserify": "^10.2.1",
+    "jshint": "^2.7.0",
+    "uglify-js": "^2.4.23"
+  }
+}
