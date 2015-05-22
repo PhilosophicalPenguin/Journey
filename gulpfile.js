@@ -18,7 +18,7 @@ gulp.task('lint', function() {
 });
 
 gulp.task('compressAndConcat', ['lint'], function() {
-    return gulp.src([targetClientSourceFiles] )
+    return gulp.src(targetClientSourceFiles)
         .pipe(concat('all.js'))
         .pipe(gulp.dest(distributeDirectory))
         .pipe(rename('all.min.js'))
