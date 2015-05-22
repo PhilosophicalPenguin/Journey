@@ -1,0 +1,11 @@
+language : node_js
+node_js:
+ - "node"
+"scripts" : {
+    #list tests here to have travis run npm test
+    #"test" : "vows --spec"
+}
+
+#before sc
+
+#before install :
