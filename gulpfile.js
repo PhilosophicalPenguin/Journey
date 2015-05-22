@@ -4,6 +4,7 @@ var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
 var rename = require('gulp-rename');
 var minifyCss = require('gulp-minify-css');
+var clean = require('gulp-clean');
 
 var targetClientSourceFiles = './client/**/*.js';
 var distributeDirectory = './dist/';
@@ -33,7 +34,8 @@ gulp.task('minify-css', function() {
 });
 
 gulp.task('clean', function() {
-
+    return gulp.src(distributeDirectory)
+        .pipe(clean());
 });
 
 gulp.task('watch', function() {
