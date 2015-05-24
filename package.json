@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "lint" : "echo needs to be filled out",
-    "minify" : "ehco needs to be filled out",
-    "browserify" : "echo needs to be filled out",
-    "build" : "echo need to be written! WOO!"
+    "lint": "echo needs to be filled out",
+    "minify": "ehco needs to be filled out",
+    "browserify": "echo needs to be filled out",
+    "build": "echo need to be written! WOO!"
   },
   "repository": {
     "type": "git",
@@ -29,5 +29,11 @@
     "browserify": "^10.2.1",
     "jshint": "^2.7.0",
     "uglify-js": "^2.4.23"
+  },
+  "dependencies": {
+    "bookshelf": "^0.8.1",
+    "express": "^4.12.4",
+    "knex": "^0.8.6",
+    "mysql": "^2.6.2"
   }
 }
