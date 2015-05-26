@@ -19,5 +19,4 @@ logs
 build/
 dist/
 
-
 test*.js
