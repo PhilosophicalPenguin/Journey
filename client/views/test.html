@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Test Backend</title>
+</head>
+<body>
+
+  <h1>Journey</h1>
+  <h3>Positions</h3>
+  <ul class='positions'>
+    <li>Software engineer</li>
+  </ul>
+
+  <ul class='stats'>
+  </ul>
+  
+  <script type="text/javascript" src="../bower_components/jQuery/dist/jquery.js"></script>
+  <script>
+    $(document).ready(function() {
+
+      var getStats = function(name){
+        $.ajax({
+          url: "/getStats",
+          method: 'GET',
+          data: { name: name }
+        }).done(function(resp) {
+          console.log('response from server:', resp);
+        });
+      }
+
+      $('.positions').on('click', 'li', function(){
+        var query = $(this).text();
+        console.log('query:', query);
+        getStats(query);
+      });
+    });
+  </script>
+
+</body>
+</html>
