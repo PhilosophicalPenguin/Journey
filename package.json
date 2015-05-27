@@ -4,7 +4,7 @@
   "description": "career path router",
   "main": "index.js",
   "scripts": {
-    "build": "echo need to be written! WOO!"
+  "build": "echo need to be written! WOO!"
   },
   "repository": {
     "type": "git",
