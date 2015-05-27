@@ -11,7 +11,7 @@ var Industry = db.Model.extend({
 });
 
 new Industry ({
-  name: 'Consumer Electronics',
+  industry_name: 'Consumer Electronics',
 }).save().then(function(resp){
   console.log('New Industry created:', resp);
 }).catch(function(err) {
@@ -19,7 +19,7 @@ new Industry ({
 });
 
 new Industry ({
-  name: "Internet",
+  industry_name: "Internet",
 }).save().then(function(resp){
   console.log('New Industry created:', resp);
 }).catch(function(err) {
@@ -27,7 +27,7 @@ new Industry ({
 });
 
 new Industry ({
-  name: "Financial Services",
+  industry_name: "Financial Services",
 }).save().then(function(resp){
   console.log('New Industry created:', resp);
 }).catch(function(err) {
@@ -35,7 +35,7 @@ new Industry ({
 });
 
 new Industry ({
-  name: "Higher Education",
+  industry_name: "Higher Education",
 }).save().then(function(resp){
   console.log('New Industry created:', resp);
 }).catch(function(err) {

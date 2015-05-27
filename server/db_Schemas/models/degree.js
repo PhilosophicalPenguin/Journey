@@ -11,7 +11,7 @@ var Degree = db.Model.extend({
 });
 
 new Degree ({
-  name: "B.A.",
+  degree_name: "B.A.",
 }).save().then(function(resp){
   console.log('New Degree created:', resp);
 }).catch(function(err) {
@@ -19,7 +19,7 @@ new Degree ({
 });
 
 new Degree ({
-  name: "B.S.",
+  degree_name: "B.S.",
 }).save().then(function(resp){
   console.log('New Degree created:', resp);
 }).catch(function(err) {
@@ -27,7 +27,7 @@ new Degree ({
 });
 
 new Degree ({
-  name: "M.A.",
+  degree_name: "M.A.",
 }).save().then(function(resp){
   console.log('New Degree created:', resp);
 }).catch(function(err) {
@@ -35,7 +35,7 @@ new Degree ({
 });
 
 new Degree ({
-  name: "M.B.A.",
+  degree_name: "M.B.A.",
 }).save().then(function(resp){
   console.log('New Degree created:', resp);
 }).catch(function(err) {
