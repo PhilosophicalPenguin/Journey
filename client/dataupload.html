@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Upload your JSON here</title>
+</head>
+
+<body>
+    <form id="uploadForm" enctype="multipart/form-data" action="http://localhost:3000/api/uploadfile" method="post">
+        <input type="file" name="jsondata" />
+        <input type="submit" value="Upload Data" name="submit">
+    </form>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Upload your JSON here</title>
+</head>
+<body>
+  <h1>Upload your JSON</h1>
+
+  <span>File</span>
+  <form enctype="multipart/form-data">
+      <input name="file" type="file" />
+      <input type="button" value="Upload" />
+  </form>
+  <progress></progress>
+
+<script src="http://code.jquery.com/jquery-2.1.4.min.js"> </script>
+<script>
+
+	$(':button').click(function(){
+		var formData = new FormData($('form')[0]);
+		    $.ajax({
+		        url: 'http://localhost:3000/uploadfile',  //Server script to process data
+		        type: 'POST',
+		        xhr: function() {  // Custom XMLHttpRequest
+		            var myXhr = $.ajaxSettings.xhr();
+		            if(myXhr.upload){ // Check if upload property exists
+		                myXhr.upload.addEventListener('progress',progressHandlingFunction, false); // For handling the progress of the upload
+		            }
+		            return myXhr;
+		        },
+		        //Ajax events
+		        // beforeSend: beforeSendHandler,
+		         success: function(){
+		         	console.log("IT WORKS")
+		         },
+		         // error: errorHandler,
+		        // Form data
+		        data: formData,
+		        //Options to tell jQuery not to process data or worry about content-type.
+		        cache: false,
+		        contentType: false,
+		        processData: false
+		    });
+	})
+
+</script
+
+
+</body>
+</html>
