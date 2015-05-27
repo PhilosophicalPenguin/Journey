@@ -19,7 +19,7 @@ var Profile = db.Model.extend({
 });
 
 new Profile ({
-  name: 'Kevin Olson',
+  profile_name: 'Kevin Olson',
   profileURL: 'https://www.linkedin.com/in/kevinolson',
   picURL: 'https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/066/26d/3fc215b.jpg',
   currentLocation: 'San Francisco, California',
@@ -32,7 +32,7 @@ new Profile ({
 });
 
 new Profile ({
-  name: 'Kurt Hurtado',
+  profile_name: 'Kurt Hurtado',
   profileURL: 'https://www.linkedin.com/in/kurthurtado',
   picURL: 'https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/4/000/164/2ae/06f514f.jpg',
   currentLocation: 'San Francisco Bay Area',
@@ -45,7 +45,7 @@ new Profile ({
 });
 
 new Profile ({
-  name: 'Lev Stesin',
+  profile_name: 'Lev Stesin',
   profileURL: 'https://www.linkedin.com/in/levstesin',
   picURL: 'https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/2/000/272/045/115dac8.jpg',
   currentLocation: 'San Francisco Bay Area',
@@ -58,11 +58,11 @@ new Profile ({
 });
 
 new Profile ({
-  name: 'Navid Kamali',
+  profile_name: 'Navid Kamali',
   profileURL: 'https://www.linkedin.com/in/ionrails',
   picURL: 'https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/7/000/28f/09e/034280f.jpg',
   currentLocation: 'San Francisco Bay Area',
-  position_id: 1,
+  position_id: 2,
   industry_id: 2
 }).save().then(function(resp){
   console.log('New Profile created:', resp);

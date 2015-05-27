@@ -11,7 +11,7 @@ var School = db.Model.extend({
 });
 
 new School ({
-  name: "UCLA",
+  school_name: "UCLA",
 }).save().then(function(resp){
   console.log('New School created:', resp);
 }).catch(function(err) {
@@ -19,7 +19,7 @@ new School ({
 });
 
 new School ({
-  name: "Stanford",
+  school_name: "Stanford",
 }).save().then(function(resp){
   console.log('New School created:', resp);
 }).catch(function(err) {
@@ -27,7 +27,7 @@ new School ({
 });
 
 new School ({
-  name: "UC Berkeley",
+  school_name: "UC Berkeley",
 }).save().then(function(resp){
   console.log('New School created:', resp);
 }).catch(function(err) {
@@ -35,7 +35,7 @@ new School ({
 });
 
 new School ({
-  name: "Hack Reactor",
+  school_name: "Hack Reactor",
 }).save().then(function(resp){
   console.log('New School created:', resp);
 }).catch(function(err) {

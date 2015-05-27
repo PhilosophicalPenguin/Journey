@@ -1,41 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="journey">
 <head>
   <meta charset="UTF-8">
   <title>Test Backend</title>
+  <style>
+    ul {
+      list-style: none;
+    }
+    .name {
+      margin-left: 40px;
+    }
+  </style>
 </head>
-<body>
+<body ng-controller='testCtrl'>
 
   <h1>Journey</h1>
+  <h2>{{ Testing }}</h2>
   <h3>Positions</h3>
   <ul class='positions'>
-    <li>Software engineer</li>
+    <li ng-repeat='position in positions' ng-click='getStats(position)'>{{position}}</li>
   </ul>
 
-  <ul class='stats'>
+  <ul ng-show='degrees'>
+    <li><b>Degrees</b></li>
+    <li ng-repeat='degree in degrees'>{{degree.percentage * 100}}%<span class='name'>{{degree.name}} </span></li>
   </ul>
-  
-  <script type="text/javascript" src="../bower_components/jQuery/dist/jquery.js"></script>
-  <script>
-    $(document).ready(function() {
 
-      var getStats = function(name){
-        $.ajax({
-          url: "/getStats",
-          method: 'GET',
-          data: { name: name }
-        }).done(function(resp) {
-          console.log('response from server:', resp);
-        });
-      }
+  <ul ng-show='schools'>
+    <li><b>Schools</b></li>
+    <li ng-repeat='school in schools'>{{school.percentage * 100}}%<span class='name'>{{school.name}} </span></li>
+  </ul>
 
-      $('.positions').on('click', 'li', function(){
-        var query = $(this).text();
-        console.log('query:', query);
-        getStats(query);
-      });
-    });
-  </script>
+  <ul ng-show='fieldsOfStudy'>
+    <li><b>Fields of Study</b></li>
+    <li ng-repeat='fieldOfStudy in fieldsOfStudy'>{{fieldOfStudy.percentage * 100}}%<span class='name'>{{fieldOfStudy.name}}</span></li>
+  </ul>
+
+  <script type="text/javascript" src="../bower_components/angular/angular.js"></script>
+  <script type="text/javascript" src="./journeyAngular.js"></script>
 
 </body>
 </html>

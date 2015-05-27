@@ -11,7 +11,7 @@ var Position = db.Model.extend({
 });
 
 new Position ({
-  name: "Software engineer",
+  position_name: "Software engineer",
 }).save().then(function(resp){
   console.log('New Position created:', resp);
 }).catch(function(err) {
@@ -19,7 +19,7 @@ new Position ({
 });
 
 new Position ({
-  name: "Nurse practitioner",
+  position_name: "Nurse practitioner",
 }).save().then(function(resp){
   console.log('New Position created:', resp);
 }).catch(function(err) {
@@ -27,7 +27,7 @@ new Position ({
 });
 
 new Position ({
-  name: "Deputy attorney general",
+  position_name: "Deputy attorney general",
 }).save().then(function(resp){
   console.log('New Position created:', resp);
 }).catch(function(err) {
@@ -35,7 +35,7 @@ new Position ({
 });
 
 new Position ({
-  name: "Product manager",
+  position_name: "Product manager",
 }).save().then(function(resp){
   console.log('New Position created:', resp);
 }).catch(function(err) {

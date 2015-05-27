@@ -24,21 +24,137 @@ app.use(bodyParser.json());
 app.listen(port);
 console.log('Now listening on port', port);
 
+var getModelConstructor = function(name) {
+  var constructor = null;
+  switch(name) {
+    case 'degrees' : constructor = Degree;
+      break;
+    default : console.log('invalid');
+  }
+
+  return constructor;
+}
+
+app.get('/getNameOfId', function(req, res) {
+  var modelConstructor = getModelConstructor(req.query.tableName);
+  if(modelConstructor){
+    new modelConstructor().where({
+      id: req.query.id,
+    }).fetch().then(function (name) {
+      if(name) {
+        res.status(202).json(name);
+      }
+    })
+  }
+  else {
+    res.status(404).send('Not found');
+  }
+});
+
 app.get('/getStats', function(req, res){
 
   console.log('getStats is called', req.query.name);
 
   new Position().where({
-    name: req.query.name
-  }).fetchAll({
-    withRelated: ['profiles']
-  }).then(function(collection) {
-    if (!collection) {
+    position_name: req.query.name
+  }).fetch().then(function(position) {
+    if (!position) {
       console.log('No records for profile found.');
     } else {
-      console.log('variable position:', collection);
-      var position = res.json(collection);
+      var positionID = position.attributes.id;
+      
+      db.knex.from('eduMilestones')
+      .innerJoin('profiles', 'eduMilestones.profile_id', 'profiles.id')
+      .innerJoin('degrees', 'eduMilestones.degree_id', 'degrees.id')
+      .innerJoin('schools', 'eduMilestones.school_id', 'schools.id')
+      .innerJoin('fieldsOfStudy', 'eduMilestones.fieldOfStudy_id', 'fieldsOfStudy.id')
+      .where({position_id: positionID})
+      .then(function(data){
+
+        var forEach = function(){
+          var list = arguments[0];
+          for(var i=0; i<list.length; i++){
+            for(var j = 1; j < arguments.length; j++){
+              arguments[j](list[i], i, list);
+            }
+          }
+        };
+
+        var result = {
+          degrees: { total: 0 },
+          fieldsOfStudy: { total: 0 },
+          schools: { total: 0 },
+          degreesAndFields: { total: 0 }
+        }
+
+        forEach(data,
+          function(object){
+            var val = object.degree_name;
+            if(result.degrees[val]){
+              result.degrees[val]++;
+            }
+            else {
+              result.degrees[val] = 1;
+            }
+            result.degrees.total++;
+          },
+
+          function(object){
+            var val = object.fieldOfStudy_name;
+            if(result.fieldsOfStudy[val]){
+              result.fieldsOfStudy[val]++;
+            }
+            else {
+              result.fieldsOfStudy[val] = 1;
+            }
+            result.fieldsOfStudy.total++;
+          },
+
+          function(object){
+            var val = object.school_name;
+            if(result.schools[val]){
+              result.schools[val]++;
+            }
+            else {
+              result.schools[val] = 1;
+            }
+            result.schools.total++;
+          },
+
+          function(object){
+            var degreeName = object.degree_name.toString();
+            var schoolName = object.school_name.toString();
+            var val = degreeName + '_' + schoolName;
+            if(result.degreesAndFields[val]){
+              result.degreesAndFields[val]++;
+            }
+            else {
+              result.degreesAndFields[val] = 1;
+            }
+            result.degreesAndFields.total++;
+          }
+        );
+
+        console.log('result', result);
+
+        res.json(result);
+      });
+      
+      // var position = res.json(collection);
     }
   });
-
+  
 });
+
+  // new Position().where({
+  //   name: req.query.name
+  // }).fetchAll({
+  //   withRelated: ['profiles']
+  // }).then(function(collection) {
+  //   if (!collection) {
+  //     console.log('No records for profile found.');
+  //   } else {
+  //     console.log('variable position:', collection);
+  //     var position = res.json(collection);
+  //   }
+  // });

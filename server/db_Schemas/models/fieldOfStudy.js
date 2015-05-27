@@ -11,7 +11,7 @@ var FieldOfStudy = db.Model.extend({
 });
 
 new FieldOfStudy ({
-  name: "Computer Science",
+  fieldOfStudy_name: "Computer Science",
 }).save().then(function(resp){
   console.log('New FieldOfStudy created:', resp);
 }).catch(function(err) {
@@ -19,7 +19,7 @@ new FieldOfStudy ({
 });
 
 new FieldOfStudy ({
-  name: "Electrical Engineering",
+  fieldOfStudy_name: "Electrical Engineering",
 }).save().then(function(resp){
   console.log('New FieldOfStudy created:', resp);
 }).catch(function(err) {
@@ -27,7 +27,7 @@ new FieldOfStudy ({
 });
 
 new FieldOfStudy({
-  name: "Philosophy",
+  fieldOfStudy_name: "Philosophy",
 }).save().then(function(resp){
   console.log('New FieldOfStudy created:', resp);
 }).catch(function(err) {
@@ -35,7 +35,7 @@ new FieldOfStudy({
 });
 
 new FieldOfStudy({
-  name: "Business",
+  fieldOfStudy_name: "Business",
 }).save().then(function(resp){
   console.log('New FieldOfStudy created:', resp);
 }).catch(function(err) {
