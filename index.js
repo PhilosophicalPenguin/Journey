@@ -31,12 +31,10 @@ app.listen(port);
 console.log('Now listening on port', port);
 
 
+
 app.post('/api/uploadfile', multipartMiddleware, dataUploadRoute.parseUploadedData)
 
 app.get('/getStats', function(req, res) {
-
-console.log('getStats is called', req.query.name);
-
   new Position().where({
     position_name: req.query.name
   }).fetch().then(function(position) {
@@ -117,8 +115,6 @@ console.log('getStats is called', req.query.name);
           }
         );
 
-        console.log('result', result);
-
         res.json(result);
       });
       
@@ -127,6 +123,8 @@ console.log('getStats is called', req.query.name);
   });
   
 });
+
+module.exports = app;
 
   // new Position().where({
   //   name: req.query.name

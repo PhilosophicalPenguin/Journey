@@ -11,7 +11,7 @@ var distributeDirectory = './dist/';
 var distributeSource = distributeDirectory + '**/*.js';
 
 gulp.task('lint', function() {
-    return gulp.src([targetClientSourceFiles, '!' + distributeSource])
+    return gulp.src([targetClientSourceFiles, '!' + distributeSource, '!./client/bower_components/'])
         .pipe(jshint())
         .pipe(jshint.reporter('jshint-stylish'))
         .pipe(jshint.reporter('fail'));
