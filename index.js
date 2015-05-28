@@ -35,6 +35,7 @@ var positionQueryRoutes = express.Router();
 app.use('/api/queryPositions', positionQueryRoutes);
 require('./server/routes/positionQuery/positionQueryRoutes')(positionQueryRoutes);
 
+
 app.post('/api/uploadfile', multipartMiddleware, dataUploadRoute.parseUploadedData)
 
 // app.get('/getStats', function(req, res) {
