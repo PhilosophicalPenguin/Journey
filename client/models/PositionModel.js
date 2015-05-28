@@ -2,6 +2,13 @@ var PositionModel = Backbone.Model.extend({
 
 	url: '/getStats',
 
+	defaults: {
+		name: null,
+		degrees: null,
+		FOS: null
+	},
+
+
 	goToJourney: function(journeyClicked){
 
 		this.fetch({data: $.param({name: journeyClicked})});
@@ -11,14 +18,18 @@ var PositionModel = Backbone.Model.extend({
 	parse: function(response) {
 
     console.log('RESPONSE', response);
+    console.log("THIS MODEL", this);
 
     var degreesObj = response.degrees;
     var fieldsOfStudyObj = response.fieldsOfStudy;
 
-    console.log('degrees', degreesObj);
-    console.log('FOS', fieldsOfStudyObj);
+    this.set('degrees', degreesObj);
+    this.set('FOS', fieldsOfStudyObj);
 
-    clientRouter.viewDegrees(degreesObj);
+   	console.log('DEGREES', this.get('degrees'));
+
+
+    clientRouter.viewJourney(this);
 
     return response;
   },
