@@ -35,9 +35,8 @@ app.post('/api/uploadfile', multipartMiddleware, dataUploadRoute.parseUploadedDa
 
 app.get('/getStats', function(req, res) {
 
-    console.log('getStats is called', req.query.name);
+console.log('getStats is called', req.query.name);
 
-<<<<<<< HEAD
   new Position().where({
     position_name: req.query.name
   }).fetch().then(function(position) {
@@ -141,19 +140,3 @@ app.get('/getStats', function(req, res) {
   //     var position = res.json(collection);
   //   }
   // });
-=======
-    new Position().where({
-        name: req.query.name
-    }).fetchAll({
-        withRelated: ['profiles']
-    }).then(function(collection) {
-        if (!collection) {
-            console.log('No records for profile found.');
-        } else {
-            console.log('variable position:', collection);
-            var position = res.json(collection);
-        }
-    });
-
-});
->>>>>>> JSON ingestion almost complete

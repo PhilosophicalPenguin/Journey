@@ -10,39 +10,6 @@ var FieldOfStudy = db.Model.extend({
   }
 });
 
-<<<<<<< HEAD
-new FieldOfStudy ({
-  fieldOfStudy_name: "Computer Science",
-}).save().then(function(resp){
-  console.log('New FieldOfStudy created:', resp);
-}).catch(function(err) {
-    console.error(err);
-});
-
-new FieldOfStudy ({
-  fieldOfStudy_name: "Electrical Engineering",
-}).save().then(function(resp){
-  console.log('New FieldOfStudy created:', resp);
-}).catch(function(err) {
-    console.error(err);
-});
-
-new FieldOfStudy({
-  fieldOfStudy_name: "Philosophy",
-}).save().then(function(resp){
-  console.log('New FieldOfStudy created:', resp);
-}).catch(function(err) {
-    console.error(err);
-});
-
-new FieldOfStudy({
-  fieldOfStudy_name: "Business",
-}).save().then(function(resp){
-  console.log('New FieldOfStudy created:', resp);
-}).catch(function(err) {
-    console.error(err);
-});
-=======
 // new FieldOfStudy ({
 //   name: "Computer Science",
 // }).save().then(function(resp){
@@ -74,7 +41,6 @@ new FieldOfStudy({
 // }).catch(function(err) {
 //     console.error(err);
 // });
->>>>>>> JSON ingestion almost complete
 
 
 module.exports = db.model('FieldOfStudy', FieldOfStudy);
