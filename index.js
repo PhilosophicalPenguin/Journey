@@ -37,4 +37,5 @@ var positionQueryRoutes = express.Router();
 app.use('/api/queryPositions', positionQueryRoutes);
 require('./server/routes/positionQuery/positionQueryRoutes')(positionQueryRoutes);
 
+
 module.exports = app;
