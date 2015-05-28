@@ -10,36 +10,36 @@ var Degree = db.Model.extend({
   }
 });
 
-new Degree ({
-  degree_name: "B.A.",
-}).save().then(function(resp){
-  console.log('New Degree created:', resp);
-}).catch(function(err) {
-    console.error(err);
-});
+// new Degree ({
+//   name: "B.A.",
+// }).save().then(function(resp){
+//   console.log('New Degree created:', resp);
+// }).catch(function(err) {
+//     console.error(err);
+// });
 
-new Degree ({
-  degree_name: "B.S.",
-}).save().then(function(resp){
-  console.log('New Degree created:', resp);
-}).catch(function(err) {
-    console.error(err);
-});
+// new Degree ({
+//   name: "B.S.",
+// }).save().then(function(resp){
+//   console.log('New Degree created:', resp);
+// }).catch(function(err) {
+//     console.error(err);
+// });
 
-new Degree ({
-  degree_name: "M.A.",
-}).save().then(function(resp){
-  console.log('New Degree created:', resp);
-}).catch(function(err) {
-    console.error(err);
-});
+// new Degree ({
+//   name: "M.A.",
+// }).save().then(function(resp){
+//   console.log('New Degree created:', resp);
+// }).catch(function(err) {
+//     console.error(err);
+// });
 
-new Degree ({
-  degree_name: "M.B.A.",
-}).save().then(function(resp){
-  console.log('New Degree created:', resp);
-}).catch(function(err) {
-    console.error(err);
-});
+// new Degree ({
+//   name: "M.B.A.",
+// }).save().then(function(resp){
+//   console.log('New Degree created:', resp);
+// }).catch(function(err) {
+//     console.error(err);
+// });
 
 module.exports = db.model('Degree', Degree);

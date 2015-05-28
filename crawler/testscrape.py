@@ -1,11 +1,11 @@
-# sudo scrapy runspider testscrape.py -s USER_AGENT="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.152 Safari/537.36" -o test_data.json;
+#sudo scrapy runspider testscrape.py -s USER_AGENT="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.152 Safari/537.36" -o test_data.json;
 
 import scrapy
 from scrapy.contrib.spiders import CrawlSpider, Rule
 from scrapy.contrib.linkextractors import LinkExtractor
 from scrapy.contrib.linkextractors.sgml import SgmlLinkExtractor
 
-start_urls = ['https://www.linkedin.com/in/vatraghavan']
+start_urls = ['https://www.linkedin.com/pub/valerie-liang/33/269/489']
 
 class Person(scrapy.Item):
 	full_name = scrapy.Field()
@@ -25,8 +25,8 @@ class PersonScraper(CrawlSpider):
 	USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.152 Safari/537.36"
 	name = 'personSpy'
 	allowed_domains = ['linkedin.com']
-	start_urls = ['https://www.linkedin.com/in/vatraghavan']
-	rules = [Rule(SgmlLinkExtractor(allow=(r'in/vatraghavan')), callback='parse_person', follow=False)]
+	start_urls = ['https://www.linkedin.com/pub/valerie-liang/33/269/489']
+	rules = [Rule(SgmlLinkExtractor(allow=(r'pub/valerie-liang/33/269/489')), callback='parse_person', follow=False)]
 
 	def parse_person(self, response):
 		person = Person()

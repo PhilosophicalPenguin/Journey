@@ -10,6 +10,7 @@ var Industry = db.Model.extend({
   }
 });
 
+<<<<<<< HEAD
 new Industry ({
   industry_name: 'Consumer Electronics',
 }).save().then(function(resp){
@@ -41,5 +42,38 @@ new Industry ({
 }).catch(function(err) {
     console.error(err);
 });
+=======
+// new Industry ({
+//   name: 'Consumer Electronics',
+// }).save().then(function(resp){
+//   console.log('New Industry created:', resp);
+// }).catch(function(err) {
+//     console.error(err);
+// });
+
+// new Industry ({
+//   name: "Internet",
+// }).save().then(function(resp){
+//   console.log('New Industry created:', resp);
+// }).catch(function(err) {
+//     console.error(err);
+// });
+
+// new Industry ({
+//   name: "Financial Services",
+// }).save().then(function(resp){
+//   console.log('New Industry created:', resp);
+// }).catch(function(err) {
+//     console.error(err);
+// });
+
+// new Industry ({
+//   name: "Higher Education",
+// }).save().then(function(resp){
+//   console.log('New Industry created:', resp);
+// }).catch(function(err) {
+//     console.error(err);
+// });
+>>>>>>> JSON ingestion almost complete
 
 module.exports = db.model('Industry', Industry);

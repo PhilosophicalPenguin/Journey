@@ -20,7 +20,9 @@ var multipart = require('connect-multiparty');
 var port = process.env.PORT || 3000;
 app.use(express.static(__dirname + '/client'));
 
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 app.use(bodyParser.json());
 
 var multipartMiddleware = multipart();
@@ -31,10 +33,11 @@ console.log('Now listening on port', port);
 
 app.post('/api/uploadfile', multipartMiddleware, dataUploadRoute.parseUploadedData)
 
-app.get('/getStats', function(req, res){
+app.get('/getStats', function(req, res) {
 
-  console.log('getStats is called', req.query.name);
+    console.log('getStats is called', req.query.name);
 
+<<<<<<< HEAD
   new Position().where({
     position_name: req.query.name
   }).fetch().then(function(position) {
@@ -138,3 +141,19 @@ app.get('/getStats', function(req, res){
   //     var position = res.json(collection);
   //   }
   // });
+=======
+    new Position().where({
+        name: req.query.name
+    }).fetchAll({
+        withRelated: ['profiles']
+    }).then(function(collection) {
+        if (!collection) {
+            console.log('No records for profile found.');
+        } else {
+            console.log('variable position:', collection);
+            var position = res.json(collection);
+        }
+    });
+
+});
+>>>>>>> JSON ingestion almost complete

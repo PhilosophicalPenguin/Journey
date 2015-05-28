@@ -21,92 +21,92 @@ var EduMilestone = db.Model.extend({
   }
 });
 
-new EduMilestone ({
-  profile_id: 1,
-  degree_id: 2,
-  fieldOfStudy_id: 1,
-  school_id: 2,
-  startYear: 1999,
-  endYear: 2003
-}).save().then(function(resp){
-  console.log('New EduMilestone created:', resp)
-}).catch(function(err) {
-    console.error(err);
-});
+// new EduMilestone ({
+//   profile_id: 1,
+//   degree_id: 2,
+//   fieldOfStudy_id: 1,
+//   school_id: 2,
+//   startYear: 1999,
+//   endYear: 2003
+// }).save().then(function(resp){
+//   console.log('New EduMilestone created:', resp)
+// }).catch(function(err) {
+//     console.error(err);
+// });
 
-new EduMilestone ({
-  profile_id: 1,
-  degree_id: 4,
-  fieldOfStudy_id: 4,
-  school_id: 3,
-  startYear: 2007,
-  endYear: 2009
-}).save().then(function(resp){
-  console.log('New EduMilestone created:', resp)
-}).catch(function(err) {
-    console.error(err);
-});
+// new EduMilestone ({
+//   profile_id: 1,
+//   degree_id: 4,
+//   fieldOfStudy_id: 4,
+//   school_id: 3,
+//   startYear: 2007,
+//   endYear: 2009
+// }).save().then(function(resp){
+//   console.log('New EduMilestone created:', resp)
+// }).catch(function(err) {
+//     console.error(err);
+// });
 
-new EduMilestone ({
-  profile_id: 2,
-  degree_id: 2,
-  fieldOfStudy_id: 1,
-  school_id: 3,
-  startYear: 2005,
-  endYear: 2009
-}).save().then(function(resp){
-  console.log('New EduMilestone created:', resp)
-}).catch(function(err) {
-    console.error(err);
-});
+// new EduMilestone ({
+//   profile_id: 2,
+//   degree_id: 2,
+//   fieldOfStudy_id: 1,
+//   school_id: 3,
+//   startYear: 2005,
+//   endYear: 2009
+// }).save().then(function(resp){
+//   console.log('New EduMilestone created:', resp)
+// }).catch(function(err) {
+//     console.error(err);
+// });
 
-new EduMilestone ({
-  profile_id: 3,
-  degree_id: 1,
-  fieldOfStudy_id: 3,
-  school_id: 4,
-  startYear: 1995,
-  endYear: 1999
-}).save().then(function(resp){
-  console.log('New EduMilestone created:', resp)
-}).catch(function(err) {
-    console.error(err);
-});
+// new EduMilestone ({
+//   profile_id: 3,
+//   degree_id: 1,
+//   fieldOfStudy_id: 3,
+//   school_id: 4,
+//   startYear: 1995,
+//   endYear: 1999
+// }).save().then(function(resp){
+//   console.log('New EduMilestone created:', resp)
+// }).catch(function(err) {
+//     console.error(err);
+// });
 
-new EduMilestone ({
-  profile_id: 4,
-  degree_id: 2,
-  fieldOfStudy_id: 2,
-  school_id: 1,
-  startYear: 2004,
-  endYear: 2008
-}).save().then(function(resp){
-  console.log('New EduMilestone created:', resp)
-}).catch(function(err) {
-    console.error(err);
-});
+// new EduMilestone ({
+//   profile_id: 4,
+//   degree_id: 2,
+//   fieldOfStudy_id: 2,
+//   school_id: 1,
+//   startYear: 2004,
+//   endYear: 2008
+// }).save().then(function(resp){
+//   console.log('New EduMilestone created:', resp)
+// }).catch(function(err) {
+//     console.error(err);
+// });
 
-new EduMilestone ({
-  profile_id: 4,
-  degree_id: 3,
-  fieldOfStudy_id: 2,
-  school_id: 2,
-  startYear: 2013,
-  endYear: 2015
-}).save().then(function(resp){
-  console.log('New EduMilestone created:', resp)
-}).catch(function(err) {
-    console.error(err);
-});
+// new EduMilestone ({
+//   profile_id: 4,
+//   degree_id: 3,
+//   fieldOfStudy_id: 2,
+//   school_id: 2,
+//   startYear: 2013,
+//   endYear: 2015
+// }).save().then(function(resp){
+//   console.log('New EduMilestone created:', resp)
+// }).catch(function(err) {
+//     console.error(err);
+// });
 
 
-new EduMilestone({'id': '2'}).fetch({
-  withRelated: ['profile']
-}).then(function(EduMilestone) {
-  // console.log(EduMilestone.related('profile').toJSON());
-  // console.log(EduMilestone.related('degree').toJSON());
-  console.log(EduMilestone.toJSON());
-});
+// new EduMilestone({'id': '2'}).fetch({
+//   withRelated: ['profile']
+// }).then(function(EduMilestone) {
+//   // console.log(EduMilestone.related('profile').toJSON());
+//   // console.log(EduMilestone.related('degree').toJSON());
+//   console.log(EduMilestone.toJSON());
+// });
 
 
 
