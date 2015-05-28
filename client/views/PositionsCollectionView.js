@@ -4,7 +4,7 @@ var PositionsCollectionView = Backbone.View.extend({
 	className: 'positionsList',
 
 	initialize: function(){
-		// this.collection.on('goToJourneyClicked', console.log('goToJourneyClicked'));
+
 		this.render();
 
 	},
