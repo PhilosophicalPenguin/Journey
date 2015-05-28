@@ -9,6 +9,8 @@ var Position = require('./server/db_Schemas/models/position');
 var Profile = require('./server/db_Schemas/models/profile');
 var Industry = require('./server/db_Schemas/models/industry');
 var EduMilestone = require('./server/db_Schemas/models/eduMilestone');
+var dataUploadRoute = require('./server/routes/dataUpload/dataUploadRoute.js');
+var multipart = require('connect-multiparty');
 
 // var mongoose = require('mongoose')
 // var db_port = process.env.MONGOLAB_URI || 'mongodb://localhost/socialstocks';
@@ -18,42 +20,22 @@ var EduMilestone = require('./server/db_Schemas/models/eduMilestone');
 var port = process.env.PORT || 3000;
 app.use(express.static(__dirname + '/client'));
 
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 app.use(bodyParser.json());
+
+var multipartMiddleware = multipart();
 
 app.listen(port);
 console.log('Now listening on port', port);
 
-var getModelConstructor = function(name) {
-  var constructor = null;
-  switch(name) {
-    case 'degrees' : constructor = Degree;
-      break;
-    default : console.log('invalid');
-  }
 
-  return constructor;
-}
+app.post('/api/uploadfile', multipartMiddleware, dataUploadRoute.parseUploadedData)
 
-app.get('/getNameOfId', function(req, res) {
-  var modelConstructor = getModelConstructor(req.query.tableName);
-  if(modelConstructor){
-    new modelConstructor().where({
-      id: req.query.id,
-    }).fetch().then(function (name) {
-      if(name) {
-        res.status(202).json(name);
-      }
-    })
-  }
-  else {
-    res.status(404).send('Not found');
-  }
-});
+app.get('/getStats', function(req, res) {
 
-app.get('/getStats', function(req, res){
-
-  console.log('getStats is called', req.query.name);
+console.log('getStats is called', req.query.name);
 
   new Position().where({
     position_name: req.query.name
