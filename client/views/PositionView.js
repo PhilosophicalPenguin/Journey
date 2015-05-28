@@ -5,7 +5,7 @@ var PositionView = Backbone.View.extend({
 	template: _.template('<%= title %>'),
 
 	events: {
-		'click': 'goToJourneyPage',
+		'click': 'journeyClickHandler',
 	},
 
 	render: function() {
@@ -13,9 +13,16 @@ var PositionView = Backbone.View.extend({
 		return this.$el.html(this.template(this.model.attributes));
 	},
 
-	goToJourneyPage: function() {
-		this.model.goToJourney();
-	}
+	journeyClickHandler : function(event){
+    var journey = this.model.get('title');
+    alert(journey);
+    this.model.goToJourney(journey);
+
+	},
+
+	// goToJourneyPage: function() {
+	// 	this.model.goToJourney();
+	// }
 
 })
 

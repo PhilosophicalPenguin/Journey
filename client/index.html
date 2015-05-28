@@ -42,11 +42,12 @@
       $(function(){
 
       	var positionsCollection = new PositionsCollection(positionsData);
+      	console.log(positionsCollection);
+
         var app = new AppModel({positionsCollection: positionsCollection});
 
         // build a view for the top level of the whole app
         var appView = new AppView({model: app});
-
 
         $('.mainContent').append(appView.$el);
       });

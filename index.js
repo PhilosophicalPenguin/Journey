@@ -42,7 +42,7 @@ app.get('/getStats', function(req, res) {
       console.log('No records for profile found.');
     } else {
       var positionID = position.attributes.id;
-      
+
       db.knex.from('eduMilestones')
       .innerJoin('profiles', 'eduMilestones.profile_id', 'profiles.id')
       .innerJoin('degrees', 'eduMilestones.degree_id', 'degrees.id')
@@ -117,11 +117,11 @@ app.get('/getStats', function(req, res) {
 
         res.json(result);
       });
-      
+
       // var position = res.json(collection);
     }
   });
-  
+
 });
 
 module.exports = app;

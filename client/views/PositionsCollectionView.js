@@ -4,7 +4,6 @@ var PositionsCollectionView = Backbone.View.extend({
 	className: 'positionsList',
 
 	initialize: function(){
-
 		this.render();
 
 	},

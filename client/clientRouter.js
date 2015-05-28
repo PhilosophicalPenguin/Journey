@@ -2,7 +2,7 @@ var ClientRouter = Backbone.Router.extend ({
 
  	routes: {
  		'' : 'home',
- 		'viewJourney': 'viewJourney'
+ 		'viewDegrees': 'viewDegrees'
  	},
 
  	home: function () {
@@ -11,11 +11,10 @@ var ClientRouter = Backbone.Router.extend ({
 
  	},
 
+ 	viewDegrees: function(degrees) {
 
- 	viewJourney: function() {
-
-		var journeyView = new JourneyView();
-    $(".mainContent").html(journeyView.el);
+		var degreeView = new JourneyView(degrees);
+    $(".mainContent").html(degreeView.el);
 
  	}
 });
