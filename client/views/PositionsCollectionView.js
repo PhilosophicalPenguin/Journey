@@ -5,13 +5,12 @@ var PositionsCollectionView = Backbone.View.extend({
 
 	initialize: function(){
 		this.render();
-
 	},
 
 	render: function(){
 		this.$el.children().detach();
-		this.$el.html('<li class="positionsHeader">Positions</li>')
-		.append(
+
+		this.$el.append(
 			this.collection.map(function(position){
 				return new PositionView({ model: position }).render();
 			})

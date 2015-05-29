@@ -20,7 +20,7 @@ var AppModel = Backbone.Model.extend ({
 	positionsReceived: function() {
 		console.log(this);
 		console.log('this.get data', this.get('data'));
-		this.set('positionsCollection', new PositionsCollection(this.get('data')))
+		this.set('positionsCollection', new PositionsCollection(this.get('data')));
 		this.trigger('positionsReceived');
 	}
 

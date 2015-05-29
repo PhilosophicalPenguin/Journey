@@ -11,9 +11,6 @@
 	<script src= "libs/underscore/underscore.js"></script>
 	<script src= "libs/backbone/backbone.js"></script>
 
-	<!-- DUMMY DATA -->
-	<script src= "positionsListData.js"></script>
-
 	<!-- MODELS & COLLECTIONS -->
 	<script src= "models/PositionModel.js"></script>
 	<script src= "collections/PositionsCollection.js"></script>
@@ -23,6 +20,7 @@
 	<script src= "views/PositionsCollectionView.js"></script>
 	<script src= "views/PositionView.js"></script>
 	<script src= "views/AppView.js"></script>
+	<script src= "views/StatsTableView.js"></script>
 	<script src= "views/JourneyView.js"></script>
 
 	<!-- ROUTER -->
@@ -43,8 +41,6 @@
       $(function(){
 
         var app = new AppModel();
-
-        // build a view for the top level of the whole app
         var appView = new AppView({model: app});
 
         $('.mainContent').append(appView.$el);
