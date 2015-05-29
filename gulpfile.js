@@ -4,14 +4,14 @@ var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
 var rename = require('gulp-rename');
 var minifyCss = require('gulp-minify-css');
-var clean = require('gulp-clean');
+var clean = require('rimraf');
 
 var targetClientSourceFiles = './client/**/*.js';
 var distributeDirectory = './dist/';
 var distributeSource = distributeDirectory + '**/*.js';
 
 gulp.task('lint', function() {
-    return gulp.src([targetClientSourceFiles, '!' + distributeSource])
+    return gulp.src([targetClientSourceFiles, '!' + distributeSource, '!./client/bower_components/'])
         .pipe(jshint())
         .pipe(jshint.reporter('jshint-stylish'))
         .pipe(jshint.reporter('fail'));
@@ -34,7 +34,7 @@ gulp.task('minify-css', function() {
 });
 
 gulp.task('clean', function() {
-    return gulp.src(distributeDirectory)
+    return gulp.src(distributeDirectory, { read : false } )
         .pipe(clean());
 });
 
