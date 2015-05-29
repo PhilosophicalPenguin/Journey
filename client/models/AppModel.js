@@ -4,20 +4,24 @@ var AppModel = Backbone.Model.extend ({
 
 	parse: function(response) {
 		this.set('data', response);
-		console.log('all available positions', response);
+		//response is an array of objects
+		console.log('all available positions array', response);
 		return response;
 	},
 
 	initialize: function(params){
 		var response = null;
-		var context = this;
-		this.fetch().then(function(res) {
-			context.trigger('positionsReceived');
-		});
 
-
+		this.fetch().then(this.positionsReceived.bind(this));
 		this.set('positionModel', new PositionModel());
 
+	},
+
+	positionsReceived: function() {
+		console.log(this);
+		console.log('this.get data', this.get('data'));
+		this.set('positionsCollection', new PositionsCollection(this.get('data')))
+		this.trigger('positionsReceived');
 	}
 
 

@@ -3,9 +3,9 @@ var db = require('../../db_Schemas/config');
 
 
 var forEach = function(){
-  var list = arguments[0];
-  for(var i=0; i<list.length; i++){
-    for(var j = 1; j < arguments.length; j++){
+  var list = arguments[0];//grab the collection
+  for(var i=0; i<list.length; i++){ //iterate over collection
+    for(var j = 1; j < arguments.length; j++){ // iterate over callbacks arguments[1] .. arguments[n]
       arguments[j](list[i], i, list);
     }
   }
@@ -16,7 +16,15 @@ module.exports = {
     console.log('im trying to get available positions');
     new Position().fetchAll().then(function(positions){
       if (positions) {
-        response.json(positions);
+        var positionArray = [];
+        forEach(positions.models, function(position) {
+          //pull off id and position_name off each object
+          positionArray.push({
+            "position_id" : position.attributes.id,
+            "position_name" :position.attributes.position_name
+          });
+        });
+        response.json(positionArray);
       }
     })
 

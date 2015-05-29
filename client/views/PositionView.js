@@ -2,7 +2,7 @@ var PositionView = Backbone.View.extend({
 
 	tagName: 'li',
 	className: 'positionView',
-	template: _.template('<%= title %>'),
+	template: _.template('<%= position_name %>'),
 
 	intialize: function() {
 		this.render();
@@ -18,15 +18,12 @@ var PositionView = Backbone.View.extend({
 	},
 
 	journeyClickHandler : function(event){
-    var journey = this.model.get('title');
+    var journey = this.model.get('position_name');
     alert(journey);
     this.model.goToJourney(journey);
 
 	},
 
-	// goToJourneyPage: function() {
-	// 	this.model.goToJourney();
-	// }
 
 })
 
