@@ -9,6 +9,8 @@ var path = require('path');
 
 // require('require/server').mount(app);
 
+
+
 // var mongoose = require('mongoose')
 // var db_port = process.env.MONGOLAB_URI || 'mongodb://localhost/socialstocks';
 // mongoose.connect(db_port);
@@ -36,6 +38,5 @@ app.post('/api/uploadfile', multipartMiddleware, dataUploadRoute.parseUploadedDa
 var positionQueryRoutes = express.Router();
 app.use('/api/queryPositions', positionQueryRoutes);
 require('./server/routes/positionQuery/positionQueryRoutes')(positionQueryRoutes);
-
 
 module.exports = app;
