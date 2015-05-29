@@ -15,14 +15,14 @@ var labelToIdStorage = require('../../labelToIdStorage');
 //
 
 //helper for injesting json
-saveNewEntryToDB = function(model, propertyName, label, tableName) {
-  new model({
-    propertyName: label
-  }).save().then(function (resp) {
-    labelToIdStorage(tableName, fieldValue, resp.attributes.id);
-    return 
-  })
-}
+// saveNewEntryToDB = function(model, propertyName, label, tableName) {
+//   new model({
+//     propertyName: label
+//   }).save().then(function (resp) {
+//     labelToIdStorage(tableName, fieldValue, resp.attributes.id);
+//     return 
+//   })
+// }
 
 module.exports = {
 
@@ -34,130 +34,130 @@ module.exports = {
 
         data_dump_profiles.forEach(function(person) {
 
-            for (var i = 0; i < person.educationList.length; i++) {
-                // console.log("person.educationList[i]", person.educationList[i])
-
-
-                // var degreeLabel = person.educationList[i].degree;
-                // var degreeID = labelToIdStorage.getId('degrees', degreeLabel);
-
-                // if( degreeID === -1) {
-                //     //ADD TO DEGREES TABLE
-                //     new Degree({
-                //         degree_name: degreeLabel
-                //     }).save().then(function(resp) {
-                //         degreeID = resp.attributes.id;
-                //         labelToIdStorage.addItem('degrees', degreeLabel, degreeID)
-                //         console.log('response from labelToIdStorage', labelToIdStorage.degrees);
-                //     }).catch(function(err) {
-                //         console.error(err);
-                //     });
-                // }
-
-                // var fieldOfStudyLabel = person.educationList[i].major;
-                // var fieldOfStudyID = labelToIdStorage.getId('fieldOfStudy', fieldOfStudyLabel);
-
-                // if( fieldOfStudyID === -1) {
-                //   //ADD TO FIELDS OF STUDY TABLE
-                //   new FieldOfStudy({
-                //       fieldOfStudy_name: fieldOfStudyLabel
-                //   }).save().then(function(resp) {
-                //       fieldOfStudyID = resp.attributes.id;
-                //       labelToIdStorage.addItem('fieldOfStudy', fieldOfStudyLabel, fieldOfStudyID);
-                //       console.log('response from labelToIdStorage', labelToIdStorage.fieldsOfStudy);
-                //   }).catch(function(err) {
-                //       console.error(err);
-                //   });
-                // }
-
-                // var schoolLabel = person.educationList[i].school;
-                // var schoolID = labelToIdStorage.getId('school', schoolLabel);
-
-                // if(schoolID === -1) {
-                //   new School({
-                //     school_name: schoolLabel
-                //   }).save().then(function (resp) {
-                //     schoolID = resp.attributes.id;
-                //     labelToIdStorage.addItem('school', schoolLabel, schoolID);
-                //   }).catch(function (err) {
-                //     console.error(err);
-                //   })
-                // }
-            }
-
-            //ADD TO INDUSTRIES TABLE
-            new Industry({
-                industry_name: person.industry[0],
-            }).save().then(function(resp) {
-                // console.log('New Industry created:', resp);
-            }).catch(function(err) {
-                console.error(err);
-            });
-
-            //ADD CURRENT_TITLE TO POSITIONS 
-            new Position({
-                position_name: person.current_title[0],
-            }).save().then(function(resp) {
-                 console.log('New Position created:', resp);
-            }).catch(function(err) {
-                console.error(err);
-            });
-
-
-            //ADD PREVIOUS TITLES TO POSITIONS
+            //ADD PREVIOUS POSITION TITLES TO POSITIONS TABLE
             for (var j = 0; j < person.past_experience_list.length; j++) {
 
-                new Position({
-                    position_name: person.past_experience_list[j].title,
-                }).save().then(function(resp) {
-                    // console.log('New Position created:', resp);
-                }).catch(function(err) {
-                    console.error(err);
-                });
+                var positionLabel = person.past_experience_list[j].title;
+                var positionID = labelToIdStorage.getId('positions', positionLabel);
 
+                if( positionID === -1) {
+                    new Position({
+                        position_name: person.past_experience_list[j].title,
+                    }).save().then(function(resp) {
+                      positionID = resp.attributes.id;
+                      labelToIdStorage.addItem('positions', positionLabel, positionID)
+                      console.log('response from labelToIdStorage', labelToIdStorage.positions);
+                    }).catch(function(err) {
+                        console.error(err);
+                    });
+                }
             }
 
-            // // ADD TO PROFILES TABLE
+            //ADD CURRENT_TITLE TO POSITIONS 
 
-            //  // figure out what the position_id is:
-            //  // query Positions table with person.current_title[0],
-            //  // see what the ID returned from there is
+            var currentPositionLabel = person.current_title[0];
+            var currentPositionID = labelToIdStorage.getId('positions', currentPositionLabel);
 
+            if(currentPositionID === -1) {
+              new Position({
+                  position_name: person.current_title[0],
+              }).save().then(function(resp) {
+                currentPositionID = resp.attributes.id;
+                labelToIdStorage.addItem('positions', positionLabel, positionID)
+                console.log('response from labelToIdStorage', labelToIdStorage.positions);
+              }).catch(function(err) {
+                  console.error(err);
+              });
+            }
 
-            var person_position_id;
-            var person_industry_id;
+            var industryLabel = person.industry[0];
+            var industryID = labelToIdStorage.getId('industries', industryLabel);
 
-            new Position({'position_name': person.current_title[0]})
-                .fetch()
-                .then(function(model){
-                    person_position_id = model.get('id');
-                    console.log("person_position_id IN THEN", person_position_id)
-                })
-
-            new Industry({'industry_name': person.industry[0]})
-                .fetch()
-                .then(function(model){
-                    person_industry_id = model.get('id');
-                    console.log("person_industry_id IN THEN", person_industry_id)
-                })
+            // ADD TO INDUSTRIES TABLE
+            if(industryID === -1) {
+              new Industry({
+                  industry_name: person.industry[0],
+              }).save().then(function(resp) {
+                industryID = resp.attributes.id;
+                labelToIdStorage.addItem('induestries', industryLabel, industryID)
+                console.log('response from labelToIdStorage', labelToIdStorage.industries);
+              }).catch(function(err) {
+                  console.error(err);
+              });
+            }
 
 
             console.log("PERSON.URL[0]:::::::::::::", person.url[0])
+            console.log('currentPositionID', currentPositionID);
+            console.log('industryID', industryID);
+
             new Profile ({
               profile_name: person.full_name[0],
               profileURL: person.url,
               picURL: person.current_photo_link,
               currentLocation: person.location[0],
-              position_id: person_position_id,
-              industry_id: person_industry_id
+              position_id: currentPositionID,
+              industry_id: industryID
             }).save().then(function(resp){
               console.log('New Profile created:', resp);
             }).catch(function(err) {
                 console.error(err);
             });
 
+            // ITERATE OVER EDUCATION LIST
+            for (var i = 0; i < person.educationList.length; i++) {
+                console.log("person.educationList[i]", person.educationList[i])
+
+                var degreeLabel = person.educationList[i].degree;
+                var degreeID = labelToIdStorage.getId('degrees', degreeLabel);
+
+                if( degreeID === -1) {
+                    //ADD TO DEGREES TABLE IF NOT IN LOCAL HASH TABLE
+                    new Degree({
+                        degree_name: degreeLabel
+                    }).save().then(function(resp) {
+                        degreeID = resp.attributes.id;
+                        labelToIdStorage.addItem('degrees', degreeLabel, degreeID)
+                        console.log('response from labelToIdStorage', labelToIdStorage.degrees);
+                    }).catch(function(err) {
+                        console.error(err);
+                    });
+                }
+
+                var fieldOfStudyLabel = person.educationList[i].major;
+                var fieldOfStudyID = labelToIdStorage.getId('fieldsOfStudy', fieldOfStudyLabel);
+
+                if( fieldOfStudyID === -1) {
+                  //ADD TO FIELDS OF STUDY TABLE IF NOT IN LOCAL HASH TABLE 
+                  new FieldOfStudy({
+                      fieldOfStudy_name: fieldOfStudyLabel
+                  }).save().then(function(resp) {
+                      fieldOfStudyID = resp.attributes.id;
+                      labelToIdStorage.addItem('fieldsOfStudy', fieldOfStudyLabel, fieldOfStudyID);
+                      console.log('response from labelToIdStorage', labelToIdStorage.fieldsOfStudy);
+                  }).catch(function(err) {
+                      console.error(err);
+                  });
+                }
+
+                var schoolLabel = person.educationList[i].school;
+                var schoolID = labelToIdStorage.getId('schools', schoolLabel);
+                if(schoolID === -1) {
+                  //ADD TO SCHOOLS TABLE IF NOT IN LOCAL HASH TABLE 
+                  new School({
+                    school_name: schoolLabel
+                  }).save().then(function (resp) {
+                    schoolID = resp.attributes.id;
+                    labelToIdStorage.addItem('school', schoolLabel, schoolID);
+                  }).catch(function (err) {
+                    console.error(err);
+                  })
+                }
+            }
 
 
+           
+           
 
 
             // //ADD TO EDUMILESTONES

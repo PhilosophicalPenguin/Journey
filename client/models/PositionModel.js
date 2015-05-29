@@ -17,7 +17,7 @@ window.PositionModel = Backbone.Model.extend({
     clientRouter.viewJourney(this);
 
     return response;
-  },
+  }
 
 });
 
