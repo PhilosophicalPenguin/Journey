@@ -4,6 +4,10 @@ var PositionView = Backbone.View.extend({
 	className: 'positionView',
 	template: _.template('<%= title %>'),
 
+	intialize: function() {
+		this.render();
+	},
+
 	events: {
 		'click': 'journeyClickHandler',
 	},

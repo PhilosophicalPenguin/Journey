@@ -8,9 +8,7 @@ var JourneyView = Backbone.View.extend({
 
   initialize: function () {
 
-  		console.log("NEW JOURNEY VIEW CREATED, model degrees:", this.model.get("degrees"))
-
-      this.render();
+    this.render();
   },
 
   render: function () {
@@ -20,9 +18,6 @@ var JourneyView = Backbone.View.extend({
   	data.schools = [];
   	data.fieldsOfStudy = [];
   	data.degreesAndFields = [];
-  	// data.title = this.model.attributes.title;
-  	// data.totalDegrees = this.model.attributes.degrees.total;
-  	// data.degrees = [];
 
   	var objConstructor = function(array, obj){
       for (var key in obj){		//BA, MBA, MS
@@ -42,20 +37,6 @@ var JourneyView = Backbone.View.extend({
 
     console.log("data", JSON.stringify(data));
 
-  	// for(var degree in this.model.attributes.degrees){
-  	// 	data.degrees.push(degree)
-  	// };
-
-
-
-    // this.$el.html(this.template(data));
-
-  // // 	return data.degrees.forEach(function(degree){
-  // // 		context.$el.html(context.template(data))
-  // // 	})
-  // // }
-
-  // this.$el.children().detach();
 
   //   this.$el.html('<th>Education</th>').append(
   //     data.degrees.map(function(degree){
@@ -66,10 +47,14 @@ var JourneyView = Backbone.View.extend({
 		var context = this;
 		console.log(context);
 
+		context.$el.append('<h4>'+ this.model.get('title') + '</h4>');
+
   	data.degrees.forEach(function(degree){
   		return context.$el.append(context.template({degree: degree}))
   	})
 
+  	// this.positionView = new PositionView({model: this.model});
+  	// this.$el.append(this.positionView.$el);
 }
 
 });
