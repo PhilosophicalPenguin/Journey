@@ -4,7 +4,7 @@
   "description": "career path router",
   "main": "index.js",
   "scripts": {
-    "build": "echo need to be written! WOO!"
+  "build": "echo need to be written! WOO!"
   },
   "repository": {
     "type": "git",
@@ -38,6 +38,7 @@
     "sinon": "^1.14.1",
     "uglify-js": "^2.4.23"
   },
+
   "dependencies": {
     "body-parser": "^1.12.4",
     "bookshelf": "^0.8.1",
