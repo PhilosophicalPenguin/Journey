@@ -103,13 +103,14 @@ if(addMochData) {
       console.error(err);
   });
 
-  // new EduMilestone({'id': '2'}).fetch({
-  //   withRelated: ['profile']
-  // }).then(function(EduMilestone) {
-  //   // console.log(EduMilestone.related('profile').toJSON());
-  //   // console.log(EduMilestone.related('degree').toJSON());
-  //   console.log(EduMilestone.toJSON());
-  // });
+
+  new EduMilestone({'id': '2'}).fetch({
+    withRelated: ['profile']
+  }).then(function(EduMilestone) {
+    // console.log(EduMilestone.related('profile').toJSON());
+    // console.log(EduMilestone.related('degree').toJSON());
+    console.log(EduMilestone.toJSON());
+  });
 }
 
 
