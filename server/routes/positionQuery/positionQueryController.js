@@ -12,6 +12,7 @@ var forEach = function(){
 };
 
 module.exports = {
+
   getAvailablePositions: function(request,response) {
     console.log('im trying to get available positions');
     new Position().fetchAll().then(function(positions){
@@ -38,6 +39,7 @@ module.exports = {
   // @param request {object} - contains information on the client and inforamtion
   //                            relating to their wants
   // @param response {object} - an object to respond with information in relation to the request
+  
   getStatsOnPosition : function(request, response) {
     new Position().where({
       position_name: request.query.name

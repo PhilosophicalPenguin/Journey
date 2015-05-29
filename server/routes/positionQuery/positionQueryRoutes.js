@@ -1,6 +1,5 @@
 var  positionQueryController = require('./positionQueryController')
 
-
 module.exports = function (router) {
 
     //                      VVV request-handler
@@ -9,3 +8,4 @@ module.exports = function (router) {
 
   console.log('routes');
 };
+
