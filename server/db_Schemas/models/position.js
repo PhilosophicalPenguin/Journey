@@ -1,6 +1,8 @@
 var db = require('../config');
 var Profile = require('./profile');
 var addMochData = require('../../addMochData');
+var Promise = require("bluebird");
+var _ = require('underscore');
 
 // Defines individual Position Model
 var Position = db.Model.extend({
