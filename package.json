@@ -3,7 +3,13 @@
   "version": "0.0.0",
   "description": "career path router",
   "main": "index.js",
+<<<<<<< HEAD
   "scripts": {},
+=======
+  "scripts": {
+    "build": "echo need to be written! WOO!"
+  },
+>>>>>>> Adds some promises to jsonImporter
   "repository": {
     "type": "git",
     "url": "https://github.com/PhilosophicalPenguin/Journey.git"

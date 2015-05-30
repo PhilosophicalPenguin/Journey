@@ -7,6 +7,7 @@ var labelToIdStorage = {
 
     // methods
     getId: function(table, label){
+
       if(this[table].hasOwnProperty(label)){
         return this[table][label];
       }
@@ -19,8 +20,5 @@ var labelToIdStorage = {
         this[table][label] = id;
     }
 };
-
-//labelToIdStorage.getId('degree', 'nameOfDegree')
-//labelToIdStorage.add('degree', 'nameOFDegree', id)
 
 module.exports = labelToIdStorage;
