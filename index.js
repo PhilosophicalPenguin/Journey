@@ -6,9 +6,7 @@ var dataUploadRoute = require('./server/routes/dataUpload/dataUploadRoute.js');
 var multipart = require('connect-multiparty');
 var path = require('path');
 
-
 // require('require/server').mount(app);
-
 // var mongoose = require('mongoose')
 // var db_port = process.env.MONGOLAB_URI || 'mongodb://localhost/socialstocks';
 // mongoose.connect(db_port);
