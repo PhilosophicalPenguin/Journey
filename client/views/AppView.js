@@ -1,7 +1,6 @@
 // AppView.js - Defines a backbone view class for the whole
 var AppView = Backbone.View.extend({
 
-
 	initialize: function(params) {
 
 		var context = this;

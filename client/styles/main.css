@@ -2,5 +2,20 @@
 	font-weight: bold;
 }
 .positionView {
-	color: grey;
+	color: #F0E4FB;
 }
+
+#thewholebody {
+	background-color: #2E0854
+}
+
+.mainContent {
+	width: 50%;
+  margin: 0 auto;
+}
+
+h3 {
+	color: #F0E4FB;
+
+}
+

@@ -19,7 +19,6 @@ var PositionView = Backbone.View.extend({
 
 	journeyClickHandler : function(event){
     var journey = this.model.get('position_name');
-    alert(journey);
     this.model.goToJourney(journey);
 
 	},

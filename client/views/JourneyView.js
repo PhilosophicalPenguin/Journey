@@ -12,8 +12,7 @@ var JourneyView = Backbone.View.extend({
   },
 
   render: function () {
-    console.log(this.model);
-    var statsTableView = new StatsTableView({model: this.model});
+    var statsTableView = new StatsTableView({model: this.model}, {field: 'degreesAndFields'} );
 
     this.$el.append(statsTableView.$el);
 

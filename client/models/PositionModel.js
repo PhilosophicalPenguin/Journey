@@ -4,7 +4,7 @@ var PositionModel = Backbone.Model.extend({
 
 	goToJourney: function(journeyClicked){
 
-		console.log(this.fetch({data: $.param({name: journeyClicked})}));
+		this.fetch({data: $.param({name: journeyClicked})});
 
   },
 
