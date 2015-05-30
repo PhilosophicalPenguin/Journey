@@ -10,6 +10,7 @@ var Profile = require('../../db_Schemas/models/profile');
 var Industry = require('../../db_Schemas/models/industry');
 var EduMilestone = require('../../db_Schemas/models/eduMilestone');
 var labelToIdStorage = require('../../labelToIdStorage');
+var Promise = require("bluebird");
 
 //TODO: position ids and industry ids are not being passed in correctly!
 //
@@ -25,135 +26,220 @@ var labelToIdStorage = require('../../labelToIdStorage');
 // }
 
 module.exports = {
+  parseUploadedData: function(req, res) {
 
-    parseUploadedData: function(req, res) {
-
-        var data_dump_profiles = JSON.parse(fs.readFileSync(req.files.jsondata.path, "utf8"))
-
-        var degreeID = null;
-
-        data_dump_profiles.forEach(function(person) {
-
-            //ADD PREVIOUS POSITION TITLES TO POSITIONS TABLE
-            for (var j = 0; j < person.past_experience_list.length; j++) {
-
-                var positionLabel = person.past_experience_list[j].title;
-                var positionID = labelToIdStorage.getId('positions', positionLabel);
-
-                if( positionID === -1) {
-                    new Position({
-                        position_name: person.past_experience_list[j].title,
-                    }).save().then(function(resp) {
-                      positionID = resp.attributes.id;
-                      labelToIdStorage.addItem('positions', positionLabel, positionID)
-                      console.log('response from labelToIdStorage', labelToIdStorage.positions);
-                    }).catch(function(err) {
-                        console.error(err);
-                    });
-                }
-            }
-
-            //ADD CURRENT_TITLE TO POSITIONS 
-
-            var currentPositionLabel = person.current_title[0];
-            var currentPositionID = labelToIdStorage.getId('positions', currentPositionLabel);
-
-            if(currentPositionID === -1) {
-              new Position({
-                  position_name: person.current_title[0],
-              }).save().then(function(resp) {
-                currentPositionID = resp.attributes.id;
-                labelToIdStorage.addItem('positions', positionLabel, positionID)
-                console.log('response from labelToIdStorage', labelToIdStorage.positions);
-              }).catch(function(err) {
-                  console.error(err);
-              });
-            }
-
-            var industryLabel = person.industry[0];
-            var industryID = labelToIdStorage.getId('industries', industryLabel);
-
-            // ADD TO INDUSTRIES TABLE
-            if(industryID === -1) {
-              new Industry({
-                  industry_name: person.industry[0],
-              }).save().then(function(resp) {
-                industryID = resp.attributes.id;
-                labelToIdStorage.addItem('induestries', industryLabel, industryID)
-                console.log('response from labelToIdStorage', labelToIdStorage.industries);
-              }).catch(function(err) {
-                  console.error(err);
-              });
-            }
+    var data_dump_profiles = JSON.parse(fs.readFileSync(req.files.jsondata.path, "utf8"));
 
 
-            console.log("PERSON.URL[0]:::::::::::::", person.url[0])
-            console.log('currentPositionID', currentPositionID);
-            console.log('industryID', industryID);
+    // LOOP OVER EACH PROFILE IN DATA DUMP
+    // data_dump_profiles.forEach(function(person) {
+    // Promise.each(data_dump_profiles, function(person){
 
-            new Profile ({
-              profile_name: person.full_name[0],
-              profileURL: person.url,
-              picURL: person.current_photo_link,
-              currentLocation: person.location[0],
-              position_id: currentPositionID,
-              industry_id: industryID
-            }).save().then(function(resp){
-              console.log('New Profile created:', resp);
+      // ADD PREVIOUS POSITION TITLES TO POSITIONS TABLE
+      // for (var j = 0; j < person.past_experience_list.length; j++) {
+
+      //   var positionLabel = person.past_experience_list[j].title;
+      //   var positionID = labelToIdStorage.getId('positions', positionLabel);
+      //   console.log('positionID!!!!!', positionID);
+
+      //   if( positionID === -1) {
+      //     new Position({
+      //       position_name: person.past_experience_list[j].title,
+      //     }).save().then(function(resp) {
+      //       positionID = resp.attributes.id;
+      //       labelToIdStorage.addItem('positions', positionLabel, positionID);
+      //       console.log('response from labelToIdStorage', labelToIdStorage.positions);
+      //     }).catch(function(err) {
+      //       console.error(err);
+      //     });
+      //   }
+      // }
+
+      var parseProfile = function(person, callback){
+        console.log('parseProfile ++');
+        // ADD CURRENT_TITLE TO POSITIONS TABLE & GET POSITION ID
+        var getPositionID = function(callback) {
+             
+          var currentPositionLabel = JSON.stringify(person.current_title[0]);
+          var obj = {
+            currentPositionID: labelToIdStorage.getId('positions', currentPositionLabel)
+          };
+
+          if(obj.currentPositionID === -1) {
+            new Position({
+              position_name: currentPositionLabel
+            }).save()
+            .then(function(resp) {
+              obj.currentPositionID = resp.attributes.id;
+              labelToIdStorage.addItem('positions', currentPositionLabel, obj.currentPositionID);
+              callback(false, obj);
+            })
+            .catch(function(err) {
+              console.error(err);
+            });
+          }
+          else {
+            callback(false, obj);
+          }
+        }
+        
+        // ADD INDUSTRY TO INDUSTRIES TABLE & GET INDUSTRY ID
+        var getIndustryID = function(obj, callback){
+          var industryLabel = JSON.stringify(person.industry[0]);
+          obj.industryID = labelToIdStorage.getId('industries', industryLabel);
+          // Add to Industry Table if we don't have it in hash
+          if(obj.industryID === -1) {
+            new Industry({
+                industry_name: industryLabel
+            }).save()
+            .then(function(resp) {
+              obj.industryID = resp.attributes.id;
+              labelToIdStorage.addItem('industries', industryLabel, obj.industryID);
+              console.log('labelToIdStorage!!!', labelToIdStorage);
+              callback(false, obj);
             }).catch(function(err) {
                 console.error(err);
             });
+          }
+          else {
+            console.log("gets into else statement")
+            callback(false, obj);
+          }
+        };
+
+        // var getIndustryID = function(obj, callback){
+        //   console.log('getIndustryID getting called!', callback);
+        //   obj = {};
+        //   var industryLabel = person.industry[0];
+        //   // var industryLabel = "Computer Software";
+          
+        //   Industry.forge({
+        //     'industry_name': industryLabel
+        //   })
+        //   .fetch()
+        //   .then(function(industry) {
+        //     console.log('industry returned from GetIndustryID', industry);
+        //     if(industry === null){
+        //       console.log('Its null');
+        //       Industry.forge({
+        //         'industry_name': industryLabel
+        //       }).save().then(function(industry){
+        //         obj.industryID = industry.attributes.id;
+        //         console.log('object returned after creating Industry from getIndustryID', obj);
+        //         callback(false, obj);
+        //         // return obj;
+        //       });
+        //     }
+        //     else {
+        //       obj.industryID = industry.attributes.id;
+        //       console.log('object returned from getIndustryID', obj);
+        //       callback(false, obj);
+        //       // return obj;
+        //       // return obj; 
+        //     }
+        //   })
+        // };
+      
+        // PROMISIFY FUNCTIONS
+        var getPositionIDAsync = Promise.promisify(getPositionID);
+        var getIndustryIDAsync = Promise.promisify(getIndustryID);
+        
+        getIndustryIDAsync()
+        .then(function(obj){
+          console.log('got Industry ID', obj);
+        });
+        // INVOKE CHAIN OF EVENTS
+        // getPositionIDAsync()
+        // .then(function(obj){
+        //   console.log('got the Position id!!!!', obj);
+        //   return getIndustryIDAsync(obj);
+        // })
+        // .then(function(obj){
+        //   callback(false, function(){
+        //     console.log('Finished parsing one profile!!!', obj)
+        //   });
+        // });
+
+      }; // END OF PARSE PROFILE FUNCTION
+
+      var parseProfileAsync = Promise.promisify(parseProfile);
+
+      Promise.map(data_dump_profiles, function(person){
+        return parseProfileAsync(person);
+      }, {concurrency: 3}).then(function(objs){
+        console.log('Fucking complete!!!!!');
+      });
+
+    // });
+  }
+}
+
+            
+          // var createProfile = function(callback){
+          //   new Profile ({
+          //     profile_name: person.full_name[0],
+          //     profileURL: person.url,
+          //     picURL: person.current_photo_link,
+          //     currentLocation: person.location[0],
+          //     position_id: currentPositionID,
+          //     industry_id: industryID
+          //   }).save().then(function(resp){
+          //     console.log('New Profile created:', resp);
+          //     callback(false, resp);
+          //   }).catch(function(err) {
+          //       console.error(err);
+          //   });
+          // }
+
+          // var createProfileAsync = Promise.promisify(createProfile);
 
             // ITERATE OVER EDUCATION LIST
-            for (var i = 0; i < person.educationList.length; i++) {
-                console.log("person.educationList[i]", person.educationList[i])
+            // for (var i = 0; i < person.educationList.length; i++) {
 
-                var degreeLabel = person.educationList[i].degree;
-                var degreeID = labelToIdStorage.getId('degrees', degreeLabel);
+            //     var degreeLabel = person.educationList[i].degree;
+            //     var degreeID = labelToIdStorage.getId('degrees', degreeLabel);
 
-                if( degreeID === -1) {
-                    //ADD TO DEGREES TABLE IF NOT IN LOCAL HASH TABLE
-                    new Degree({
-                        degree_name: degreeLabel
-                    }).save().then(function(resp) {
-                        degreeID = resp.attributes.id;
-                        labelToIdStorage.addItem('degrees', degreeLabel, degreeID)
-                        console.log('response from labelToIdStorage', labelToIdStorage.degrees);
-                    }).catch(function(err) {
-                        console.error(err);
-                    });
-                }
+            //     if( degreeID === -1) {
+            //         //ADD TO DEGREES TABLE IF NOT IN LOCAL HASH TABLE
+            //         new Degree({
+            //             degree_name: degreeLabel
+            //         }).save().then(function(resp) {
+            //             degreeID = resp.attributes.id;
+            //             labelToIdStorage.addItem('degrees', degreeLabel, degreeID)
+            //         }).catch(function(err) {
+            //             console.error(err);
+            //         });
+            //     }
 
-                var fieldOfStudyLabel = person.educationList[i].major;
-                var fieldOfStudyID = labelToIdStorage.getId('fieldsOfStudy', fieldOfStudyLabel);
+            //     var fieldOfStudyLabel = person.educationList[i].major;
+            //     var fieldOfStudyID = labelToIdStorage.getId('fieldsOfStudy', fieldOfStudyLabel);
 
-                if( fieldOfStudyID === -1) {
-                  //ADD TO FIELDS OF STUDY TABLE IF NOT IN LOCAL HASH TABLE 
-                  new FieldOfStudy({
-                      fieldOfStudy_name: fieldOfStudyLabel
-                  }).save().then(function(resp) {
-                      fieldOfStudyID = resp.attributes.id;
-                      labelToIdStorage.addItem('fieldsOfStudy', fieldOfStudyLabel, fieldOfStudyID);
-                      console.log('response from labelToIdStorage', labelToIdStorage.fieldsOfStudy);
-                  }).catch(function(err) {
-                      console.error(err);
-                  });
-                }
+            //     if( fieldOfStudyID === -1) {
+            //       //ADD TO FIELDS OF STUDY TABLE IF NOT IN LOCAL HASH TABLE 
+            //       new FieldOfStudy({
+            //           fieldOfStudy_name: fieldOfStudyLabel
+            //       }).save().then(function(resp) {
+            //           fieldOfStudyID = resp.attributes.id;
+            //           labelToIdStorage.addItem('fieldsOfStudy', fieldOfStudyLabel, fieldOfStudyID);
+            //       }).catch(function(err) {
+            //           console.error(err);
+            //       });
+            //     }
 
-                var schoolLabel = person.educationList[i].school;
-                var schoolID = labelToIdStorage.getId('schools', schoolLabel);
-                if(schoolID === -1) {
-                  //ADD TO SCHOOLS TABLE IF NOT IN LOCAL HASH TABLE 
-                  new School({
-                    school_name: schoolLabel
-                  }).save().then(function (resp) {
-                    schoolID = resp.attributes.id;
-                    labelToIdStorage.addItem('school', schoolLabel, schoolID);
-                  }).catch(function (err) {
-                    console.error(err);
-                  })
-                }
-            }
+            //     var schoolLabel = person.educationList[i].school;
+            //     var schoolID = labelToIdStorage.getId('schools', schoolLabel);
+            //     if(schoolID === -1) {
+            //       //ADD TO SCHOOLS TABLE IF NOT IN LOCAL HASH TABLE 
+            //       new School({
+            //         school_name: schoolLabel
+            //       }).save().then(function (resp) {
+            //         schoolID = resp.attributes.id;
+            //         labelToIdStorage.addItem('school', schoolLabel, schoolID);
+            //       }).catch(function (err) {
+            //         console.error(err);
+            //       })
+            //     }
+            // }
 
 
            
@@ -223,13 +309,6 @@ module.exports = {
 
 
 
-
-        })
-
-
-
-    }
-}
 
 
 //ONE PROFILE:

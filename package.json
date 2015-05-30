@@ -38,6 +38,7 @@
   },
   "dependencies": {
     "backbone-autocomplete": "0.0.5",
+    "bluebird": "^2.9.26",
     "body-parser": "^1.12.4",
     "bookshelf": "^0.8.1",
     "connect-busboy": "0.0.2",
