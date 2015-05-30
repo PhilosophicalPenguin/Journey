@@ -56,12 +56,15 @@
     "multiparty": "^4.1.2",
     "mysql": "^2.6.2",
     "nodemon": "^1.3.7",
+<<<<<<< HEAD
     "require": "^2.4.18",
     "util": "^0.10.3"
   },
   "engines": {
     "node": "0.12.2",
     "npm": "2.7.4",
+=======
+>>>>>>> Tinkering with json importing
     "underscore": "^1.8.3",
     "util": "^0.10.3"
   }

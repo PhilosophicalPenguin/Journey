@@ -371,7 +371,6 @@ module.exports = {
         });
       };
 
-
       var getSkillsAsync                  =   Promise.promisify(getSkills),
           getIndustryIDAsync              =   Promise.promisify(getIndustryID),
           getCurrentPositionIDAsync       =   Promise.promisify(getCurrentPositionID),
