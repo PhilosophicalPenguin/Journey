@@ -27,6 +27,7 @@ var async = require("async");
 // }
 
 module.exports = {
+
     parseUploadedData: function(req, res) {
 
         var data_dump_profiles = JSON.parse(fs.readFileSync(req.files.jsondata.path, "utf8"));
@@ -154,15 +155,9 @@ module.exports = {
                     callbackNext() //go to next person
             })
 
-
-
-
-
             // callbackNext()  //go to next person
+
         });
-
-
-
 
 
         // data_dump_profiles.forEach(function(person) {

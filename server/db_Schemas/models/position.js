@@ -1,6 +1,8 @@
 var db = require('../config');
 var Profile = require('./profile');
 var addMochData = require('../../addMochData');
+var Promise = require("bluebird");
+var _ = require('underscore');
 
 // Defines individual position
 var Position = db.Model.extend({
@@ -8,7 +10,22 @@ var Position = db.Model.extend({
   hasTimestamps: true,
   profiles: function() {
     return this.hasMany('Profile', 'position_id');
+  },
+
+  findOrCreate : function(options) {
+    var cloned = this;
+    console.log('THIS within findOrCreate', this);
+    console.log('options within findOrCreate', options);
+    
+    return this.fetch({position_name: this.attributes.position_name, require: true})
+    .then(null, function(err) {
+      if (err) return cloned.save();
+      else return;
+      // console.log('CLONED!!!', cloned);
+      // return cloned.save();
+    });
   }
+
 });
 
 if(addMochData) {
