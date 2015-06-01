@@ -2,7 +2,7 @@ function homeCtrl($scope, $location){
   
   $scope.positions = [
     {
-      name: 'Software engineer',
+      name: 'Senior Backend Engineer',
       id: 1
     },
     {
