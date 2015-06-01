@@ -6,6 +6,7 @@ var Degree = require('../../db_Schemas/models/degree');
 var FieldOfStudy = require('../../db_Schemas/models/fieldOfStudy');
 var School = require('../../db_Schemas/models/school');
 var Position = require('../../db_Schemas/models/position');
+var Company = require('../../db_Schemas/models/company');
 var Profile = require('../../db_Schemas/models/profile');
 var Industry = require('../../db_Schemas/models/industry');
 var EduMilestone = require('../../db_Schemas/models/eduMilestone');
@@ -27,137 +28,123 @@ var async = require("async");
 // }
 
 module.exports = {
+  parseUploadedData: function(req, res) {
+    
+    var data_dump_profiles = JSON.parse(fs.readFileSync(req.files.jsondata.path, "utf8"));
 
-    parseUploadedData: function(req, res) {
+    async.eachSeries(data_dump_profiles, function(person, callbackNext) {
+      
+      obj = {};
 
-        var data_dump_profiles = JSON.parse(fs.readFileSync(req.files.jsondata.path, "utf8"));
+      var getPositionID = function(callback) {
+        var positionLabel = person.current_title[0];
 
-        async.eachSeries(data_dump_profiles, function(person, callbackNext) {
-            console.log('go over one person');
-
-
-            // var getIndustryID = function(obj, callback) {
-            var industryHit = false;
-            obj = {};
-
-
-            var getIndustryID = function(callback) {
-                var industryLabel = person.industry[0];
-                // var industryLabel = "Computer Software";
-
-                Industry.forge({
-                        'industry_name': industryLabel
-                    })
-                    .fetch()
-                    .then(function(industry) {
-                        // console.log('industry returned from GetIndustryID, it\'s either null or ID#:', industry);
-                        if (industry === null) {
-                            // console.log('Its null INDUSTRY');
-                            Industry.forge({
-                                'industry_name': industryLabel
-                            }).save().then(function(industry) {
-                                // console.log('argumentssssss', Object.keys(arguments));
-                                console.log("OBJ before adding industry id:", obj)
-                                obj.industryID = industry.attributes.id;
-                                console.log("OBJ after adding industry id:", obj)
-                                // callback()
-                                // console.log("RETURNING THE FOLLOWING OBJ:", obj)
-                                industryHit = true;
-                                callback(false)
-                            })
-                        } else {
-                            // console.log("we found a new industry id:", industry.attributes.id)
-                            obj.industryID = industry.attributes.id;
-                            // console.log('object returned from getIndustryID', obj);
-                            // callback()
-                            // console.log("RETURNING THE FOLLOWING OBJ:", obj)
-                            industryHit = true;
-                            callback(false)
-
-                        }
-                        // console.log("AAAAAAAAAAAAAAAA")
-                    })
-
-            }
-
-
-            var getPositionID = function(callback) {
-                    var positionLabel = person.current_title[0];
-                    // var industryLabel = "Computer Software";
-
-                    Position.forge({
-                            'position_name': positionLabel
-                        })
-                        .fetch()
-                        .then(function(position) {
-                            // console.log('position returned from GetIndustryID, it\'s either null or ID#:', position);
-                            if (position === null) {
-                                // console.log('Its null POSITION');
-                                Position.forge({
-                                    'position_name': positionLabel
-                                }).save().then(function(position) {
-                                    // console.log("TRY TO ADD TO OBJ. OBJ LOOKS LIKE:", obj)
-                                    console.log("OBJ before adding position id:", obj)
-                                    obj.positionID = position.attributes.id;
-                                    console.log("OBJ after adding position id:", obj)
-                                        // console.log("we created a new industry ID:", obj.positionID)
-                                        // callback(false, obj);
-                                    callback(false)
-                                })
-                            } else {
-                                // console.log("we found a new position id:", position.attributes.id)
-                                obj.positionID = position.attributes.id;
-                                // console.log('object returned from getPositionID', obj);
-                                // callback(false, obj);
-                                callback(false)
-
-                            }
-                        })
-                        // }
-
-
-                } //END SECOND FUNCTION
-
-            var createProfile = function(callback) {
-                new Profile({
-                    profile_name: person.full_name[0],
-                    profileURL: person.url,
-                    picURL: person.current_photo_link,
-                    currentLocation: person.location[0],
-                    position_id: obj.positionID,
-                    industry_id: obj.industryID
-                }).save().then(function(resp) {
-                    console.log('New Profile created:', resp);
-                    // console.log("during save, obj.positionID is:", obj.positionID);
-                    // console.log("during save, obj.industry is:", obj.industryID)
-                    console.log("when profile is saved, has industry been hit?", industryHit)
-                    callback(false);
-                }).catch(function(err) {
-                    console.error(err);
-                });
-            }
-
-            var getIndustryIDAsync = Promise.promisify(getIndustryID);
-            var getPositionIDAsync = Promise.promisify(getPositionID);
-            var createProfileAsync = Promise.promisify(createProfile);
-
-            getPositionIDAsync().then(function() {
-                console.log("getPositionIDAsync complete. obj:", obj);
-            }).then(function() {
-                console.log("getPositionIDAsync complete. obj:", obj);
-            }).then(function() {
-                return getIndustryIDAsync();
-            }).then(function() {
-                console.log("right before create profileasync happens, obj is:", obj)
-                return createProfileAsync()
-            }).then(function() {
-                console.log("at end of everything, obj looks like:", obj)
-                    callbackNext() //go to next person
-            })
-
-            // callbackNext()  //go to next person
-
+        Position.forge({
+          'position_name': positionLabel
+        })
+        .fetch()
+        .then(function(position) {
+          if (position === null) {
+            Position.forge({
+              'position_name': positionLabel
+            }).save()
+            .then(function(position) {
+              obj.positionID = position.attributes.id;
+              callback(false)
+            });
+          } 
+          else {
+            obj.positionID = position.attributes.id;
+            callback(false)
+          }
         });
+      }
+
+      var getIndustryID = function(callback) {
+        var industryLabel = person.industry[0];
+        Industry.forge({
+          'industry_name': industryLabel
+        })
+        .fetch()
+        .then(function(industry) {
+          if (industry === null) {
+            Industry.forge({
+                'industry_name': industryLabel
+            }).save()
+            .then(function(industry) {
+              obj.industryID = industry.attributes.id;
+              callback(false)
+            });
+          } else {
+            obj.industryID = industry.attributes.id;
+            callback(false);
+          }
+        });
+      };
+
+      var getCompanyID = function(callback) {
+        var companyLabel = person.current_company[0];
+
+        Company.forge({
+          'company_name': companyLabel
+        })
+        .fetch()
+        .then(function(company) {
+          if (company === null) {
+            Company.forge({
+              'company_name': companyLabel
+            }).save()
+            .then(function(company) {
+              obj.companyID = company.attributes.id;
+              callback(false)
+            });
+          } 
+          else {
+            obj.companyID = company.attributes.id;
+            callback(false)
+          }
+        });
+      }
+       
+      var createProfile = function(callback) {
+        new Profile({
+          profile_name: person.full_name[0],
+          profileURL: person.url,
+          picURL: person.current_photo_link,
+          headline: person.headline[0],
+          currentLocation: person.location[0],
+          currentPosition_id: obj.positionID,
+          industry_id: obj.industryID,
+          currentCompany_id: obj.companyID 
+        }).save()
+        .then(function(resp) {
+          console.log('New Profile created:', resp);
+          callback(false);
+        }).catch(function(err) {
+          console.error(err);
+        });
+      };
+
+      var getIndustryIDAsync = Promise.promisify(getIndustryID);
+      var getPositionIDAsync = Promise.promisify(getPositionID);
+      var getCompanyIDAsync = Promise.promisify(getCompanyID);
+
+      var createProfileAsync = Promise.promisify(createProfile);
+
+      getPositionIDAsync().then(function() {
+          console.log("getPositionIDAsync complete. obj:", obj);
+          return getIndustryIDAsync();
+      }).then(function() {
+          console.log("right before getCompanyIDAsync happens, obj is:", obj)
+          return getCompanyIDAsync();
+      }).then(function() {
+          console.log("right before createProfileAsync happens, obj is:", obj)
+          return createProfileAsync();
+      }).then(function() {
+        console.log("at end of everything, obj looks like:", obj)
+        callbackNext() //go to next person
+      })
+    });
 
 
         // data_dump_profiles.forEach(function(person) {

@@ -2,7 +2,7 @@ function positionCtrl($scope, $http, $location, $stateParams, statsFactory){
   
   $scope.positionID = $stateParams.positionID; 
 
-  statsFactory.getStats('Software engineer');
+  statsFactory.getStats('Senior Backend Engineer');
   $scope.stats = statsFactory;
   
 }

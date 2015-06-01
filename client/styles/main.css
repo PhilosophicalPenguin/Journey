@@ -1,25 +1,3 @@
-/*.positionsHeader {
-	font-weight: bold;
-}
-.positionView {
-	color: #F0E4FB;
-}
-
-#thewholebody {
-	background-color: #2E0854
-}
-
-.mainContent {
-	width: 50%;
-  margin: 0 auto;
-  color: white;
-}
-
-h3 {
-	color: #F0E4FB;
-
-}*/
-
 html {
   background: url(../assets/bg-blue.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
@@ -89,6 +67,7 @@ body {
     cursor: pointer; }
   .onePath h3:hover {
     cursor: pointer; }
+
 /*
 td {
   font: Helvetica;
@@ -110,7 +89,4 @@ th {
   height: 100px;
 }
 
-/*# sour
-
-ceMappingURL=main.css.map */
-
+/*# sourceMappingURL=main.css.map */

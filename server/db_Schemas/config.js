@@ -87,7 +87,9 @@ db.knex.schema.hasTable('profiles').then(function(exists) {
       profile.string('profile_name', 100);
       profile.string('picURL', 200);
       profile.string('currentLocation', 100);
-      profile.integer('position_id');
+      profile.string('headline', 100);
+      profile.integer('currentPosition_id');
+      profile.integer('currentCompany_id');
       profile.integer('industry_id');
       profile.timestamps();
     }).then(function (table) {
@@ -107,9 +109,22 @@ db.knex.schema.hasTable('positions').then(function(exists) {
       console.log('Positions table created.');
     });
   }
+});
+
+// Creates 'companies' table
+db.knex.schema.hasTable('companies').then(function(exists) {
+  if (!exists){
+    return knex.schema.createTable('companies', function (company) {
+      company.increments('id').primary();
+      company.string('company_name', 100).unique();
+      company.timestamps();
+    }).then(function (table) {
+      console.log('Companies table created.');
+    });
+  }
 })
 
-// Creates 'eduMilestones' table & this is the key join table
+// Creates 'eduMilestones' table
 db.knex.schema.hasTable('eduMilestones').then(function(exists) {
   if (!exists) {
     return knex.schema.createTable('eduMilestones', function (eduMilestone) {
@@ -123,6 +138,24 @@ db.knex.schema.hasTable('eduMilestones').then(function(exists) {
       eduMilestone.timestamps();
     }).then(function (table) {
       console.log('EduMilestones table created.');
+    });
+  }
+});
+
+// Creates 'expMilestones' table
+db.knex.schema.hasTable('expMilestones').then(function(exists) {
+  if (!exists) {
+    return knex.schema.createTable('expMilestones', function (expMilestone) {
+      expMilestone.increments('id').primary();
+      expMilestone.integer('profile_id');
+      expMilestone.integer('company_id');
+      expMilestone.integer('position_id');
+      expMilestone.string('start_date', 20).unique();
+      expMilestone.string('end_date', 20).unique();
+      expMilestone.string('end_date', 20).unique();
+      eduMilestone.timestamps();
+    }).then(function (table) {
+      console.log('ExpMilestones table created.');
     });
   }
 });

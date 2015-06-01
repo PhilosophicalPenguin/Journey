@@ -48,7 +48,7 @@ module.exports = {
     .then( function (position) {
       if(!position) { // invalid position name can not find such a position in the database
         console.log('danger will robinson! didnt find position');
-        response.writeHead(404)
+        // response.writeHead(404)
         response.send({errorMessage: 'that position does not exist in our database'});
       }
       else { //found the position requested

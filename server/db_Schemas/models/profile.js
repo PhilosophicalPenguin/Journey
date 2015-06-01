@@ -9,14 +9,17 @@ var addMochData = require('../../addMochData');
 var Profile = db.Model.extend({
   tableName: 'profiles',
   hasTimestamps: true,
-  position: function() {
-    return this.hasOne('Position', 'position_id');
+  currentPosition: function() {
+    return this.hasOne('Position', 'currentPosition_id');
   },
   industry: function() {
     return this.hasOne('Industry', 'industry_id');
   },
   eduMilestone: function() {
     return this.hasMany('EduMilestone', 'profile_id');
+  },
+  expMilestone: function() {
+    return this.hasMany('ExpMilestone', 'profile_id');
   }
 });
 
