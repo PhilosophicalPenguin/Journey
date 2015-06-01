@@ -6,6 +6,7 @@ var Degree = require('./server/db_Schemas/models/degree');
 var FieldOfStudy = require('./server/db_Schemas/models/fieldOfStudy');
 var School = require('./server/db_Schemas/models/school');
 var Position = require('./server/db_Schemas/models/position');
+var Skill = require('./server/db_Schemas/models/skill');
 var Profile = require('./server/db_Schemas/models/profile');
 var Industry = require('./server/db_Schemas/models/industry');
 var EduMilestone = require('./server/db_Schemas/models/eduMilestone');

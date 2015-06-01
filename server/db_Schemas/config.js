@@ -122,7 +122,33 @@ db.knex.schema.hasTable('companies').then(function(exists) {
       console.log('Companies table created.');
     });
   }
-})
+});
+
+// Creates 'skills' table
+db.knex.schema.hasTable('skills').then(function(exists) {
+  if (!exists){
+    return knex.schema.createTable('skills', function (skill) {
+      skill.increments('id').primary();
+      skill.string('skill_name', 50).unique();
+      skill.timestamps();
+    }).then(function (table) {
+      console.log('Skills table created.');
+    });
+  }
+});
+
+// Creates 'profiles_skills' join table
+db.knex.schema.hasTable('profiles_skills').then(function(exists) {
+  if (!exists){
+    return knex.schema.createTable('profiles_skills', function (table) {
+      table.increments('id').primary();
+      table.integer('profile_id');
+      table.integer('skill_id');
+    }).then(function (table) {
+      console.log('profiles_skills table created.');
+    });
+  }
+});
 
 // Creates 'eduMilestones' table
 db.knex.schema.hasTable('eduMilestones').then(function(exists) {
@@ -152,8 +178,7 @@ db.knex.schema.hasTable('expMilestones').then(function(exists) {
       expMilestone.integer('position_id');
       expMilestone.string('start_date', 20).unique();
       expMilestone.string('end_date', 20).unique();
-      expMilestone.string('end_date', 20).unique();
-      eduMilestone.timestamps();
+      expMilestone.timestamps();
     }).then(function (table) {
       console.log('ExpMilestones table created.');
     });
