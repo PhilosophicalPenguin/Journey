@@ -55,6 +55,7 @@ module.exports = {
       };
 
       var getCurrentPositionID = function(getCurrentPositionIDCallback) {
+
         var positionLabel = person.current_title[0];
 
         Position.forge({
@@ -291,7 +292,6 @@ module.exports = {
           var getPositionID = function(getPositionIDCallback) {
 
             var positionLabel = expMilestone.title;
-
             Position.forge({
               'position_name': positionLabel
             })
