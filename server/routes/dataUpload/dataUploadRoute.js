@@ -3,6 +3,7 @@ var util = require('util');
 var db = require('../../db_Schemas/config.js');
 var multiparty = require('multiparty');
 var Degree = require('../../db_Schemas/models/degree');
+var Skill = require('../../db_Schemas/models/skill');
 var FieldOfStudy = require('../../db_Schemas/models/fieldOfStudy');
 var School = require('../../db_Schemas/models/school');
 var Position = require('../../db_Schemas/models/position');
@@ -14,8 +15,23 @@ var labelToIdStorage = require('../../labelToIdStorage');
 var Promise = require("bluebird");
 var async = require("async");
 
-//TODO: position ids and industry ids are not being passed in correctly!
-//
+/* TODO: 
+
+2. Add eduMilestones
+a) loop over profile's education
+b) for each degree / fos / school - fetch or create 
+c) construct obj with:
+- profile_id
+- degree_id
+- fieldOfStudy_id
+- school_id
+- startYear
+- endYear
+d) create eduMilestone
+
+
+3. Add expMilestones 
+*/
 
 //helper for injesting json
 // saveNewEntryToDB = function(model, propertyName, label, tableName) {
@@ -35,6 +51,33 @@ module.exports = {
     async.eachSeries(data_dump_profiles, function(person, callbackNext) {
       
       obj = {};
+      var skills_ids = [];
+
+      var getSkills = function(callback){
+        async.eachSeries(person.skills, function(skillName, nextSkill) {
+
+          Skill.forge ({
+            'skill_name': skillName
+          })
+          .fetch()
+          .then(function(skill){
+            if (skill === null) {
+              Skill.forge({
+                'skill_name': skillName
+              }).save()
+              .then(function(skill) {
+                return skills_ids.push(skill.attributes.id);
+              });
+            }
+            else {
+              return skills_ids.push(skill.attributes.id);
+            }
+          });
+          nextSkill(); // Go to the next skill in the array
+        });
+
+        callback(false); // Done with the loop over the skills array
+      };
 
       var getPositionID = function(callback) {
         var positionLabel = person.current_title[0];
@@ -105,7 +148,7 @@ module.exports = {
           }
         });
       }
-       
+
       var createProfile = function(callback) {
         new Profile({
           profile_name: person.full_name[0],
@@ -117,32 +160,158 @@ module.exports = {
           industry_id: obj.industryID,
           currentCompany_id: obj.companyID 
         }).save()
-        .then(function(resp) {
-          console.log('New Profile created:', resp);
+        .then(function(profile) {
+          obj.profileID = profile.attributes.id;
+          profile.skills().attach(skills_ids);
           callback(false);
         }).catch(function(err) {
           console.error(err);
         });
       };
 
-      var getIndustryIDAsync = Promise.promisify(getIndustryID);
-      var getPositionIDAsync = Promise.promisify(getPositionID);
-      var getCompanyIDAsync = Promise.promisify(getCompanyID);
+      var createEduMilestones = function(callback){
 
-      var createProfileAsync = Promise.promisify(createProfile);
+        async.eachSeries(person.educationList, function(eduMilestone, nextMilestone) {
 
-      getPositionIDAsync().then(function() {
-          console.log("getPositionIDAsync complete. obj:", obj);
-          return getIndustryIDAsync();
+          var milestone = {
+            profileID: obj.profileID,
+            startYear: eduMilestone.start_date,
+            endYear: eduMilestone.end_date
+          };
+
+          var getDegreeID = function(callback) {
+
+            var degreeLabel = eduMilestone.degree;
+
+            Degree.forge({
+              'degree_name': degreeLabel
+            })
+            .fetch()
+            .then(function(degree) {
+              if (degree === null) {
+                Degree.forge({
+                  'degree_name': degreeLabel
+                }).save()
+                .then(function(degree) {
+                  milestone.degreeID = degree.attributes.id;
+                  callback(false)
+                });
+              } 
+              else {
+                milestone.degreeID = degree.attributes.id;
+                callback(false)
+              }
+            });
+          }
+
+          var getFosID = function(callback) {
+
+            var fosLabel = eduMilestone.major;
+
+            FieldOfStudy.forge({
+              'fieldOfStudy_name': fosLabel
+            })
+            .fetch()
+            .then(function(fos) {
+              if (fos === null) {
+                FieldOfStudy.forge({
+                  'fieldOfStudy_name': fosLabel
+                }).save()
+                .then(function(fos) {
+                  milestone.fosID = fos.attributes.id;
+                  callback(false)
+                });
+              } 
+              else {
+                milestone.fosID = fos.attributes.id;
+                callback(false)
+              }
+            });
+          };
+
+          var getSchoolID = function(callback) {
+
+            var schoolLabel = eduMilestone.school;
+
+            School.forge({
+              'school_name': schoolLabel
+            })
+            .fetch()
+            .then(function(school) {
+              if (school === null) {
+                School.forge({
+                  'school_name': schoolLabel
+                }).save()
+                .then(function(school) {
+                  milestone.schoolID = school.attributes.id;
+                  callback(false)
+                });
+              } 
+              else {
+                milestone.schoolID = school.attributes.id;
+                callback(false)
+              }
+            });
+          };
+
+          var newEduMilestone = function(callback) {
+            new EduMilestone({
+              profile_id: milestone.profileID,
+              degree_id: milestone.degreeID,
+              fieldOfStudy_id: milestone.fosID,
+              school_id: milestone.schoolID,
+              startYear: milestone.startYear,
+              endYear: milestone.endYear
+            }).save()
+            .then(function(eduMilestone) {
+              console.log('New eduMilestone saved:', eduMilestone);
+              callback(false);
+            }).catch(function(err) {
+              console.error(err);
+            });
+          };
+
+          var getDegreeIDAsync      =   Promise.promisify(getDegreeID),
+              getFosIDAsync         =   Promise.promisify(getFosID),
+              getSchoolIDAsync      =   Promise.promisify(getSchoolID)
+              newEduMilestoneAsync  =   Promise.promisify(newEduMilestone);
+
+          getDegreeIDAsync().then(function(){
+            return getFosIDAsync();
+          }).then(function() {
+            return getSchoolIDAsync();
+          }).then(function() {
+            return newEduMilestoneAsync();
+          }).then(function() {
+            console.log('newEduMilestone about to be saved!!!', milestone);
+            nextMilestone(); // Go to the next eduMilestone in the array
+          });
+
+          callback(false); // Done with the loop over the education LIST array
+
+        });
+      };
+
+      var getSkillsAsync            =   Promise.promisify(getSkills),
+          getIndustryIDAsync        =   Promise.promisify(getIndustryID),
+          getPositionIDAsync        =   Promise.promisify(getPositionID),
+          getCompanyIDAsync         =   Promise.promisify(getCompanyID),
+          createProfileAsync        =   Promise.promisify(createProfile),
+          createEduMilestonesAsync  =   Promise.promisify(createEduMilestones);
+
+      getSkillsAsync().then(function() {
+        return getCompanyIDAsync();
       }).then(function() {
-          console.log("right before getCompanyIDAsync happens, obj is:", obj)
-          return getCompanyIDAsync();
+        return getIndustryIDAsync();
       }).then(function() {
-          console.log("right before createProfileAsync happens, obj is:", obj)
-          return createProfileAsync();
+        return getPositionIDAsync();
       }).then(function() {
-        console.log("at end of everything, obj looks like:", obj)
-        callbackNext() //go to next person
+        return createProfileAsync();
+      }).then(function() {
+        return createEduMilestonesAsync();
+      }).then(function() {
+        console.log('at end of everything, obj looks like:', obj)
+        callbackNext(); // Go to next person
       })
     });
 
@@ -269,23 +438,6 @@ module.exports = {
 
 
 
-// var createProfile = function(callback){
-//   new Profile ({
-//     profile_name: person.full_name[0],
-//     profileURL: person.url,
-//     picURL: person.current_photo_link,
-//     currentLocation: person.location[0],
-//     position_id: currentPositionID,
-//     industry_id: industryID
-//   }).save().then(function(resp){
-//     console.log('New Profile created:', resp);
-//     callback(false, resp);
-//   }).catch(function(err) {
-//       console.error(err);
-//   });
-// }
-
-// var createProfileAsync = Promise.promisify(createProfile);
 
 // ITERATE OVER EDUCATION LIST
 // for (var i = 0; i < person.educationList.length; i++) {
@@ -396,16 +548,10 @@ module.exports = {
 
 
 
-// }
 
 
 
-
-
-
-
-
-//ONE PROFILE:
+// EXAMPLE PROFILE:
 
 // {
 //     "current_title": ["Architect and Lead Backend Engineer"],

@@ -160,7 +160,7 @@ db.knex.schema.hasTable('eduMilestones').then(function(exists) {
       eduMilestone.integer('fieldOfStudy_id');
       eduMilestone.integer('school_id');
       eduMilestone.integer('startYear', 4);
-      eduMilestone.integer('endYear', 4)
+      eduMilestone.integer('endYear', 4);
       eduMilestone.timestamps();
     }).then(function (table) {
       console.log('EduMilestones table created.');

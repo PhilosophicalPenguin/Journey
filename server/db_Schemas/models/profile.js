@@ -52,8 +52,9 @@ if(addMochData) {
     currentLocation: 'San Francisco Bay Area',
     currentPosition_id: 1,
     industry_id: 2
-  }).save().then(function(resp){
+  }).save().then(function(profile){
     console.log('New Profile created!');
+    return profile.skills().attach(skills_ids);
   }).catch(function(err) {
       console.error(err);
   });
