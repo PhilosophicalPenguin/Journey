@@ -1,8 +1,8 @@
-var StatsTableView = Backbone.View.extend({
+window.StatsTableView = Backbone.View.extend({
 
 	model: PositionModel,
 	tagName: 'table',
-	className: 'StatsTableView',
+	className: 'table',
 
   template: _.template('<tr><td><%=item.percentage%> have a <%=item.name%> or higher, </td></tr>'),
 
