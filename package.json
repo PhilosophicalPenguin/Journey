@@ -49,7 +49,8 @@
     "multiparty": "^4.1.2",
     "mysql": "^2.6.2",
     "nodemon": "^1.3.7",
-    "util": "^0.10.3"
+    "util": "^0.10.3",
+    "pg"
   },
   "engines": {
     "node": "0.12.2"
