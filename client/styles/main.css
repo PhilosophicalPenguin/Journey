@@ -97,10 +97,20 @@ td {
 }*/
 
 table, th, td {
-  border: 1px solid black;
   font: Helvetica;
-  size: 35px;
+  font-size: 20px;
   color: white;
 }
-/*# sourceMappingURL=main.css.map */
+
+table {
+  width: 50%;
+}
+
+th {
+  height: 100px;
+}
+
+/*# sour
+
+ceMappingURL=main.css.map */
 
