@@ -3,7 +3,6 @@
 node_modules/
 
 client/bower_components/
-
 bower_components/
 
 # Runtime data
@@ -21,3 +20,5 @@ dist/
 
 
 test*.js
+
+client/libs/**/*

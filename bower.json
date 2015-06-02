@@ -1,17 +1,28 @@
 {
   "name": "Journey",
   "main": "index.html",
-  "version": "0.0.0",
-  "homepage": "https://github.com/yuriybash/Journey",
+  "version": "0.0.3",
+  "homepage": "https://github.com/PhilosophicalPenguin/Journey",
+  "authors": [
+    "Sunshine Yin <sunshine.w.yin@gmail.com>"
+  ],
   "description": "Journey",
   "moduleType": [
     "es6",
     "node"
   ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
   "license": "MIT",
   "dependencies": {
     "bootstrap": "~3.3.4",
     "jquery": "~2.1.4",
-    "jquery-ui": "~1.11.4"
+    "jquery-ui": "~1.11.4",
+    "backbone": "~1.2.0"
   }
 }
