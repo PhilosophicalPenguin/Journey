@@ -16,6 +16,8 @@ window.PositionModel = Backbone.Model.extend({
 
     clientRouter.viewJourney(this);
 
+    // clientRouter.navigate("/viewJourney/" + 13  , true )
+
     return response;
   }
 

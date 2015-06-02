@@ -16,20 +16,6 @@ var Promise = require("bluebird");
 var async = require("async");
 
 /* TODO: 
-
-2. Add eduMilestones
-a) loop over profile's education
-b) for each degree / fos / school - fetch or create 
-c) construct obj with:
-- profile_id
-- degree_id
-- fieldOfStudy_id
-- school_id
-- startYear
-- endYear
-d) create eduMilestone
-
-
 3. Add expMilestones 
 */
 
@@ -45,22 +31,21 @@ d) create eduMilestone
 
 module.exports = {
   parseUploadedData: function(req, res) {
-    
     var data_dump_profiles = JSON.parse(fs.readFileSync(req.files.jsondata.path, "utf8"));
 
     async.eachSeries(data_dump_profiles, function(person, callbackNext) {
-      
+
       obj = {};
       var skills_ids = [];
 
-      var getSkills = function(callback){
+      var getSkills = function(getSkillsCallback) {
         async.eachSeries(person.skills, function(skillName, nextSkill) {
 
-          Skill.forge ({
+          Skill.forge({
             'skill_name': skillName
           })
           .fetch()
-          .then(function(skill){
+          .then(function(skill) {
             if (skill === null) {
               Skill.forge({
                 'skill_name': skillName
@@ -68,18 +53,17 @@ module.exports = {
               .then(function(skill) {
                 return skills_ids.push(skill.attributes.id);
               });
-            }
-            else {
+            } else {
               return skills_ids.push(skill.attributes.id);
             }
           });
           nextSkill(); // Go to the next skill in the array
         });
 
-        callback(false); // Done with the loop over the skills array
+        getSkillsCallback(false); // Done with the loop over the skills array
       };
 
-      var getPositionID = function(callback) {
+      var getPositionID = function(getPositionIDCallback) {
         var positionLabel = person.current_title[0];
 
         Position.forge({
@@ -93,17 +77,16 @@ module.exports = {
             }).save()
             .then(function(position) {
               obj.positionID = position.attributes.id;
-              callback(false)
+              getPositionIDCallback(false)
             });
-          } 
-          else {
+          } else {
             obj.positionID = position.attributes.id;
-            callback(false)
+            getPositionIDCallback(false)
           }
         });
       }
 
-      var getIndustryID = function(callback) {
+      var getIndustryID = function(getIndustryIDCallback) {
         var industryLabel = person.industry[0];
         Industry.forge({
           'industry_name': industryLabel
@@ -112,20 +95,20 @@ module.exports = {
         .then(function(industry) {
           if (industry === null) {
             Industry.forge({
-                'industry_name': industryLabel
+              'industry_name': industryLabel
             }).save()
             .then(function(industry) {
               obj.industryID = industry.attributes.id;
-              callback(false)
+              getIndustryIDCallback(false)
             });
           } else {
             obj.industryID = industry.attributes.id;
-            callback(false);
+            getIndustryIDCallback(false);
           }
         });
       };
 
-      var getCompanyID = function(callback) {
+      var getCompanyID = function(getCompanyIDCallback) {
         var companyLabel = person.current_company[0];
 
         Company.forge({
@@ -139,17 +122,16 @@ module.exports = {
             }).save()
             .then(function(company) {
               obj.companyID = company.attributes.id;
-              callback(false)
+              getCompanyIDCallback(false)
             });
-          } 
-          else {
+          } else {
             obj.companyID = company.attributes.id;
-            callback(false)
+            getCompanyIDCallback(false)
           }
         });
       }
 
-      var createProfile = function(callback) {
+      var createProfile = function(createProfileCallback) {
         new Profile({
           profile_name: person.full_name[0],
           profileURL: person.url,
@@ -158,18 +140,18 @@ module.exports = {
           currentLocation: person.location[0],
           currentPosition_id: obj.positionID,
           industry_id: obj.industryID,
-          currentCompany_id: obj.companyID 
+          currentCompany_id: obj.companyID
         }).save()
         .then(function(profile) {
           obj.profileID = profile.attributes.id;
           profile.skills().attach(skills_ids);
-          callback(false);
+          createProfileCallback(false);
         }).catch(function(err) {
           console.error(err);
         });
       };
 
-      var createEduMilestones = function(callback){
+      var createEduMilestones = function(outerCallback) {
 
         async.eachSeries(person.educationList, function(eduMilestone, nextMilestone) {
 
@@ -179,7 +161,7 @@ module.exports = {
             endYear: eduMilestone.end_date
           };
 
-          var getDegreeID = function(callback) {
+          var getDegreeID = function(getDegreeIDCallback) {
 
             var degreeLabel = eduMilestone.degree;
 
@@ -194,17 +176,16 @@ module.exports = {
                 }).save()
                 .then(function(degree) {
                   milestone.degreeID = degree.attributes.id;
-                  callback(false)
+                  getDegreeIDCallback(false)
                 });
-              } 
-              else {
+              } else {
                 milestone.degreeID = degree.attributes.id;
-                callback(false)
+                getDegreeIDCallback(false)
               }
             });
-          }
+          };
 
-          var getFosID = function(callback) {
+          var getFosID = function(getFosIDCallback) {
 
             var fosLabel = eduMilestone.major;
 
@@ -219,17 +200,16 @@ module.exports = {
                 }).save()
                 .then(function(fos) {
                   milestone.fosID = fos.attributes.id;
-                  callback(false)
+                  getFosIDCallback(false)
                 });
-              } 
-              else {
+              } else {
                 milestone.fosID = fos.attributes.id;
-                callback(false)
+                getFosIDCallback(false)
               }
             });
           };
 
-          var getSchoolID = function(callback) {
+          var getSchoolID = function(getSchoolIDCallback) {
 
             var schoolLabel = eduMilestone.school;
 
@@ -244,17 +224,16 @@ module.exports = {
                 }).save()
                 .then(function(school) {
                   milestone.schoolID = school.attributes.id;
-                  callback(false)
+                  getSchoolIDCallback(false)
                 });
-              } 
-              else {
+              } else {
                 milestone.schoolID = school.attributes.id;
-                callback(false)
+                getSchoolIDCallback(false)
               }
             });
           };
 
-          var newEduMilestone = function(callback) {
+          var newEduMilestone = function(newEduMilestoneCallback) {
             new EduMilestone({
               profile_id: milestone.profileID,
               degree_id: milestone.degreeID,
@@ -265,18 +244,18 @@ module.exports = {
             }).save()
             .then(function(eduMilestone) {
               console.log('New eduMilestone saved:', eduMilestone);
-              callback(false);
+              newEduMilestoneCallback(false);
             }).catch(function(err) {
               console.error(err);
             });
           };
 
-          var getDegreeIDAsync      =   Promise.promisify(getDegreeID),
-              getFosIDAsync         =   Promise.promisify(getFosID),
-              getSchoolIDAsync      =   Promise.promisify(getSchoolID)
-              newEduMilestoneAsync  =   Promise.promisify(newEduMilestone);
+          var getDegreeIDAsync = Promise.promisify(getDegreeID),
+              getFosIDAsync = Promise.promisify(getFosID),
+              getSchoolIDAsync = Promise.promisify(getSchoolID),
+              newEduMilestoneAsync = Promise.promisify(newEduMilestone);
 
-          getDegreeIDAsync().then(function(){
+          getDegreeIDAsync().then(function() {
             return getFosIDAsync();
           }).then(function() {
             return getSchoolIDAsync();
@@ -287,17 +266,18 @@ module.exports = {
             nextMilestone(); // Go to the next eduMilestone in the array
           });
 
-          callback(false); // Done with the loop over the education LIST array
 
+        }, function done(){
+          outerCallback(false); // Done with the loop over the education LIST array          
         });
       };
 
-      var getSkillsAsync            =   Promise.promisify(getSkills),
-          getIndustryIDAsync        =   Promise.promisify(getIndustryID),
-          getPositionIDAsync        =   Promise.promisify(getPositionID),
-          getCompanyIDAsync         =   Promise.promisify(getCompanyID),
-          createProfileAsync        =   Promise.promisify(createProfile),
-          createEduMilestonesAsync  =   Promise.promisify(createEduMilestones);
+      var getSkillsAsync = Promise.promisify(getSkills),
+          getIndustryIDAsync = Promise.promisify(getIndustryID),
+          getPositionIDAsync = Promise.promisify(getPositionID),
+          getCompanyIDAsync = Promise.promisify(getCompanyID),
+          createProfileAsync = Promise.promisify(createProfile),
+          createEduMilestonesAsync = Promise.promisify(createEduMilestones);
 
       getSkillsAsync().then(function() {
         return getCompanyIDAsync();
@@ -315,127 +295,8 @@ module.exports = {
       })
     });
 
-
-        // data_dump_profiles.forEach(function(person) {
-
-        //   // async.eachSeries(data_dump_profiles, function(person, function(){
-
-
-        //   // }))
-
-        //     console.log("NEW PERSON'S PROFILE IS BEING SCRAPED")
-
-        //     // LOOP OVER EACH PROFILE IN DATA DUMP
-
-        //     // ADD PREVIOUS POSITION TITLES TO POSITIONS TABLE
-        //     // for (var j = 0; j < person.past_experience_list.length; j++) {
-
-        //     //   var positionLabel = person.past_experience_list[j].title;
-        //     //   var positionID = labelToIdStorage.getId('positions', positionLabel);
-        //     //   console.log('positionID!!!!!', positionID);
-
-        //     //   if( positionID === -1) {
-        //     //     new Position({
-        //     //       position_name: person.past_experience_list[j].title,
-        //     //     }).save().then(function(resp) {
-        //     //       positionID = resp.attributes.id;
-        //     //       labelToIdStorage.addItem('positions', positionLabel, positionID);
-        //     //       console.log('response from labelToIdStorage', labelToIdStorage.positions);
-        //     //     }).catch(function(err) {
-        //     //       console.error(err);
-        //     //     });
-        //     //   }
-        //     // }
-
-        //     // ADD CURRENT_TITLE TO POSITIONS TABLE & GET POSITION ID
-        //     // var getPositionID = function(callback) {
-
-        //     //   var currentPositionLabel = JSON.stringify(person.current_title[0]);
-        //     //   var obj = {
-        //     //     currentPositionID: labelToIdStorage.getId('positions', currentPositionLabel)
-        //     //   };
-
-        //     //   if(obj.currentPositionID === -1) {
-        //     //     new Position({
-        //     //       position_name: currentPositionLabel
-        //     //     }).save()
-        //     //     .then(function(resp) {
-        //     //       obj.currentPositionID = resp.attributes.id;
-        //     //       labelToIdStorage.addItem('positions', currentPositionLabel, obj.currentPositionID);
-        //     //       callback(false, obj);
-        //     //     })
-        //     //     .catch(function(err) {
-        //     //       console.error(err);
-        //     //     });
-        //     //   }
-        //     //   else {
-        //     //     callback(false, obj);
-        //     //   }
-        //     // }
-
-        //     // var getIndustryID = function(obj, callback) {
-        //         obj = {};
-        //     var industryLabel = person.industry[0];
-        //     // var industryLabel = "Computer Software";
-
-        //     Industry.forge({
-        //             'industry_name': industryLabel
-        //         })
-        //         .fetch()
-        //         .then(function(industry) {
-        //             console.log('industry returned from getIndustryID, it\'s either null or ID#:', industry);
-        //             if (industry === null) {
-        //                 console.log('Its null');
-        //                 Industry.forge({
-        //                     'industry_name': industryLabel
-        //                 }).save().then(function(industry) {
-        //                   console.log('argumentssssss', Object.keys(arguments));
-        //                     obj.industryID = industry.attributes.id;
-        //                     console.log("we created a new industry ID:", obj.industryID)
-        //                     // callback(false, obj);
-        //                     return obj;
-        //                 })
-        //             } else {
-        //                 console.log("we found a new industry id:", industry.attributes.id)
-        //                 obj.industryID = industry.attributes.id;
-        //                 console.log('object returned from getIndustryID', obj);
-        //                 // callback(false, obj);
-        //                 return obj
-
-        //             }
-        //         }).then(function(returnedObj){
-        //           console.log('returnedObj', returnedObj)
-        //         })
-        // // }
-
-        //     // var getIndustryIDAsync = Promise.promisify(getIndustryID);
-
-        //     // getIndustryIDAsync()
-        //     //     .then(function(obj) {
-        //     //         console.log('got Industry ID from async function. here\'s the whole obj:', obj);
-        //     //     });
-        // })
-
-
-    }
+  }
 }
-
-
-
-
-// INVOKE CHAIN OF EVENTS
-// getPositionIDAsync()
-// .then(function(obj){
-//   console.log('got the Position id!!!!', obj);
-//   return getIndustryIDAsync(obj);
-// })
-// .then(function(obj){
-//   callback(false, function(){
-//     console.log('Finished parsing one profile!!!', obj)
-//   });
-// });
-
-
 
 
 
