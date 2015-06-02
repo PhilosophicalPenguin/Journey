@@ -13,6 +13,8 @@ var ClientRouter = Backbone.Router.extend ({
 
  	viewJourney: function(model) {
 
+ 		console.log('got to viewJourney on clientRouter');
+
 		var journeyView = new JourneyView({model: model});
     $(".mainContent").html(journeyView.el);
 
