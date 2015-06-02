@@ -11,6 +11,7 @@ var Industry = require('./server/db_Schemas/models/industry');
 var EduMilestone = require('./server/db_Schemas/models/eduMilestone');
 var dataUploadRoute = require('./server/routes/dataUpload/dataUploadRoute.js');
 var multipart = require('connect-multiparty');
+// require('require/server').mount(app);
 
 // var mongoose = require('mongoose')
 // var db_port = process.env.MONGOLAB_URI || 'mongodb://localhost/socialstocks';
