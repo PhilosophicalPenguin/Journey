@@ -15,7 +15,14 @@ var dbConfig = {
   }
 }
 
-var knex = require('knex')(dbConfig);
+//var knex = require('knex')(dbConfig);
+
+//          if we are not deployed    use our local information    else we use the enviroment variable
+var knex = !process.env.DATABASE_URL ? require('knex')(dbConfig) : require('knex')({
+  client: 'mysql',
+  connection: process.env.DATABASE_URL
+});
+
 var db = require('bookshelf')(knex);
 db.plugin('registry');
 
