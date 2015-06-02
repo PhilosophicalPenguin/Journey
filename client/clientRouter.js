@@ -10,9 +10,7 @@ window.ClientRouter = Backbone.Router.extend ({
     console.log('in home view - called from router');
         // var appView = new AppView();
         // $(".mainContent").html(appView.el);
-
     },
-
 
     viewJourney: function(model) {
         console.log('got to viewJourney on clientRouter');
