@@ -176,8 +176,9 @@ db.knex.schema.hasTable('expMilestones').then(function(exists) {
       expMilestone.integer('profile_id');
       expMilestone.integer('company_id');
       expMilestone.integer('position_id');
-      expMilestone.string('start_date', 20).unique();
-      expMilestone.string('end_date', 20).unique();
+      expMilestone.string('start_date', 20);
+      expMilestone.string('end_date', 20);
+      expMilestone.string('duration', 20);
       expMilestone.timestamps();
     }).then(function (table) {
       console.log('ExpMilestones table created.');

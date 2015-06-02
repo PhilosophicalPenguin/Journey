@@ -10,6 +10,7 @@ var Skill = require('./server/db_Schemas/models/skill');
 var Profile = require('./server/db_Schemas/models/profile');
 var Industry = require('./server/db_Schemas/models/industry');
 var EduMilestone = require('./server/db_Schemas/models/eduMilestone');
+var ExpMilestone = require('./server/db_Schemas/models/expMilestone');
 var dataUploadRoute = require('./server/routes/dataUpload/dataUploadRoute.js');
 var multipart = require('connect-multiparty');
 
