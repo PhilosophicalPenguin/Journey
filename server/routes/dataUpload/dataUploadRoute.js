@@ -292,6 +292,7 @@ module.exports = {
           var getPositionID = function(getPositionIDCallback) {
 
             var positionLabel = expMilestone.title;
+
             Position.forge({
               'position_name': positionLabel
             })
@@ -347,8 +348,6 @@ module.exports = {
             }).save()
             .then(function(expMilestone) {
               newExpMilestoneCallback(false);
-
-
             }).catch(function(err) {
               console.error(err);
             });
