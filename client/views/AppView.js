@@ -1,5 +1,5 @@
 // AppView.js - Defines a backbone view class for the whole
-var AppView = Backbone.View.extend({
+window.AppView = Backbone.View.extend({
 
 	initialize: function(params) {
 
@@ -14,6 +14,7 @@ var AppView = Backbone.View.extend({
 
 		// this.render();
 
+		this.discoverPathsView = new DiscoverPathsView({collection: this.model.get('discoverPathsCollection')});
 		this.render();
 
 
@@ -34,9 +35,8 @@ var AppView = Backbone.View.extend({
 
 		// this.$el.children().detach();
 
-		var discoverPathsView = new DiscoverPathsView({collection: this.model.get('discoverPathsCollection')});
 
-		return this.$el.append(['hello', discoverPathsView.$el]);
+		return this.$el.append(this.discoverPathsView.$el);
 
 
 	}

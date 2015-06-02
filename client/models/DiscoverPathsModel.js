@@ -1,4 +1,4 @@
-var DiscoverPathsModel = Backbone.Model.extend({
+window.DiscoverPathsModel = Backbone.Model.extend({
 
 	url: '/api/queryPositions/getStats',
 

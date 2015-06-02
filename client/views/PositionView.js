@@ -1,4 +1,4 @@
-var PositionView = Backbone.View.extend({
+window.PositionView = Backbone.View.extend({
 
 	tagName: 'li',
 	className: 'positionView',

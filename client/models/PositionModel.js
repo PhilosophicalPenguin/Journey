@@ -1,4 +1,4 @@
-var PositionModel = Backbone.Model.extend({
+window.PositionModel = Backbone.Model.extend({
 
 	url: '/api/queryPositions/getStats',
 

@@ -1,4 +1,4 @@
-var StatsTableView = Backbone.View.extend({
+window.StatsTableView = Backbone.View.extend({
 
 	model: PositionModel,
 	tagName: 'table',

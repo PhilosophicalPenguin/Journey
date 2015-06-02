@@ -1,4 +1,4 @@
-var PositionsCollectionView = Backbone.View.extend({
+window.PositionsCollectionView = Backbone.View.extend({
 
 	tagName: 'ul',
 	className: 'positionsList',

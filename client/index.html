@@ -3,12 +3,17 @@
 <head>
 	<title>Journey</title>
 	<link href='http://fonts.googleapis.com/css?family=Galdeano' rel='stylesheet' type='text/css'>
-  <link href='bower_components/bootstrap/dist/css/bootstrap.css' rel="stylesheet" type="text/css" />
-  <link href='bower_components/bootstrap/dist/css/bootstrap-theme.css' rel="stylesheet" type="text/css" />
+  <!-- <link href='bower_components/bootstrap/dist/css/bootstrap.css' rel="stylesheet" type="text/css" />
+  <link href='bower_components/bootstrap/dist/css/bootstrap-theme.css' rel="stylesheet" type="text/css" /> -->
+  <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css' rel="stylesheet" />
 	<link href="styles/main.css" rel="stylesheet">
 
 </head>
 <body id="thewholebody">
+
+
+<div class="mainContent">
+
 
 	<div class='splashPage container'>
     <div class='row '>
@@ -20,17 +25,43 @@
         </form>
       </div>
     </div>
-  </div>
 
-	<div>
-		<div class="mainContent"></div>
+    <div class='row discoverPaths'>
+      <!-- <h2>Find Your Path...</h2> -->
+
+      <div class='col-md-4'>
+        <div class='onePath'>
+          <h3>Corporate Lawyer</h3>
+          <img src='../assets/lawyer.jpg' alt='Corporate Lawyer'>
+        </div>
+      </div>
+
+      <div class='col-md-4'>
+        <div class='onePath'>
+
+          <h3>Software Engineer</h3>
+          <img src='../assets/software_engineer.jpg' alt='Software Engineer'>
+        </div>
+      </div>
+
+      <div class='col-md-4'>
+        <div class='onePath'>
+          <h3>Nurse Practioner</h3>
+          <img src='../assets/nurse.jpg' alt='Nurse Practioner'>
+        </div>
+      </div>
+
+    </div>
 	</div>
+ </div>
+
+
 
 	<!-- DEPENDENCIES -->
 
-	<script src= "libs/jquery/dist/jquery.js"></script>
-	<script src= "libs/underscore/underscore.js"></script>
-	<script src= "libs/backbone/backbone.js"></script>
+	<script src= "bower_components/jquery/dist/jquery.js"></script>
+	<script src= "bower_components/underscore/underscore.js"></script>
+	<script src= "bower_components/backbone/backbone.js"></script>
 
 	<!-- <script src="//localhost:3000/require/client"></script> -->
 	<!-- <script src="/Users/sunshineyin/Desktop/HR/Journey/node_modules/backbone-autocomplete/views.autocomplete-view.js"></script> -->
@@ -48,7 +79,7 @@
 	<script src= "views/DiscoverPathsView.js"></script>
 	<script src= "views/PositionsCollectionView.js"></script>
 	<script src= "views/PositionView.js"></script>
-	<!-- <script srce="views/AutoCompleteview.js"></script> -->
+	<!-- <script src="views/AutoCompleteview.js"></script> -->
 	<script src= "views/AppView.js"></script>
 	<script src= "views/StatsTableView.js"></script>
 	<script src= "views/JourneyView.js"></script>
@@ -63,7 +94,10 @@
         var app = new AppModel();
         var appView = new AppView({model: app});
 
-        $('.mainContent').append(appView.$el);
+        $( ".onePath" ).click(function(e) {
+          appView.discoverPathsView.journeyClickHandler(e);
+				});
+
       });
 
     </script>

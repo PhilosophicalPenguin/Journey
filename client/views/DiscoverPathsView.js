@@ -1,7 +1,8 @@
-var DiscoverPathsView = Backbone.View.extend({
+window.DiscoverPathsView = Backbone.View.extend({
 
-	tagName: 'table',
-	template: _.template('<tr><td><%=position_name%></td><td><img src= <%=position_image%>></td></tr>'),
+	tagName: 'div',
+	className: 'col-md-4',
+	template: _.template('<h3 class=onePath><%=position_name%></h3>'),
 
 	initialize: function() {
 		this.render();
@@ -11,6 +12,16 @@ var DiscoverPathsView = Backbone.View.extend({
 		'click': 'journeyClickHandler'
 	},
 
+
+  journeyClickHandler: function(e) {
+  	var journeyClicked = $(e.target).text();
+  	console.log('this is the journeyClicked', journeyClicked);
+  	var journey = this.collection.where({position_name: journeyClicked });
+
+
+    journey[0].goToJourney(journeyClicked);
+  },
+
 	render: function(){
 
 		var context = this;
@@ -19,12 +30,4 @@ var DiscoverPathsView = Backbone.View.extend({
   		context.$el.append(context.template(position.attributes))
   	})
   },
-
-  journeyClickHandler: function(e) {
-  	var journeyClicked = $(e.target).text();
-  	var journey = this.collection.where({position_name: journeyClicked });
-
-    journey[0].goToJourney(journeyClicked);
-  }
-
 })

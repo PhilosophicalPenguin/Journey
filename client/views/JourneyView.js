@@ -1,4 +1,4 @@
-var JourneyView = Backbone.View.extend({
+window.JourneyView = Backbone.View.extend({
 
 	model: PositionModel,
 	className: 'JourneyView',
