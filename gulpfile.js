@@ -27,6 +27,11 @@ var jsSrcFiles = [
 
 var distributeDirectory = './dist/';
 var distributeSource = distributeDirectory + '**/*.js';
+var ignoreBower = '!./client/bower_components/**/*';
+var ignoreAngular = '!./client/angular/**/*';
+//var ignoreList = [ignoreBower, ignoreAngular];
+
+var clientTargetsAndIgnores = [targetClientSourceFiles, ignoreBower, ignoreAngular];
 
 // var clientTargetsAndIgnores = [jsSrcFiles, ignoreBower, ignoreAngular];
 
