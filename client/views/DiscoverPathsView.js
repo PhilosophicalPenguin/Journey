@@ -27,7 +27,7 @@ window.DiscoverPathsView = Backbone.View.extend({
 		var context = this;
 
   	return this.collection.each(function(position){
-  		context.$el.append(context.template(position.attributes))
-  	})
+  		context.$el.append(context.template(position.attributes));
+  	});
   },
-})
+});

@@ -33,8 +33,8 @@ window.StatsTableView = Backbone.View.extend({
 
 		var context = this;
   	fieldItems.forEach(function(item){
-  		return context.$el.append(context.template({item: item}))
+  		return context.$el.append(context.template({item: item}));
   	});
   }
 
-})
+});

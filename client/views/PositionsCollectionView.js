@@ -14,6 +14,6 @@ window.PositionsCollectionView = Backbone.View.extend({
 			this.collection.map(function(position){
 				return new PositionView({ model: position }).render();
 			})
-		)
+		);
 	}
-})
+});

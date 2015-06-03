@@ -40,4 +40,4 @@ window.AppView = Backbone.View.extend({
 
 
 	}
-})
+});

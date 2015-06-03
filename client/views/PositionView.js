@@ -22,7 +22,4 @@ window.PositionView = Backbone.View.extend({
 	},
 
 
-})
-
-
-
+});

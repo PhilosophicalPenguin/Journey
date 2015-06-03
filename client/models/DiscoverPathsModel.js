@@ -31,5 +31,5 @@ window.DiscoverPathsModel = Backbone.Model.extend({
     return response;
   },
 
-})
+});
     

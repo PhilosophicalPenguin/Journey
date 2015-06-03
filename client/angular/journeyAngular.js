@@ -13,7 +13,7 @@ function testCtrl($scope, $http){
       method: 'GET',
       url: '/api/positionQuery/getStats',
       params: { name: name }
-    }
+    };
 
     $http(req)
     .success(function(resp){
@@ -43,13 +43,11 @@ function testCtrl($scope, $http){
       objConstructor($scope.degreesAndFields, resp.degreesAndFields);
     })
     .error(function(){
-      console.log('error', error)
+      console.log('error', error);
     });
   };
 
-  $scope.degrees 
-
-
+  //$scope.degrees;
 }
 
 angular.module('journey', [])

@@ -7,4 +7,4 @@ var PositionsCollection = Backbone.Collection.extend({
 		}
 
 
-})
+});
