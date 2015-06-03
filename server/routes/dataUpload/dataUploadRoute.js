@@ -22,6 +22,10 @@ module.exports = {
 
     async.eachSeries(data_dump_profiles, function(person, callbackNext) {
 
+      if(person.current_photo_link.length === 0){
+        person.current_photo_link = null;
+      }
+
       obj = {};
       var skills_ids = [];
 
@@ -144,8 +148,8 @@ module.exports = {
 
           var milestone = {
             profileID: obj.profileID,
-            startYear: eduMilestone.start_date,
-            endYear: eduMilestone.end_date
+            startYear: eduMilestone.start_date || null,
+            endYear: eduMilestone.end_date || null
           };
 
           var getDegreeID = function(getDegreeIDCallback) {

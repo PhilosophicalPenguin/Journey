@@ -31,7 +31,7 @@ db.knex.schema.hasTable('degrees').then(function(exists) {
   if (!exists) {
     return knex.schema.createTable('degrees', function (degree) {
       degree.increments('id').primary();
-      degree.string('degree_name', 50).unique();      
+      degree.string('degree_name', 100).unique();      
       degree.timestamps();
     }).then(function (table) {
       console.log('Degrees table created.');
@@ -44,7 +44,7 @@ db.knex.schema.hasTable('fieldsOfStudy').then(function(exists) {
   if (!exists) {
     return knex.schema.createTable('fieldsOfStudy', function (fieldOfStudy) {
       fieldOfStudy.increments('id').primary();
-      fieldOfStudy.string('fieldOfStudy_name', 50).unique();
+      fieldOfStudy.string('fieldOfStudy_name', 100).unique();
       fieldOfStudy.timestamps();
     }).then(function (table) {
       console.log('FieldsOfStudy table created.');
@@ -85,7 +85,7 @@ db.knex.schema.hasTable('profiles').then(function(exists) {
       profile.increments('id').primary();
       profile.string('profileURL', 200).unique();
       profile.string('profile_name', 100);
-      profile.string('picURL', 200);
+      profile.string('picURL', 200).defaultTo('null');
       profile.string('currentLocation', 100);
       profile.string('headline', 100);
       profile.integer('currentPosition_id');
