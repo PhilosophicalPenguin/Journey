@@ -56,6 +56,8 @@ module.exports = {
         } else { //found the position requested
           console.log('found the position Woo!', position);
           var positionID = position.attributes.id;
+          
+          // creates object to store stats
           var result = {
             degrees: {
               total: 0
@@ -80,6 +82,7 @@ module.exports = {
             }
           };
 
+          // Create helper function to calculate stats of each table
           var makeTally = function(subject, property) {
             return function(object) {
               var val = object[property];
@@ -168,9 +171,9 @@ module.exports = {
               })
           }
 
-          var getEducationStatsAsync  =   Promise.promisify(getEducationStats);
-          var getExperienceStatsAsync =   Promise.promisify(getExperienceStats);
-          var getSkillStatsAsync      =   Promise.promisify(getSkillStats);
+          var getEducationStatsAsync    =   Promise.promisify(getEducationStats);
+          var getExperienceStatsAsync   =   Promise.promisify(getExperienceStats);
+          var getSkillStatsAsync        =   Promise.promisify(getSkillStats);
 
           getEducationStatsAsync().then(function() {
             return getExperienceStatsAsync()
