@@ -14,6 +14,7 @@ window.DiscoverPathsModel = Backbone.Model.extend({
 
 	goToJourney: function(journeyClicked){
 		console.log('got to goToJourney from discoverPathsModel');
+        console.log("parameter being passed", journeyClicked);
 
 		console.log(this.fetch({data: $.param({name: journeyClicked})}));
 

@@ -11,6 +11,7 @@ window.JourneyView = Backbone.View.extend({
   },
 
   render: function () {
+    console.log('positionModel ', this.model)
     var statsTableView = new StatsTableView({model: this.model}, {field: 'degreesAndFields'} );
 
     this.$el.append(['<th>For the position</th>' + this.model.get('title'), statsTableView.$el]);
