@@ -1,11 +1,18 @@
 {
   "name": "Journey",
-  "version": "0.0.0",
-  "homepage": "https://github.com/sunshinewyin/Journey",
+  "main": "index.html",
+  "version": "0.0.4",
+  "homepage": "https://github.com/PhilosophicalPenguin/Journey",
   "authors": [
-    "Sunshine Yin <sunshine.w.yin@gmail.com>"
+    "Sunshine Yin <sunshine.w.yin@gmail.com>",
+    "Derek Boero <derek.b26@gmail.com>"
   ],
+  "description": "Journey",
   "license": "MIT",
+  "moduleType": [
+    "es6",
+    "node"
+  ],
   "ignore": [
     "**/.*",
     "node_modules",
@@ -16,6 +23,7 @@
   "dependencies": {
     "backbone": "~1.2.0",
     "jquery": "~2.1.4",
+    "jquery-ui": "~1.11.4",
     "bootstrap": "~3.3.4"
   }
 }

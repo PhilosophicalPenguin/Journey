@@ -19,5 +19,3 @@ build/
 dist/
 
 test*.js
-
-client/libs/**/*
