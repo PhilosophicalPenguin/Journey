@@ -72,13 +72,13 @@
     }, {
         "degree": "Bachelor of Science",
         "school": "University of Denver",
-        "major": "Computer Science",
+        "major": "Computer Sciencessss",
         "end_date": "2002",
         "start_date": "1998"
     }, {
-        "degree": "",
+        "degree": "N/A",
         "school": "School Monta Vista High School",
-        "major": "",
+        "major": "N/A",
         "end_date": "1998",
         "start_date": "1994"
     }],
@@ -228,7 +228,7 @@
     "educationList": [{
         "degree": "Bachelor of Science (BS)",
         "school": "University of California, Berkeley",
-        "major": "",
+        "major": "N/A",
         "end_date": "2010",
         "start_date": "2006"
     }],
@@ -402,7 +402,7 @@
     }, {
         "degree": "J.D.",
         "school": "New York University School of Law",
-        "major": "",
+        "major": "N/A",
         "end_date": "2009",
         "start_date": "2006"
     }, {
@@ -519,7 +519,13 @@
     "current_photo_link": ["https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/1/000/0c7/086/3b130f6.jpg"],
     "headline": ["Lead Backend Engineer at 6SensorLabs"],
     "industry": ["Computer Software"],
-    "educationList": [],
+    "educationList": [{
+        "degree": "Bsc Sciences",
+        "school": "North Southwest University",
+        "major": "Computer Sciences",
+        "end_date": "2007",
+        "start_date": "2003"
+    }],
     "current_company": ["6SensorLabs"],
     "url": "https://www.linkedin.com/in/vatraghavan",
     "full_name": ["Vat Raghavan"],
