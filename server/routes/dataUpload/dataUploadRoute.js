@@ -269,9 +269,9 @@ module.exports = {
 
           var milestone = {
             profileID: obj.profileID,
-            start_date: expMilestone.start_date,
-            end_date: expMilestone.end_date,
-            duration: expMilestone.duration
+            start_date: expMilestone.start_date || null,
+            end_date: expMilestone.end_date || null,
+            duration: expMilestone.duration || null
           };
 
           var getPositionID = function(getPositionIDCallback) {
