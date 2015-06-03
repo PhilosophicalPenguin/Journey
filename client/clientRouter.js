@@ -1,31 +1,27 @@
 window.ClientRouter = Backbone.Router.extend ({
 
- 	routes: {
- 		'' : 'home',
- 		// 'viewJourney': 'viewJourney',
+    routes: {
+        '' : 'home',
+        // 'viewJourney': 'viewJourney',
     'viewJourney/:id': 'viewJourney'
- 	},
+    },
 
- 	home: function () {
+    home: function () {
     console.log('in home view - called from router');
- 		// var appView = new AppView();
- 		// $(".mainContent").html(appView.el);
+        // var appView = new AppView();
+        // $(".mainContent").html(appView.el);
 
- 	},
+    },
 
 
- 	viewJourney: function(id) {
+    viewJourney: function(model) {
+        console.log('got to viewJourney on clientRouter');
 
- 		console.log('got to viewJourney on clientRouter');
-
-		// var journeyView = new JourneyView({model: model});
-
-    // var path = location.pathname;
-    console.log('in viewJourney', id);
-		// var journeyView = new JourneyView({model: model});
-    $(".mainContent").html(journeyView.el);
-
- 	}
+        // var path = location.pathname;
+        //console.log('in viewJourney', id);
+         var journeyView = new JourneyView({model: model});
+        $(".mainContent").html(journeyView.el);
+    }
 });
 
 var clientRouter = new ClientRouter();
