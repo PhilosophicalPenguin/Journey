@@ -1,10 +1,10 @@
 var PositionsCollection = Backbone.Collection.extend({
 
-		model: PositionModel,
+    model: PositionModel,
 
-		initialize: function() {
+    initialize: function() {
 
-		}
+    }
 
 
 });

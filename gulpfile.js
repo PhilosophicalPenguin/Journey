@@ -4,7 +4,6 @@ var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
 var rename = require('gulp-rename');
 var minifyCss = require('gulp-minify-css');
-// var clean = require('del');
 
 var targetClientSourceFiles = './client/**/*.js';
 var ignoreBower = '!./client/bower_components/**/*';
@@ -40,9 +39,7 @@ gulp.task('lint', function() {
 
 gulp.task('compressAndConcat', ['lint'], function() {
     return gulp.src(jsSrcFiles)
-        .pipe(concat('all.js'))
-        .pipe(gulp.dest(distributeDirectory))
-        .pipe(rename('all.min.js'))
+        .pipe(concat('all.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest(distributeDirectory));
 });
@@ -74,4 +71,3 @@ gulp.task('watch', function() {
 });
 
 gulp.task('build', ['compressAndConcat', 'minify-css', 'copy', 'copy-assets']);
-
