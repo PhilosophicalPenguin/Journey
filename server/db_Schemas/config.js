@@ -87,7 +87,9 @@ db.knex.schema.hasTable('profiles').then(function(exists) {
       profile.string('profile_name', 100);
       profile.string('picURL', 200);
       profile.string('currentLocation', 100);
-      profile.integer('position_id');
+      profile.string('headline', 100);
+      profile.integer('currentPosition_id');
+      profile.integer('currentCompany_id');
       profile.integer('industry_id');
       profile.timestamps();
     }).then(function (table) {
@@ -107,9 +109,48 @@ db.knex.schema.hasTable('positions').then(function(exists) {
       console.log('Positions table created.');
     });
   }
-})
+});
 
-// Creates 'eduMilestones' table & this is the key join table
+// Creates 'companies' table
+db.knex.schema.hasTable('companies').then(function(exists) {
+  if (!exists){
+    return knex.schema.createTable('companies', function (company) {
+      company.increments('id').primary();
+      company.string('company_name', 100).unique();
+      company.timestamps();
+    }).then(function (table) {
+      console.log('Companies table created.');
+    });
+  }
+});
+
+// Creates 'skills' table
+db.knex.schema.hasTable('skills').then(function(exists) {
+  if (!exists){
+    return knex.schema.createTable('skills', function (skill) {
+      skill.increments('id').primary();
+      skill.string('skill_name', 50).unique();
+      skill.timestamps();
+    }).then(function (table) {
+      console.log('Skills table created.');
+    });
+  }
+});
+
+// Creates 'profiles_skills' join table
+db.knex.schema.hasTable('profiles_skills').then(function(exists) {
+  if (!exists){
+    return knex.schema.createTable('profiles_skills', function (table) {
+      table.increments('id').primary();
+      table.integer('profile_id');
+      table.integer('skill_id');
+    }).then(function (table) {
+      console.log('profiles_skills table created.');
+    });
+  }
+});
+
+// Creates 'eduMilestones' table
 db.knex.schema.hasTable('eduMilestones').then(function(exists) {
   if (!exists) {
     return knex.schema.createTable('eduMilestones', function (eduMilestone) {
@@ -119,10 +160,28 @@ db.knex.schema.hasTable('eduMilestones').then(function(exists) {
       eduMilestone.integer('fieldOfStudy_id');
       eduMilestone.integer('school_id');
       eduMilestone.integer('startYear', 4);
-      eduMilestone.integer('endYear', 4)
+      eduMilestone.integer('endYear', 4);
       eduMilestone.timestamps();
     }).then(function (table) {
       console.log('EduMilestones table created.');
+    });
+  }
+});
+
+// Creates 'expMilestones' table
+db.knex.schema.hasTable('expMilestones').then(function(exists) {
+  if (!exists) {
+    return knex.schema.createTable('expMilestones', function (expMilestone) {
+      expMilestone.increments('id').primary();
+      expMilestone.integer('profile_id');
+      expMilestone.integer('company_id');
+      expMilestone.integer('position_id');
+      expMilestone.string('start_date', 20);
+      expMilestone.string('end_date', 20);
+      expMilestone.string('duration', 20);
+      expMilestone.timestamps();
+    }).then(function (table) {
+      console.log('ExpMilestones table created.');
     });
   }
 });

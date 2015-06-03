@@ -2,13 +2,13 @@ var db = require('../config');
 var Profile = require('./profile');
 var addMochData = require('../../addMochData');
 
-// Defines individual position
+// Defines individual Position Model
 var Position = db.Model.extend({
   tableName: 'positions',
-  hasTimestamps: true,
-  profiles: function() {
-    return this.hasMany('Profile', 'position_id');
-  }
+  hasTimestamps: true
+  // profiles: function() {
+  //   return this.hasMany('Profile', 'position_id');
+  // }
 });
 
 if(addMochData) {

@@ -12,6 +12,7 @@ var forEach = function(){
 };
 
 module.exports = {
+
   getAvailablePositions: function(request,response) {
     console.log('im trying to get available positions');
     new Position().fetchAll().then(function(positions){
@@ -38,6 +39,7 @@ module.exports = {
   // @param request {object} - contains information on the client and inforamtion
   //                            relating to their wants
   // @param response {object} - an object to respond with information in relation to the request
+  
   getStatsOnPosition : function(request, response) {
     new Position().where({
       position_name: request.query.name
@@ -46,7 +48,7 @@ module.exports = {
     .then( function (position) {
       if(!position) { // invalid position name can not find such a position in the database
         console.log('danger will robinson! didnt find position');
-        response.writeHead(404)
+        // response.writeHead(404)
         response.send({errorMessage: 'that position does not exist in our database'});
       }
       else { //found the position requested

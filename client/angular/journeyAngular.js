@@ -11,7 +11,7 @@ function testCtrl($scope, $http){
     
     var req = {
       method: 'GET',
-      url: '/getStats',
+      url: '/api/positionQuery/getStats',
       params: { name: name }
     }
 
