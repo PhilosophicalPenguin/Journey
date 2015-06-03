@@ -84,7 +84,6 @@ module.exports = {
             return function(object) {
               var val = object[property];
               result[subject][val] = result[subject][val] || 0;
-
               ++result[subject][val];
               ++result[subject].total;
             };
@@ -135,7 +134,7 @@ module.exports = {
           }
 
           var getExperienceStats = function(getExperienceStatsCB) {
-            //create a join table to retrieve all information of
+            // create a join table to retrieve all experience info of
             // people and their history, who have or had the job specified
             db.knex.from('expMilestones')
               .innerJoin('profiles', 'expMilestones.profile_id', 'profiles.id')
@@ -145,39 +144,26 @@ module.exports = {
                 currentPosition_id: positionID
               })
               .then(function(data) {
-                console.log('heres the data', data);
-                //create an object to tally information
-                //and calculate statistics
-
                 var tallyCompanies = makeTally('companies', 'company_name');
                 var tallyPositions = makeTally('positions', 'position_name');
-
                 forEach(data, tallyCompanies,
                   tallyPositions
                 );
-
                 getExperienceStatsCB();
               })
           }
 
           var getSkillStats = function(getSkillStatsCB) {
-            //create a join table to retrieve all information of
-            // people and their history, who have or had the job specified
+            // create a join table to retrieve all skill stats
             db.knex.from('profiles_skills')
               .innerJoin('profiles', 'profiles_skills.profile_id', 'profiles.id')
               .innerJoin('skills', 'profiles_skills.skill_id', 'skills.id')
               .where({
                 currentPosition_id: positionID
               })
-              .then(function(data) {
-                console.log('heres the data', data);
-                //create an object to tally information
-                //and calculate statistics
-
+              .then(function(data) {              
                 var tallySkills = makeTally('skills', 'skill_name');
-
                 forEach(data, tallySkills);
-
                 getSkillStatsCB();
               })
           }
@@ -187,10 +173,8 @@ module.exports = {
           var getSkillStatsAsync      =   Promise.promisify(getSkillStats);
 
           getEducationStatsAsync().then(function() {
-            console.log("Get education stats async complete");
             return getExperienceStatsAsync()
           }).then(function() {
-            console.log("Get experience stats async complete");
             return getSkillStatsAsync()
           }).then(function() {
             console.log('this is the result!', result);
