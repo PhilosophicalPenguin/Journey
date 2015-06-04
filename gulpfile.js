@@ -22,6 +22,8 @@ var jsSrcFiles = [
     './client/views/ExperienceView.js',
     './client/views/EducationChartView.js',
     './client/views/EducationView.js',
+    './client/views/SkillsStatsChartView.js',
+    './client/views/SkillsView.js',
     './client/views/JourneyView.js',
     './client/clientRouter.js',
     ignoreBower,
@@ -67,7 +69,7 @@ gulp.task('copy-assets', function() {
 });
 
 gulp.task('watch', function() {
-    gulp.watch(targetClientSourceFiles, ['lint', 'build']);
+    gulp.watch([jsSrcFiles, './client/index.html'], ['lint', 'build']);
     gulp.watch('styles/*.css', ['minify-css']);
 });
 
