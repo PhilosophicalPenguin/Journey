@@ -12,6 +12,7 @@ var Profile = require('../../db_Schemas/models/profile');
 var Industry = require('../../db_Schemas/models/industry');
 var EduMilestone = require('../../db_Schemas/models/eduMilestone');
 var ExpMilestone = require('../../db_Schemas/models/expMilestone');
+var degreeBucket = require('./degreeBucket');
 var Promise = require("bluebird");
 var async = require("async");
 
@@ -154,16 +155,32 @@ module.exports = {
 
           var getDegreeID = function(getDegreeIDCallback) {
 
-            var degreeLabel = eduMilestone.degree;
+            // lowercases the string & removes periods & returns first element in the array
+            var firstWordinDegree = eduMilestone.degree.toLowerCase().replace(/\./g, '').replace(/'/g, '').split(' ')[0];
+            var degreeName;
+
+            // need to catch exceptions like 'master of business administration', 'doctore of law', 'doctor of philosophy'
+            
+            var getBucket = function(val) {
+              if(degreeBucket.hasOwnProperty(val)){
+                degreeName = degreeBucket[val];
+              }
+              else {
+                degreeName = 'Other'
+              }
+              console.log('We bucketed the degree to:', degreeName);
+            }
+
+            getBucket(firstWordinDegree);
 
             Degree.forge({
-              'degree_name': degreeLabel
+              'degree_name': degreeName
             })
             .fetch()
             .then(function(degree) {
               if (degree === null) {
                 Degree.forge({
-                  'degree_name': degreeLabel
+                  'degree_name': degreeName
                 }).save()
                 .then(function(degree) {
                   milestone.degreeID = degree.attributes.id;
@@ -234,7 +251,6 @@ module.exports = {
               endYear: milestone.endYear
             }).save()
             .then(function(eduMilestone) {
-              console.log('New eduMilestone saved:', eduMilestone);
               newEduMilestoneCallback(false);
             }).catch(function(err) {
               console.error(err);
@@ -253,7 +269,6 @@ module.exports = {
           }).then(function() {
             return newEduMilestoneAsync();
           }).then(function() {
-            console.log('newEduMilestone about to be saved!!!', milestone);
             nextMilestone(); // Go to the next eduMilestone in the array
           });
 
@@ -332,7 +347,6 @@ module.exports = {
               duration: milestone.duration
             }).save()
             .then(function(expMilestone) {
-              console.log('New expMilestone saved:', expMilestone);
               newExpMilestoneCallback(false);
             }).catch(function(err) {
               console.error(err);
@@ -348,7 +362,6 @@ module.exports = {
           }).then(function() {
             return newExpMilestoneAsync();
           }).then(function(milestone) {
-            console.log('newExpMilestone about to be saved!!!', milestone);
             nextMilestone(); // Go to the next expMilestone in the array
           });
 
@@ -379,7 +392,6 @@ module.exports = {
       }).then(function() {
         return createExperienceMilestonesAsync();
       }).then(function() {
-        console.log('at end of everything, obj looks like:', obj)
         callbackNext(); // Go to next person
       })
     });

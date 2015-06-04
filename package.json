@@ -3,8 +3,7 @@
   "version": "0.0.0",
   "description": "career path router",
   "main": "index.js",
-  "scripts": {
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "https://github.com/PhilosophicalPenguin/Journey.git"
@@ -24,6 +23,7 @@
   "devDependencies": {
     "browserify": "^10.2.1",
     "gulp": "^3.8.11",
+    "gulp-concat": "^2.5.2",
     "gulp-jshint": "^1.11.0",
     "gulp-minify-css": "^1.1.1",
     "gulp-rename": "^1.2.2",
@@ -36,24 +36,26 @@
     "sinon": "^1.14.1"
   },
   "dependencies": {
-    "backbone-autocomplete": "0.0.5",
     "async": "^1.0.0",
+    "backbone-autocomplete": "0.0.5",
     "bluebird": "^2.9.26",
     "body-parser": "^1.12.4",
     "bookshelf": "^0.8.1",
+    "bower": "0.6.x",
     "connect-busboy": "0.0.2",
     "connect-multiparty": "^1.2.5",
     "express": "^4.12.4",
+    "jade": "^1.10.0",
     "knex": "^0.8.6",
     "multiparty": "^4.1.2",
     "mysql": "^2.6.2",
     "nodemon": "^1.3.7",
-    "util": "^0.10.3",
-    "bower": "0.6.x",
-    "require": "^2.4.18"
+    "require": "^2.4.18",
+    "util": "^0.10.3"
   },
   "engines": {
     "node": "0.12.2",
+    "npm": "2.7.4",
     "underscore": "^1.8.3",
     "util": "^0.10.3"
   }

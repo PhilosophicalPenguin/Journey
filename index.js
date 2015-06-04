@@ -13,6 +13,8 @@ var EduMilestone = require('./server/db_Schemas/models/eduMilestone');
 var ExpMilestone = require('./server/db_Schemas/models/expMilestone');
 var dataUploadRoute = require('./server/routes/dataUpload/dataUploadRoute.js');
 var multipart = require('connect-multiparty');
+var path = require('path');
+
 
 // require('require/server').mount(app);
 
@@ -22,7 +24,12 @@ var multipart = require('connect-multiparty');
 // require('./middleware.js')(app, express);
 
 var port = process.env.PORT || 3000;
-app.use(express.static(__dirname + '/client'));
+
+// app.set('views', '/dist');
+// app.set('view engine', 'jade');
+
+app.use(express.static(__dirname + '/dist'));
+// app.use(express.static(path.join(__dirname, './client')));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
