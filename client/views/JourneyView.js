@@ -1,20 +1,22 @@
 window.JourneyView = Backbone.View.extend({
-
+  el:"#mainContent",
 	model: PositionModel,
 	className: 'JourneyView',
-  template: _.template('<tr><td><%=degree.percentage%> have a <%=degree.name%> or higher, </td></tr>'),
 
-  // template: _.template("<h4> For the position <%= title %>: </h4><h3> Education </h3><ul><li><%= degrees['B.S.'] %> have a B.S. or higher, </li><li><%= degrees['M.B.A.'] %> have a M.B.A. or higher, </li><li><%= degrees['B.A.'] %> have a B.A. or higher </li></ul>"),
   initialize: function () {
-
     this.render();
   },
 
   render: function () {
-    console.log('positionModel ', this.model)
-    var statsTableView = new StatsTableView({model: this.model}, {field: 'degreesAndFields'} );
+    this.$el.children().detach();
+    this.$el.append('<h1>People who currently have the title ' + this.model.get('position_name') + ' have the following histories:</h1>');
+    this.$el.append('<div id="experienceDiv"></div>');
+    var newExperienceView = new ExperienceView({model : this.model });
+    this.$el.append('<div id="educationDiv"></div>');
+    var newEducationView = new EducationView({model : this.model });
 
-    this.$el.append(['<th>For the position</th>' + this.model.get('title'), statsTableView.$el]);
+
+   // this.$el.append(['<th>For the position</th>' + this.model.get('position_name')]);
   }
 
 });

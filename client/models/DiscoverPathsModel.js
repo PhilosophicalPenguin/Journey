@@ -23,9 +23,7 @@ window.DiscoverPathsModel = Backbone.Model.extend({
   parse: function(response) {
   	console.log('got to parse from discoverPathsModel');
 
-    this.set('degrees', response.degrees);
-    this.set('fieldsOfStudy', response.fieldsOfStudy);
-    this.set('degreesAndFields', response.degreesAndFields);
+    this.set('info', response);
 
     clientRouter.viewJourney(this);
 
