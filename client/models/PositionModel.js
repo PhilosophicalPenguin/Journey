@@ -3,7 +3,7 @@ window.PositionModel = Backbone.Model.extend({
 	url: '/api/queryPositions/getStats',
 
 	goToJourney: function(journeyClicked){
-
+    console.log("parameter being passed", journeyClicked);
 		this.fetch({data: $.param({name: journeyClicked})});
 
   },

@@ -11,19 +11,18 @@ window.AppModel = Backbone.Model.extend ({
 	initialize: function(params){
 
 		var lawyer = new DiscoverPathsModel ({
-  		position_name: 'Corporate Lawyer',
-  		position_image: '../assets/lawyer.jpg',
-
+  		  position_name: 'Corporate Lawyer',
+  		  position_image: '../assets/lawyer.jpg',
 		});
 
 		var softwareEngineer = new DiscoverPathsModel ({
-  		position_name: 'Software Engineer',
-  		position_image: '../assets/software_engineer.jpg'
+  		  position_name: 'Software Engineer',
+  		  position_image: '../assets/software_engineer.jpg'
 		});
 
 		var nurse = new DiscoverPathsModel ({
-  		position_name: 'Nurse Practioner',
-  		position_image: '../assets/nurse.jpg'
+  		  position_name: 'Nurse Practioner',
+  	      position_image: '../assets/nurse.jpg'
 		});
 
 

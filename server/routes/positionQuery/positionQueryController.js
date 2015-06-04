@@ -54,7 +54,6 @@ module.exports = {
             errorMessage: 'that position does not exist in our database'
           });
         } else { //found the position requested
-          console.log('found the position Woo!', position);
           var positionID = position.attributes.id;
           
           // creates object to store stats
@@ -104,7 +103,6 @@ module.exports = {
                 currentPosition_id: positionID
               })
               .then(function(data) {
-                console.log('heres the data', data);
                 //create an object to tally information
                 //and calculate statistics
 

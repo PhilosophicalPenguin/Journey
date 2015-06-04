@@ -22,4 +22,8 @@ window.PositionView = Backbone.View.extend({
 	},
 
 
+	// goToJourneyPage: function() {
+	// 	this.model.goToJourney();
+	// }
+
 });

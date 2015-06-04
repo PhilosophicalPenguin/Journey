@@ -91,7 +91,6 @@ if(addMochData) {
   });
 
   new EduMilestone ({
-    profile_id: 4,
     degree_id: 3,
     fieldOfStudy_id: 2,
     school_id: 2,
@@ -102,7 +101,6 @@ if(addMochData) {
   }).catch(function(err) {
       console.error(err);
   });
-
 
   new EduMilestone({'id': '2'}).fetch({
     withRelated: ['profile']

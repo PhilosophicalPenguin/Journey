@@ -19,8 +19,9 @@ window.ClientRouter = Backbone.Router.extend ({
 
         // var path = location.pathname;
         //console.log('in viewJourney', id);
-         var journeyView = new JourneyView({model: model});
-        $(".mainContent").html(journeyView.el);
+        $("#mainContent").empty();
+         var journeyView = new JourneyView({ model: model});
+        //$("#mainContent").html(journeyView.el);
     }
 });
 

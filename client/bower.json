@@ -24,6 +24,7 @@
     "backbone": "~1.2.0",
     "jquery": "~2.1.4",
     "jquery-ui": "~1.11.4",
-    "bootstrap": "~3.3.4"
+    "bootstrap": "~3.3.4",
+    "highcharts-release": "~4.1.5"
   }
 }
