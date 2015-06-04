@@ -5,16 +5,42 @@ window.PositionsStatsChartView = Backbone.View.extend({
   },
 
   render: function() {
+    var data = [];
     var names = [];//an array of tuples
     var percentages = [];
     //create the tuples grabing their names and calculate the %
+    // for(var key in this.model) {
+    //   if(key!== 'total') {
+    //     var item = {};
+    //     names.push(key);
+    //     percentages.push((this.model[key] / this.model.total)*100);
+    //   }
+    // }
+
+     for(var wookey in this.model) {
+      if(wookey === "Software Engineer") {
+        this.model.total -= this.model[wookey];
+      }
+     }
+
     for(var key in this.model) {
-      if(key!== 'total') {
+      if(key!== 'total' && key != "Software Engineer") {
         var item = {};
-        names.push(key);
-        percentages.push((this.model[key] / this.model.total)*100);
+        data.push([key, (this.model[key] / this.model.total)*100]);
       }
     }
+
+    data.sort(function(a,b) { return a[1] < b[1]; });
+
+    var res = data.splice(0,10);
+
+    for(var i = 0; i < res.length; ++i) {
+      names.push(res[i][0]);
+      percentages.push(res[i][1]);
+    }
+
+    console.log("xAxis categories passed to table:", names);
+    console.log("yAxis percentages passed to table:", percentages);
 
     var chart = {
       chart: {
@@ -29,21 +55,20 @@ window.PositionsStatsChartView = Backbone.View.extend({
               viewDistance: 25
           }
       },
+      tooltip : { 
+        pointFormat : "Value: {point.y:.2f} %"
+      },
       xAxis : {
         categories: names
       },
       yAxis : {
         min: 0,
-        max: 25,
         title : {
           text : "percentage"
         }
       },
       title: {
-          text: 'woo chart demo'
-      },
-      subtitle: {
-          text: 'Test options by dragging the sliders below'
+          text: 'Previous Roles:'
       },
       plotOptions: {
           column: {
@@ -51,6 +76,7 @@ window.PositionsStatsChartView = Backbone.View.extend({
           }
       },
       series: [{
+        showInLegend: false,
           data: percentages
       }],
       credits :{

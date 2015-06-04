@@ -7,12 +7,27 @@ window.EducationChartView = Backbone.View.extend({
   render: function() {
     var educationData = [];//an array of tuples
     //create the tuples grabing their names and calculate the %
+    // this.model.HackReactor = 100;
+    // this.model.total += this.model.HackReactor;
     for(var key in this.model) {
       if(key!== 'total') {
         var item = {};
-        educationData.push([key, this.model[key]]);
+        var name = key.replace('_', ' in ');
+        if(key === '_') {
+            educationData.push(['unlisted', this.model[key]]);
+        } else {
+            if(key === 'Other_'){
+                name = 'Other';
+            }
+            educationData.push([name, this.model[key]]);
+        }
       }
     }
+
+    educationData.sort(function(a,b) { return a[1] < b[1]; });
+    educationData = educationData.splice(0,10);
+
+    console.log("EDUCATION DATA AFTER SPLICE::::::", educationData);
 
     var chart = {
       chart: {
@@ -23,10 +38,7 @@ window.EducationChartView = Backbone.View.extend({
             }
         },
         title: {
-            text: 'Contents of Highsoft\'s weekly fruit delivery'
-        },
-        subtitle: {
-            text: '3D donut in Highcharts'
+            text: 'Degrees Obtained:'
         },
         plotOptions: {
             pie: {
@@ -35,7 +47,7 @@ window.EducationChartView = Backbone.View.extend({
             }
         },
         series: [{
-            name: 'Delivered amount',
+            name: 'percentage',
             data: educationData
         }]
     };
