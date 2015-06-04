@@ -28,8 +28,8 @@ var port = process.env.PORT || 3000;
 // app.set('views', '/dist');
 // app.set('view engine', 'jade');
 
-// app.use(express.static(__dirname + '/dist'));
-app.use(express.static(path.join(__dirname, './client')));
+app.use(express.static(__dirname + '/dist'));
+// app.use(express.static(path.join(__dirname, './client')));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
