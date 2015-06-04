@@ -87,7 +87,7 @@ db.knex.schema.hasTable('profiles').then(function(exists) {
       profile.string('profile_name', 100);
       profile.string('picURL', 200).defaultTo('null');
       profile.string('currentLocation', 100);
-      profile.string('headline', 100);
+      profile.string('headline', 200);
       profile.integer('currentPosition_id');
       profile.integer('currentCompany_id');
       profile.integer('industry_id');
@@ -159,8 +159,8 @@ db.knex.schema.hasTable('eduMilestones').then(function(exists) {
       eduMilestone.integer('degree_id');
       eduMilestone.integer('fieldOfStudy_id');
       eduMilestone.integer('school_id');
-      eduMilestone.integer('startYear', 4);
-      eduMilestone.integer('endYear', 4);
+      eduMilestone.string('startYear', 20);
+      eduMilestone.string('endYear', 20);
       eduMilestone.timestamps();
     }).then(function (table) {
       console.log('EduMilestones table created.');
