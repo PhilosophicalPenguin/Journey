@@ -18,9 +18,12 @@ var jsSrcFiles = [
     './client/views/PositionsCollectionView.js',
     './client/views/PositionView.js',
     './client/views/AppView.js',
-    './client/views/StatsTableView.js',
+    './client/views/PositionsStatsChartView.js',
+    './client/views/ExperienceView.js',
+    './client/views/EducationChartView.js',
+    './client/views/EducationView.js',
     './client/views/JourneyView.js',
-    './client/clientRouter.js', 
+    './client/clientRouter.js',
     ignoreBower,
     ignoreAngular
     ]
@@ -29,11 +32,8 @@ var distributeDirectory = './dist/';
 var distributeSource = distributeDirectory + '**/*.js';
 var ignoreBower = '!./client/bower_components/**/*';
 var ignoreAngular = '!./client/angular/**/*';
-//var ignoreList = [ignoreBower, ignoreAngular];
 
 var clientTargetsAndIgnores = [targetClientSourceFiles, ignoreBower, ignoreAngular];
-
-// var clientTargetsAndIgnores = [jsSrcFiles, ignoreBower, ignoreAngular];
 
 gulp.task('lint', function() {
     return gulp.src(jsSrcFiles)
@@ -64,11 +64,7 @@ gulp.task('copy', function() {
 gulp.task('copy-assets', function() {
     return gulp.src('client/assets/*')
     .pipe(gulp.dest('./dist/assets'));
-})
-
-// gulp.task('clean', function() {
-//     clean([distributeDirectory]);
-// });
+});
 
 gulp.task('watch', function() {
     gulp.watch(targetClientSourceFiles, ['lint', 'build']);
