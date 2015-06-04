@@ -22,6 +22,10 @@ var multipart = require('connect-multiparty');
 // require('./middleware.js')(app, express);
 
 var port = process.env.PORT || 3000;
+
+app.set('views', '/dist');
+app.set('view engine', 'jade');
+
 app.use(express.static(__dirname + '/dist'));
 
 app.use(bodyParser.urlencoded({ extended: true }));
