@@ -1,14 +1,19 @@
 var db = require('../config');
 var Profile = require('./profile');
+var ExpMilestone = require('./expMilestone')
 var addMochData = require('../../addMochData');
 
 // Defines individual Position Model
 var Position = db.Model.extend({
   tableName: 'positions',
-  hasTimestamps: true
-  // profiles: function() {
-  //   return this.hasMany('Profile', 'position_id');
-  // }
+  hasTimestamps: true,
+  profiles: function() {
+    return this.belongsToMany('Profile');
+  },
+  expMilestone: function() {
+    return this.hasMany('ExpMilestone', 'position_id');
+  }
+
 });
 
 if(addMochData) {

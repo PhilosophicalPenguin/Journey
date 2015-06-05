@@ -13,6 +13,9 @@ var Profile = db.Model.extend({
   currentPosition: function() {
     return this.hasOne('Position', 'position_id');
   },
+  currentCompany: function() {
+    return this.hasOne('Company', 'currentCompany_id')
+  },
   industry: function() {
     return this.hasOne('Industry', 'industry_id');
   },
