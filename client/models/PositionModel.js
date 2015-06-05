@@ -13,6 +13,7 @@ window.PositionModel = Backbone.Model.extend({
     this.set('degrees', response.degrees);
     this.set('fieldsOfStudy', response.fieldsOfStudy);
     this.set('degreesAndFields', response.degreesAndFields);
+    this.set('info', response);
 
     clientRouter.viewJourney(this);
 
