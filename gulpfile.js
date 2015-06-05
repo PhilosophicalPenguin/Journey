@@ -10,15 +10,21 @@ var ignoreBower = '!./client/bower_components/**/*';
 var ignoreAngular = '!./client/angular/**/*';
 
 var jsSrcFiles = [
+    './client/models/ProfileModel.js',
+
     './client/models/PositionModel.js',
     './client/collections/PositionsCollection.js',
     './client/models/DiscoverPathsModel.js',
     './client/models/AppModel.js',
+
+    './client/views/NavBarView.js',
+
     './client/views/DiscoverPathsView.js',
     './client/views/PositionsCollectionView.js',
     './client/views/PositionView.js',
     './client/views/AutocompleteView.js',
     './client/views/AppView.js',
+
     './client/views/PositionsStatsChartView.js',
     './client/views/ExperienceView.js',
     './client/views/EducationChartView.js',
@@ -26,6 +32,10 @@ var jsSrcFiles = [
     './client/views/SkillsStatsChartView.js',
     './client/views/SkillsView.js',
     './client/views/JourneyView.js',
+
+    './client/views/ProfileCardView.js',
+    './client/views/ProfileView.js',
+
     './client/clientRouter.js',
     ignoreBower,
     ignoreAngular

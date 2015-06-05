@@ -1,8 +1,10 @@
-var ProfileModel = Backbone.model.extend({
+var ProfileModel = Backbone.Model.extend({
     
-    url: 'api/getProfile/'
+    url: 'api/getProfile/',
 
-    initialize : function () {
+    initialize : function (id) {
+        console.log('init profile model, this is the model', this);
+        console.log('init profile model, id param is ', id);
         //fetch data from the server
     },
 

@@ -8,14 +8,6 @@ window.PositionsStatsChartView = Backbone.View.extend({
     var data = [];
     var names = [];//an array of tuples
     var percentages = [];
-    //create the tuples grabing their names and calculate the %
-    // for(var key in this.model) {
-    //   if(key!== 'total') {
-    //     var item = {};
-    //     names.push(key);
-    //     percentages.push((this.model[key] / this.model.total)*100);
-    //   }
-    // }
 
      for(var key in this.model) {
       if(key === "Software Engineer") {
