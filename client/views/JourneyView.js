@@ -16,7 +16,7 @@ window.JourneyView = Backbone.View.extend({
     var newExperienceView = new ExperienceView({model : this.model });
     this.$el.find('.innerJourney').append('<div id="educationDiv"></div>');
     var newEducationView = new EducationView({model : this.model });
-    this.$el.append('<div id="skillsDiv"></div>');
+    this.$el.find('.innerJourney').append('<div id="skillsDiv"></div>');
     var newSkillsView = new SkillsView({model: this.model});
 
 
