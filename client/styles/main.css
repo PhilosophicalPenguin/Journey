@@ -129,7 +129,7 @@ th {
 
 .ui-menu-item {
   font-size: 14px;
-  color: white;
+  color: black;
 }
 
 ul.ui-autocomplete {
@@ -140,6 +140,13 @@ ul.ui-autocomplete {
   background:white;
   height:10px;
   font-size:8px;
+}
+
+.ui-autocomplete {
+  max-height: 100px;
+  background-color: white;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 /*# sourceMappingURL=main.css.map */
