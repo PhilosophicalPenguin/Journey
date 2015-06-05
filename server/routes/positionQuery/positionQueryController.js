@@ -14,7 +14,6 @@ var forEach = function() {
 
 module.exports = {
   getAvailablePositions: function(request, response) {
-    console.log('im trying to get available positions');
     new Position().fetchAll().then(function(positions) {
       if (positions) {
         var positionArray = [];
@@ -47,10 +46,10 @@ module.exports = {
       .fetch()
       .then(function(position) {
         if (!position) { // invalid position name can not find such a position in the database
-          console.log('danger will robinson! didnt find position');
+          console.log('Did not find position.');
           // response.writeHead(404)
           response.send({
-            errorMessage: 'that position does not exist in our database'
+            errorMessage: 'That position does not exist in our database.'
           });
         } else { //found the position requested
           var positionID = position.attributes.id;
@@ -81,11 +80,16 @@ module.exports = {
           };
 
           // Create helper function to calculate stats of each table
-          var makeTally = function(subject, property) {
+          var makeTally = function(subject, property, profile) {
             return function(object) {
+              var profile = {
+                id:     object.profile_id,
+                name:   object.profile_name,
+                picURL: object.picURL
+              }
               var val = object[property];
-              result[subject][val] = result[subject][val] || 0;
-              ++result[subject][val];
+              result[subject][val] = result[subject][val] || [];
+              result[subject][val].push(profile);
               ++result[subject].total;
             };
           };
@@ -112,11 +116,14 @@ module.exports = {
                   var degreeName = object.degree_name.toString();
                   var fieldName = object.fieldOfStudy_name.toString();
                   var val = degreeName + '_' + fieldName;
-                  if (result.degreesAndFields[val]) {
-                    result.degreesAndFields[val]++;
-                  } else {
-                    result.degreesAndFields[val] = 1;
+                  var profile = {
+                    id:     object.profile_id,
+                    name:   object.profile_name,
+                    picURL: object.picURL
                   }
+
+                  result.degreesAndFields[val] = result.degreesAndFields[val] || [];
+                  result.degreesAndFields[val].push(profile);
                   result.degreesAndFields.total++;
                 }
 
@@ -177,7 +184,7 @@ module.exports = {
           }).then(function() {
             return getSkillStatsAsync()
           }).then(function() {
-            console.log('this is the result!', result);
+            // console.log('this is the result!', result);
             response.json(result)
           });
 
