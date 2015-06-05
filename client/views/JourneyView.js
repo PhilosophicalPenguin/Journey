@@ -9,12 +9,14 @@ window.JourneyView = Backbone.View.extend({
 
   render: function () {
     this.$el.children().detach();
-    this.$el.append('<h1>People who currently have the title ' + this.model.get('position_name') + ' have the following histories:</h1>');
-    this.$el.append('<div id="experienceDiv"></div>');
+    this.$el.append(new NavBarView().render());
+    this.$el.append('<div class="container journeyView"><div class="row"><div class="col-md-12 innerJourney"></div></div></div>');
+    this.$el.find('.innerJourney').append('<div class="sectionTitles"><h2>Destination:</h2><h1>' + this.model.get('position_name') + '</h1></div>');
+    this.$el.find('.innerJourney').append('<div id="experienceDiv"></div>');
     var newExperienceView = new ExperienceView({model : this.model });
-    this.$el.append('<div id="educationDiv"></div>');
+    this.$el.find('.innerJourney').append('<div id="educationDiv"></div>');
     var newEducationView = new EducationView({model : this.model });
-    this.$el.append('<div id="skillsDiv"></div>');
+    this.$el.find('.innerJourney').append('<div id="skillsDiv"></div>');
     var newSkillsView = new SkillsView({model: this.model});
 
 

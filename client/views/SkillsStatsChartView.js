@@ -20,7 +20,7 @@ window.SkillsStatsChartView = Backbone.View.extend({
 
             if(key!== 'total'){
 
-                skills.push([key, this.model[key]]);
+                skills.push([key, this.model[key].length]);
 
             }
 

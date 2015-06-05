@@ -1,5 +1,5 @@
 function statsFactory($http){
-  var statsFactory = {};
+  var statsFact = {};
   
   statsFactory.getStats = function(name){
     
@@ -7,15 +7,15 @@ function statsFactory($http){
       method: 'GET',
       url: '/api/positionQuery/getStats',
       params: { name: name }
-    }
+    };
 
     $http(req)
     .success(function(resp){
       
-      statsFactory.degrees = [];
-      statsFactory.schools = [];
-      statsFactory.fieldsOfStudy = [];
-      statsFactory.degreesAndFields = [];
+      statsFact.degrees = [];
+      statsFact.schools = [];
+      statsFact.fieldsOfStudy = [];
+      statsFact.degreesAndFields = [];
 
       // Construct degree objects with percentages and degree name
       var objConstructor = function(array, obj){
@@ -24,24 +24,24 @@ function statsFactory($http){
             var item = {};
             item.name = key;
             item.percentage = obj[key] / obj.total;
-            array.push(item);          
+            array.push(item);
           }
         }
       };
       
-      objConstructor(statsFactory.degrees, resp.degrees);
-      objConstructor(statsFactory.schools, resp.schools);
-      objConstructor(statsFactory.fieldsOfStudy, resp.fieldsOfStudy);
-      objConstructor(statsFactory.degreesAndFields, resp.degreesAndFields);
+      objConstructor(statsFact.degrees, resp.degrees);
+      objConstructor(statsFact.schools, resp.schools);
+      objConstructor(statsFact.fieldsOfStudy, resp.fieldsOfStudy);
+      objConstructor(statsFact.degreesAndFields, resp.degreesAndFields);
     })
     .error(function(){
-      console.log('error', error)
+      console.log('error', error);
     });
   };
 
 
 
-  return statsFactory;
+  return statsFact;
 }
 
 angular.module('journeyApp')

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <title>Journey</title>
+  <link href='http://fonts.googleapis.com/css?family=Galdeano' rel='stylesheet' type='text/css'>
+  <link href='../bower_components/bootstrap/dist/css/bootstrap.css' rel="stylesheet" type="text/css" />
+  <link href='../bower_components/bootstrap/dist/css/bootstrap-theme.css' rel="stylesheet" type="text/css" />
+  <link href='../styles/main.css' rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+  <div class='splashPage container'>
+    <div class='row '>
+      <div class='col-md-6 col-md-offset-3'>
+        <h1>Journey</h1>
+        <h2>What position are you considering?</h2>
+        <form>
+          <input placeholder='e.g. Software engineer at Google' autocomplete='on'>
+        </form>
+      </div>
+    </div>
+
+    <div class='row discoverPaths'>
+      <!-- <h2>Find Your Path...</h2> -->
+      
+      <div class='col-md-4'>
+        <div class='onePath'><a href='/#journeyView/1'>
+          <h3>Corporate Lawyer</h3>
+          <img src='../assets/lawyer.jpg' alt='Corporate Lawyer'>
+        </a></div>
+      </div>
+
+      <div class='col-md-4'>
+        <div class='onePath'>
+          
+          <h3>Software Engineer</h3>
+          <img src='../assets/software_engineer.jpg' alt='Software Engineer'>
+        </div>
+      </div>
+
+      <div class='col-md-4'>
+        <div class='onePath'>
+          <h3>Nurse Practioner</h3>
+          <img src='../assets/nurse.jpg' alt='Nurse Practioner'>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  
+
+  <script src='../bower_components/jquery/dist/jquery.js'></script>
+  <script src='../bower_components/underscore/underscore.js'></script>
+  <script src='../bower_components/backbone/backbone.js'></script>
+  
+
+
+</body>
+</html>

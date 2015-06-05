@@ -13,46 +13,46 @@
 <body id="thewholebody">
 <div id="mainContent">
 
+  <div class='splashBack'>
+    <div class='splashPage container'>
+      <div class='row splashRow'>
+        <div class='col-md-6 col-md-offset-3'>
+          <h1>Journey</h1>
+          <h2>What position are you considering?</h2>
+          <form>
+            <input id="autocomplete" placeholder='e.g. Software engineer'>
+          </form>
+        </div>
+      </div>
 
-	<div class='splashPage container'>
-    <div class='row '>
-      <div class='col-md-6 col-md-offset-3'>
-        <h1>Journey</h1>
-        <h2>What position are you considering?</h2>
-        <form>
-          <input placeholder='e.g. Software engineer' autocomplete='on'>
-        </form>
+      <div class='row discoverPaths'>
+        <!-- <h2>Find Your Path...</h2> -->
+
+        <div class='col-md-4'>
+          <div class='onePath'>
+            <h3>Corporate Lawyer</h3>
+            <img src='./assets/lawyer.jpg' alt='Corporate Lawyer'>
+          </div>
+        </div>
+
+        <div class='col-md-4'>
+          <div class='onePath'>
+
+            <h3>Software Engineer</h3>
+            <img src='./assets/software_engineer.jpg' alt='Software Engineer'>
+          </div>
+        </div>
+
+        <div class='col-md-4'>
+          <div class='onePath'>
+            <h3>Nurse Practitioner</h3>
+            <img src='./assets/nurse.jpg' alt='Nurse Practitioner'>
+          </div>
+        </div>
       </div>
     </div>
-
-    <div class='row discoverPaths'>
-      <!-- <h2>Find Your Path...</h2> -->
-
-      <div class='col-md-4'>
-        <div class='onePath'>
-          <h3>Corporate Lawyer</h3>
-          <img src='./assets/lawyer.jpg' alt='Corporate Lawyer'>
-        </div>
-      </div>
-
-      <div class='col-md-4'>
-        <div class='onePath'>
-
-          <h3>Software Engineer</h3>
-          <img src='./assets/software_engineer.jpg' alt='Software Engineer'>
-        </div>
-      </div>
-
-      <div class='col-md-4'>
-        <div class='onePath'>
-          <h3>Nurse Practitioner</h3>
-          <img src='./assets/nurse.jpg' alt='Nurse Practitioner'>
-        </div>
-      </div>
-
-    </div>
-	</div>
  </div>
+</div>
 
 
 
@@ -69,6 +69,8 @@
 	<script src= "bower_components/backbone/backbone.js"></script>
   <script src= "bower_components/highcharts-release/highcharts.js"></script>
   <script src= "bower_components/highcharts-release/highcharts-3d.js"></script>-->
+
+  <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 
   <!-- ALL OUR JS IN ONE FILE -->
   <script src="all.min.js"></script>
@@ -95,16 +97,17 @@
 
 
 	<script>
-      $(function(){
+  $(function(){
 
-        var app = new AppModel();
-        var appView = new AppView({model: app});
+      var app = new AppModel();
+      var appView = new AppView({model: app});
 
-        $( ".onePath" ).click(function(e) {
-          appView.discoverPathsView.journeyClickHandler(e);
-				});
 
+      $( ".onePath" ).click(function(e) {
+        appView.discoverPathsView.journeyClickHandler(e);
       });
+
+    });
 
     </script>
 

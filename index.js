@@ -6,9 +6,7 @@ var dataUploadRoute = require('./server/routes/dataUpload/dataUploadRoute.js');
 var multipart = require('connect-multiparty');
 var path = require('path');
 
-
 // require('require/server').mount(app);
-
 // var mongoose = require('mongoose')
 // var db_port = process.env.MONGOLAB_URI || 'mongodb://localhost/socialstocks';
 // mongoose.connect(db_port);
@@ -33,8 +31,13 @@ console.log('Now listening on port', port);
 //post request to upload our json data scrapped from linkedin 
 app.post('/api/uploadfile', multipartMiddleware, dataUploadRoute.parseUploadedData);
 
-var positionQueryRoutes = express.Router();
+var positionQueryRoutes   = express.Router();
+var profileRoutes         = express.Router();
+
 app.use('/api/queryPositions', positionQueryRoutes);
 require('./server/routes/positionQuery/positionQueryRoutes')(positionQueryRoutes);
+
+app.use('/api/profiles', profileRoutes);
+require('./server/routes/profile/profileRoutes')(profileRoutes);
 
 module.exports = app;

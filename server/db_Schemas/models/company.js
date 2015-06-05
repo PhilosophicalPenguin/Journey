@@ -1,5 +1,6 @@
 var db = require('../config');
 var Profile = require('./profile');
+var ExpMilestone = require('./expMilestone');
 
 // Defines individual Company Model
 var Company = db.Model.extend({
@@ -7,6 +8,9 @@ var Company = db.Model.extend({
   hasTimestamps: true,
   profiles: function() {
     return this.hasMany('Profile', 'currentCompany_id');
+  },
+  expMilestone: function() {
+    return this.hasMany('ExpMilestone', 'company_id');
   }
 });
 

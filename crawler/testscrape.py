@@ -25,103 +25,51 @@ class PersonScraper(CrawlSpider):
 	USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.152 Safari/537.36"
 	name = 'personSpy'
 	allowed_domains = ['linkedin.com']
-	start_urls = ['https://www.linkedin.com/pub/ashley-hollan/13/911/27',
-  'https://www.linkedin.com/in/keithdfraser',
-  'https://www.linkedin.com/pub/charles-prince/6/67/865',
-  'https://www.linkedin.com/pub/ed-pierson/b/366/651',
-  'https://www.linkedin.com/in/emilylawyer',
-  'https://www.linkedin.com/pub/evan-cohen/3/b06/383',
-  'https://www.linkedin.com/pub/wallace-collins/3/887/958',
-  'https://www.linkedin.com/pub/jordan-manekin/41/292/497',
-  'https://www.linkedin.com/in/nedsherman',
-  'https://www.linkedin.com/pub/robert-strent/0/18/686',
-  'https://www.linkedin.com/in/erinjacobson',
-  'https://www.linkedin.com/in/tylermiddleton',
-  'https://www.linkedin.com/pub/dawn-friedman/7/534/a5',
-  'https://uk.linkedin.com/pub/banny-poostchi/64/683/794',
-  'https://www.linkedin.com/pub/kia-kamran/9/a3/187',
-  'https://www.linkedin.com/pub/joseph-brenner/4/7b5/7a2',
-  'https://www.linkedin.com/in/geoffreylamoureux',
-  'https://www.linkedin.com/pub/robert-weinberg/5/633/340',
-  'https://www.linkedin.com/pub/jody-simon/4/328/54',
-  'https://www.linkedin.com/pub/daniel-sirkin/20/195/563',
-  'https://www.linkedin.com/in/gfiremark',
-  'https://www.linkedin.com/pub/grace-kim/6/7a9/304',
-  'https://www.linkedin.com/in/josephrgregory',
-  'https://www.linkedin.com/pub/ted-harris/7/2ab/48',
-  'https://www.linkedin.com/in/gentleskmusiclaw123',
-  'https://www.linkedin.com/in/jimswisher',
-  'https://www.linkedin.com/pub/karen-gottlieb/5/746/891',
-  'https://www.linkedin.com/pub/rose-meade-hart/0/74/575',
-  'https://www.linkedin.com/in/adammehr',
-  'https://www.linkedin.com/pub/leah-antonio-ketcham/6/47b/9a',
-  'https://www.linkedin.com/pub/paul-miloknay/5/30b/104',
-  'https://www.linkedin.com/in/hhertz',
-  'https://www.linkedin.com/pub/jay-patel/19/b71/965',
-  'https://www.linkedin.com/in/hrbeklaw',
-  'https://www.linkedin.com/pub/lawrence-browning/19/723/470',
-  'https://www.linkedin.com/pub/sonya-guardo/b/678/b13',
-  'https://www.linkedin.com/pub/daniella-restrepo-orozco/84/8a9/360',
-  'https://www.linkedin.com/pub/scott-bobrow/8/4b3/a41',
-  'https://www.linkedin.com/in/entertainment',
-  'https://www.linkedin.com/pub/julie-feldman/21/84/761',
-  'https://www.linkedin.com/pub/nina-markus/1/b0/693',
-  'https://www.linkedin.com/in/karenkettner',
-  'https://www.linkedin.com/in/joshhiller',
-  'https://www.linkedin.com/pub/eve-bonham/15/939/bb3',
-  'https://www.linkedin.com/in/nargesnoelletopetzes',
-  'https://www.linkedin.com/pub/peter-grant/5/468/316',
-  'https://www.linkedin.com/in/jakeprestonevans',
-  'https://www.linkedin.com/in/ilenegoldberg',
-  'https://www.linkedin.com/pub/stephanie-adwar/2/148/72a',
-  'https://www.linkedin.com/pub/noelle-brown/66/225/340',
-  'https://www.linkedin.com/pub/beth-b-moore/7/813/a65',
-  'https://www.linkedin.com/in/shawnasseyhowellbrooks',
-  'https://www.linkedin.com/pub/paula-paizes/5/573/759',
-  'https://www.linkedin.com/pub/larry-verbit/5/ab5/769',
-  'https://www.linkedin.com/pub/leonard-zackheim/59/20b/b5a',
-  'https://www.linkedin.com/pub/brandon-dorsky/15/64/101',
-  'https://www.linkedin.com/pub/david-berlin/66/100/87',
-  'https://www.linkedin.com/pub/sandra-depass/29/55b/503',
-  'https://www.linkedin.com/in/jessdrabkin',
-  'https://www.linkedin.com/pub/don-friedman/3a/307/203',
-  'https://au.linkedin.com/in/genesgoodsell',
-  'https://www.linkedin.com/pub/katherine-mcclure/1/a82/172',
-  'https://www.linkedin.com/in/michaelwlawrence',
-  'https://ca.linkedin.com/pub/eb-reinbergs/4/769/721',
-  'https://www.linkedin.com/pub/terry-chang/7/bb1/251',
-  'https://www.linkedin.com/pub/seth-j-horwitz/11/b6/5b4',
-  'https://www.linkedin.com/pub/adam-rosen/2/855/544',
-  'https://www.linkedin.com/pub/c-j-vranca/0/403/679',
-  'https://www.linkedin.com/in/jerrenwright',
-  'https://www.linkedin.com/in/shawnahilleary',
-  'https://www.linkedin.com/pub/stuart-prager/19/210/19',
-  'https://www.linkedin.com/pub/lucy-popkin/2/888/a91',
-  'https://www.linkedin.com/in/jaynekaplan',
-  'https://www.linkedin.com/pub/charles-driebe/1/60/903',
-  'https://tt.linkedin.com/pub/carla-parris/b/603/667',
-  'https://www.linkedin.com/pub/michael-bonafede/5/2/885',
-  'https://www.linkedin.com/pub/jennifer-murdoch/36/425/243',
-  'https://www.linkedin.com/pub/jon-birkhahn/4/b44/1a',
-  'https://www.linkedin.com/pub/daniel-mun/27/b3/262',
-  'https://www.linkedin.com/pub/dennis-franks/4/796/28a',
-  'https://www.linkedin.com/pub/tova-l-lutz/18/965/458',
-  'https://www.linkedin.com/pub/sandra-sweeney/28/542/894',
-  'https://www.linkedin.com/in/sjsteigs010108',
-  'https://www.linkedin.com/pub/mackenzie-lewis/17/449/539',
-  'https://uk.linkedin.com/pub/paul-spraggon/a/297/586',
-  'https://www.linkedin.com/pub/fred-jong/8a/b51/478',
-  'https://www.linkedin.com/pub/katrina-bleckley/8a/779/336',
-  'https://www.linkedin.com/in/mollyhansen',
-  'https://www.linkedin.com/pub/nathan-avery/56/869/8b',
-  'https://au.linkedin.com/pub/marcus-walkom/29/288/123',
-  'https://www.linkedin.com/pub/david-finkelstein/8/81a/219',
-  'https://www.linkedin.com/pub/doug-shumard/8a/283/82a',
-  'https://www.linkedin.com/pub/marie-laduca/6b/47a/94a',
-  'https://www.linkedin.com/pub/matthew-kamen/32/667/1b5',
-  'https://www.linkedin.com/pub/robert-kabat/8/16b/a31',
-  'https://www.linkedin.com/pub/tammy-wang/59/769/669']
-	rules = [Rule(SgmlLinkExtractor(allow=(r'/pub/ashley-hollan/13/911/27|/in/keithdfraser|/pub/ed-pierson/b/366/651|/in/emilylawyer|/pub/wallace-collins/3/887/958|/in/nedsherman|/pub/robert-strent/0/18/686|/in/erinjacobson|/pub/dawn-friedman/7/534/a5|/pub/kia-kamran/9/a3/187|/in/geoffreylamoureux|/pub/robert-weinberg/5/633/340|/pub/daniel-sirkin/20/195/563|/in/gfiremark|/in/josephrgregory|/pub/ted-harris/7/2ab/48|/in/gentleskmusiclaw123|/pub/karen-gottlieb/5/746/891|/in/adammehr|/pub/leah-antonio-ketcham/6/47b/9a|/in/hhertz|/pub/jay-patel/19/b71/965|/in/hrbeklaw|/pub/sonya-guardo/b/678/b13|/pub/scott-bobrow/8/4b3/a41|/in/entertainment|/pub/nina-markus/1/b0/693|/in/karenkettner|/pub/eve-bonham/15/939/bb3|/in/nargesnoelletopetzes|/in/jakeprestonevans|/pub/stephanie-adwar/2/148/72a|/pub/beth-b-moore/7/813/a65|/in/shawnasseyhowellbrooks|/pub/larry-verbit/5/ab5/769|/pub/brandon-dorsky/15/64/101|/pub/sandra-depass/29/55b/503|/in/jessdrabkin|in/genesgoodsell|/pub/katherine-mcclure/1/a82/172|/in/michaelwlawrence|/pub/terry-chang/7/bb1/251|/pub/adam-rosen/2/855/544|/in/jerrenwright|/pub/stuart-prager/19/210/19|/in/jaynekaplan|/pub/charles-driebe/1/60/903|/pub/michael-bonafede/5/2/885|/pub/jon-birkhahn/4/b44/1a|/pub/dennis-franks/4/796/28a|/pub/sandra-sweeney/28/542/894|/in/sjsteigs010108|pub/paul-spraggon/a/297/586|/pub/katrina-bleckley/8a/779/336|/in/mollyhansen|pub/marcus-walkom/29/288/123|/pub/doug-shumard/8a/283/82a|/pub/matthew-kamen/32/667/1b5|/pub/tammy-wang/59/769/669')), callback='parse_person', follow=False)]
+	start_urls = [ 'https://www.linkedin.com/in/gadibenzvi',
+  'https://www.linkedin.com/in/paulthomsen',
+  'https://www.linkedin.com/in/harshjitsethi',
+  'https://www.linkedin.com/pub/zindzi-mccormick/b/8a4/a35',
+  'https://www.linkedin.com/in/ksenya',
+  'https://www.linkedin.com/pub/john-nack/0/87b/b38',
+  'https://www.linkedin.com/in/adamazzara',
+  'https://www.linkedin.com/in/sibozhao',
+  'https://www.linkedin.com/in/amandabeuckelaere',
+  'https://www.linkedin.com/in/katieschmalzried',
+  'https://www.linkedin.com/pub/isi-azeke/8/6b9/29a',
+  'https://www.linkedin.com/in/lahini',
+  'https://www.linkedin.com/in/jonkrafcik',
+  'https://www.linkedin.com/in/ericarios',
+  'https://www.linkedin.com/pub/aubrey-gray/63/613/2a3',
+  'https://www.linkedin.com/in/alexandrelee',
+  'https://www.linkedin.com/in/merlindowse73',
+  'https://www.linkedin.com/in/toddsherman',
+  'https://www.linkedin.com/pub/wei-luo/9/805/7a3',
+  'https://www.linkedin.com/pub/alec-motamed/86/aaa/9b4',
+  'https://www.linkedin.com/pub/stuart-mcguigan/4/751/b46/nl',
+  'https://www.linkedin.com/pub/ulla-cocke/5/410/240',
+  'https://www.linkedin.com/pub/jace-quayle/42/585/300/it',
+  'https://www.linkedin.com/pub/stefan-goedegebure/18/a34/623',
+  'https://www.linkedin.com/in/calvinclee',
+  'https://www.linkedin.com/pub/julia-katz/4a/270/aa0',
+  'https://www.linkedin.com/pub/edel-tryse/4b/272/a10',
+  'https://www.linkedin.com/pub/emelie-tibblin/55/742/4ab',
+  'https://www.linkedin.com/in/madejongh/nl',
+  'https://www.linkedin.com/pub/damon-hopley/1/797/ab2',
+  'https://www.linkedin.com/pub/zein-el-etnawy/6a/209/9aa',
+  'https://www.linkedin.com/pub/narelle-whiteley/22/708/54b',
+  'https://www.linkedin.com/pub/jennifer-gabel/9/b24/a91',
+  'https://www.linkedin.com/pub/arun-sundaram/18/447/a5a',
+  'https://www.linkedin.com/pub/freddy-corlier/12/838/361',
+  'https://www.linkedin.com/pub/antes-digiesi/72/b32/390',
+  'https://www.linkedin.com/pub/stefan-smith/36/276/931',
+  'https://www.linkedin.com/pub/gregory-mccabe/6/a09/14a',
+  'https://www.linkedin.com/pub/john-schouwman/88/220/231',
+  'https://www.linkedin.com/pub/edith-kock/19/3a1/225',
+  'https://www.linkedin.com/pub/daphne-van-dijk-blom/15/651/853',
+  'https://www.linkedin.com/pub/henrik-iversen/8a/4b9/594',
+  'https://www.linkedin.com/pub/marco-buggle/b1/179/91a',
+  'https://www.linkedin.com/pub/peterson-bruce/23/457/b05' ]
+	rules = [Rule(SgmlLinkExtractor(allow=(r'/in/paulthomsen|/in/harshjitsethi|/pub/zindzi-mccormick/b/8a4/a35|/in/ksenya|/pub/john-nack/0/87b/b38|/in/adamazzara|/in/sibozhao|/in/amandabeuckelaere|/in/katieschmalzried|/pub/isi-azeke/8/6b9/29a|/in/lahini|/in/jonkrafcik|/in/ericarios|/pub/aubrey-gray/63/613/2a3|/in/alexandrelee|/in/merlindowse73|/in/toddsherman|in/prodman|/pub/wei-luo/9/805/7a3|pub/product-manager/7a/b92/644|pub/ product-manager/48/259/415|pub/product-manager/b4/8b8/695|/pub/cédric-hutchings/0/99a/886|/pub/judith-van-der-star/3/651/872|pub/john-robins/36/321/ab6|pub/shahzad-faisal/a/440/88a|pub/amir-cohen/14/5b4/99a|/pub/fabian-portehaut/58/588/419|/pub/angelique-smolinski/1/635/b7a|pub/natalie-hopkins/7/bb4/b97|/pub/david-darg/12/2a/956/es|pub/abhishek-chandhock/14/852/a50|/in/rachaelwilcox1/fr|pub/hadja-kane/4/b93/870|/pub/akin-oladipo/a4/925/b98|pub/hsien-yi-stanley-huang/8/b5b/33|pub/rickwood-dave/4/67a/266|/pub/alec-motamed/86/aaa/9b4|/pub/stuart-mcguigan/4/751/b46/nl|/pub/ulla-cocke/5/410/240|/pub/jace-quayle/42/585/300/it|/pub/stefan-goedegebure/18/a34/623|pub/egon-danielsson/0/1b4/644/es|/in/calvinclee|/pub/julia-katz/4a/270/aa0|/pub/edel-tryse/4b/272/a10|/pub/emelie-tibblin/55/742/4ab|/pub/maya-moléa/4b/943/9b0|/in/madejongh/nl|/pub/damon-hopley/1/797/ab2|pub/zhaokun-zong/55/142/264|/pub/zein-el-etnawy/6a/209/9aa|/pub/narelle-whiteley/22/708/54b|/pub/jennifer-gabel/9/b24/a91|/pub/arun-sundaram/18/447/a5a|/pub/freddy-corlier/12/838/361|/pub/antes-digiesi/72/b32/390|/pub/stefan-smith/36/276/931|/pub/gregory-mccabe/6/a09/14a|/pub/john-schouwman/88/220/231|/pub/edith-kock/19/3a1/225|/pub/daphne-van-dijk-blom/15/651/853|/pub/henrik-iversen/8a/4b9/594|/pub/marco-buggle/b1/179/91a|/pub/peterson-bruce/23/457/b05')), callback='parse_person', follow=False)]
 	urlCounter = 0
 
 	def parse_person(self, response):
@@ -206,20 +154,21 @@ class PersonScraper(CrawlSpider):
 			schoolValueList = education.xpath('(header/h4/a/text())|(header/h4/text())').extract()
 			if schoolValueList == []:
 				schoolValueList = [""]
-			schoolValue = schoolValueList[0].encode("utf8")
+			schoolValue = schoolValueList[0].encode("utf-8")
 			#adds school to education dictionary
 			tempEducation["school"] = schoolValue
+			print(tempEducation["school"])
 
 			majorValueList = education.xpath('header/h5/span[@class="major"]/a/text()').extract()
 			if majorValueList == []:
 				majorValueList = [""]
-			majorValue = majorValueList[0].encode("utf8")
+			majorValue = majorValueList[0].encode("utf-8")
 			tempEducation["major"] = majorValue
 
 			degreeValueList = education.xpath('header/h5/span[@class="degree"]/text()').extract()
 			if degreeValueList == []:
 				degreeValueList = [""]
-			degreeValue = degreeValueList[0].encode("utf8")
+			degreeValue = degreeValueList[0].encode("utf-8")
 			degreeValue = degreeValue.replace(", ", "")
 			tempEducation["degree"] = degreeValue
 
@@ -228,8 +177,8 @@ class PersonScraper(CrawlSpider):
 				tempEducation["start_date"] = ""
 				tempEducation["end_date"] = ""
 			else:
-				time1 = degreeYears[0].encode("utf8")
-				time2 = degreeYears[1].encode("utf8")[-4:]
+				time1 = degreeYears[0].encode("utf-8")
+				time2 = degreeYears[1].encode("utf-8")[-4:]
 				tempEducation["start_date"] = time1
 				tempEducation["end_date"] = time2
 

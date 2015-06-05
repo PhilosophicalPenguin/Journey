@@ -9,14 +9,11 @@ window.DiscoverPathsModel = Backbone.Model.extend({
 
 	initialize: function() {
 
-		console.log(this);
 	},
 
 	goToJourney: function(journeyClicked){
-		console.log('got to goToJourney from discoverPathsModel');
-        console.log("parameter being passed", journeyClicked);
 
-		console.log(this.fetch({data: $.param({name: journeyClicked})}));
+		this.fetch({data: $.param({name: journeyClicked})});
 
   },
 
@@ -31,4 +28,4 @@ window.DiscoverPathsModel = Backbone.Model.extend({
   },
 
 });
-    
+

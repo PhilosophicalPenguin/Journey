@@ -8,28 +8,22 @@ window.PositionsStatsChartView = Backbone.View.extend({
     var data = [];
     var names = [];//an array of tuples
     var percentages = [];
-    //create the tuples grabing their names and calculate the %
-    // for(var key in this.model) {
-    //   if(key!== 'total') {
-    //     var item = {};
-    //     names.push(key);
-    //     percentages.push((this.model[key] / this.model.total)*100);
-    //   }
-    // }
 
-     for(var wookey in this.model) {
-      if(wookey === "Software Engineer") {
-        this.model.total -= this.model[wookey];
+     for(var key in this.model) {
+      if(key === "Software Engineer") {
+        this.model.total -= this.model[key].length;
       }
      }
 
-    for(var key in this.model) {
-      if(key!== 'total' && key != "Software Engineer") {
+     console.log('this model!!!', this.model);
+    for(var wookey in this.model) {
+      if(wookey!== 'total' && wookey != "Software Engineer") {
         var item = {};
-        data.push([key, (this.model[key] / this.model.total)*100]);
+        data.push([wookey, (this.model[wookey].length / this.model.total)*100]);
       }
     }
 
+    //data[0]: [position, percentage]
     data.sort(function(a,b) { return a[1] < b[1]; });
 
     var res = data.splice(0,10);
@@ -55,7 +49,7 @@ window.PositionsStatsChartView = Backbone.View.extend({
               viewDistance: 25
           }
       },
-      tooltip : { 
+      tooltip : {
         pointFormat : "Value: {point.y:.2f} %"
       },
       xAxis : {

@@ -4,6 +4,7 @@ window.AppModel = Backbone.Model.extend ({
 
 	parse: function(response) {
 		this.set('data', response);
+
 		//response is an array of objects
 		return response;
 	},
@@ -38,5 +39,9 @@ window.AppModel = Backbone.Model.extend ({
 		this.set('positionsCollection', new PositionsCollection(this.get('data')));
 		this.trigger('positionsReceived');
 	},
+
+  tellPositionModel: function(journeyClicked) {
+    console.log('this from app model', this);
+  }
 
 });
