@@ -47,13 +47,11 @@ window.DiscoverPathsModel = Backbone.Model.extend({
 
 	initialize: function() {
 
-		console.log(this);
 	},
 
 	goToJourney: function(journeyClicked){
-		console.log('got to goToJourney from discoverPathsModel');
 
-		console.log(this.fetch({data: $.param({name: journeyClicked})}));
+		this.fetch({data: $.param({name: journeyClicked})});
 
   },
 
@@ -70,7 +68,8 @@ window.DiscoverPathsModel = Backbone.Model.extend({
   },
 
 });
-    
+
+
 window.AppModel = Backbone.Model.extend ({
 
 	url: '/api/queryPositions/getPositions',
@@ -114,6 +113,10 @@ window.AppModel = Backbone.Model.extend ({
 		this.trigger('positionsReceived');
 	},
 
+  tellPositionModel: function(journeyClicked) {
+    console.log('this from app model', this);
+  }
+
 });
 
 window.DiscoverPathsView = Backbone.View.extend({
@@ -135,7 +138,6 @@ window.DiscoverPathsView = Backbone.View.extend({
   	var journeyClicked = $(e.target).text();
   	console.log('this is the journeyClicked', journeyClicked);
   	var journey = this.collection.where({position_name: journeyClicked });
-
 
     journey[0].goToJourney(journeyClicked);
   },
@@ -227,8 +229,32 @@ window.AutocompleteView = Backbone.View.extend({
   },
 
   events: {
+<<<<<<< HEAD
     //
     //on submit
+=======
+    'keyup' : 'journeyClickHandler',
+  },
+
+
+  journeyClickHandler: function(e) {
+
+    var isEnterKey = (e.which === 13);
+
+    if(isEnterKey) {
+      var journeyEntered = this.$el.val();
+      var journey = this.model.get('positionsCollection').where({position_name: journeyEntered});
+      console.log(journeyEntered);
+      console.log(journey);
+
+      journey[0].goToJourney(journeyEntered);
+
+    }
+
+
+    // this.model.goToJourney(journey);
+
+>>>>>>> Completes autocomplete functionality - hitting enter renders journeyview on searched position name
   },
 
   render: function() {
@@ -258,7 +284,6 @@ window.AppView = Backbone.View.extend({
 		this.discoverPathsView = new DiscoverPathsView({collection: this.model.get('discoverPathsCollection')});
 		this.autocompleteView = new AutocompleteView({model: this.model});
 
-		console.log(this.autocompleteView);
 		this.render();
 
 
@@ -295,10 +320,7 @@ window.StatsTableView = Backbone.View.extend({
   template: _.template('<tr><td><%=item.percentage%> have a <%=item.name%> or higher, </td></tr>'),
 
   initialize: function (model, options) {
-  	console.log('POSITION MODEL from statstableview', this.model);
   	this.settings = options;
-  	console.log('options woo!', options);
-
     this.render();
   },
 
@@ -367,7 +389,6 @@ window.ClientRouter = Backbone.Router.extend ({
 
 
     viewJourney: function(model) {
-        console.log('got to viewJourney on clientRouter');
 
         // var path = location.pathname;
         //console.log('in viewJourney', id);

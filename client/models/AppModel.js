@@ -40,4 +40,8 @@ window.AppModel = Backbone.Model.extend ({
 		this.trigger('positionsReceived');
 	},
 
+  tellPositionModel: function(journeyClicked) {
+    console.log('this from app model', this);
+  }
+
 });

@@ -29,14 +29,26 @@ window.AutocompleteView = Backbone.View.extend({
   },
 
   events: {
-    //
-    //on submit
+    'keyup' : 'journeyClickHandler',
+  },
+
+
+  journeyClickHandler: function(e) {
+
+    var isEnterKey = (e.which === 13);
+
+    if(isEnterKey) {
+      var journeyEntered = this.$el.val();
+      var journey = this.model.get('positionsCollection').where({position_name: journeyEntered});
+      console.log(journeyEntered);
+      console.log(journey);
+
+      journey[0].goToJourney(journeyEntered);
+    }
   },
 
   render: function() {
-
     return $("#autocomplete").html(this.el);
-
   }
 
 });

@@ -13,7 +13,6 @@ window.ClientRouter = Backbone.Router.extend ({
     },
 
     viewJourney: function(model) {
-        console.log('got to viewJourney on clientRouter');
 
         // var path = location.pathname;
         //console.log('in viewJourney', id);
