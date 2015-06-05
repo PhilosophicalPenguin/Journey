@@ -11,6 +11,9 @@ window.JourneyView = Backbone.View.extend({
     this.$el.children().detach();
     this.$el.append(new NavBarView().render());
     this.$el.append('<div class="container journeyView"><div class="row"><div class="col-md-12 innerJourney"></div></div></div>');
+    var newAutocompleteView = new AutocompleteView();
+    console.log('new autocomplete view', newAutocompleteView);
+    this.$el.find('navbar navbar-static-top').append(newAutocompleteView);
     this.$el.find('.innerJourney').append('<div class="sectionTitles"><h2>Destination:</h2><h1>' + this.model.get('position_name') + '</h1></div>');
     this.$el.find('.innerJourney').append('<div id="educationDiv"></div>');
     var newEducationView = new EducationView({model : this.model });
