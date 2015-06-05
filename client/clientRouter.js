@@ -2,8 +2,8 @@ window.ClientRouter = Backbone.Router.extend ({
 
     routes: {
         '' : 'home',
-        // 'viewJourney': 'viewJourney',
-    'viewJourney/:id': 'viewJourney'
+        'viewJourney': 'viewJourney',
+        // 'viewJourney/:id': 'viewJourney'
     },
 
     home: function () {
@@ -18,7 +18,7 @@ window.ClientRouter = Backbone.Router.extend ({
         //console.log('in viewJourney', id);
         $("#mainContent").empty();
          var journeyView = new JourneyView({ model: model});
-        //$("#mainContent").html(journeyView.el);
+        // $("#mainContent").html(journeyView.el);
     }
 });
 
