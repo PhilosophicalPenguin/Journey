@@ -1,15 +1,19 @@
 var db = require('../config');
 var EduMilestone = require('./eduMilestone');
 var addMochData = require('../../addMochData');
+var Profile = require('./profile');
 
 
 // Defines an indvidual Industry record
 var Industry = db.Model.extend({
   tableName: 'industries',
-  hasTimestamps: true
-  // eduMilestone: function() {
-  //   return this.hasMany('EduMilestone', 'industry_id');
-  // }
+  hasTimestamps: true,
+  eduMilestone: function() {
+    return this.hasMany('EduMilestone', 'industry_id');
+  },
+  profiles: function() {
+    return this.hasMany('Profile', 'industry_id');
+  }
 });
 
 if(addMochData) {

@@ -31,8 +31,13 @@ console.log('Now listening on port', port);
 //post request to upload our json data scrapped from linkedin 
 app.post('/api/uploadfile', multipartMiddleware, dataUploadRoute.parseUploadedData);
 
-var positionQueryRoutes = express.Router();
+var positionQueryRoutes   = express.Router();
+var profileRoutes         = express.Router();
+
 app.use('/api/queryPositions', positionQueryRoutes);
 require('./server/routes/positionQuery/positionQueryRoutes')(positionQueryRoutes);
+
+app.use('/api/profiles', profileRoutes);
+require('./server/routes/profile/profileRoutes')(profileRoutes);
 
 module.exports = app;
