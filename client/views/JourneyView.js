@@ -9,7 +9,7 @@ window.JourneyView = Backbone.View.extend({
 
   render: function () {
     this.$el.children().detach();
-    this.$el.append('<header class="navbar navbar-static-top" role="navigation"><div class="container"><div class="navbar-header"><a href="#/"><h1>Journey</h1></a></div></div></header>');
+    this.$el.append(new NavBarView().render());
     this.$el.append('<div class="container journeyView"><div class="row"><div class="col-md-12 innerJourney"></div></div></div>');
     this.$el.find('.innerJourney').append('<div class="sectionTitles"><h2>Destination:</h2><h1>' + this.model.get('position_name') + '</h1></div>');
     this.$el.find('.innerJourney').append('<div id="experienceDiv"></div>');

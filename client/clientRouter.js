@@ -2,8 +2,10 @@ window.ClientRouter = Backbone.Router.extend ({
 
     routes: {
         '' : 'home',
-        'viewJourney': 'viewJourney'
+        'viewJourney': 'viewJourney',
         // 'viewJourney/:id': 'viewJourney'
+        //'viewJourney/:id': 'viewJourney',
+        'profile/:id': 'viewProfile'
     },
 
     home: function () {
@@ -18,7 +20,13 @@ window.ClientRouter = Backbone.Router.extend ({
         //console.log('in viewJourney', id);
         $("#mainContent").empty();
          var journeyView = new JourneyView({ model: model});
-        // $("#mainContent").html(journeyView.el);
+    },
+
+    viewProfile : function(id) {
+        console.log('hello woo!');
+        var profileModel = new ProfileModel(id);
+        $('#mainContent').empty();
+        var profile = new ProfileView( { model : profileModel } );
     }
 });
 
