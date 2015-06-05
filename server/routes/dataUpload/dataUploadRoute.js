@@ -16,7 +16,6 @@ var degreeBucket = require('./degreeBucket');
 var Promise = require("bluebird");
 var async = require("async");
 
-
 module.exports = {
   parseUploadedData: function(req, res) {
     var data_dump_profiles = JSON.parse(fs.readFileSync(req.files.jsondata.path, "utf8"));
@@ -56,6 +55,7 @@ module.exports = {
       };
 
       var getCurrentPositionID = function(getCurrentPositionIDCallback) {
+
         var positionLabel = person.current_title[0];
 
         Position.forge({
@@ -370,7 +370,6 @@ module.exports = {
         });
       };
 
-
       var getSkillsAsync                  =   Promise.promisify(getSkills),
           getIndustryIDAsync              =   Promise.promisify(getIndustryID),
           getCurrentPositionIDAsync       =   Promise.promisify(getCurrentPositionID),
@@ -398,3 +397,4 @@ module.exports = {
 
   }
 }
+

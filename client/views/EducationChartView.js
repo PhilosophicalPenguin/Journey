@@ -9,17 +9,21 @@ window.EducationChartView = Backbone.View.extend({
     //create the tuples grabing their names and calculate the %
     // this.model.HackReactor = 100;
     // this.model.total += this.model.HackReactor;
+
+    //this.model: {'bachelors_comp_sci': 2, 'masters_cs': 4}
+
+
     for(var key in this.model) {
       if(key!== 'total') {
         var item = {};
         var name = key.replace('_', ' in ');
         if(key === '_') {
-            educationData.push(['unlisted', this.model[key]]);
+            educationData.push(['unlisted', this.model[key].length]);
         } else {
             if(key === 'Other_'){
                 name = 'Other';
             }
-            educationData.push([name, this.model[key]]);
+            educationData.push([name, this.model[key].length]);
         }
       }
     }

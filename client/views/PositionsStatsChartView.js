@@ -17,19 +17,21 @@ window.PositionsStatsChartView = Backbone.View.extend({
     //   }
     // }
 
-     for(var wookey in this.model) {
-      if(wookey === "Software Engineer") {
-        this.model.total -= this.model[wookey];
+     for(var key in this.model) {
+      if(key === "Software Engineer") {
+        this.model.total -= this.model[key].length;
       }
      }
 
-    for(var key in this.model) {
-      if(key!== 'total' && key != "Software Engineer") {
+     console.log('this model!!!', this.model);
+    for(var wookey in this.model) {
+      if(wookey!== 'total' && wookey != "Software Engineer") {
         var item = {};
-        data.push([key, (this.model[key] / this.model.total)*100]);
+        data.push([wookey, (this.model[wookey].length / this.model.total)*100]);
       }
     }
 
+    //data[0]: [position, percentage]
     data.sort(function(a,b) { return a[1] < b[1]; });
 
     var res = data.splice(0,10);

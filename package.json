@@ -34,7 +34,6 @@
     "jshint-stylish": "^1.0.2",
     "request": "^2.55.0",
     "sinon": "^1.14.1",
-    "uglify-js": "^2.4.23"
   },
   "dependencies": {
     "async": "^1.0.0",
