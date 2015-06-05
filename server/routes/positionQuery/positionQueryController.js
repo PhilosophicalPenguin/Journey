@@ -184,7 +184,7 @@ module.exports = {
           }).then(function() {
             return getSkillStatsAsync()
           }).then(function() {
-            // console.log('this is the result!', result);
+            console.log('Returning stats for:', request.query.name);
             response.json(result)
           });
 

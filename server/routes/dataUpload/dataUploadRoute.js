@@ -168,7 +168,6 @@ module.exports = {
               else {
                 degreeName = 'Other'
               }
-              console.log('We bucketed the degree to:', degreeName);
             }
 
             getBucket(firstWordinDegree);
@@ -391,6 +390,7 @@ module.exports = {
       }).then(function() {
         return createExperienceMilestonesAsync();
       }).then(function() {
+        console.log('Finished importing profile to database. Name of profile:', person.full_name[0]);
         callbackNext(); // Go to next person
       })
     });
