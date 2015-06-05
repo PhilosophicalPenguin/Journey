@@ -17,6 +17,7 @@ var jsSrcFiles = [
     './client/views/DiscoverPathsView.js',
     './client/views/PositionsCollectionView.js',
     './client/views/PositionView.js',
+    './client/views/AutocompleteView.js',
     './client/views/AppView.js',
     './client/views/PositionsStatsChartView.js',
     './client/views/ExperienceView.js',

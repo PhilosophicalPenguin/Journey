@@ -9,7 +9,7 @@ window.PositionModel = Backbone.Model.extend({
   },
 
 	parse: function(response) {
-
+    this.set('info', response);
     this.set('degrees', response.degrees);
     this.set('fieldsOfStudy', response.fieldsOfStudy);
     this.set('degreesAndFields', response.degreesAndFields);

@@ -18,7 +18,6 @@ window.DiscoverPathsView = Backbone.View.extend({
   	console.log('this is the journeyClicked', journeyClicked);
   	var journey = this.collection.where({position_name: journeyClicked });
 
-
     journey[0].goToJourney(journeyClicked);
   },
 
