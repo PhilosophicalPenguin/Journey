@@ -1,18 +1,36 @@
 html {
+  background-color: white;
+}
+
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+  background: none;
+}
+
+.navbar {
+  background-color: #002B5E;
+  padding: 15px 0;
+}
+.navbar-header a {
+  color: white;
+  text-decoration: none;
+}
+.navbar-header h1 {
+  font-size: 2.9em;
+  margin: 0;
+  font-family: "Galdeano", sans-serif;
+}
+
+.splashBack{
   background: url(../assets/bg-blue.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: cover; }
-
-body {
-  font: 100% Helvetica, sans-serif;
-  color: white;
-  background: none; }
-
+  background-size: cover;
+}
 .splashPage {
   color: white;
-  margin-top: 5%;
   text-align: center; }
   .splashPage h1 {
     font-family: "Galdeano", sans-serif;
@@ -32,12 +50,38 @@ body {
   .splashPage input:focus {
     outline: none; }
 
+.splashRow {
+  margin-top: 5%;
+}
+
 .discoverPaths {
   margin: 50px 0 100px;
   border-top: 1px solid #C5C5C5;
   padding-top: 50px; }
   .discoverPaths h2 {
     margin-bottom: 30px; }
+
+
+
+/* JOURNEY VIEW */
+.journeyView {
+  color: #002B5E;
+}
+.sectionTitles {
+  border-bottom: 1px solid #002B5E;
+  padding-bottom: 15px;
+}
+.sectionTitles h1 {
+  font-size: 2.3em;
+  font-weight: 600;
+}
+.sectionTitles h2 {
+  font-weight: 400;
+  font-size: 1.8em;
+}
+.sectionTitles h1, .sectionTitles h2 {
+  margin: 0;
+}
 
 .onePath {
   height: 200px;
@@ -68,12 +112,6 @@ body {
   .onePath h3:hover {
     cursor: pointer; }
 
-/*
-td {
-  font: Helvetica;
-  size: 35px;
-  color: white;
-}*/
 
 table, th, td {
   font: Helvetica;
@@ -88,13 +126,5 @@ table {
 th {
   height: 100px;
 }
-
-
-/*#experienceDiv {
-  min-width: 300px;
-  width: 50%;
-  display: inline-block;
-<<<<<<< HEAD
-}*/
 
 /*# sourceMappingURL=main.css.map */

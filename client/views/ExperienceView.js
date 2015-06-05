@@ -9,7 +9,7 @@ var ExperienceView = Backbone.View.extend({
     },
 
     render : function () {
-        this.$el.append('<h1>Previous Experience:</h1>');
+        this.$el.append('<h1>Previous Experience</h1>');
         this.$el.append('<div id="experienceStatsDiv"></div>');
         var statsView = new PositionsStatsChartView({ el: '#experienceStatsDiv', model : this.model.get('info').positions });
 
