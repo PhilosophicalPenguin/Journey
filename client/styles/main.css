@@ -127,4 +127,19 @@ th {
   height: 100px;
 }
 
+.ui-menu-item {
+  font-size: 14px;
+  color: white;
+}
+
+ul.ui-autocomplete {
+  list-style: none;
+}
+
+.ui-autocomplete-input {
+  background:white;
+  height:10px;
+  font-size:8px;
+}
+
 /*# sourceMappingURL=main.css.map */

@@ -11,18 +11,18 @@
 
 </head>
 <body id="thewholebody">
-<div id="mainContent">
 
-  <div class='splashBack'>
-  	<div class='splashPage container'>
-      <div class='row splashRow'>
-        <div class='col-md-6 col-md-offset-3'>
-          <h1>Journey</h1>
-          <h2>What position are you considering?</h2>
-          <form>
-            <input placeholder='e.g. Software engineer' autocomplete='on'>
-          </form>
-        </div>
+<div class="mainContent">
+
+
+	<div class='splashPage container'>
+    <div class='row '>
+      <div class='col-md-6 col-md-offset-3'>
+        <h1>Journey</h1>
+        <h2>What position are you considering?</h2>
+        <form>
+          <input id='autocomplete' placeholder='e.g. Software engineer'>
+        </form>
       </div>
 
       <div class='row discoverPaths'>
@@ -69,6 +69,8 @@
   <script src= "bower_components/highcharts-release/highcharts.js"></script>
   <script src= "bower_components/highcharts-release/highcharts-3d.js"></script>-->
 
+  <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+
   <!-- ALL OUR JS IN ONE FILE -->
   <script src="all.min.js"></script>
 
@@ -94,16 +96,17 @@
 
 
 	<script>
-      $(function(){
+  $(function(){
 
-        var app = new AppModel();
-        var appView = new AppView({model: app});
+      var app = new AppModel();
+      var appView = new AppView({model: app});
 
-        $( ".onePath" ).click(function(e) {
-          appView.discoverPathsView.journeyClickHandler(e);
-				});
 
+      $( ".onePath" ).click(function(e) {
+        appView.discoverPathsView.journeyClickHandler(e);
       });
+
+    });
 
     </script>
 

@@ -1,24 +1,42 @@
-// var AutocompleteView = require ('backbone-autocomplete');
+window.AutocompleteView = Backbone.View.extend({
 
-var PositionSearchBoxView = AutocompleteView.extend({
+  model: AppModel,
+  el: '#autocomplete',
+  tagName: 'input',
 
-	initialize: function() {
-		this.render();
-	},
+  initialize: function() {
+    var availablePositions = [];
 
-	onSelect: function(model) {
-		console.log(model);
-	},
+    this.listenTo(this.model, 'positionsReceived', function() {
 
-	searchMethod: function(model) {
-		var label = model.get(this.searchField).toLowerCase();
-		var searchValue = this.searchValue.toLowerCase().trim();
+      console.log('listening to positioned received in autocomplete view');
 
-		if (label.indexOf(searchValue) !== -1) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+      for (var key in this.model.attributes) {
+        if(this.model.attributes[key].position_name !== null && this.model.attributes[key].position_name !== undefined) {
+          availablePositions.push(this.model.attributes[key].position_name);
+        }
+      }
+
+      console.log(availablePositions);
+      this.$el.autocomplete({
+        source: availablePositions
+      });
+
+
+    });
+
+    this.render();
+  },
+
+  events: {
+    //
+    //on submit
+  },
+
+  render: function() {
+
+    return $("#autocomplete").html(this.el);
+
+  }
+
 });
-

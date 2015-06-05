@@ -77,6 +77,7 @@ window.AppModel = Backbone.Model.extend ({
 
 	parse: function(response) {
 		this.set('data', response);
+
 		//response is an array of objects
 		return response;
 	},
@@ -195,6 +196,49 @@ window.PositionView = Backbone.View.extend({
 
 });
 
+window.AutocompleteView = Backbone.View.extend({
+
+  model: AppModel,
+  el: '#autocomplete',
+  tagName: 'input',
+
+  initialize: function() {
+    var availablePositions = [];
+
+    this.listenTo(this.model, 'positionsReceived', function() {
+
+      console.log('listening to positioned received in autocomplete view');
+
+      for (var key in this.model.attributes) {
+        if(this.model.attributes[key].position_name !== null && this.model.attributes[key].position_name !== undefined) {
+          availablePositions.push(this.model.attributes[key].position_name);
+        }
+      }
+
+      console.log(availablePositions);
+      this.$el.autocomplete({
+        source: availablePositions
+      });
+
+
+    });
+
+    this.render();
+  },
+
+  events: {
+    //
+    //on submit
+  },
+
+  render: function() {
+
+    return $("#autocomplete").html(this.el);
+
+  }
+
+});
+
 // AppView.js - Defines a backbone view class for the whole
 window.AppView = Backbone.View.extend({
 
@@ -212,6 +256,9 @@ window.AppView = Backbone.View.extend({
 		// this.render();
 
 		this.discoverPathsView = new DiscoverPathsView({collection: this.model.get('discoverPathsCollection')});
+		this.autocompleteView = new AutocompleteView({model: this.model});
+
+		console.log(this.autocompleteView);
 		this.render();
 
 
