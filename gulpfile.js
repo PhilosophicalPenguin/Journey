@@ -69,8 +69,8 @@ gulp.task('copy-assets', function() {
 });
 
 gulp.task('watch', function() {
-    gulp.watch([jsSrcFiles, './client/index.html'], ['lint', 'build']);
-    gulp.watch('styles/*.css', ['minify-css']);
+    gulp.watch([jsSrcFiles, './client/index.html', './client/styles/main.css'], ['lint', 'build']);
+    // gulp.watch('styles/*.css', ['minify-css']);
 });
 
 gulp.task('build', ['compressAndConcat', 'minify-css', 'copy', 'copy-assets']);
