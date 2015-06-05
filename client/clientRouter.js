@@ -2,7 +2,7 @@ window.ClientRouter = Backbone.Router.extend ({
 
     routes: {
         '' : 'home',
-        'viewJourney': 'viewJourney'
+        'viewJourney': 'viewJourney',
         // 'viewJourney/:id': 'viewJourney'
         //'viewJourney/:id': 'viewJourney',
         'profile/:id': 'viewProfile'
