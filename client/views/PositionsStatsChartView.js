@@ -57,7 +57,7 @@ window.PositionsStatsChartView = Backbone.View.extend({
               viewDistance: 25
           }
       },
-      tooltip : { 
+      tooltip : {
         pointFormat : "Value: {point.y:.2f} %"
       },
       xAxis : {
