@@ -8,6 +8,14 @@ window.PositionsStatsChartView = Backbone.View.extend({
     var data = [];
     var names = [];//an array of tuples
     var percentages = [];
+    //create the tuples grabing their names and calculate the %
+    // for(var key in this.model) {
+    //   if(key!== 'total') {
+    //     var item = {};
+    //     names.push(key);
+    //     percentages.push((this.model[key] / this.model.total)*100);
+    //   }
+    // }
 
      for(var key in this.model) {
       if(key === "Software Engineer") {
@@ -36,11 +44,12 @@ window.PositionsStatsChartView = Backbone.View.extend({
     console.log("xAxis categories passed to table:", names);
     console.log("yAxis percentages passed to table:", percentages);
 
+    var previousPoint = null;
     var chart = {
       chart: {
           renderTo: this.$el,
-          type: 'column',
-          margin: 150,
+          type: 'bar',
+          margin: 100,
           options3d: {
               enabled: false,
               alpha: 15,
@@ -65,8 +74,23 @@ window.PositionsStatsChartView = Backbone.View.extend({
           text: 'Previous Roles:'
       },
       plotOptions: {
-          column: {
-              depth: 25
+          dataLabels: {
+            enabled: true
+          },
+          series:{
+            point: {
+              events: {
+                click: function (event) {
+                  console.log(this);
+
+                    if (previousPoint) {
+                      previousPoint.update({ color: '#7cb5ec' }, true, false);
+                    }
+                    previousPoint = this;
+                    this.update({ color: '#fe5800' });
+                }
+              }      // this.update({ color: '#fe5800' }, true, false);
+            }
           }
       },
       series: [{
