@@ -82,6 +82,10 @@ body {
 .sectionTitles h1, .sectionTitles h2 {
   margin: 0;
 }
+.journeyView h3 {
+  font-size: 1.8em;
+  font-weight: 600;
+}
 
 .onePath {
   height: 200px;

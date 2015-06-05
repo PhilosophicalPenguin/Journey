@@ -5,7 +5,6 @@ window.PositionModel = Backbone.Model.extend({
 	goToJourney: function(journeyClicked){
     console.log("parameter being passed", journeyClicked);
 		this.fetch({data: $.param({name: journeyClicked})});
-
   },
 
 	parse: function(response) {
@@ -19,6 +18,7 @@ window.PositionModel = Backbone.Model.extend({
 
     // clientRouter.navigate("/viewJourney/" + 13  , true )
 
+    console.log('response!!!', response);
     return response;
   }
 

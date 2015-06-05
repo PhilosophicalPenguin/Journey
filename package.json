@@ -37,7 +37,6 @@
   },
   "dependencies": {
     "async": "^1.0.0",
-    "backbone-autocomplete": "0.0.5",
     "bluebird": "^2.9.26",
     "body-parser": "^1.12.4",
     "bookshelf": "^0.8.1",
