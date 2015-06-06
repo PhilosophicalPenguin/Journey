@@ -11,6 +11,10 @@ window.ThumbnailView = Backbone.View.extend({
         this.render();
     },
 
+    events: {
+    	'click': 'sendToProfile'
+    },
+
         render: function() {
 
         console.log("thumbnailview render function called");
@@ -29,6 +33,14 @@ window.ThumbnailView = Backbone.View.extend({
         //return the el property (no $)
 
 
+
+    },
+
+    sendToProfile: function(){
+
+    	console.log("sendToProfile called");
+    	console.log("this.id", this.id);
+    	clientRouter.navigate("profile/" + this.model.get('id')  , true );
 
     }
 
