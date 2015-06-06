@@ -38,6 +38,7 @@ var jsSrcFiles = [
     './client/views/SkillsView.js',
     './client/views/JourneyView.js',
 
+    './client/views/TimelineView.js',
     './client/views/ProfileCardView.js',
     './client/views/ProfileView.js',
 

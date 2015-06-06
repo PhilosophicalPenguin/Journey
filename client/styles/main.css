@@ -194,10 +194,26 @@ th {
   outline: none;
 }
 
+
 .ui-helper-hidden-accessible {
   display: none;
   position: absolute;
   left:-999em;
+}
+
+#profile-card {
+  width: 250px;
+  margin: 20px;
+  padding: 25px;
+  border-radius: 4px;
+  background: url(../assets/bg-blue.jpg) no-repeat center center fixed;
+}
+
+#profile-card div {
+  margin: 15px;
+  padding: 15px;
+  border-radius: 4px;
+  background-color: white;
 }
 
 
