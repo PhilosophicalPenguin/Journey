@@ -24,7 +24,7 @@ body {
 }
 
 .splashBack{
-  background: url(../assets/bg-blue.jpg) no-repeat center center fixed;
+  background: url(../assets/bg-darkblue.jpg) no-repeat center center fixed;
   height:100vh;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -35,7 +35,8 @@ body {
   color: white;
   text-align: center; }
   .splashPage h1 {
-    font-family: "Galdeano", sans-serif;
+    font-family: "Droid Serif", sans-serif;
+    font-weight: 400;
     font-size: 12em;
     color: rgb(255, 172, 23);}
   .splashPage h2 {

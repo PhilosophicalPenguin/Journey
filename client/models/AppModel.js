@@ -12,23 +12,23 @@ window.AppModel = Backbone.Model.extend ({
 	initialize: function(params){
     console.log(this);
 
-		var lawyer = new DiscoverPathsModel ({
-  		  position_name: 'Corporate Lawyer',
-  		  position_image: '../assets/lawyer.jpg',
+		var entertainmentLawyer = new DiscoverPathsModel ({
+  		  position_name: 'Entertainment Lawyer',
+  		  position_image: '../assets/entertainment-lawyer.jpg',
 		});
 
-		var softwareEngineer = new DiscoverPathsModel ({
-  		  position_name: 'Software Engineer',
-  		  position_image: '../assets/software_engineer.jpg'
+		var productManager = new DiscoverPathsModel ({
+  		  position_name: 'Product Manager',
+  		  position_image: '../assets/product-manager.jpg'
 		});
 
-		var nurse = new DiscoverPathsModel ({
-  		  position_name: 'Nurse Practioner',
-  	    position_image: '../assets/nurse.jpg'
+		var dataScientist = new DiscoverPathsModel ({
+  		  position_name: 'Data Scientist',
+  	    position_image: '../assets/data-scientist.jpg'
 		});
 
 
-		this.set('discoverPathsCollection', new Backbone.Collection([lawyer, softwareEngineer, nurse], {model: DiscoverPathsModel}));
+		this.set('discoverPathsCollection', new Backbone.Collection([entertainmentLawyer, productManager, dataScientist], {model: DiscoverPathsModel}));
 
     var response = null;
 
