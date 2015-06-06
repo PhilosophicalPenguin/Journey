@@ -9,7 +9,6 @@ window.ClientRouter = Backbone.Router.extend ({
     },
 
     home: function () {
-    console.log('in home view - called from router');
         // var appView = new AppView();
         // $(".mainContent").html(appView.el);
     },
@@ -23,7 +22,7 @@ window.ClientRouter = Backbone.Router.extend ({
     },
 
     viewProfile : function(id) {
-        console.log('hello woo!');
+        
         var profileModel = new ProfileModel(id);
         $('#mainContent').empty();
         var profile = new ProfileView( { model : profileModel } );

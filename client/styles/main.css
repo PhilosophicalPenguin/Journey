@@ -82,6 +82,9 @@ body {
 .sectionTitles h1, .sectionTitles h2 {
   margin: 0;
 }
+.journeyView {
+  margin-bottom: 150px;
+}
 .journeyView h3 {
   font-size: 1.8em;
   font-weight: 600;
@@ -116,6 +119,10 @@ body {
   .onePath h3:hover {
     cursor: pointer; }
 
+
+#experienceStatsDiv {
+  height: 600px;
+}
 
 table, th, td {
   font: Helvetica;

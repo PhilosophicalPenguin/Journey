@@ -8,7 +8,7 @@ var ExperienceView = Backbone.View.extend({
     },
 
     render : function () {
-        this.$el.append('<h3>Previous Experience</h3>');
+        this.$el.append('<h3>Experience</h3>');
         this.$el.append('<div id="experienceStatsDiv"></div>');
 
         var context = this;

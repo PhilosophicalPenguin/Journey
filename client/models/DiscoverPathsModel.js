@@ -18,7 +18,6 @@ window.DiscoverPathsModel = Backbone.Model.extend({
   },
 
   parse: function(response) {
-  	console.log('got to parse from discoverPathsModel');
 
     this.set('info', response);
 
