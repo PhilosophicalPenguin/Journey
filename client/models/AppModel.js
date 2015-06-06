@@ -10,6 +10,7 @@ window.AppModel = Backbone.Model.extend ({
 	},
 
 	initialize: function(params){
+    console.log(this);
 
 		var lawyer = new DiscoverPathsModel ({
   		  position_name: 'Corporate Lawyer',

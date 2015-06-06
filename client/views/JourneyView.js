@@ -4,6 +4,7 @@ window.JourneyView = Backbone.View.extend({
 	className: 'JourneyView',
 
   initialize: function () {
+    console.log('this model from journeyview', this.model);
     this.render();
   },
 
