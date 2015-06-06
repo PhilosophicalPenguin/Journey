@@ -14,11 +14,12 @@ window.ClientRouter = Backbone.Router.extend ({
     },
 
     viewJourney: function(model) {
+        console.log('model passed to viewJourney in client router', model);
 
         // var path = location.pathname;
         //console.log('in viewJourney', id);
         $("#mainContent").empty();
-         var journeyView = new JourneyView({ model: model});
+        var journeyView = new JourneyView({ model: model});
     },
 
     viewProfile : function(id) {

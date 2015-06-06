@@ -4,12 +4,16 @@ window.JourneyView = Backbone.View.extend({
 	className: 'JourneyView',
 
   initialize: function () {
+    console.log('this model from journeyview', this.model);
     this.render();
   },
 
   render: function () {
     this.$el.children().detach();
-    this.$el.append(new NavBarView().render());
+
+    new NavBarView();
+    new AutocompleteView ({model: app});
+
     this.$el.append('<div class="container journeyView"><div class="row"><div class="col-md-12 innerJourney"></div></div></div>');
     this.$el.find('.innerJourney').append('<div class="sectionTitles"><h2>Destination:</h2><h1>' + this.model.get('position_name') + '</h1></div>');
     this.$el.find('.innerJourney').append('<div id="educationDiv"></div>');

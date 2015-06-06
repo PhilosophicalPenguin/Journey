@@ -11,6 +11,7 @@
 
 </head>
 <body id="thewholebody">
+<div id="nav-bar-div-container"></div>
 <div id="mainContent">
 
   <div class='splashBack'>
@@ -99,9 +100,8 @@
 	<script>
   $(function(){
 
-      var app = new AppModel();
-      var appView = new AppView({model: app});
-
+      window.app = new AppModel();
+      window.appView = new AppView({model: app});
 
       $( ".onePath" ).click(function(e) {
         appView.discoverPathsView.journeyClickHandler(e);

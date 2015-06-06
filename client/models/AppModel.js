@@ -10,6 +10,7 @@ window.AppModel = Backbone.Model.extend ({
 	},
 
 	initialize: function(params){
+    console.log(this);
 
 		var lawyer = new DiscoverPathsModel ({
   		  position_name: 'Corporate Lawyer',
@@ -23,26 +24,22 @@ window.AppModel = Backbone.Model.extend ({
 
 		var nurse = new DiscoverPathsModel ({
   		  position_name: 'Nurse Practioner',
-  	      position_image: '../assets/nurse.jpg'
+  	    position_image: '../assets/nurse.jpg'
 		});
 
 
 		this.set('discoverPathsCollection', new Backbone.Collection([lawyer, softwareEngineer, nurse], {model: DiscoverPathsModel}));
 
-		var response = null;
+    var response = null;
 
 		this.fetch().then(this.positionsReceived.bind(this));
+    this.set('availablePositions', []);
 
+  },
+
+  positionsReceived: function() {
+    this.set('positionsCollection', new PositionsCollection(this.get('data')));
+    this.trigger('positionsReceived');
 	},
-
-	positionsReceived: function() {
-		this.set('positionsCollection', new PositionsCollection(this.get('data')));
-    console.log('position collection!!!!', this.get('positionsCollection'));
-		this.trigger('positionsReceived');
-	},
-
-  tellPositionModel: function(journeyClicked) {
-    console.log('this from app model', this);
-  }
 
 });

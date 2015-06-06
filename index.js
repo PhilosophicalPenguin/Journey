@@ -27,8 +27,8 @@ var multipartMiddleware = multipart();
 
 app.listen(port);
 console.log('Now listening on port', port);
-    
-//post request to upload our json data scrapped from linkedin 
+
+//post request to upload our json data scrapped from linkedin
 app.post('/api/uploadfile', multipartMiddleware, dataUploadRoute.parseUploadedData);
 
 var positionQueryRoutes   = express.Router();

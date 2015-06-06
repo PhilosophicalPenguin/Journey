@@ -6,9 +6,10 @@ window.AutocompleteView = Backbone.View.extend({
 
   initialize: function() {
 
-    console.log('this model', this.model);
+    this.$el.autocomplete({
+      source: this.model.get('availablePositions')
+    });
 
-    var availablePositions = [];
 
     // wait until positions received from the server
     this.listenTo(this.model, 'positionsReceived', function() {
@@ -16,15 +17,16 @@ window.AutocompleteView = Backbone.View.extend({
       for (var key in this.model.attributes) {
         // put all the positions that are in the server into an array that will be used as the reference "source" for the autocomplete
         if(this.model.attributes[key].position_name !== null && this.model.attributes[key].position_name !== undefined) {
-          availablePositions.push(this.model.attributes[key].position_name);
+          this.model.get('availablePositions').push(this.model.attributes[key].position_name);
         }
       }
-      console.log('listening to positioned received in autocomplete view', availablePositions);
       // set the source for the autocomplete widget to available positions
       this.$el.autocomplete({
-        source: availablePositions
+        source: this.model.get('availablePositions'),
+        minLength: 2,
       });
     });
+
 
     this.render();
   },
@@ -36,16 +38,11 @@ window.AutocompleteView = Backbone.View.extend({
 
   journeyClickHandler: function(e) {
 
-
-
-    // checks if key  pressed is enter key
+    // checks if key pressed is enter key
     var isEnterKey = (e.which === 13);
 
     // if it's the enter key
     if(isEnterKey) {
-
-      e.preventDefault();
-
       // get the value of the input field
       var journeyEntered = this.$el.val();
       // grab the model from the positions collection where the position name matches with the entered position. This returns an array
@@ -58,8 +55,9 @@ window.AutocompleteView = Backbone.View.extend({
   },
 
   render: function() {
+
     // replace autocomplete field that already exists on the dom with this autocomplete
-    return $("#autocomplete").html(this.el);
+    return this.el;
   }
 
 });
