@@ -149,9 +149,11 @@ module.exports = {
 
           var milestone = {
             profileID: obj.profileID,
-            startYear: eduMilestone.start_date || null,
-            endYear: eduMilestone.end_date || null
+            startYear: parseInt(eduMilestone.start_date.replace(/[^\d.]/g, '')) || null,
+            endYear: parseInt(eduMilestone.end_date.replace(/[^\d.]/g, '')) || null
           };
+
+          console.log("milestone: ", milestone);
 
           var getDegreeID = function(getDegreeIDCallback) {
 
@@ -283,8 +285,8 @@ module.exports = {
 
           var milestone = {
             profileID: obj.profileID,
-            start_date: expMilestone.start_date || null,
-            end_date: expMilestone.end_date || null,
+            start_date: parseInt(expMilestone.start_date.replace(/[^\d.]/g, '')) || null,
+            end_date: parseInt(expMilestone.end_date.replace(/[^\d.]/g, '')) || null,
             duration: expMilestone.duration || null
           };
 
