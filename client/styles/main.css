@@ -11,6 +11,7 @@ body {
 .navbar {
   background-color: #002B5E;
   padding: 15px 0;
+  z-index: 1;
 }
 .navbar-header a {
   color: white;
@@ -143,20 +144,36 @@ th {
   margin: 0;
 }
 
-.ui-menu-item {
-  font-size: 14px;
-  color: black;
-}
 
+/*homepage autocomplete dropdown*/
 .ui-autocomplete {
   list-style: none;
-  max-height: 100px;
+  max-height: 200px;
   background-color: white;
   overflow-y: scroll;
   overflow-x: hidden;
+  width: 100px;
 }
 
-.ui-autocomplete-input {
+/*header autocomplete dropdown*/
+.ui-autocomplete {
+  border: 1px solid #002B5E;
+  border-radius: 3px;
+  top: 15px;
+  padding: 20px 0;
+}
+
+.ui-menu-item {
+  padding: 5px 10px;
+  color: #606060;
+  font-size: 14px;
+}
+
+.ui-menu-item:hover {
+  background-color: #D3D3D3
+}
+
+.header-search.ui-autocomplete-input {
   box-shadow: none;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -168,6 +185,7 @@ th {
   background-color: #003778;
   color: white;
   padding-left: 10px;
+  z-index: 10;
 }
 
 .ui-autocomplete-input:focus {
