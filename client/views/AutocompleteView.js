@@ -5,12 +5,13 @@ window.AutocompleteView = Backbone.View.extend({
   tagName: 'input',
 
   initialize: function() {
+
+    console.log('this model', this.model);
+
     var availablePositions = [];
 
     // wait until positions received from the server
     this.listenTo(this.model, 'positionsReceived', function() {
-
-      console.log('listening to positioned received in autocomplete view');
 
       for (var key in this.model.attributes) {
         // put all the positions that are in the server into an array that will be used as the reference "source" for the autocomplete
@@ -18,6 +19,7 @@ window.AutocompleteView = Backbone.View.extend({
           availablePositions.push(this.model.attributes[key].position_name);
         }
       }
+      console.log('listening to positioned received in autocomplete view', availablePositions);
       // set the source for the autocomplete widget to available positions
       this.$el.autocomplete({
         source: availablePositions
@@ -34,11 +36,16 @@ window.AutocompleteView = Backbone.View.extend({
 
   journeyClickHandler: function(e) {
 
-    // checks if key pressed is enter key
+
+
+    // checks if key  pressed is enter key
     var isEnterKey = (e.which === 13);
 
     // if it's the enter key
     if(isEnterKey) {
+
+      e.preventDefault();
+
       // get the value of the input field
       var journeyEntered = this.$el.val();
       // grab the model from the positions collection where the position name matches with the entered position. This returns an array

@@ -27,6 +27,7 @@ module.exports = {
 
     // Gets core profile details, using an inner join to get position, current company and industry names
     // Inserts results of query to resultProfile object
+
     var getProfileDetails = function(getProfileDetailsCB) {
       db.knex.from('profiles')
         .innerJoin('positions', 'profiles.currentPosition_id', 'positions.id')

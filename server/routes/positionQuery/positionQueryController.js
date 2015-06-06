@@ -1,4 +1,5 @@
 var Position = require('../../db_Schemas/models/position');
+var Profile = require('../../db_Schemas/models/profile');
 var db = require('../../db_Schemas/config');
 var Promise = require("bluebird");
 
@@ -13,7 +14,42 @@ var forEach = function() {
 };
 
 module.exports = {
+
+  // Returns all current positions of profiles in database
   getAvailablePositions: function(request, response) {
+
+    db.knex.from('profiles')
+      .innerJoin('positions', 'profiles.currentPosition_id', 'positions.id')
+      .then(function(profiles) {
+
+        var positions       =   {};
+        var positionArray   =   [];
+        
+        forEach(profiles, function(profile){
+          var positionID      =   profile.currentPosition_id,
+              positionName    =   profile.position_name
+          
+          // if position is not in object, add it as a key: value --> positionID: positionName
+          if(!positions[positionID] && positionName != null) {
+            positions[positionID] = positionName;
+          }
+
+        });
+
+        for(var key in positions) {
+          positionArray.push({
+            "position_id": parseInt(key),
+            "position_name": positions[key]
+          });
+        }
+
+        response.json(positionArray);
+
+      });
+  },
+
+  // Returns all positions in database - current and non-current
+  getAllPositions: function(request, response) {
     new Position().fetchAll().then(function(positions) {
       if (positions) {
         var positionArray = [];
@@ -83,9 +119,10 @@ module.exports = {
           var makeTally = function(subject, property, profile) {
             return function(object) {
               var profile = {
-                id:     object.profile_id,
-                name:   object.profile_name,
-                picURL: object.picURL
+                id:       object.profile_id,
+                name:     object.profile_name,
+                picURL:   object.picURL,
+                headline: object.headline
               }
               var val = object[property];
               result[subject][val] = result[subject][val] || [];
@@ -117,9 +154,10 @@ module.exports = {
                   var fieldName = object.fieldOfStudy_name.toString();
                   var val = degreeName + '_' + fieldName;
                   var profile = {
-                    id:     object.profile_id,
-                    name:   object.profile_name,
-                    picURL: object.picURL
+                    id:       object.profile_id,
+                    name:     object.profile_name,
+                    picURL:   object.picURL,
+                    headline: object.headline
                   }
 
                   result.degreesAndFields[val] = result.degreesAndFields[val] || [];
