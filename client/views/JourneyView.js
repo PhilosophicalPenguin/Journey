@@ -73,8 +73,7 @@ window.JourneyView = Backbone.View.extend({
 
     this.$el.find('.innerJourneyContent').append('<div id="skillsDiv"></div>');
     var newSkillsView = new SkillsView({model: this.model});
-    this.$el.find('.row').append('<div class="col-md-4"><div class="sectionTitles"><h2>Software Engineers with</h2><h1>MA Computer Science degrees</h1></div></div>');
-
+    // this.$el.find('.row').append('<div class="col-md-4"><div class="sectionTitles"><h2>Software Engineers with</h2><h1>MA Computer Science degrees</h1></div></div>');
 
     this.$el.find('.row').append(
       '<div class="col-md-4 rightCol">' + 
@@ -104,6 +103,6 @@ window.JourneyView = Backbone.View.extend({
     this.$el.find('.featuredHeader h1').removeClass('offsetHeader');
     this.$el.find('.featuredHeader h2').removeClass('hideCol');
 
-  },
+  }
 
 });
