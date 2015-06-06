@@ -29,20 +29,16 @@ window.AppModel = Backbone.Model.extend ({
 
 		this.set('discoverPathsCollection', new Backbone.Collection([lawyer, softwareEngineer, nurse], {model: DiscoverPathsModel}));
 
-		var response = null;
+    var response = null;
 
 		this.fetch().then(this.positionsReceived.bind(this));
+    this.set('availablePositions', []);
 
+  },
+
+  positionsReceived: function() {
+    this.set('positionsCollection', new PositionsCollection(this.get('data')));
+    this.trigger('positionsReceived');
 	},
-
-	positionsReceived: function() {
-		this.set('positionsCollection', new PositionsCollection(this.get('data')));
-    console.log('position collection!!!!', this.get('positionsCollection'));
-		this.trigger('positionsReceived');
-	},
-
-  tellPositionModel: function(journeyClicked) {
-    console.log('this from app model', this);
-  }
 
 });

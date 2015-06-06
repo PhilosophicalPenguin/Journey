@@ -17,12 +17,12 @@ var jsSrcFiles = [
     './client/models/DiscoverPathsModel.js',
     './client/models/AppModel.js',
 
+    './client/views/AutocompleteView.js',
     './client/views/NavBarView.js',
 
     './client/views/DiscoverPathsView.js',
     './client/views/PositionsCollectionView.js',
     './client/views/PositionView.js',
-    './client/views/AutocompleteView.js',
     './client/views/AppView.js',
 
     './client/views/PositionsStatsChartView.js',

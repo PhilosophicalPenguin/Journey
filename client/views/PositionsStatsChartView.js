@@ -44,10 +44,15 @@ window.PositionsStatsChartView = Backbone.View.extend({
       percentages.push(res[i][1]);
     }
 
+<<<<<<< HEAD
     var previousPoint = null;
+=======
+>>>>>>> Render new autocomplete search bar on nav bar, styling, set min-length for search to 2
 
+var previousPoint = null;
     var chart = {
       chart: {
+<<<<<<< HEAD
         renderTo: this.$el,
         type: 'bar',
         marginLeft: 150,
@@ -61,6 +66,18 @@ window.PositionsStatsChartView = Backbone.View.extend({
           depth: 50,
           viewDistance: 25
         }
+=======
+          renderTo: this.$el,
+          type: 'bar',
+          margin: 100,
+          options3d: {
+              enabled: false,
+              alpha: 15,
+              beta: 15,
+              depth: 50,
+              viewDistance: 25
+          }
+>>>>>>> Render new autocomplete search bar on nav bar, styling, set min-length for search to 2
       },
       tooltip: {
         pointFormat: "{point.y:.2f}%"
@@ -87,6 +104,7 @@ window.PositionsStatsChartView = Backbone.View.extend({
         text: null
       },
       plotOptions: {
+<<<<<<< HEAD
         dataLabels: {
           enabled: true,
         },
@@ -108,6 +126,25 @@ window.PositionsStatsChartView = Backbone.View.extend({
                 });
               }
             } // this.update({ color: '#fe5800' }, true, false);
+=======
+          dataLabels: {
+            enabled: true
+          },
+          series:{
+            point: {
+              events: {
+                click: function (event) {
+                  console.log(this);
+
+                    if (previousPoint) {
+                      previousPoint.update({ color: '#7cb5ec' }, true, false);
+                    }
+                    previousPoint = this;
+                    this.update({ color: '#fe5800' });
+                }
+              }      // this.update({ color: '#fe5800' }, true, false);
+            }
+>>>>>>> Render new autocomplete search bar on nav bar, styling, set min-length for search to 2
           }
         }
       },

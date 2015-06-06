@@ -138,26 +138,41 @@ th {
   height: 100px;
 }
 
+.navbar-form {
+  float: right;
+  margin: 0;
+}
+
 .ui-menu-item {
   font-size: 14px;
   color: black;
 }
 
-ul.ui-autocomplete {
-  list-style: none;
-}
-
-.ui-autocomplete-input {
-  background:white;
-  height:10px;
-  font-size:8px;
-}
-
 .ui-autocomplete {
+  list-style: none;
   max-height: 100px;
   background-color: white;
   overflow-y: scroll;
   overflow-x: hidden;
 }
+
+.ui-autocomplete-input {
+  box-shadow: none;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  border: 1px solid white;
+  height: 40px;
+  width: 300px;
+  font-size:14px;
+  background-color: #003778;
+  color: white;
+  padding-left: 10px;
+}
+
+.ui-autocomplete-input:focus {
+  outline: none;
+}
+
 
 /*# sourceMappingURL=main.css.map */
