@@ -1,12 +1,12 @@
 window.PositionsStatsChartView = Backbone.View.extend({
-  initialize: function () {
-    console.log(this.model);
+
+  initialize: function() {
     this.render();
   },
 
   render: function() {
     var data = [];
-    var names = [];//an array of tuples
+    var names = []; //an array of tuples
     var percentages = [];
     //create the tuples grabing their names and calculate the %
     // for(var key in this.model) {
@@ -17,88 +17,106 @@ window.PositionsStatsChartView = Backbone.View.extend({
     //   }
     // }
 
-     for(var key in this.model) {
-      if(key === "Software Engineer") {
+    for (var key in this.model) {
+      if (key === "Software Engineer") {
         this.model.total -= this.model[key].length;
       }
-     }
+    }
 
-     console.log('this model!!!', this.model);
-    for(var wookey in this.model) {
-      if(wookey!== 'total' && wookey != "Software Engineer") {
+    for (var wookey in this.model) {
+      if (wookey !== 'total' && wookey != "Software Engineer") {
         var item = {};
-        data.push([wookey, (this.model[wookey].length / this.model.total)*100]);
+        data.push([wookey, (this.model[wookey].length / this.model.total) * 100]);
       }
     }
 
     //data[0]: [position, percentage]
-    data.sort(function(a,b) { return a[1] < b[1]; });
+    console.log('data before sort:', data);
+    data.sort(function(a, b) {
+      return b[1] - a[1];
+    });
+    console.log('data after sort:', data);
 
-    var res = data.splice(0,10);
+    var res = data.splice(0, 10);
 
-    for(var i = 0; i < res.length; ++i) {
+    for (var i = 0; i < res.length; ++i) {
       names.push(res[i][0]);
       percentages.push(res[i][1]);
     }
 
-    console.log("xAxis categories passed to table:", names);
-    console.log("yAxis percentages passed to table:", percentages);
-
     var previousPoint = null;
+
     var chart = {
       chart: {
-          renderTo: this.$el,
-          type: 'bar',
-          margin: 100,
-          options3d: {
-              enabled: false,
-              alpha: 15,
-              beta: 15,
-              depth: 50,
-              viewDistance: 25
+        renderTo: this.$el,
+        type: 'bar',
+        marginLeft: 150,
+        style: {
+          fontFamily: 'Helvetica, sans-serif'
+        },
+        options3d: {
+          enabled: false,
+          alpha: 15,
+          beta: 15,
+          depth: 50,
+          viewDistance: 25
+        }
+      },
+      tooltip: {
+        pointFormat: "{point.y:.2f}%"
+      },
+      xAxis: {
+        categories: names,
+        labels: {
+          style: {
+            fontSize: '14px'
           }
+        }
       },
-      tooltip : {
-        pointFormat : "Value: {point.y:.2f} %"
-      },
-      xAxis : {
-        categories: names
-      },
-      yAxis : {
+      yAxis: {
         min: 0,
-        title : {
-          text : "percentage"
+        lineWidth: 0,
+        minorGridLineWidth: 0,
+        gridLineWidth: 0,
+        lineColor: 'transparent',
+        title: {
+          text: "Percentage"
         }
       },
       title: {
-          text: 'Previous Roles:'
+        text: null
       },
       plotOptions: {
-          dataLabels: {
-            enabled: true
-          },
-          series:{
-            point: {
-              events: {
-                click: function (event) {
-                  console.log(this);
-
-                    if (previousPoint) {
-                      previousPoint.update({ color: '#7cb5ec' }, true, false);
-                    }
-                    previousPoint = this;
-                    this.update({ color: '#fe5800' });
+        dataLabels: {
+          enabled: true,
+        },
+        series: {
+          groupPadding: 0.1,
+          cursor: 'pointer',
+          point: {
+            events: {
+              click: function(event) {
+                console.log(this);
+                if (previousPoint) {
+                  previousPoint.update({
+                    color: '#7cb5ec'
+                  }, true, false);
                 }
-              }      // this.update({ color: '#fe5800' }, true, false);
-            }
+                previousPoint = this;
+                this.update({
+                  color: '#fe5800'
+                });
+              }
+            } // this.update({ color: '#fe5800' }, true, false);
           }
+        }
       },
       series: [{
         showInLegend: false,
-          data: percentages
+        data: percentages
       }],
-      credits :{
-        enabled :false
+      credits: {
+        enabled: false
       }
     };
 

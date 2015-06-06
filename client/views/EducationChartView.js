@@ -30,28 +30,47 @@ window.EducationChartView = Backbone.View.extend({
     educationData.sort(function(a,b) { return a[1] < b[1]; });
     educationData = educationData.splice(0,10);
 
-
     var chart = {
       chart: {
             type: 'pie',
             options3d: {
-                enabled: true,
+                enabled: false,
                 alpha: 45
-            }
+            },
+            style: {
+                fontFamily: 'Helvetica, sans-serif'
+            },
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false
+        },
+        tooltip : {
+            pointFormat : "{point.percentage:.2f}%"
         },
         title: {
-            text: 'Degrees Obtained:'
+            text: null
         },
         plotOptions: {
             pie: {
-                innerSize: 100,
-                depth: 45
+                innerSize: 0,
+                depth: 45,
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.name}: {point.percentage:.1f}%',
+                    color: '#606060',
+                    style: { lineHeight: '18px', fontSize: '14px', fontWeight: 'normal' }
+                }
             }
         },
         series: [{
-            name: 'percentage',
+            name: 'Percentage',
             data: educationData
-        }]
+        }],
+        credits: {
+            enabled :false
+        }
     };
 
     this.$el.highcharts(chart);
