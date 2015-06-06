@@ -14,7 +14,8 @@ window.DiscoverPathsView = Backbone.View.extend({
 
 
   journeyClickHandler: function(e) {
-  	var journeyClicked = $(e.target).text();
+
+  	var journeyClicked = $(e.target).text() || $(e.target).attr("alt");
   	var journey = this.collection.where({position_name: journeyClicked });
 
     journey[0].goToJourney(journeyClicked);
