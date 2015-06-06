@@ -46,7 +46,6 @@ window.PositionsStatsChartView = Backbone.View.extend({
 
     var previousPoint = null;
 
-    var previousPoint = null;
     var chart = {
       chart: {
         renderTo: this.$el,
