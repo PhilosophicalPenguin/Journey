@@ -24,7 +24,7 @@ window.AppModel = Backbone.Model.extend ({
 
 		var nurse = new DiscoverPathsModel ({
   		  position_name: 'Nurse Practioner',
-  	      position_image: '../assets/nurse.jpg'
+  	    position_image: '../assets/nurse.jpg'
 		});
 
 
