@@ -6,8 +6,10 @@ window.AutocompleteView = Backbone.View.extend({
 
   initialize: function() {
 
+    var thisEl = this.$el;
+
     this.$el.autocomplete({
-      source: this.model.get('availablePositions')
+      source: this.model.get('availablePositions'),
     });
 
 
@@ -23,7 +25,6 @@ window.AutocompleteView = Backbone.View.extend({
       // set the source for the autocomplete widget to available positions
       this.$el.autocomplete({
         source: this.model.get('availablePositions'),
-        minLength: 2,
       });
     });
 
@@ -32,23 +33,28 @@ window.AutocompleteView = Backbone.View.extend({
   },
 
   events: {
-    'keyup' : 'journeyClickHandler',
+
+    'keydown' : 'keyDownClickHandler',
+    'autocompleteselect': function(event, ui) {
+      this.journeySelected = ui.item.value;
+    }
   },
 
 
-  journeyClickHandler: function(e) {
+  keyDownClickHandler: function(e) {
 
     // checks if key pressed is enter key
     var isEnterKey = (e.which === 13);
 
     // if it's the enter key
     if(isEnterKey) {
+      e.preventDefault();
       // get the value of the input field
-      var journeyEntered = this.$el.val();
+      var journeySelected = this.$el.val() || this.journeySelected;
       // grab the model from the positions collection where the position name matches with the entered position. This returns an array
-      var journey = this.model.get('positionsCollection').where({position_name: journeyEntered});
+      var journey = this.model.get('positionsCollection').where({position_name: journeySelected});
       // call 'goToJourney', which lives on the position model, and pass in the journeyEntered
-      journey[0].goToJourney(journeyEntered);
+      journey[0].goToJourney(journeySelected);
       //clears input field after a search
       this.$el.val('');
     }
