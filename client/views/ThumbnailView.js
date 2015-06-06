@@ -1,0 +1,38 @@
+window.ThumbnailView = Backbone.View.extend({
+
+    tagName: "li",
+    model: ThumbnailModel,
+    className: 'thumbnail',
+
+    initialize: function() {
+
+    	console.log("thumbnailview initialized");
+
+        this.render();
+    },
+
+        render: function() {
+
+        console.log("thumbnailview render function called");
+
+        console.log("this.model", this.model);
+        console.log("this.model.name", this.model.name);
+        var name = this.model.get('name');
+        var id = this.model.get('id');
+        var picURL = this.model.get('picURL');
+
+        //append DOM elements to the $el property
+
+        return this.$el.append('<img src="' + picURL + '">' + '<div class="profileInfo">' + '<h1>' + name + '</h1>' + '<h2>Software engineer at Cloudera</h2>' + '</div>');
+
+
+        //return the el property (no $)
+
+
+
+    }
+
+
+
+
+});

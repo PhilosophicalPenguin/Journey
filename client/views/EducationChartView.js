@@ -1,5 +1,6 @@
 window.EducationChartView = Backbone.View.extend({
   initialize: function () {
+
     this.render();
   },
 
@@ -29,6 +30,7 @@ window.EducationChartView = Backbone.View.extend({
 
     educationData.sort(function(a,b) { return a[1] < b[1]; });
     educationData = educationData.splice(0,10);
+
 
     var chart = {
       chart: {

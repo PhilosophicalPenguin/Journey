@@ -4,6 +4,7 @@ var EducationView = Backbone.View.extend({
     className : 'EducationView',
 
     initialize : function () {
+
         this.render();
     },
 

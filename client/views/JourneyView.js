@@ -4,11 +4,21 @@ window.JourneyView = Backbone.View.extend({
 	className: 'JourneyView',
 
   initialize: function () {
-    console.log('this model from journeyview', this.model);
+
+
+    var context = this;
+    this.model.on('createThumbnails', function(){
+      context.drawThumbnails(arguments);
+    });
+
+
     this.render();
   },
 
   render: function () {
+
+
+
     this.$el.children().detach();
 
     new NavBarView();
@@ -23,6 +33,28 @@ window.JourneyView = Backbone.View.extend({
     this.$el.find('.innerJourney').append('<div id="skillsDiv"></div>');
     var newSkillsView = new SkillsView({model: this.model});
     // this.$el.find('.row').append('<div class="col-md-4"><div class="sectionTitles"><h2>Software Engineers with</h2><h1>MA Computer Science degrees</h1></div></div>');
+
+
+
+   // this.$el.append(['<th>For the position</th>' + this.model.get('position_name')]);
+  },
+
+  drawThumbnails: function(peopleToDraw){
+
+    console.log("drawThumbnails being called!!! arguments:", arguments);
+    console.log("drawThumbnails in JourneyView called with these people to draw: ", peopleToDraw);
+
+    var testPerson = peopleToDraw[0][1];
+
+    console.log("testPerson", testPerson);
+
+    var newThumbnailModelTest = new ThumbnailModel(testPerson);
+
+    console.log("newThumbnailModelTest", newThumbnailModelTest);
+
+    var newThumbnailViewTest = new ThumbnailView({model: newThumbnailModelTest});
+    this.$el.append(newThumbnailViewTest.el);
+
 
   }
 
