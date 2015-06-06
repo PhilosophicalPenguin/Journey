@@ -126,5 +126,4 @@ window.PositionsStatsChartView = Backbone.View.extend({
 
         this.$el.highcharts(chart);
     },
-
 });

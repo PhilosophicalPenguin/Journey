@@ -150,6 +150,10 @@ button:focus, .btn:focus {outline:0;}
   height: 600px;
 }
 
+#experienceStatsDiv {
+  height: 600px;
+}
+
 table, th, td {
   font: Helvetica;
   font-size: 20px;
