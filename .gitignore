@@ -16,5 +16,3 @@ logs
 
 #compiled dirs
 build/
-
-test*.js

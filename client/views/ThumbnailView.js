@@ -2,11 +2,9 @@ window.ThumbnailView = Backbone.View.extend({
 
     tagName: "li",
     model: ThumbnailModel,
-    className: 'thumbnail',
+    className: 'profileThumb',
 
     initialize: function() {
-
-    	console.log("thumbnailview initialized");
 
         this.render();
     },
@@ -17,14 +15,11 @@ window.ThumbnailView = Backbone.View.extend({
 
         render: function() {
 
-        console.log("thumbnailview render function called");
-
-        console.log("this.model", this.model);
-        console.log("this.model.name", this.model.name);
         var name = this.model.get('name');
         var id = this.model.get('id');
         var picURL = this.model.get('picURL');
         var headline = this.model.get('headline');
+
 
 
         //append DOM elements to the $el property
@@ -40,8 +35,6 @@ window.ThumbnailView = Backbone.View.extend({
 
     sendToProfile: function(){
 
-    	console.log("sendToProfile called");
-    	console.log("this.id", this.id);
     	clientRouter.navigate("profile/" + this.model.get('id')  , true );
 
     }

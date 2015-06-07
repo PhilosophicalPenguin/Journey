@@ -13,7 +13,6 @@ window.AppView = Backbone.View.extend({
 		// 	});
 
 		// this.render();
-		console.log('inside app view');
 
 		this.discoverPathsView = new DiscoverPathsView({collection: this.model.get('discoverPathsCollection')});
 		this.autocompleteView = new AutocompleteView({model: this.model});

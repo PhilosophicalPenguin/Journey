@@ -29,27 +29,33 @@ module.exports = {
     // Inserts results of query to resultProfile object
 
     var getProfileDetails = function(getProfileDetailsCB) {
-      db.knex.from('profiles')
-        .innerJoin('positions', 'profiles.currentPosition_id', 'positions.id')
-        .innerJoin('industries', 'profiles.industry_id', 'industries.id')
-        .innerJoin('companies', 'profiles.currentCompany_id', 'companies.id')
-        .where('profiles.id', profileID)
-        .then(function(profile) {
+
+      new Profile({'id': profileID}).fetch({
+        withRelated: ['currentPosition', 'currentCompany', 'industry']
+      })
+      .then(function(profile) {
+
+        var attributes  =   profile.attributes;
+        var relations   =   profile.relations;
+
+        if(attributes.picURL === null) {
+          attributes.picURL = 'http://bridgesprep.org/wp-content/uploads/2013/10/Facebook-no-profile-picture-icon-620x389.jpg';
+        }
+
+        resultProfile.id                =     attributes.id;
+        resultProfile.name              =     attributes.profile_name;
+        resultProfile.linkedin          =     attributes.profileURL;
+        resultProfile.pic               =     attributes.picURL;
+        resultProfile.location          =     attributes.currentLocation;
+        resultProfile.headline          =     attributes.headline;
+        resultProfile.currentCompany    =     relations.currentCompany.attributes.company_name;
+        resultProfile.currentPosition   =     relations.currentPosition.attributes.position_name;
+        resultProfile.industry          =     relations.industry.attributes.industry_name;
           
-            resultProfile.id                =     profile[0].id;
-            resultProfile.name              =     profile[0].profile_name;
-            resultProfile.linkedin          =     profile[0].profileURL;
-            resultProfile.pic               =     profile[0].picURL;
-            resultProfile.location          =     profile[0].currentLocation;
-            resultProfile.currentCompany    =     profile[0].company_name;
-            resultProfile.currentPosition   =     profile[0].position_name;
-            resultProfile.industry          =     profile[0].industry_name;
-            resultProfile.headline          =     profile[0].headline;
-          
-        })
-        .then(function() {
-          getProfileDetailsCB();
-        });
+      })
+      .then(function() {
+        getProfileDetailsCB();
+      });
     };
 
     // Gets all relevant degrees for profile

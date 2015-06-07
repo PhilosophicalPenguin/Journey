@@ -15,7 +15,7 @@ var ExperienceView = Backbone.View.extend({
 
     render : function () {
         this.$el.append('<h3>Experience</h3>');
-        this.$el.append('<div id="experienceStatsDiv"></div>');
+        this.$el.append('<div id="experienceStatsDiv" class="chartLarge"></div>');
 
         var statsView = new PositionsStatsChartView({
             el: '#experienceStatsDiv',

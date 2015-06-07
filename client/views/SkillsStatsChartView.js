@@ -14,11 +14,11 @@ window.SkillsStatsChartView = Backbone.View.extend({
     var skillsNames = [];
     var skillsPercentages = [];
 
-    for (var key in this.model) {
+    for (var key in this.model.get('info').skills) {
 
       if (key !== 'total') {
 
-        skills.push([key, this.model[key].length]);
+        skills.push([key, this.model.get('info').skills[key].length]);
 
       }
 
@@ -28,7 +28,29 @@ window.SkillsStatsChartView = Backbone.View.extend({
       return b[1] - a[1];
     });
 
-    skills = skills.splice(0, 9);
+    skills = skills.splice(0, 10);
+
+    function shuffle(array) {
+      var currentIndex = array.length,
+          temporaryValue, randomIndex;
+
+      // While there remain elements to shuffle...
+      while (0 !== currentIndex) {
+
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+      }
+      return array;
+    }
+
+    skills = shuffle(skills);
+
     skillsNames = skills.map(function(skillCombo) {
       return skillCombo[0];
     });
@@ -37,19 +59,13 @@ window.SkillsStatsChartView = Backbone.View.extend({
     });
 
     var previousPoint = null;
-
+    var context = this;
     var skillsChart = {
       chart: {
         renderTo: this.$el,
         type: 'bar',
+        polar: true,
         marginLeft: 150,
-        options3d: {
-          enabled: false,
-          alpha: 15,
-          beta: 15,
-          depth: 50,
-          viewDistance: 25
-        }
       },
       tooltip: {
         pointFormat: "{point.y:.2f}%"
@@ -64,7 +80,7 @@ window.SkillsStatsChartView = Backbone.View.extend({
       },
       yAxis: {
         min: 0,
-        max: 75,
+        max: 20,
         lineWidth: 0,
         minorGridLineWidth: 0,
         gridLineWidth: 0,
@@ -86,7 +102,8 @@ window.SkillsStatsChartView = Backbone.View.extend({
           point: {
             events: {
               click: function(event) {
-                console.log(this);
+                context.model.set('positionFilter', this.category);
+                context.model.createNewThumbnails(context.model.get('info').skills[this.category].slice(0, 10));
                 if (previousPoint) {
                   previousPoint.update({
                     color: '#7cb5ec'
@@ -113,11 +130,6 @@ window.SkillsStatsChartView = Backbone.View.extend({
 
     this.$el.highcharts(skillsChart);
 
-
-
-
   }
-
-
 
 });

@@ -23,8 +23,7 @@ var jsSrcFiles = [
     './client/views/NavBarView.js',
     './client/views/ThumbnailView.js',
     './client/views/ThumbnailsCollectionView.js',
-
-
+    
     './client/models/TimelineItemModel.js',
     './client/collections/TimelineItemsCollection.js',
 

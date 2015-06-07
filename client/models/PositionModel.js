@@ -12,13 +12,7 @@ window.PositionModel = Backbone.Model.extend({
 
     },
 
-
-    testFunction: function(){
-        console.log("this is a test");
-    },
-
     createNewThumbnails: function(thumbnailsToCreate) {
-        console.log("createNewThumbnails being called in PositionModel with args:", thumbnailsToCreate);
         this.trigger('createThumbnails', thumbnailsToCreate);
     },
 
@@ -30,8 +24,6 @@ window.PositionModel = Backbone.Model.extend({
         this.set('info', response);
 
         clientRouter.viewJourney(this);
-
-        // clientRouter.navigate("/viewJourney/" + 13  , true )
 
         return response;
     }

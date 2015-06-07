@@ -124,6 +124,9 @@ module.exports = {
                 picURL:   object.picURL,
                 headline: object.headline
               }
+              if(profile.picURL === null) {
+                profile.picURL = 'http://bridgesprep.org/wp-content/uploads/2013/10/Facebook-no-profile-picture-icon-620x389.jpg';
+              }
               var val = object[property];
               result[subject][val] = result[subject][val] || [];
               result[subject][val].push(profile);
@@ -158,6 +161,10 @@ module.exports = {
                     name:     object.profile_name,
                     picURL:   object.picURL,
                     headline: object.headline
+                  }
+
+                  if(profile.picURL === null) {
+                    profile.picURL = 'http://bridgesprep.org/wp-content/uploads/2013/10/Facebook-no-profile-picture-icon-620x389.jpg';
                   }
 
                   result.degreesAndFields[val] = result.degreesAndFields[val] || [];

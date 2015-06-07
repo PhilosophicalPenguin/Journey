@@ -7,7 +7,6 @@ body {
   color: #333;
   background: none;
 }
-
 .navbar {
   background-color: #002B5E;
   padding: 15px 0;
@@ -18,10 +17,17 @@ body {
   text-decoration: none;
 }
 .navbar-header h1 {
-  font-size: 2.9em;
+  font-size: 3em;
   margin: 0;
-  font-family: "Galdeano", sans-serif;
+  font-family: 'Expletus Sans', cursive;
+  margin-top: 5px;
 }
+.navbar-form {
+  float: right;
+  margin: 0;
+  padding: 0;
+}
+
 
 .splashBack{
   background: url(../assets/bg-darkblue.jpg) no-repeat center center fixed;
@@ -35,10 +41,11 @@ body {
   color: white;
   text-align: center; }
   .splashPage h1 {
-    font-family: "Droid Serif", sans-serif;
+    font-family: 'Expletus Sans', cursive;
     font-weight: 400;
     font-size: 12em;
-    color: rgb(255, 172, 23);}
+    color: #EAD121;
+    }
   .splashPage h2 {
     font-size: 2em;
     text-align: center;
@@ -65,10 +72,15 @@ body {
     margin-bottom: 30px; }
 
 
-
 /* JOURNEY VIEW */
 .journeyView {
   color: #002B5E;
+  margin-top: 90px;
+  margin-bottom: 55px;
+}
+.journeyView h3 {
+  font-size: 1.8em;
+  font-weight: 600;
 }
 .sectionTitles {
   border-bottom: 1px solid #002B5E;
@@ -85,12 +97,8 @@ body {
 .sectionTitles h1, .sectionTitles h2 {
   margin: 0;
 }
-.journeyView {
-  margin-bottom: 150px;
-}
-.journeyView h3 {
-  font-size: 1.8em;
-  font-weight: 600;
+.offsetSectionTitles {
+  height: 60px;
 }
 
 .onePath {
@@ -122,8 +130,10 @@ body {
   .onePath h3:hover {
     cursor: pointer; }
 
-
-#experienceStatsDiv {
+.chart {
+  height: 450px;
+}
+.chartLarge {
   height: 600px;
 }
 
@@ -140,12 +150,6 @@ table {
 th {
   height: 100px;
 }
-
-.navbar-form {
-  float: right;
-  margin: 0;
-}
-
 
 /*homepage autocomplete dropdown*/
 .ui-autocomplete {
@@ -182,11 +186,11 @@ th {
   border-radius: 5px;
   border: 1px solid white;
   height: 40px;
-  width: 300px;
+  width: 280px;
   font-size:14px;
   background-color: #003778;
   color: white;
-  padding-left: 10px;
+  padding-left: 15px;
   z-index: 10;
 }
 
@@ -199,6 +203,40 @@ th {
   display: none;
   position: absolute;
   left:-999em;
+}
+
+.profiles {
+  padding: 0;
+  margin-top: 20px;
+  list-style: none;
+}
+
+.profiles li {
+  height: 60px;
+  margin-bottom: 15px;
+}
+
+.profiles li img {
+  cursor: pointer;
+  width: 60px;
+  border-radius: 3px;
+  float: left;
+}
+.profileInfo {
+  display: inline-block;
+  margin-left: 10px;
+  width: 192px;
+}
+.profileInfo h1, .profileInfo h2 {
+  font-size: 1.5em;
+  margin: 0;
+}
+.profileInfo h1 {
+  font-weight: 600;
+}
+.profileInfo h1:hover {
+  cursor: pointer;
+  color: #004EAB;;
 }
 
 #profile-card {
@@ -216,5 +254,23 @@ th {
   background-color: white;
 }
 
+.hideCol {
+  display: none;
+}
+
+.offsetHeader {
+  position: absolute;
+  top: 15px;
+}
+
+.rightCol {
+  top: 90px;
+  bottom: 0;
+  position: fixed;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  right: 115px;
+  width: 370px;
+}
 
 /*# sourceMappingURL=main.css.map */
