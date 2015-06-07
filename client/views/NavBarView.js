@@ -8,7 +8,7 @@ var NavBarView = Backbone.View.extend({
   render : function() {
     this.$el.children().detach();
 
-      this.$el.append('<header class="navbar navbar-static-top" role="navigation">' +
+      this.$el.append('<header class="navbar navbar-fixed-top" role="navigation">' +
         '<div class="container">' +
           '<div class="navbar-header">' +
             '<a href="/"><h1>Journey</h1></a>' +

@@ -7,7 +7,6 @@ body {
   color: #333;
   background: none;
 }
-
 .navbar {
   background-color: #002B5E;
   padding: 15px 0;
@@ -22,6 +21,12 @@ body {
   margin: 0;
   font-family: "Galdeano", sans-serif;
 }
+.navbar-form {
+  float: right;
+  margin: 0;
+  padding: 0;
+}
+
 
 .splashBack{
   background: url(../assets/bg-darkblue.jpg) no-repeat center center fixed;
@@ -65,11 +70,11 @@ body {
     margin-bottom: 30px; }
 
 
-
 /* JOURNEY VIEW */
 .journeyView {
   color: #002B5E;
-  margin-bottom: 80px;
+  margin-top: 90px;
+  margin-bottom: 90px;
 }
 .journeyView h3 {
   font-size: 1.8em;
@@ -78,7 +83,6 @@ body {
 .sectionTitles {
   border-bottom: 1px solid #002B5E;
   padding-bottom: 15px;
-  height: 60px;
 }
 .sectionTitles h1 {
   font-size: 2.3em;
@@ -90,6 +94,9 @@ body {
 }
 .sectionTitles h1, .sectionTitles h2 {
   margin: 0;
+}
+.offsetSectionTitles {
+  height: 60px;
 }
 
 .onePath {
@@ -141,12 +148,6 @@ table {
 th {
   height: 100px;
 }
-
-.navbar-form {
-  float: right;
-  margin: 0;
-}
-
 
 /*homepage autocomplete dropdown*/
 .ui-autocomplete {
@@ -255,10 +256,19 @@ th {
   display: none;
 }
 
-.featuredHeader {
+.offsetHeader {
   position: absolute;
   top: 15px;
 }
 
+.rightCol {
+  top: 90px;
+  bottom: 0;
+  position: fixed;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  right: 115px;
+  width: 370px;
+}
 
 /*# sourceMappingURL=main.css.map */
