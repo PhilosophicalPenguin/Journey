@@ -24,7 +24,7 @@ window.JourneyView = Backbone.View.extend({
     new NavBarView();
     new AutocompleteView ({model: app});
 
-    this.$el.append('<div class="container journeyView"><div class="row"><div class="col-md-12 innerJourney"></div></div></div>');
+    this.$el.append('<div class="container journeyView"><div class="row"><div class="col-md-9 innerJourney"></div></div></div>');
     this.$el.find('.innerJourney').append('<div class="sectionTitles"><h2>Destination:</h2><h1>' + this.model.get('position_name') + '</h1></div>');
     this.$el.find('.innerJourney').append('<div id="educationDiv"></div>');
     var newEducationView = new EducationView({model : this.model });
@@ -32,7 +32,23 @@ window.JourneyView = Backbone.View.extend({
     var newExperienceView = new ExperienceView({model : this.model });
     this.$el.find('.innerJourney').append('<div id="skillsDiv"></div>');
     var newSkillsView = new SkillsView({model: this.model});
-    // this.$el.find('.row').append('<div class="col-md-4"><div class="sectionTitles"><h2>Software Engineers with</h2><h1>MA Computer Science degrees</h1></div></div>');
+    this.$el.find('.row').append(
+      '<div class="col-md-3">' + 
+        '<div class="sectionTitles">' + 
+          '<h2>Software Engineers with</h2>' +
+          '<h1>MA Computer Science</h1>' +
+        '</div>' +
+        '<ul class="profiles">' +
+          '<li>' +
+            '<img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/5/005/079/14f/0b66594.jpg">' +
+            '<div class="profileInfo">' +
+              '<h1>Henry Robinson</h1>' +
+              '<h2>Software engineer at Cloudera</h2>' +
+            '</div>' +
+          '</li>' +
+        '</ul>' +
+      '</div>'
+    );
 
 
 

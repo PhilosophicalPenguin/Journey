@@ -69,6 +69,11 @@ body {
 /* JOURNEY VIEW */
 .journeyView {
   color: #002B5E;
+  margin-bottom: 80px;
+}
+.journeyView h3 {
+  font-size: 1.8em;
+  font-weight: 600;
 }
 .sectionTitles {
   border-bottom: 1px solid #002B5E;
@@ -84,13 +89,6 @@ body {
 }
 .sectionTitles h1, .sectionTitles h2 {
   margin: 0;
-}
-.journeyView {
-  margin-bottom: 150px;
-}
-.journeyView h3 {
-  font-size: 1.8em;
-  font-weight: 600;
 }
 
 .onePath {
@@ -122,8 +120,10 @@ body {
   .onePath h3:hover {
     cursor: pointer; }
 
-
-#experienceStatsDiv {
+.chart {
+  height: 450px;
+}
+.chartLarge {
   height: 600px;
 }
 
@@ -199,6 +199,34 @@ th {
   display: none;
   position: absolute;
   left:-999em;
+
+.profiles {
+  padding: 0;
+  margin-top: 20px;
+  list-style: none;
+}
+
+.profiles li img {
+  cursor: pointer;
+  width: 60px;
+  border-radius: 3px;
+  float: left;
+}
+.profileInfo {
+  display: inline-block;
+  margin-left: 10px;
+  width: 192px;
+}
+.profileInfo h1, .profileInfo h2 {
+  font-size: 1.5em;
+  margin: 0;
+}
+.profileInfo h1 {
+  font-weight: 600;
+}
+.profileInfo h1:hover {
+  cursor: pointer;
+  color: #004EAB;;
 }
 
 #profile-card {

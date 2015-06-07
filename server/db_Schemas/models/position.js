@@ -8,7 +8,7 @@ var Position = db.Model.extend({
   tableName: 'positions',
   hasTimestamps: true,
   profiles: function() {
-    return this.belongsToMany('Profile');
+    return this.hasMany('Profile', 'currentPosition');
   },
   expMilestone: function() {
     return this.hasMany('ExpMilestone', 'position_id');

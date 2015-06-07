@@ -10,7 +10,7 @@ var EducationView = Backbone.View.extend({
 
     render : function () {
         this.$el.append('<h3>Education</h3>');
-        this.$el.append('<div id="educationStatsDiv"></div>');
+        this.$el.append('<div id="educationStatsDiv" class="chart"></div>');
         var statsView_ = new EducationChartView({ el: '#educationStatsDiv', model : this.model.get('info').degreesAndFields });
     }
 });
