@@ -18,11 +18,11 @@ var TimelineView = Backbone.View.extend({
         var experiences = this.model.get('experiences');
         //iterate over experience creating timeline item models
         for(var j = 0; j < experiences.length; ++j) {
+            //use method to massage data into timeline item model
             tl_Items.push( experienceToTimelineItemModel(experiences[j]) );
         }
-        //use method to massage data into timeline item model
-        //sort the collection of time line model base by start date
 
+        //sort the collection of time line models base by start date
         tl_Items.sort(function(a,b) { return b.dates.start - a.dates.start; });
         this.timelineItems.add(tl_Items);
         this.render();
@@ -31,6 +31,8 @@ var TimelineView = Backbone.View.extend({
     render : function() {
         this.$el.children().detach(); // clear the div of a previous elements
         this.$el.append('<h1>Timeline</h1>');
+        d3.select(el).append('svg')
+                    .classed('timeline-svg', true);
         //create the list to contain the time line items
         this.$el.append('<ul class="timelineList"></ul>');
 

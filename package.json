@@ -43,6 +43,7 @@
     "bower": "0.6.x",
     "connect-busboy": "0.0.2",
     "connect-multiparty": "^1.2.5",
+    "d3": "^3.5.5",
     "express": "^4.12.4",
     "jade": "^1.10.0",
     "knex": "^0.8.6",
