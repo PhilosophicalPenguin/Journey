@@ -27,12 +27,12 @@ window.ClientRouter = Backbone.Router.extend({
         });
     },
 
-    viewProfile: function(id) {
-        // console.log('hello woo!');
+    viewProfile : function(id) {
         var profileModel = new ProfileModel(id);
-        $('#mainContent').empty();
-        var profile = new ProfileView({
-            model: profileModel
+
+        this.listenTo(profileModel, 'RecievedData', function() {
+            $('#mainContent').empty();
+            var profileView = new ProfileView( { model : profileModel } );
         });
     }
 });

@@ -12,7 +12,6 @@ window.AutocompleteView = Backbone.View.extend({
       source: this.model.get('availablePositions'),
     });
 
-
     // wait until positions received from the server
     this.listenTo(this.model, 'positionsReceived', function() {
 

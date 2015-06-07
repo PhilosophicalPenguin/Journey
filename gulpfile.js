@@ -25,6 +25,9 @@ var jsSrcFiles = [
     './client/views/ThumbnailsCollectionView.js',
 
 
+    './client/models/TimelineItemModel.js',
+    './client/collections/TimelineItemsCollection.js',
+
     './client/views/DiscoverPathsView.js',
     './client/views/PositionsCollectionView.js',
     './client/views/PositionView.js',
@@ -38,6 +41,8 @@ var jsSrcFiles = [
     './client/views/SkillsView.js',
     './client/views/JourneyView.js',
 
+    './client/views/TimeBlockView.js',
+    './client/views/TimelineView.js',
     './client/views/ProfileCardView.js',
     './client/views/ProfileView.js',
 
