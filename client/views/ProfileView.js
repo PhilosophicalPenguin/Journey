@@ -13,6 +13,6 @@ var ProfileView = Backbone.View.extend({
         this.$el.append('<div id="profile-card"></div>');
         new ProfileCardView( { model : this.model } );
         this.$el.append('<div id="timeline-div"></div>');
-        this.$el.append(new TimelineView().render());
+        new TimelineView( { model : this.model } );
     }
 });

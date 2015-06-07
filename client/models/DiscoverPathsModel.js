@@ -22,7 +22,6 @@ window.DiscoverPathsModel = Backbone.Model.extend({
     this.set('info', response);
 
     clientRouter.viewJourney(this);
-    //clientRouter.viewProfile(1);
 
     return response;
   },

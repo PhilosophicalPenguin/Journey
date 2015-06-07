@@ -30,7 +30,7 @@ window.ClientRouter = Backbone.Router.extend({
     viewProfile : function(id) {
         var profileModel = new ProfileModel(id);
 
-        profileModel.on('RecievedData', function() {
+        this.listenTo(profileModel, 'RecievedData', function() {
             $('#mainContent').empty();
             var profileView = new ProfileView( { model : profileModel } );
         });
