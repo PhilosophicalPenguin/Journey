@@ -12,6 +12,7 @@ var ignoreAngular = '!./client/angular/**/*';
 var jsSrcFiles = [
     './client/models/ProfileModel.js',
     './client/models/ThumbnailModel.js',
+    './client/collections/ThumbnailsCollection.js',
 
     './client/models/PositionModel.js',
     './client/collections/PositionsCollection.js',
@@ -21,6 +22,8 @@ var jsSrcFiles = [
     './client/views/AutocompleteView.js',
     './client/views/NavBarView.js',
     './client/views/ThumbnailView.js',
+    './client/views/ThumbnailsCollectionView.js',
+
 
     './client/views/DiscoverPathsView.js',
     './client/views/PositionsCollectionView.js',

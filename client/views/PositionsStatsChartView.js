@@ -145,7 +145,7 @@ window.PositionsStatsChartView = Backbone.View.extend({
                   point: {
                     events: {
                       click: function(event) {
-                        console.log(this);
+                        context.model.createNewThumbnails(context.model.get('info').positions[this.category].slice(0, 10));
                         if (previousPoint) {
                           previousPoint.update({
                             color: '#7cb5ec'

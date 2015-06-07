@@ -44,16 +44,30 @@ window.JourneyView = Backbone.View.extend({
     console.log("drawThumbnails being called!!! arguments:", arguments);
     console.log("drawThumbnails in JourneyView called with these people to draw: ", peopleToDraw);
 
-    var testPerson = peopleToDraw[0][1];
 
-    console.log("testPerson", testPerson);
+    /*TESTS CREATION AND RENDERING OF ONE THUMBNAIL:*/
+    // var testPerson = peopleToDraw[0][1];
 
-    var newThumbnailModelTest = new ThumbnailModel(testPerson);
+    // console.log("testPerson", testPerson);
 
-    console.log("newThumbnailModelTest", newThumbnailModelTest);
+    // var newThumbnailModelTest = new ThumbnailModel(testPerson);
 
-    var newThumbnailViewTest = new ThumbnailView({model: newThumbnailModelTest});
-    this.$el.append(newThumbnailViewTest.el);
+    // console.log("newThumbnailModelTest", newThumbnailModelTest);
+
+    // var newThumbnailViewTest = new ThumbnailView({model: newThumbnailModelTest});
+    // this.$el.append(newThumbnailViewTest.el);
+
+    console.log("PEOPLE TO DRAW[0]: ", peopleToDraw[0]);
+
+    var newThumbnailsCollectionTest = new ThumbnailsCollection(peopleToDraw[0]);
+
+    newThumbnailsCollectionTest.each(function(thumbnail){
+      console.log("thumbnail insance of thumbnail model?:", (thumbnail instanceof ThumbnailModel) );
+    });
+
+    var newThumbnailsCollectionView = new ThumbnailsCollectionView({collection: newThumbnailsCollectionTest});
+
+    this.$el.append(newThumbnailsCollectionView.el);
 
 
   }
