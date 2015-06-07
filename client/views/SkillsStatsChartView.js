@@ -14,11 +14,11 @@ window.SkillsStatsChartView = Backbone.View.extend({
     var skillsNames = [];
     var skillsPercentages = [];
 
-    for (var key in this.model) {
+    for (var key in this.model.get('info').skills) {
 
       if (key !== 'total') {
 
-        skills.push([key, this.model[key].length]);
+        skills.push([key, this.model.get('info').skills[key].length]);
 
       }
 
@@ -59,7 +59,7 @@ window.SkillsStatsChartView = Backbone.View.extend({
     });
 
     var previousPoint = null;
-
+    var context = this;
     var skillsChart = {
       chart: {
         renderTo: this.$el,
@@ -102,6 +102,8 @@ window.SkillsStatsChartView = Backbone.View.extend({
           point: {
             events: {
               click: function(event) {
+                context.model.set('positionFilter', this.category);
+                context.model.createNewThumbnails(context.model.get('info').skills[this.category].slice(0, 10));
                 if (previousPoint) {
                   previousPoint.update({
                     color: '#7cb5ec'

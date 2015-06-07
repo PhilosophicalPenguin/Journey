@@ -78,6 +78,7 @@ body {
 .sectionTitles {
   border-bottom: 1px solid #002B5E;
   padding-bottom: 15px;
+  height: 60px;
 }
 .sectionTitles h1 {
   font-size: 2.3em;
@@ -199,11 +200,17 @@ th {
   display: none;
   position: absolute;
   left:-999em;
+}
 
 .profiles {
   padding: 0;
   margin-top: 20px;
   list-style: none;
+}
+
+.profiles li {
+  height: 60px;
+  margin-bottom: 15px;
 }
 
 .profiles li img {
@@ -242,6 +249,15 @@ th {
   padding: 15px;
   border-radius: 4px;
   background-color: white;
+}
+
+.hideCol {
+  display: none;
+}
+
+.featuredHeader {
+  position: absolute;
+  top: 15px;
 }
 
 

@@ -15,7 +15,6 @@ window.ClientRouter = Backbone.Router.extend({
     },
 
     viewJourney: function(model) {
-        console.log('model passed to viewJourney in client router', model);
 
         // var path = location.pathname;
         //console.log('in viewJourney', id);

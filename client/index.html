@@ -1,119 +1,119 @@
 <!DOCTYPE html>
-
 <html>
+
 <head>
-	<title>Journey</title>
-	<link href='http://fonts.googleapis.com/css?family=Galdeano' rel='stylesheet' type='text/css'>
+  <title>Journey</title>
+  <link href='http://fonts.googleapis.com/css?family=Galdeano' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
   <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css' rel="stylesheet" />
   <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700' rel='stylesheet' type='text/css'>
-	<link href="style.min.css" rel="stylesheet">
-
+  <link href="styles/main.css" rel="stylesheet">
   <!-- COMMENT TO SEE IF IT GOES INTO NEW INDEX -->
-
 </head>
+
 <body id="thewholebody">
-<div id="nav-bar-div-container"></div>
-<div id="mainContent">
-
-  <div class='splashBack'>
-    <div class='splashPage container'>
-      <div class='row splashRow'>
-        <div class='col-md-6 col-md-offset-3'>
-          <h1>Journey</h1>
-          <h2>What position are you considering?</h2>
-          <form>
-            <input id="autocomplete" placeholder='e.g. Software engineer'>
-          </form>
-        </div>
-      </div>
-
-      <div class='row discoverPaths'>
-        <!-- <h2>Find Your Path...</h2> -->
-
-        <div class='col-md-4'>
-          <div class='onePath'>
-            <h3>Entertainment Lawyer</h3>
-            <img src='./assets/entertainment-lawyer.jpg' alt='Entertainment Lawyer'>
+  <div id="nav-bar-div-container"></div>
+  <div id="mainContent">
+    <div class='splashBack'>
+      <div class='splashPage container'>
+        <div class='row splashRow'>
+          <div class='col-md-6 col-md-offset-3'>
+            <h1>Journey</h1>
+            <h2>What position are you considering?</h2>
+            <form>
+              <input id="autocomplete" placeholder='e.g. Software engineer'>
+            </form>
           </div>
         </div>
-
-        <div class='col-md-4'>
-          <div class='onePath'>
-
-            <h3>Product Manager</h3>
-            <img src='./assets/product-manager.jpg' alt='Product Manager'>
+        <div class='row discoverPaths'>
+          <!-- <h2>Find Your Path...</h2> -->
+          <div class='col-md-4'>
+            <div class='onePath'>
+              <h3>Entertainment Lawyer</h3>
+              <img src='./assets/entertainment-lawyer.jpg' alt='Entertainment Lawyer'>
+            </div>
           </div>
-        </div>
-
-        <div class='col-md-4'>
-          <div class='onePath'>
-            <h3>Data Scientist</h3>
-            <img src='./assets/data-scientist.jpg' alt='Data Scientist'>
+          <div class='col-md-4'>
+            <div class='onePath'>
+              <h3>Product Manager</h3>
+              <img src='./assets/product-manager.jpg' alt='Product Manager'>
+            </div>
+          </div>
+          <div class='col-md-4'>
+            <div class='onePath'>
+              <h3>Data Scientist</h3>
+              <img src='./assets/data-scientist.jpg' alt='Data Scientist'>
+            </div>
           </div>
         </div>
       </div>
     </div>
- </div>
-</div>
-
-
-
-	<!-- DEPENDENCIES -->
-	<script src="jquery.min.js"></script>
-	<script src="underscore-min.js"></script>
-	<script src="backbone-min.js"></script>
+  </div>
+  <!-- DEPENDENCIES -->
+  <!-- script src="jquery.min.js"></script>
+  <script src="underscore-min.js"></script>
+  <script src="backbone-min.js"></script>
   <script src="highcharts.js"></script>
   <script src="highcharts-more.js"></script>
   <script src="highcharts-3d.js"></script>
   <script src="modernizr.js"></script>
 
-
-	<!--<script src= "bower_components/jquery/dist/jquery.js"></script>
+  <script src= "bower_components/jquery/dist/jquery.js"></script>
 	<script src= "bower_components/underscore/underscore.js"></script>
 	<script src= "bower_components/backbone/backbone.js"></script>
   <script src= "bower_components/highcharts-release/highcharts.js"></script>
   <script src= "bower_components/highcharts-release/highcharts-3d.js"></script>-->
 
   <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-
+  
   <!-- ALL OUR JS IN ONE FILE -->
-  <script src="all.min.js"></script>
+  <!--script src="all.min.js"></script-->
+  <script src="models/ProfileModel.js"></script>
+  <script src="models/ThumbnailModel.js"></script>
+  <script src="collections/ThumbnailsCollection.js"></script>
+  <script src="models/PositionModel.js"></script>
+  <script src="collections/PositionsCollection.js"></script>
+  <script src="models/DiscoverPathsModel.js"></script>
+  <script src="models/AppModel.js"></script>
+  <script src="views/AutocompleteView.js"></script>
+  <script src="views/NavBarView.js"></script>
+  <script src="views/ThumbnailView.js"></script>
+  <script src="views/ThumbnailsCollectionView.js"></script>
 
-  <!--<script src= "models/PositionModel.js"></script>
-  <script src= "collections/PositionsCollection.js"></script>
-  <script src= "models/DiscoverPathsModel.js"></script>
-  <script src= "models/AppModel.js"></script>
+  <script src="models/TimelineItemModel.js"></script>
+  <script src="collections/TimelineItemsCollection.js"></script>
 
-  <script src= "views/DiscoverPathsView.js"></script>
-  <script src= "views/PositionsCollectionView.js"></script>
-  <script src= "views/PositionView.js"></script>
-  <script src= "views/AppView.js"></script>
-	<script src= "views/JourneyView.js"></script>
-  <script src= "views/PositionsStatsChartView.js"></script>
-	<script src= "views/ExperienceView.js"></script>
-  <script src= "views/EducationChartView.js"></script>
-  <script src= "views/EducationView.js"></script>
-  <script src= "views/JourneyView.js"></script>-->
+  <script src="views/DiscoverPathsView.js"></script>
+  <script src="views/PositionsCollectionView.js"></script>
+  <script src="views/PositionView.js"></script>
+  <script src="views/AppView.js"></script>
+  <script src="views/PositionsStatsChartView.js"></script>
+  <script src="views/ExperienceView.js"></script>
+  <script src="views/EducationChartView.js"></script>
+  <script src="views/EducationView.js"></script>
+  <script src="views/SkillsStatsChartView.js"></script>
+  <script src="views/SkillsView.js"></script>
+  <script src="views/JourneyView.js"></script>
+  <script src="views/ProfileCardView.js"></script>
+  <script src="views/ProfileView.js"></script>
+  
+  <!-- ROUTER -->
+  <script src= "clientRouter.js"></script>
+  
+  <script>
+  $(function() {
 
-
-	<!-- ROUTER>
-	<script src= "clientRouter.js"></script-->
-
-
-	<script>
-  $(function(){
-
-      window.app = new AppModel();
-      window.appView = new AppView({model: app});
-
-      $( ".onePath" ).click(function(e) {
-        appView.discoverPathsView.journeyClickHandler(e);
-      });
-
+    window.app = new AppModel();
+    window.appView = new AppView({
+      model: app
     });
 
-    </script>
+    $(".onePath").click(function(e) {
+      appView.discoverPathsView.journeyClickHandler(e);
+    });
 
+  });
+  </script>
 </body>
+
 </html>
