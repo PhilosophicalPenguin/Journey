@@ -19,6 +19,7 @@ var async = require("async");
 module.exports = {
     parseUploadedData: function(req, res) {
         var data_dump_profiles = JSON.parse(fs.readFileSync(req.files.jsondata.path, "utf8"));
+        res.send("FILE RECEIVED");
 
         async.eachSeries(data_dump_profiles, function(person, callbackNext) {
 
@@ -126,16 +127,18 @@ module.exports = {
             var createProfile = function(createProfileCallback) {
 
 
-                /*NEW WAY, CHECKS FOR DUPES*/
+
+
+                /*NEW WAY, CHECKS FOR DUPES BASED ONLY ON FULL NAME*/
                 Profile.forge({
-                        'profile_name': person.full_name[0],
-                        'profileURL': person.url,
-                        'picURL': person.current_photo_link,
-                        'headline': person.headline[0],
-                        'currentLocation': person.location[0],
-                        'currentPosition_id': obj.positionID,
-                        'industry_id': obj.industryID,
-                        'currentCompany_id': obj.companyID
+                        'profile_name': person.full_name[0]
+                        // 'profileURL': person.url,
+                        // 'picURL': person.current_photo_link,
+                        // 'headline': person.headline[0],
+                        // 'currentLocation': person.location[0],
+                        // 'currentPosition_id': obj.positionID,
+                        // 'industry_id': obj.industryID,
+                        // 'currentCompany_id': obj.companyID
                     })
                     .fetch()
                     .then(function(profile) {
@@ -152,11 +155,17 @@ module.exports = {
                                     'currentCompany_id': obj.companyID
                                 }).save()
                                 .then(function(createdProfile) {
+                                    if(person.full_name[0] === "Marcel Molina"){
+                                        "database found duplicate: FALSE. FAILURE"
+                                    }
                                     obj.profileID = createdProfile.attributes.id;
                                     createdProfile.skills().attach(skills_ids);
                                     createProfileCallback(false);
                                 })
                         } else {
+                            if(person.full_name[0] === "Marcel Molina"){
+                                "database found duplicate: TRUE. SUCCESSFULLY FOUND DUPE"
+                            }
                             obj.profileID = profile.attributes.id;
                             createProfileCallback(false);
                         }

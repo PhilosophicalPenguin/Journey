@@ -6,7 +6,9 @@ window.SkillsStatsChartView = Backbone.View.extend({
 
   render: function() {
 
+
     //this.model: {total: 1832, Ruby on Rails: 28, Pair Programming: 2}
+
 
     var skills = [];
     var skillsNames = [];
@@ -94,6 +96,7 @@ window.SkillsStatsChartView = Backbone.View.extend({
                 this.update({
                   color: '#fe5800'
                 });
+
               }
             } // this.update({ color: '#fe5800' }, true, false);
           }

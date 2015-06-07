@@ -15,6 +15,7 @@ window.AppModel = Backbone.Model.extend ({
 		var entertainmentLawyer = new DiscoverPathsModel ({
   		  position_name: 'Entertainment Lawyer',
   		  position_image: '../assets/entertainment-lawyer.jpg',
+
 		});
 
 		var productManager = new DiscoverPathsModel ({
@@ -41,5 +42,6 @@ window.AppModel = Backbone.Model.extend ({
     this.set('positionsCollection', new PositionsCollection(this.get('data')));
     this.trigger('positionsReceived');
 	},
+
 
 });
