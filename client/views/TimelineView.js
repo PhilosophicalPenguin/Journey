@@ -6,6 +6,20 @@ var TimelineView = Backbone.View.extend({
         this.timelineItems = new TimelineItemsCollection();
         var timelineItems = this.timelineItems;
 
+        this.earliestYear = Infinity;
+        this.mostRecentYear = 2015;
+        var context = this;
+        var checkYears = function(year) {
+            if(year !== 0) {
+                if(year < context.earliestYear || context.earliestYear === 0) {
+                    context.earliestYear = year;
+                }
+                if(year > context.mostRecentYear || context.mostRecentYear === 0) {
+                    context.mostRecentYear = year;
+                }
+            }
+        }
+
         //grab reference to degrees array
         var degrees = this.model.get('degrees');
         var tl_Items = [];
@@ -13,6 +27,7 @@ var TimelineView = Backbone.View.extend({
         for(var i = 0; i < degrees.length; ++i) {
             //use method to massage data into timeline item model
             tl_Items.push( degreeToTimelineItemModel( degrees[i] ) );
+            checkYears(Number(degrees[i].start));
         }
         
         var experiences = this.model.get('experiences');
@@ -20,31 +35,123 @@ var TimelineView = Backbone.View.extend({
         for(var j = 0; j < experiences.length; ++j) {
             //use method to massage data into timeline item model
             tl_Items.push( experienceToTimelineItemModel(experiences[j]) );
+            checkYears(Number(experiences[j ].start));
         }
+
+        this.diffInYears = this.mostRecentYear - this.earliestYear;
 
         //sort the collection of time line models base by start date
         tl_Items.sort(function(a,b) { return b.dates.start - a.dates.start; });
         this.timelineItems.add(tl_Items);
+        
+
         this.render();
+    },
+
+    renderSegment : function (lineFunction, lineSegement, svgContainer) {
+        return svgContainer.append('path')
+                .attr('d', lineFunction(lineSegement))
+                .attr('stroke', 'black')
+                .attr('stroke-width', 6)
+                .attr('fill', 'none');
     },
 
     render : function() {
         this.$el.children().detach(); // clear the div of a previous elements
         this.$el.append('<h1>Timeline</h1>');
-        d3.select(el).append('svg')
-                    .classed('timeline-svg', true);
-        //create the list to contain the time line items
-        this.$el.append('<ul class="timelineList"></ul>');
 
-        var $list = this.$('.timelineList');
+        var width = 1000;
+        var height = 1200;
+        var borderBuffer = 75;
 
+        //create the svg for rendering the timeline too
+        var svgContainer = d3.select(this.el).append('svg')
+                                            .attr('width', width)
+                                            .attr('height', height)
+                                            .classed('timeline-svg', true);
+
+        var midpoint = width / 2;
+        //create the main line segment for the timeline
+        lineData = lineSegement(midpoint, borderBuffer, midpoint, height - borderBuffer);
+
+        //set the iterpolation for creating a line from a set of points
+        var lineFunction = d3.svg.line()
+                                .x(function(d) { return d.x; })
+                                .y(function(d) { return d.y; })
+                                .interpolate("linear");
+
+        var topYStop = Math.floor(borderBuffer / 2);
+        var capArmLength = 75;
+        var topPerpendicular = lineSegement(midpoint - capArmLength, topYStop, midpoint + capArmLength, topYStop);
+        var presentEndOfTimeline = lineSegement(midpoint, topYStop, midpoint, borderBuffer);
+        var pastEndOfTimeline = lineSegement(midpoint, height - borderBuffer,midpoint, height);
+
+        this.renderSegment(lineFunction, topPerpendicular,     svgContainer);
+        this.renderSegment(lineFunction, presentEndOfTimeline, svgContainer);
+        this.renderSegment(lineFunction, lineData,             svgContainer); // render main line segment
+        this.renderSegment(lineFunction, pastEndOfTimeline,    svgContainer).style("stroke-dasharray", ("3, 3")); //dashed line to represent past
+
+        var capYearFontSize = 24;
+          svgContainer
+            .append('text')
+            .attr('x', midpoint - capArmLength / 3)
+            .attr('y', topYStop - capYearFontSize / 2)
+            .text(new Date().getFullYear())
+            .attr('font-family', 'sans-serif')
+            .attr('font-size', capYearFontSize + 'px')
+            .attr('fill', 'black');
+
+        var lineLength = lineData[1].y - lineData[0].y;
+        var branchLength = 75;
+        var context = this;
         //iterate over each timeline item and render it
-        this.timelineItems.forEach(function(timelineItem) {
-            new TimeBlockView( { model : timelineItem, el : $list } );
+        this.timelineItems.forEach(function(timelineItem, index, collection) {
+            var x1 = midpoint; // start of brancg line
+            var x2 = midpoint + branchLength; // end for branch line
+            var left = false;
+
+            var image;
+            var y = lineLength * ((context.diffInYears - (timelineItem.get('dates').start - context.earliestYear)) / context.diffInYears) + borderBuffer;
+            //var y = (lineLength * (index / collection.length)) + borderBuffer;
+            if(timelineItem.get('type') === "Education") // decide which side the branch should go on
+            {
+                image = './assets/education-icon.png'
+                x2 = midpoint - branchLength;
+                left = true;
+            }
+            else {
+                image = './assets/briefcase-icon.png'
+            }
+
+            
+            var lineBranch = lineSegement(x1, y, x2, y);
+            svgContainer.append('path')
+                                    .attr('d', lineFunction(lineBranch))
+                                    .attr('stroke', 'black')
+                                    .attr('stroke-width', 4)
+                                    .attr('fill', 'none');
+
+            var rectX = x2;
+            var options = { 
+                orderPosition  : index,
+                cellX          : rectX, 
+                cellY          : y,
+                font_size      : '12px',
+                leftOfTimeline : left
+            };
+
+            var imgs = svgContainer.append('image')
+                .attr('xlink:href', image)
+                .attr("x", midpoint - 16)
+                .attr("y", y - 16)
+                .attr("width", "32")
+                .attr("height", "32");
+
+            //create TimeBlockViews
+            new TimeBlockView( { model : timelineItem, el : svgContainer.node() }, options );
         });
 
 
-        //create TimeBlockViews
         return this.el;
     }
 });
@@ -79,3 +186,12 @@ var experienceToTimelineItemModel = function (expMilestone) {
     return obj;
 };
 
+var point = function(x,y) {
+    return { 'x' : x, 'y': y};
+}
+
+var lineSegement = function (x1,y1,x2,y2) {
+    return [point(x1,y1), point(x2,y2)];
+}
+
+//160

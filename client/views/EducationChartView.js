@@ -61,7 +61,7 @@ window.EducationChartView = Backbone.View.extend({
               click: function(event) {
                 console.log('this from edu', this);
                 context.model.set('positionFilter', this.name);
-                context.model.createNewThumbnails(context.model.get('degreesAndFields')[this.name.replace(" in ", "_")].slice(0, 10))
+                context.model.createNewThumbnails(context.model.get('degreesAndFields')[this.name.replace(" in ", "_")].slice(0, 10));
               }
             }
           },

@@ -273,4 +273,9 @@ th {
   width: 370px;
 }
 
+.timeline-svg {
+  left : 10%;
+  position : relative;
+}
+
 /*# sourceMappingURL=main.css.map */
