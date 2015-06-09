@@ -26,7 +26,7 @@ window.JourneyView = Backbone.View.extend({
     console.log('in the journey heres the model', this.model);
 
     this.$el.append('<div class="container journeyView"><div class="row"><div class="col-md-8 innerJourney"></div></div></div>');
-    this.$el.find('.innerJourney').append('<div class="sectionTitles"><h2>Destination:</h2><h1>' + this.model.get('position_name') + '</h1></div>');
+    this.$el.find('.innerJourney').append('<div class="sectionTitles"><h2>Destination:</h2><h1>' + this.model.get('position_name') + '</h1><button class="btn btn-default">Get me there!</button></div>');
     this.$el.find('.innerJourney').append('<div id="educationDiv"></div>');
     var newEducationView = new EducationView({model : this.model });
     this.$el.find('.innerJourney').append('<div id="experienceDiv"></div>');

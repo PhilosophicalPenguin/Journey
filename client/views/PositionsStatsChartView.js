@@ -1,15 +1,9 @@
 window.PositionsStatsChartView = Backbone.View.extend({
 
-
-
     model: PositionModel,
 
     initialize: function() {
-
-
-        this.render();
-
-
+      this.render();
     },
 
 
@@ -18,6 +12,7 @@ window.PositionsStatsChartView = Backbone.View.extend({
         var names = []; //an array of tuples
         var percentages = [];
 
+        console.log('this model', this.model);
 
         //reduce total # you divde by since you're excluding Software Engineers
         for (var key in this.model.get('positions')) {
