@@ -223,11 +223,17 @@ th {
   outline: none;
 }
 
+.ui-state-focus {
+  background:#E9E9E9;
+  outline:none;
+}
+
 .ui-helper-hidden-accessible {
   display: none;
   position: absolute;
   left:-999em;
 }
+
 .profiles {
   padding: 0;
   margin-top: 20px;
@@ -302,15 +308,15 @@ th {
 }
 
 :-moz-placeholder { /* Firefox 18- */
-   font-weight: normal;  
+   font-weight: normal;
 }
 
 ::-moz-placeholder {  /* Firefox 19+ */
-   font-weight: normal;  
+   font-weight: normal;
 }
 
-:-ms-input-placeholder {  
-   font-weight: normal;  
+:-ms-input-placeholder {
+   font-weight: normal;
 }
 
 .filterField {
@@ -322,7 +328,7 @@ th {
 }
 .showAll {
   background: url(../assets/triangle-down.png) no-repeat;
-  -webkit-background-size: 15px; 
+  -webkit-background-size: 15px;
   -moz-background-size: 15px;
   -o-background-size: 15px;
   background-size: 15px;
@@ -404,7 +410,7 @@ th {
 }
 .filterArrow {
   background: url(../assets/right-arrow.png) no-repeat;
-  -webkit-background-size: 50px; 
+  -webkit-background-size: 50px;
   -moz-background-size: 50px;
   -o-background-size: 50px;
   background-size: 50px;
