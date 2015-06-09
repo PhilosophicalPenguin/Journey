@@ -25,6 +25,7 @@
     "jquery": "~2.1.4",
     "jquery-ui": "~1.11.4",
     "bootstrap": "~3.3.4",
-    "highcharts-release": "~4.1.5"
+    "highcharts-release": "~4.1.5",
+    "d3": "~3.5.5"
   }
 }
