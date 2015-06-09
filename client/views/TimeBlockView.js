@@ -26,6 +26,10 @@ var TimeBlockView = Backbone.View.extend({
     renderCell : function () {
         var x = this.options.cellX;
         var y = this.options.cellY - this.fontSize;
+        var color = 'aliceblue';
+        if(this.model.get('type') === 'Education') {
+            color = 'navajowhite';
+        }
 
         var rect = d3.select(this.el)
                       .append('rect')
@@ -39,7 +43,7 @@ var TimeBlockView = Backbone.View.extend({
                           .classed('timeBlock', true)
                           .attr('stroke', 'black')
                           .attr('stroke-width', 2)
-                          .attr('fill', 'skyblue');
+                          .attr('fill', color);
     },
 
     renderText : function(x, y, text) {
