@@ -88,7 +88,7 @@ module.exports = {
         } else { //found the position requested
           var positionID  =   position.attributes.id;
           var filterID    =   request.query.filter;
-          
+
           // creates object to store stats
           var result = {
             position_name : position.attributes.position_name,
@@ -110,9 +110,54 @@ module.exports = {
             positions: {
               total: 0,
               positionsSummary: {}
+
             },
-            skills: {
-              total: 0
+
+    getAvailablePositions: function(request, response) {
+
+        db.knex.from('profiles')
+            .innerJoin('positions', 'profiles.currentPosition_id', 'positions.id')
+            .then(function(profiles) {
+
+                var positions = {};
+                var positionArray = [];
+
+                forEach(profiles, function(profile) {
+                    var positionID = profile.currentPosition_id,
+                        positionName = profile.position_name
+
+                    // if position is not in object, add it as a key: value --> positionID: positionName
+                    if (!positions[positionID] && positionName != null) {
+                        positions[positionID] = positionName;
+                    }
+
+                });
+
+                for (var key in positions) {
+                    positionArray.push({
+                        "position_id": parseInt(key),
+                        "position_name": positions[key]
+                    });
+                }
+
+                response.json(positionArray);
+
+            });
+    },
+
+    // Returns all positions in database - current and non-current
+    getAllPositions: function(request, response) {
+        new Position().fetchAll().then(function(positions) {
+            if (positions) {
+                var positionArray = [];
+                forEach(positions.models, function(position) {
+                    //pull off id and position_name off each object
+                    positionArray.push({
+                        "position_id": position.attributes.id,
+                        "position_name": position.attributes.position_name
+                    });
+                });
+                response.json(positionArray);
             }
           };
 
@@ -132,11 +177,11 @@ module.exports = {
               result[subject][val] = result[subject][val] || [];
               result[subject][val].push(profile);
               ++result[subject].total;
-              
+
               if(subject === 'positions'){
 
                 var positionID    = object.position_id;
-                var positionName  = object.position_name; 
+                var positionName  = object.position_name;
 
                 result[subject].positionsSummary[positionName] = positionID;
               }
@@ -180,10 +225,10 @@ module.exports = {
                 result.degreesAndFields[val].push(profile);
                 result.degreesAndFields.total++;
               }
-            
+
             forEach(data, tallyDegreeAndField);
             getEducationStatsCB();
-            
+
             });
           };
 
@@ -192,6 +237,7 @@ module.exports = {
             // create a join table to retrieve all experience info of
             // people and their history, who have or had the job specified
             db.knex.from('expMilestones')
+
             .innerJoin('profiles', 'expMilestones.profile_id', 'profiles.id')
             .innerJoin('companies', 'expMilestones.company_id', 'companies.id')
             .innerJoin('positions', 'expMilestones.position_id', 'positions.id')
@@ -207,7 +253,6 @@ module.exports = {
               getExperienceStatsCB();
             });
           };
-
 
           var getSkillStats = function(getSkillStatsCB) {
               // create a join table to retrieve all skill stats
@@ -270,7 +315,7 @@ module.exports = {
         var key           = tempObj[positionID],
             val           = positionID,
             positionToAdd = {};
-        
+
         var newVal = parseInt(val);
         fromPositions[key] = newVal;
       }
@@ -296,7 +341,7 @@ module.exports = {
         positionNames[target + 'ID'] = id;
         callback();
       });
-    } 
+    }
 
     var getFilterProfiles = function(callback) {
       db.knex.from('expMilestones')
@@ -329,10 +374,10 @@ module.exports = {
             }
           }
           else if(!result[profile.profile_id]) {
-            result[profile.profile_id] = filteredProfile; 
+            result[profile.profile_id] = filteredProfile;
           }
         }
-      
+
         for (var key in result) {
           resultArr.push(result[key]);
         }

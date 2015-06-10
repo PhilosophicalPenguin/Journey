@@ -311,12 +311,13 @@ module.exports = {
 
 
         }, function done() {
-          outerCallback(false); // Done with the loop over the education list array          
+          outerCallback(false); // Done with the loop over the education list array
         });
       };
 
       var createExperienceMilestones = function(outerCallback) {
 
+<<<<<<< HEAD
         async.eachSeries(person.past_experience_list, function(expMilestone, nextMilestone) {
 
           var milestone = {
@@ -403,7 +404,7 @@ module.exports = {
           });
 
         }, function done() {
-          outerCallback(false); // Done with the loop over the experience list array          
+          outerCallback(false); // Done with the loop over the experience list array
         });
       };
 
