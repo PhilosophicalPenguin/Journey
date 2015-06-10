@@ -20,16 +20,16 @@ window.PositionsStatsChartView = Backbone.View.extend({
 
 
         //reduce total # you divde by since you're excluding Software Engineers
-        for (var key in this.model.get('info').positions) {
+        for (var key in this.model.get('positions')) {
             if (key === "Software Engineer") {
-                this.model.get('info').positions.total -= this.model.get('info').positions[key].length;
+                this.model.get('positions').total -= this.model.get('positions')[key].length;
             }
         }
 
-        for (var wookey in this.model.get('info').positions) {
+        for (var wookey in this.model.get('positions')) {
             if (wookey !== 'total' && wookey != "Software Engineer") {
                 var item = {};
-                data.push([wookey, (this.model.get('info').positions[wookey].length / this.model.get('info').positions.total) * 100]);
+                data.push([wookey, (this.model.get('positions')[wookey].length / this.model.get('positions').total) * 100]);
             }
         }
 
@@ -105,7 +105,7 @@ window.PositionsStatsChartView = Backbone.View.extend({
                     events: {
                       click: function(event) {
                         context.model.set('positionFilter', this.category);
-                        context.model.createNewThumbnails(context.model.get('info').positions[this.category].slice(0, 10));
+                        context.model.createNewThumbnails(context.model.get('positions')[this.category].slice(0, 10));
                         if (previousPoint) {
                           previousPoint.update({
                             color: '#7cb5ec'

@@ -1,5 +1,4 @@
 window.DiscoverPathsView = Backbone.View.extend({
-
 	tagName: 'div',
 	className: 'col-md-4',
 	template: _.template('<h3 class=onePath><%=position_name%></h3>'),
@@ -14,11 +13,9 @@ window.DiscoverPathsView = Backbone.View.extend({
 
 
   journeyClickHandler: function(e) {
-
-  	var journeyClicked = $(e.target).text() || $(e.target).attr("alt");
-  	var journey = this.collection.where({position_name: journeyClicked });
-
-    journey[0].goToJourney(journeyClicked);
+  	var positionClicked = $(e.target).text() || $(e.target).attr("alt");
+  	var position = this.collection.where( { position_name : positionClicked } )[0];
+    position.viewPosition();
   },
 
 	render: function(){

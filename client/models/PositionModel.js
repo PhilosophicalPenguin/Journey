@@ -1,31 +1,38 @@
-window.PositionModel = Backbone.Model.extend({
+var PositionModel = Backbone.Model.extend({
 
     url: '/api/queryPositions/getStats',
 
-    goToJourney: function(journeyClicked) {
-
-        this.fetch({
-            data: $.param({
-                name: journeyClicked
-            })
-        });
-
+    initialize : function(obj, id) {
+        if(obj) {
+            for(var key in obj) {
+                this.set(key, obj[key]);
+            }
+        } else {
+            this.set('position_id', id);
+        }
     },
 
-    createNewThumbnails: function(thumbnailsToCreate) {
+    createNewThumbnails : function(thumbnailsToCreate) {
         this.trigger('createThumbnails', thumbnailsToCreate);
     },
 
-    parse: function(response) {
+    parse : function(response) {
+        console.log('parsing for the model', response);
+        for(var key in response) {
+            this.set(key, response[key]);
+        }
 
-        this.set('degrees', response.degrees);
-        this.set('fieldsOfStudy', response.fieldsOfStudy);
-        this.set('degreesAndFields', response.degreesAndFields);
-        this.set('info', response);
-
-        clientRouter.viewJourney(this);
+        this.trigger('RecievedStats');
 
         return response;
+    },
+
+    viewPosition : function () {
+        this.trigger('view', this); 
+    },
+
+    retrieveStats : function() {
+        this.fetch( { data : $.param( { id : this.get('position_id') } ) } );
     }
 
 });

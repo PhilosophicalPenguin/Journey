@@ -1,29 +1,29 @@
-window.ClientRouter = Backbone.Router.extend({
+var ClientRouter = Backbone.Router.extend({
 
     routes: {
         '': 'home',
-        'viewJourney': 'viewJourney',
-        // 'viewJourney/:id': 'viewJourney'
-        //'viewJourney/:id': 'viewJourney',
+        'journey/:id': 'viewJourney',
         'profile/:id': 'viewProfile'
     },
 
     home: function() {
-
         // var appView = new AppView();
         // $(".mainContent").html(appView.el);
     },
 
-    viewJourney: function(model) {
+    viewJourney: function(id) {
+        console.log('The id the router is working with');
+        var positionModel = new PositionModel(null, id);
 
-        // var path = location.pathname;
-        //console.log('in viewJourney', id);
-        $("#mainContent").empty();
-
-
-        var journeyView = new JourneyView({
-            model: model
+        this.listenTo(positionModel, 'RecievedStats', function() {
+            console.log('event heard in router',arguments);
+            $("#mainContent").empty();
+            var journeyView = new JourneyView({
+                model: positionModel
+            });
         });
+
+        positionModel.retrieveStats();
     },
 
     viewProfile : function(id) {

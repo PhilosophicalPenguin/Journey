@@ -3,7 +3,6 @@ var ProfileView = Backbone.View.extend({
     model : ProfileModel,
 
     initialize : function() {
-        console.log(this.model);
         this.render();
     },
 
