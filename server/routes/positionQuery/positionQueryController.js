@@ -229,174 +229,30 @@ module.exports = {
                 }).then(function() {
                     console.log('Returning stats for:', request.query.id);
 
-                    //remove duplicates from result.companies
-                    result.companies = _.object(_.map(result.companies, function(val, key) {
-
-                        val = _.uniq(val, false, function(person) {
-                            return JSON.stringify(person)
-                        })
-
+                    function RemoveDuplicates(object) {
+                      return _.object(_.map(object, function(val, key) {
+                        val = _.uniq(val, false, function(item) {
+                            return JSON.stringify(item)
+                        });
                         return [key, val]
-                        
-                    }))
-                    //recalculate new total # of companies
-                    var newCompanyTotal = 0;
+                      }));
+                    };
 
-                    for(var company in result.companies){
-                      if(company!== "total"){
-                        newCompanyTotal += result.companies[company].length
+                    function tally(object) {
+                      object.total = 0;
+                      for(var item in object) {
+                        if(item !== 'total') {
+                          object.total += object[item].length;
+                        }
                       }
-                    }
+                     }
 
-                    result.companies.total = newCompanyTotal;
-
-
-                    //remove duplicates from result.degrees
-                    result.degrees = _.object(_.map(result.degrees, function(val, key) {
-
-                        val = _.uniq(val, false, function(person) {
-                            return JSON.stringify(person)
-                        })
-
-                        return [key, val]
-
-                    }))
-                    //recalculate new total # of degrees
-                    var newDegreeTotal = 0;
-
-                    for(var degree in result.degrees){
-                      if(degree!== "total"){
-                        newDegreeTotal += result.degrees[degree].length
+                     for(var keyR in result) {
+                      if(keyR !== 'position_name') {
+                        result[keyR] = RemoveDuplicates(result[keyR]);
+                        tally(result[keyR]);
                       }
-                    }
-
-                    result.degrees.total = newDegreeTotal;
-
-
-
-                    //remove duplicates from result.degreesAndFields
-                    result.degreesAndFields = _.object(_.map(result.degreesAndFields, function(val, key) {
-
-                        val = _.uniq(val, false, function(person) {
-                            return JSON.stringify(person)
-                        })
-
-                        return [key, val]
-
-                    }))
-                    //recalculate new total # of degreesAndFields
-                    var newDegreeAndFieldTotal = 0;
-
-                    for(var degreeAndField in result.degreesAndFields){
-                      if(degreeAndField!== "total"){
-                        newDegreeAndFieldTotal += result.degreesAndFields[degreeAndField].length
-                      }
-                    }
-
-                    result.degreesAndFields.total = newDegreeAndFieldTotal;
-
-
-
-
-
-                    //remove duplicates from result.fieldsOfStudy
-                    result.fieldsOfStudy = _.object(_.map(result.fieldsOfStudy, function(val, key) {
-
-                        val = _.uniq(val, false, function(person) {
-                            return JSON.stringify(person)
-                        })
-
-                        return [key, val]
-
-                    }))
-                    //recalculate new total # of fieldsOfStudy
-                    var newfieldsOfStudyTotal = 0;
-
-                    for(var fieldOfStudy in result.fieldsOfStudy){
-                      if(fieldOfStudy!== "total"){
-                        newfieldsOfStudyTotal += result.fieldsOfStudy[fieldOfStudy].length
-                      }
-                    }
-
-                    result.fieldsOfStudy.total = newfieldsOfStudyTotal;
-
-
-
-
-
-                    //remove duplicates from result.positions
-                    result.positions = _.object(_.map(result.positions, function(val, key) {
-
-                        val = _.uniq(val, false, function(person) {
-                            return JSON.stringify(person)
-                        })
-
-                        return [key, val]
-
-                    }))
-                    //recalculate new total # of positions
-                    var newpositionsTotal = 0;
-
-                    for(var personPosition in result.positions){
-                      if(personPosition!== "total"){
-                        newpositionsTotal += result.positions[personPosition].length
-                      }
-                    }
-
-                    result.positions.total = newpositionsTotal;
-
-
-                    //remove duplicates from result.schools
-                    result.schools = _.object(_.map(result.schools, function(val, key) {
-
-                        val = _.uniq(val, false, function(person) {
-                            return JSON.stringify(person)
-                        })
-
-                        return [key, val]
-
-                    }))
-                    //recalculate new total # of schools
-                    var newSchoolsTotal = 0;
-
-                    for(var school in result.schools){
-                      if(school!== "total"){
-                        newSchoolsTotal += result.schools[school].length
-                      }
-                    }
-
-                    result.schools.total = newSchoolsTotal;
-
-
-
-
-
-                    //remove duplicates from result.skills
-                    result.skills = _.object(_.map(result.skills, function(val, key) {
-
-                        val = _.uniq(val, false, function(person) {
-                            return JSON.stringify(person)
-                        })
-
-                        return [key, val]
-
-                    }))
-                    //recalculate new total # of skills
-                    var newSkillsTotal = 0;
-
-                    for(var skill in result.skills){
-                      if(skill!== "total"){
-                        newSkillsTotal += result.skills[skill].length
-                      }
-                    }
-
-                    result.skills.total = newSkillsTotal;
-
-
-
-
-
-
+                     }
 
                     response.json(result)
                 });
