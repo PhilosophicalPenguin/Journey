@@ -23,6 +23,8 @@ window.JourneyView = Backbone.View.extend({
     new NavBarView();
     new AutocompleteView ({model: app});
 
+    console.log('in the journey heres the model', this.model);
+
     this.$el.append('<div class="container journeyView"><div class="row"><div class="col-md-8 innerJourney"></div></div></div>');
     this.$el.find('.innerJourney').append('<div class="sectionTitles"><h2>Destination:</h2><h1>' + this.model.get('position_name') + '</h1></div>');
     this.$el.find('.innerJourney').append('<div id="educationDiv"></div>');
@@ -41,7 +43,10 @@ window.JourneyView = Backbone.View.extend({
       '</div>'
     );
 
-    var featuredPeople = [this.model.get('info').positions[this.model.get('position_name')]];
+    var featuredPeople = [this.model.get('positions')[this.model.get('position_name')]];
+    for(var g= 0 ; g < featuredPeople[0].length; ++g) {
+      console.log(featuredPeople[0][g].name);
+    }
     this.drawThumbnails(featuredPeople);
     this.$el.find('.featuredHeader').addClass('offsetSectionTitles');
     this.$el.find('.featuredHeader h1').addClass('offsetHeader');
