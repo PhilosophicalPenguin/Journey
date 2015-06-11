@@ -36,5 +36,4 @@ window.AppModel = Backbone.Model.extend ({
     positionsReceived: function() {
       this.trigger('positionsReceived');
     }
-
 });

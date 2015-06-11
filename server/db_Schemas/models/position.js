@@ -8,12 +8,11 @@ var Position = db.Model.extend({
   tableName: 'positions',
   hasTimestamps: true,
   profiles: function() {
-    return this.hasMany('Profile', 'currentPosition');
+    return this.hasMany('Profile', 'currentPosition_id');
   },
   expMilestone: function() {
-    return this.hasMany('ExpMilestone', 'position_id');
+    return this.hasMany('ExpMilestone');
   }
-
 });
 
 if(addMochData) {

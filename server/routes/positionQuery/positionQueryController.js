@@ -4,6 +4,7 @@ var db = require('../../db_Schemas/config');
 var Promise = require("bluebird");
 var _ = require("underscore");
 
+
 var forEach = function() {
     var list = arguments[0]; //grab the collection
     for (var i = 0; i < list.length; i++) { //iterate over collection
@@ -13,6 +14,7 @@ var forEach = function() {
         }
     }
 };
+
 
 module.exports = {
 
@@ -132,11 +134,10 @@ module.exports = {
               ++result[subject].total;
               
               if(subject === 'positions'){
-                var positionID = object.position_id;
+                var positionID    = object.position_id;
+                var positionName  = object.position_name; 
 
-                // result[subject].positionsSummary = {};
-                result[subject].positionsSummary[positionID] = object.position_name;
-                // console.log('!!!!!!!', result[subject].positionsSummary);
+                result[subject].positionsSummary[positionName] = positionID;
               }
             };
           };
@@ -179,6 +180,7 @@ module.exports = {
                   result.degreesAndFields.total++;
                 }
 
+
                 var getExperienceStats = function(getExperienceStatsCB) {
                     // create a join table to retrieve all experience info of
                     // people and their history, who have or had the job specified
@@ -198,6 +200,7 @@ module.exports = {
                             getExperienceStatsCB();
                         })
                 }
+
 
                 var getSkillStats = function(getSkillStatsCB) {
                     // create a join table to retrieve all skill stats
@@ -257,54 +260,115 @@ module.exports = {
       })
   }, // End of getStatsOnPosition
 
-  getFilterOnPosition: function(request, response) {
-    var positionID  =   request.query.positionID,
-        filterID    =   request.query.filterID;
 
-    db.knex.from('expMilestones')
+  getNavFromPositions: function(request, response) {
+
+  var fromPositions = {};
+
+  db.knex
+    .select('position_id', 'position_name')
+    .from('expMilestones')
     .innerJoin('profiles', 'expMilestones.profile_id', 'profiles.id')
-    .innerJoin('companies', 'expMilestones.company_id', 'companies.id')
-    .innerJoin('positions', 'expMilestones.position_id', 'positions.id')
-    .where({ currentPosition_id: positionID })
-    .andWhere({ position_id: filterID })
+    .innerJoin('positions', 'positions.id', 'expMilestones.position_id')
+    .where({
+      currentPosition_id: request.query.id
+    })
     .then(function(data) {
+      var tempObj = {};
 
-      var result = {};
-
-      for(var i = 0; i < data.length; i++) {
-        var profile = data[i];
-        
-        var filteredProfile = {
-          id:               profile.profile_id,
-          name:             profile.profile_name,
-          picURL:           profile.picURL,
-          headline:         profile.headline,
-          currentPosition:  profile.currentPosition_id,
-          currentCompany:   profile.currentCompany_id,
-          currentLocation:  profile.currentLocation,
-          // currentStart: ,
-          // currentEnd: ,
-          filteredPosition: profile.position_name,
-          filteredCompany:  profile.company_name,
-          filteredStart:    parseInt(profile.start_date),
-          filteredEnd:      parseInt(profile.end_date)
+      data.forEach(function(position) {
+        if (!tempObj.hasOwnProperty(position["position_id"])) {
+          tempObj[position["position_id"]] = position["position_name"]
         }
+      });
 
-        if(result[profile.profile_id]) {
-          if(result[profile.profile_id].filteredEnd < parseInt(profile.end_date)) {
-            result[profile.profile_id] = filteredProfile;
+      for (var positionID in tempObj) {
+        var key           = tempObj[positionID],
+            val           = positionID,
+            positionToAdd = {};
+        
+        var newVal = parseInt(val);
+        fromPositions[key] = newVal;
+      }
+      response.json(fromPositions);
+
+    });
+  },
+
+  getFilterOnPosition: function(request, response) {
+    var toID            =   request.query.toID,
+        fromID          =   request.query.fromID,
+        result          =   {},
+        positionNames   =   {},
+        resultArr       =   [];
+
+    var getPositionName = function (id, target, callback) {
+      Position.forge({
+        'id': id
+      })
+      .fetch()
+      .then(function(position){
+        positionNames[target] = position.attributes.position_name;
+        positionNames[target + 'ID'] = id;
+        callback();
+      });
+    } 
+
+    var getFilterProfiles = function(callback) {
+      db.knex.from('expMilestones')
+      .innerJoin('profiles', 'expMilestones.profile_id', 'profiles.id')
+      .innerJoin('companies', 'expMilestones.company_id', 'companies.id')
+      .innerJoin('positions', 'expMilestones.position_id', 'positions.id')
+      .where({ currentPosition_id: toID })
+      .andWhere({ position_id: fromID })
+      .then(function(data) {
+
+        for(var i = 0; i < data.length; i++) {
+          var profile = data[i];
+          var filteredProfile = {
+            id:                 profile.profile_id,
+            name:               profile.profile_name,
+            picURL:             profile.picURL,
+            headline:           profile.headline,
+            currentPositionID:  profile.currentPosition_id,
+            currentCompany:     profile.currentCompany_id,
+            currentLocation:    profile.currentLocation,
+            // currentStart: ,
+            // currentEnd: ,
+            filteredPosition:   profile.position_name,
+            filteredCompany:    profile.company_name,
+            filteredStart:      parseInt(profile.start_date),
+            filteredEnd:        parseInt(profile.end_date)
+          }
+          if(result[profile.profile_id]) {
+            if(result[profile.profile_id].filteredEnd < parseInt(profile.end_date)) {
+              result[profile.profile_id] = filteredProfile;
+            }
+          }
+          else if(!result[profile.profile_id]) {
+            result[profile.profile_id] = filteredProfile; 
           }
         }
-
-        else if(!result[profile.profile_id]) {
-          result[profile.profile_id] = filteredProfile; 
+      
+        for (var key in result) {
+          resultArr.push(result[key]);
         }
-      }
 
-      console.log('data returned from getFilterOnPosition', result);
-      response.json(result);
+        response.json(resultArr);
+
+      });
+    }
+
+    var getPositionNameAsync = Promise.promisify(getPositionName);
+    var getFilterProfilesAsync = Promise.promisify(getFilterProfiles);
+
+    getPositionNameAsync(toID, 'toPosition').then(function(){
+      return getPositionNameAsync(fromID, 'fromPosition')
+    })
+    .then(function(){
+      resultArr.push(positionNames);
+      getFilterProfilesAsync();
     });
-
   }
 
 }

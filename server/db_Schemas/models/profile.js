@@ -11,13 +11,13 @@ var Profile = db.Model.extend({
   tableName: 'profiles',
   hasTimestamps: true,
   currentPosition: function() {
-    return this.hasOne('Position', 'id');
+    return this.belongsTo('Position', 'currentPosition_id');
   },
   currentCompany: function() {
-    return this.hasOne('Company', 'id')
+    return this.belongsTo('Company', 'currentCompany_id')
   },
   industry: function() {
-    return this.hasOne('Industry', 'id');
+    return this.belongsTo('Industry');
   },
   eduMilestone: function() {
     return this.hasMany('EduMilestone', 'profile_id');

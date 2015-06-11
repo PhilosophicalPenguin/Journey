@@ -34,6 +34,7 @@ module.exports = {
         withRelated: ['currentPosition', 'currentCompany', 'industry']
       })
       .then(function(profile) {
+        console.log('profile!!!', profile.relations);
 
         console.log("SCOTT MYERS LOOKS LIKE : ", profile);
 

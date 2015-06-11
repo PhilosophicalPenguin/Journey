@@ -1,11 +1,21 @@
 var ProfileView = Backbone.View.extend({
-    el : '#mainContent',
-    model : ProfileModel,
+  el: '#mainContent',
+  model: ProfileModel,
 
     initialize : function() {
 
         this.render();
     },
+
+
+      events: {
+        'click .backButton': 'goBack'
+      },
+
+      goBack: function() {
+        console.log('go back called!');
+        window.history.back();
+      },
 
     render : function() {
 
@@ -14,6 +24,7 @@ var ProfileView = Backbone.View.extend({
         this.$el.children().detach();
         this.$el.append(new NavBarView().render());
         this.$el.append('<div id="profile-card"></div>');
+        this.$el.append('<div class="backButton">Back</div>');
         new ProfileCardView( { model : this.model } );
         this.$el.append('<div id="timeline-div"></div>');
         new TimelineView( { model : this.model } );
@@ -57,3 +68,4 @@ var ProfileView = Backbone.View.extend({
 
     }
 });
+

@@ -30,7 +30,7 @@ window.EducationChartView = Backbone.View.extend({
     var context = this;
     var chart = {
       chart: {
-        marginLeft: 50,
+        marginLeft: 10,
         type: 'pie',
         options3d: {
           enabled: false,
@@ -51,8 +51,8 @@ window.EducationChartView = Backbone.View.extend({
       },
       plotOptions: {
         pie: {
-          size: '75%',
-          innerSize: 160,
+          size: '50%',
+          innerSize: 50,
           depth: 45,
           allowPointSelect: true,
           cursor: 'pointer',

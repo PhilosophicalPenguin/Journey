@@ -4,6 +4,7 @@ var ClientRouter = Backbone.Router.extend({
         '': 'home',
         'journey/:id': 'viewJourney',
         'profile/:id': 'viewProfile'
+        'filter/:toID/:fromID': 'viewPaths'
     },
 
     home: function() {
@@ -26,14 +27,25 @@ var ClientRouter = Backbone.Router.extend({
         positionModel.retrieveStats();
     },
 
-    viewProfile : function(id) {
+    viewProfile: function(id) {
         var profileModel = new ProfileModel(id);
 
         this.listenTo(profileModel, 'RecievedData', function() {
             $('#mainContent').empty();
             var profileView = new ProfileView( { model : profileModel } );
         });
+    },
+
+    viewPaths: function(toID, fromID) {
+        var filtersCollection = new FiltersCollection(fromID, toID);
+
+        this.listenTo(filtersCollection, 'RecievedData', function() {
+          $('.innerJourneyContent').empty();
+          var filtersCollectionView = new FiltersCollectionView({ collection: filtersCollection });
+          $('.innerJourneyContent').append(filtersCollectionView.el);
+        });
     }
+
 });
 
 var clientRouter = new ClientRouter();

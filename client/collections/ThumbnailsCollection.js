@@ -4,9 +4,6 @@ var ThumbnailsCollection = Backbone.Collection.extend({
 
 	initialize: function(){
 
-
-	
 	}
-
 
 });

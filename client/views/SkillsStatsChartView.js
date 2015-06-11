@@ -6,10 +6,6 @@ window.SkillsStatsChartView = Backbone.View.extend({
 
   render: function() {
 
-
-    //this.model: {total: 1832, Ruby on Rails: 28, Pair Programming: 2}
-
-
     var skills = [];
     var skillsNames = [];
     var skillsPercentages = [];
@@ -84,7 +80,7 @@ window.SkillsStatsChartView = Backbone.View.extend({
       },
       yAxis: {
         min: 0,
-        max: maxPercentage,
+        max: maxPercentage + 1,
         lineWidth: 0,
         minorGridLineWidth: 0,
         gridLineWidth: 0,
