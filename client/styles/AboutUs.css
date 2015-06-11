@@ -1,0 +1,43 @@
+html{
+
+  background: url(../assets/bg-darkblue.jpg) no-repeat center center fixed;
+}
+
+.aboutUs {
+  background: url(../assets/bg-darkblue.jpg) no-repeat center center fixed
+
+}
+
+.no-gutter .col-md-3 {
+  padding-left:0;
+  padding-right:0;
+}
+
+h1 {
+  color: white;
+  width: 200px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 38px
+}
+
+.memberpic {
+  width: 200px;
+  border: 5px solid white;
+  border-radius: 50%;
+}
+
+.techStackImg {
+
+  height: 150px;
+
+}
+
+.col-md-3 {
+  display: inline;
+  color: white;
+  font-size: 22px;
+
+}
+

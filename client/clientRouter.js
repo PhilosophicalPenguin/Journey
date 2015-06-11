@@ -2,9 +2,17 @@ var ClientRouter = Backbone.Router.extend({
 
     routes: {
         '': 'home',
+<<<<<<< HEAD
         'journey/:id': 'viewJourney',
         'profile/:id': 'viewProfile',
         'filter/:toID/:fromID': 'viewPaths'
+=======
+        'viewJourney': 'viewJourney',
+        // 'viewJourney/:id': 'viewJourney'
+        //'viewJourney/:id': 'viewJourney',
+        'profile/:id': 'viewProfile',
+        'about': 'about'
+>>>>>>> first implementation of about us page
     },
 
     home: function() {
@@ -13,6 +21,7 @@ var ClientRouter = Backbone.Router.extend({
         // $(".mainContent").html(appView.el);
     },
 
+<<<<<<< HEAD
     viewJourney: function(id) {
         var positionModel = new PositionModel(null, id);
 
@@ -44,9 +53,19 @@ var ClientRouter = Backbone.Router.extend({
           var filtersCollectionView = new FiltersCollectionView({ collection: filtersCollection });
           $('.innerJourneyContent').append(filtersCollectionView.el);
         });
+
+    about: function() {
+        console.log('got to about');
+        $("#mainContent").empty();
+
+        var aboutUsCollection = new AboutUsCollection(aboutUsData);
+        var aboutUsCollectionView = new AboutUsCollectionView( { collection: aboutUsCollection } );
+
+        console.log('aboutUsCollection', aboutUsCollection);
+        console.log('aboutUsCollectionView', aboutUsCollectionView);
     }
 
 });
 
-var clientRouter = new ClientRouter();
+window.clientRouter = new ClientRouter();
 Backbone.history.start();
