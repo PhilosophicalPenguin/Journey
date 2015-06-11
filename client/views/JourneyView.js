@@ -55,12 +55,13 @@ window.JourneyView = Backbone.View.extend({
 
   drawThumbnails: function(peopleToDraw){
 
+
+    console.log("PEOPLE TO DRAW PASSED IN TO NEW THUMBNAILS COLLECTION in JourneyView.js: ", peopleToDraw[0]);
     var newThumbnailsCollection = new ThumbnailsCollection(peopleToDraw[0]);
     var newThumbnailsCollectionView = new ThumbnailsCollectionView({collection: newThumbnailsCollection});
 
     this.$el.find('.profilesColumn').append(newThumbnailsCollectionView.el);
     this.$el.find('.featuredHeader h1').text(this.model.get('positionFilter'));
-    console.log('this model', this.model);
 
     this.$el.find('.featuredHeader').removeClass('offsetSectionTitles');
     this.$el.find('.featuredHeader h1').removeClass('offsetHeader');

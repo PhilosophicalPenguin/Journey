@@ -35,6 +35,8 @@ module.exports = {
       })
       .then(function(profile) {
 
+        console.log("SCOTT MYERS LOOKS LIKE : ", profile);
+
         var attributes  =   profile.attributes;
         var relations   =   profile.relations;
 
@@ -104,7 +106,8 @@ module.exports = {
               company:    experience.company_name,
               position:   experience.position_name,
               start:      experience.start_date,
-              end:        experience.end_date
+              end:        experience.end_date,
+              positionID: experience.position_id
             };
             resultProfile.experiences.push(milestone);
           }
@@ -148,5 +151,33 @@ module.exports = {
       console.log('Returning profile of: ' + resultProfile.name + '. Profile ID: ' + resultProfile.id);
       response.json(resultProfile);    
     })
+  },
+
+  getProfilesFromIndustry: function(request, response){
+
+    console.log("getProfiles query works");
+    var industryName = request.query.industryName;
+
+    console.log(industryName);
+
+    db.knex
+        .select('profiles.id', 'headline', 'profile_name', 'picURL')
+        .from('industries')
+        .innerJoin('profiles', 'industries.id', 'profiles.industry_id')
+        .where({
+           industry_name: industryName
+        })
+        .then(function(data){
+          response.json(data)
+        })
+
+
   }
+
+
+
+
+
+
+
 }

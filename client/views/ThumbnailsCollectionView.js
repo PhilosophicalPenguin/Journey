@@ -15,6 +15,7 @@ window.ThumbnailsCollectionView = Backbone.View.extend({
 		$('.profilesColumn').children().detach();
 
 		return this.$el.append(this.collection.map(function(thumbnail){
+
 				
 				var thumbnailView = new ThumbnailView({model: thumbnail});
 				return thumbnailView.el;

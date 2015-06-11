@@ -15,7 +15,9 @@ window.ThumbnailView = Backbone.View.extend({
 
         render: function() {
 
-        var name = this.model.get('name');
+            // console.log("this.model in thumbnail", this.model);
+
+        var name = this.model.get('name') || this.model.get('profile_name');
         var id = this.model.get('id');
         var picURL = this.model.get('picURL');
         var headline = this.model.get('headline');
