@@ -110,54 +110,9 @@ module.exports = {
             positions: {
               total: 0,
               positionsSummary: {}
-
             },
-
-    getAvailablePositions: function(request, response) {
-
-        db.knex.from('profiles')
-            .innerJoin('positions', 'profiles.currentPosition_id', 'positions.id')
-            .then(function(profiles) {
-
-                var positions = {};
-                var positionArray = [];
-
-                forEach(profiles, function(profile) {
-                    var positionID = profile.currentPosition_id,
-                        positionName = profile.position_name
-
-                    // if position is not in object, add it as a key: value --> positionID: positionName
-                    if (!positions[positionID] && positionName != null) {
-                        positions[positionID] = positionName;
-                    }
-
-                });
-
-                for (var key in positions) {
-                    positionArray.push({
-                        "position_id": parseInt(key),
-                        "position_name": positions[key]
-                    });
-                }
-
-                response.json(positionArray);
-
-            });
-    },
-
-    // Returns all positions in database - current and non-current
-    getAllPositions: function(request, response) {
-        new Position().fetchAll().then(function(positions) {
-            if (positions) {
-                var positionArray = [];
-                forEach(positions.models, function(position) {
-                    //pull off id and position_name off each object
-                    positionArray.push({
-                        "position_id": position.attributes.id,
-                        "position_name": position.attributes.position_name
-                    });
-                });
-                response.json(positionArray);
+            skills: {
+              total: 0
             }
           };
 
@@ -237,7 +192,6 @@ module.exports = {
             // create a join table to retrieve all experience info of
             // people and their history, who have or had the job specified
             db.knex.from('expMilestones')
-
             .innerJoin('profiles', 'expMilestones.profile_id', 'profiles.id')
             .innerJoin('companies', 'expMilestones.company_id', 'companies.id')
             .innerJoin('positions', 'expMilestones.position_id', 'positions.id')
@@ -253,6 +207,7 @@ module.exports = {
               getExperienceStatsCB();
             });
           };
+
 
           var getSkillStats = function(getSkillStatsCB) {
               // create a join table to retrieve all skill stats
@@ -373,8 +328,13 @@ module.exports = {
               result[profile.profile_id] = filteredProfile;
             }
           }
+
           else if(!result[profile.profile_id]) {
             result[profile.profile_id] = filteredProfile;
+          }
+
+          if(filteredProfile.picURL === null){
+            filteredProfile.picURL = 'http://bridgesprep.org/wp-content/uploads/2013/10/Facebook-no-profile-picture-icon-620x389.jpg'
           }
         }
 

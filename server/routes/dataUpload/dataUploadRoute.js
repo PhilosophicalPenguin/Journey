@@ -317,7 +317,6 @@ module.exports = {
 
       var createExperienceMilestones = function(outerCallback) {
 
-<<<<<<< HEAD
         async.eachSeries(person.past_experience_list, function(expMilestone, nextMilestone) {
 
           var milestone = {
