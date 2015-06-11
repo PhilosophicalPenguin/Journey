@@ -47,6 +47,7 @@ button:focus, .btn:focus {outline:0;}
     font-weight: 400;
     font-size: 12em;
     color: #EAD121;
+    margin-top: 45px;
     }
   .splashPage h2 {
     font-size: 2em;
@@ -103,7 +104,7 @@ button:focus, .btn:focus {outline:0;}
 .sectionTitles button {
   position: absolute;
   right: 15px;
-  top: 1px;
+  top: 3px;
 }
 .offsetSectionTitles {
   height: 60px;

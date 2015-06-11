@@ -3,7 +3,7 @@ var ClientRouter = Backbone.Router.extend({
     routes: {
         '': 'home',
         'journey/:id': 'viewJourney',
-        'profile/:id': 'viewProfile'
+        'profile/:id': 'viewProfile',
         'filter/:toID/:fromID': 'viewPaths'
     },
 
@@ -13,11 +13,9 @@ var ClientRouter = Backbone.Router.extend({
     },
 
     viewJourney: function(id) {
-        console.log('The id the router is working with');
         var positionModel = new PositionModel(null, id);
 
         this.listenTo(positionModel, 'RecievedStats', function() {
-            console.log('event heard in router',arguments);
             $("#mainContent").empty();
             var journeyView = new JourneyView({
                 model: positionModel

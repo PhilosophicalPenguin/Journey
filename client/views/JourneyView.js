@@ -30,6 +30,8 @@ window.JourneyView = Backbone.View.extend({
     }
     var allCurrentPositions = this.model.attributes.positions.positionsSummary;
 
+    console.log('allCurrentPositions', this.model);
+
     this.$el.find('.destination').hide();
     var navigationModel = new NavigationModel(currentPosition, allCurrentPositions);
     var navigationView = new NavigationView({ model: navigationModel });
@@ -83,9 +85,6 @@ window.JourneyView = Backbone.View.extend({
     );
 
     var featuredPeople = [this.model.get('positions')[this.model.get('position_name')]];
-    for(var g= 0 ; g < featuredPeople[0].length; ++g) {
-      console.log(featuredPeople[0][g].name);
-    }
     this.drawThumbnails(featuredPeople);
     this.$el.find('.featuredHeader').addClass('offsetSectionTitles');
     this.$el.find('.featuredHeader h1').addClass('offsetHeader');
@@ -94,8 +93,6 @@ window.JourneyView = Backbone.View.extend({
 
   drawThumbnails: function(peopleToDraw){
 
-
-    console.log("PEOPLE TO DRAW PASSED IN TO NEW THUMBNAILS COLLECTION in JourneyView.js: ", peopleToDraw[0]);
     var newThumbnailsCollection = new ThumbnailsCollection(peopleToDraw[0]);
     var newThumbnailsCollectionView = new ThumbnailsCollectionView({collection: newThumbnailsCollection});
 

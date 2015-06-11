@@ -134,6 +134,7 @@ module.exports = {
               ++result[subject].total;
               
               if(subject === 'positions'){
+
                 var positionID    = object.position_id;
                 var positionName  = object.position_name; 
 
@@ -146,118 +147,127 @@ module.exports = {
             //create a join table to retrieve all information of
             // people and their history, who have or had the job specified
             db.knex.from('eduMilestones')
-              .innerJoin('profiles', 'eduMilestones.profile_id', 'profiles.id')
-              .innerJoin('degrees', 'eduMilestones.degree_id', 'degrees.id')
-              .innerJoin('schools', 'eduMilestones.school_id', 'schools.id')
-              .innerJoin('fieldsOfStudy', 'eduMilestones.fieldOfStudy_id', 'fieldsOfStudy.id')
-              .where({
-                currentPosition_id: positionID
-              })
-              .then(function(data) {
-                //create an object to tally information
-                //and calculate statistics
+            .innerJoin('profiles', 'eduMilestones.profile_id', 'profiles.id')
+            .innerJoin('degrees', 'eduMilestones.degree_id', 'degrees.id')
+            .innerJoin('schools', 'eduMilestones.school_id', 'schools.id')
+            .innerJoin('fieldsOfStudy', 'eduMilestones.fieldOfStudy_id', 'fieldsOfStudy.id')
+            .where({
+              currentPosition_id: positionID
+            })
+            .then(function(data) {
+              //create an object to tally information
+              //and calculate statistics
 
-                // creates function for tallying specified information
-                // and recording it to a specified object
+              // creates function for tallying specified information
+              // and recording it to a specified object
 
-                var tallyDegreeAndField = function(object) {
-                  var degreeName = object.degree_name.toString();
-                  var fieldName = object.fieldOfStudy_name.toString();
-                  var val = degreeName + '_' + fieldName;
-                  var profile = {
-                    id:       object.profile_id,
-                    name:     object.profile_name,
-                    picURL:   object.picURL,
-                    headline: object.headline
-                  }
-
-                  if(profile.picURL === null) {
-                    profile.picURL = 'http://bridgesprep.org/wp-content/uploads/2013/10/Facebook-no-profile-picture-icon-620x389.jpg';
-                  }
-
-                  result.degreesAndFields[val] = result.degreesAndFields[val] || [];
-                  result.degreesAndFields[val].push(profile);
-                  result.degreesAndFields.total++;
+              var tallyDegreeAndField = function(object) {
+                var degreeName = object.degree_name.toString();
+                var fieldName = object.fieldOfStudy_name.toString();
+                var val = degreeName + '_' + fieldName;
+                var profile = {
+                  id:       object.profile_id,
+                  name:     object.profile_name,
+                  picURL:   object.picURL,
+                  headline: object.headline
                 }
 
-
-                var getExperienceStats = function(getExperienceStatsCB) {
-                    // create a join table to retrieve all experience info of
-                    // people and their history, who have or had the job specified
-                    db.knex.from('expMilestones')
-                        .innerJoin('profiles', 'expMilestones.profile_id', 'profiles.id')
-                        .innerJoin('companies', 'expMilestones.company_id', 'companies.id')
-                        .innerJoin('positions', 'expMilestones.position_id', 'positions.id')
-                        .where({
-                            currentPosition_id: positionID
-                        })
-                        .then(function(data) {
-                            var tallyCompanies = makeTally('companies', 'company_name');
-                            var tallyPositions = makeTally('positions', 'position_name');
-                            forEach(data, tallyCompanies,
-                                tallyPositions
-                            );
-                            getExperienceStatsCB();
-                        })
+                if(profile.picURL === null) {
+                  profile.picURL = 'http://bridgesprep.org/wp-content/uploads/2013/10/Facebook-no-profile-picture-icon-620x389.jpg';
                 }
 
-
-                var getSkillStats = function(getSkillStatsCB) {
-                    // create a join table to retrieve all skill stats
-                    db.knex.from('profiles_skills')
-                        .innerJoin('profiles', 'profiles_skills.profile_id', 'profiles.id')
-                        .innerJoin('skills', 'profiles_skills.skill_id', 'skills.id')
-                        .where({
-                            currentPosition_id: positionID
-                        })
-                        .then(function(data) {
-                            var tallySkills = makeTally('skills', 'skill_name');
-                            forEach(data, tallySkills);
-                            getSkillStatsCB();
-                        })
-                }
-
-                forEach(data, tallyDegreeAndField);
-
-                var getEducationStatsAsync = Promise.promisify(getEducationStats);
-                var getExperienceStatsAsync = Promise.promisify(getExperienceStats);
-                var getSkillStatsAsync = Promise.promisify(getSkillStats);
-
-
-              getEducationStatsAsync().then(function() {
-                    return getExperienceStatsAsync()
-                }).then(function() {
-                    return getSkillStatsAsync()
-                }).then(function() {
-                    console.log('Returning stats for:', request.query.id);
-
-                function RemoveDuplicates(object) {
-                  return _.object(_.map(object, function(val, key) {
-                    val = _.uniq(val, false, function(item) {
-                        return JSON.stringify(item)
-                    });
-                    return [key, val]
-                  }));
-                };
-
-                function tally(object) {
-                  object.total = 0;
-                  for(var item in object) {
-                    if(item !== 'total') {
-                      object.total += object[item].length;
-                    }
-                  }
-                 }
-
-                 for(var keyR in result) {
-                  if(keyR !== 'position_name') {
-                    result[keyR] = RemoveDuplicates(result[keyR]);
-                    tally(result[keyR]);
-                  }
-                 }
-                response.json(result)
+                result.degreesAndFields[val] = result.degreesAndFields[val] || [];
+                result.degreesAndFields[val].push(profile);
+                result.degreesAndFields.total++;
+              }
+            
+            forEach(data, tallyDegreeAndField);
+            getEducationStatsCB();
+            
             });
-      })
+          };
+
+
+          var getExperienceStats = function(getExperienceStatsCB) {
+            // create a join table to retrieve all experience info of
+            // people and their history, who have or had the job specified
+            db.knex.from('expMilestones')
+            .innerJoin('profiles', 'expMilestones.profile_id', 'profiles.id')
+            .innerJoin('companies', 'expMilestones.company_id', 'companies.id')
+            .innerJoin('positions', 'expMilestones.position_id', 'positions.id')
+            .where({
+                currentPosition_id: positionID
+            })
+            .then(function(data) {
+              var tallyCompanies = makeTally('companies', 'company_name');
+              var tallyPositions = makeTally('positions', 'position_name');
+              forEach(data, tallyCompanies,
+                  tallyPositions
+              );
+              getExperienceStatsCB();
+            });
+          };
+
+
+          var getSkillStats = function(getSkillStatsCB) {
+              // create a join table to retrieve all skill stats
+            db.knex.from('profiles_skills')
+            .innerJoin('profiles', 'profiles_skills.profile_id', 'profiles.id')
+            .innerJoin('skills', 'profiles_skills.skill_id', 'skills.id')
+            .where({
+                currentPosition_id: positionID
+            })
+            .then(function(data) {
+                var tallySkills = makeTally('skills', 'skill_name');
+                forEach(data, tallySkills);
+                getSkillStatsCB();
+            });
+          };
+
+
+          var getEducationStatsAsync = Promise.promisify(getEducationStats);
+          var getExperienceStatsAsync = Promise.promisify(getExperienceStats);
+          var getSkillStatsAsync = Promise.promisify(getSkillStats);
+
+
+          getEducationStatsAsync().then(function() {
+            return getExperienceStatsAsync()
+          })
+          .then(function() {
+            return getSkillStatsAsync()
+          })
+          .then(function() {
+
+            function RemoveDuplicates(object) {
+              return _.object(_.map(object, function(val, key) {
+                val = _.uniq(val, false, function(item) {
+                    return JSON.stringify(item)
+                });
+                return [key, val]
+              }));
+            };
+
+            function tally(object) {
+              object.total = 0;
+              for(var item in object) {
+                if(item !== 'total') {
+                  object.total += object[item].length;
+                }
+              }
+             }
+
+             for(var keyR in result) {
+              if(keyR !== 'position_name' && keyR !== 'positions') {
+                result[keyR] = RemoveDuplicates(result[keyR]);
+                tally(result[keyR]);
+              }
+             }
+
+            response.json(result);
+        });
+
+      }
+    });
   }, // End of getStatsOnPosition
 
 
@@ -333,8 +343,7 @@ module.exports = {
             currentPositionID:  profile.currentPosition_id,
             currentCompany:     profile.currentCompany_id,
             currentLocation:    profile.currentLocation,
-            // currentStart: ,
-            // currentEnd: ,
+            // currentStart:
             filteredPosition:   profile.position_name,
             filteredCompany:    profile.company_name,
             filteredStart:      parseInt(profile.start_date),
