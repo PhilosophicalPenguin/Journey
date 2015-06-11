@@ -1,15 +1,9 @@
 window.PositionsStatsChartView = Backbone.View.extend({
 
-
-
     model: PositionModel,
 
     initialize: function() {
-
-
-        this.render();
-
-
+      this.render();
     },
 
 
@@ -18,16 +12,17 @@ window.PositionsStatsChartView = Backbone.View.extend({
         var names = []; //an array of tuples
         var percentages = [];
 
-
         //reduce total # you divde by since you're excluding Software Engineers
+        var thisPosition = this.model.get('position_name');
+
         for (var key in this.model.get('positions')) {
-            if (key === "Software Engineer") {
+            if (key === thisPosition) {
                 this.model.get('positions').total -= this.model.get('positions')[key].length;
             }
         }
 
         for (var wookey in this.model.get('positions')) {
-            if (wookey !== 'total' && wookey != "Software Engineer") {
+            if (wookey !== 'total' && wookey != thisPosition && wookey != 'positionsSummary') {
                 var item = {};
                 data.push([wookey, (this.model.get('positions')[wookey].length / this.model.get('positions').total) * 100]);
             }

@@ -7,6 +7,9 @@ body {
   color: #333;
   background: none;
 }
+
+button:focus, .btn:focus {outline:0;}
+
 .navbar {
   background-color: #002B5E;
   padding: 15px 0;
@@ -28,7 +31,6 @@ body {
   padding: 0;
 }
 
-
 .splashBack{
   background: url(../assets/bg-darkblue.jpg) no-repeat center center fixed;
   height:100vh;
@@ -45,11 +47,12 @@ body {
     font-weight: 400;
     font-size: 12em;
     color: #EAD121;
+    margin-top: 45px;
     }
   .splashPage h2 {
     font-size: 2em;
     text-align: center;
-    margin: 30px 0 20px; }
+    margin: 50px 0 20px; }
   .splashPage input {
     background: none;
     width: 90%;
@@ -85,6 +88,7 @@ body {
 .sectionTitles {
   border-bottom: 1px solid #002B5E;
   padding-bottom: 15px;
+  height: 60px;
 }
 .sectionTitles h1 {
   font-size: 2.3em;
@@ -96,6 +100,11 @@ body {
 }
 .sectionTitles h1, .sectionTitles h2 {
   margin: 0;
+}
+.sectionTitles button {
+  position: absolute;
+  right: 15px;
+  top: 3px;
 }
 .offsetSectionTitles {
   height: 60px;
@@ -131,7 +140,7 @@ body {
     cursor: pointer; }
 
 .chart {
-  height: 450px;
+  height: 350px;
 }
 .chartLarge {
   height: 600px;
@@ -164,7 +173,9 @@ th {
 /*header autocomplete dropdown*/
 .ui-autocomplete {
   border: 1px solid #002B5E;
-  border-radius: 3px;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px 0px 3px 3px;
+  border-radius: 0px 0px 3px 3px;
   top: 15px;
   padding: 20px 0;
 }
@@ -174,9 +185,13 @@ th {
   color: #606060;
   font-size: 14px;
 }
-
 .ui-menu-item:hover {
-  background-color: #E9E9E9
+  background-color: #E9E9E9;
+}
+.ui-state-focus {
+  background-color: #E9E9E9;
+  outline: none;
+
 }
 
 .header-search.ui-autocomplete-input {
@@ -198,7 +213,6 @@ th {
   outline: none;
 }
 
-
 .ui-helper-hidden-accessible {
   display: none;
   position: absolute;
@@ -212,12 +226,15 @@ th {
 }
 
 .profiles li {
-  height: 60px;
+  min-height: 60px;
   margin-bottom: 15px;
+  cursor: pointer;
+}
+.profiles li:hover {
+  background-color: #EDEDED;
 }
 
 .profiles li img {
-  cursor: pointer;
   width: 60px;
   border-radius: 3px;
   float: left;
@@ -233,12 +250,8 @@ th {
 }
 .profileInfo h1 {
   font-weight: 600;
+  margin-top: 4px;
 }
-.profileInfo h1:hover {
-  cursor: pointer;
-  color: #004EAB;;
-}
-
 #profile-card {
   width: 250px;
   margin: 20px;
@@ -273,9 +286,143 @@ th {
   width: 370px;
 }
 
+
 .timeline-svg {
   left : 10%;
   position : relative;
+}
+/* FILTER NAVIGATION */
+#navigation {
+  font-size: 1.5em;
+}
+#navigation label {
+  margin-right: 10px;
+  font-weight: normal;
+}
+#navigation input {
+  border: none;
+  border-bottom: 1px solid;
+  padding: 10px;
+  font-weight: bold;
+  width: 250px;
+}
+#navigation input:focus {
+  font-weight: normal;
+}
+::-webkit-input-placeholder {
+   font-weight: normal;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   font-weight: normal;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   font-weight: normal;  
+}
+
+:-ms-input-placeholder {  
+   font-weight: normal;  
+}
+
+.filterField {
+  display: inline-block;
+  position: relative;
+}
+.fromField {
+  margin-right: 25px;
+}
+.showAll {
+  background: url(../assets/triangle-down.png) no-repeat;
+  -webkit-background-size: 15px; 
+  -moz-background-size: 15px;
+  -o-background-size: 15px;
+  background-size: 15px;
+  display: inline-block;
+  width: 20px;
+  height: 17px;
+  position: absolute;
+  top: 10px;
+  right: 2px;
+  cursor: pointer;
+}
+
+/* FILTERED PATHS VIEW */
+.filteredPaths {
+  padding: 0;
+  list-style: none;
+  margin-top: 20px;
+}
+.filteredPaths p {
+  font-size: 1.5em;
+  margin-bottom: 30px;
+  display: inline-block;
+}
+.filteredPaths li {
+  cursor: pointer;
+  height: 100px;
+  border-bottom: 1px solid #E7E7E7;
+  padding: 15px 10px;
+}
+.filteredPaths li:hover {
+  background-color: #EDEDED;
+}
+.filteredPaths li img {
+  width: 70px;
+  border-radius: 3px;
+  float: left;
+  margin-right: 15px;
+}
+.filteredPaths h1,
+.filteredPaths h2,
+.filteredPaths h3,
+.filteredPaths h4 {
+  font-size: 1.5em;
+  margin: 0;
+}
+.filteredPaths h1 {
+  font-weight: 600;
+}
+.filteredPaths h3 {
+  font-style: italic;
+  font-weight: 300;
+}
+.clearResults {
+  display: inline-block;
+  float: right;
+  font-size: 1.3em;
+  color: #5BC0DE;
+  padding-top: 1px;
+  cursor: pointer;
+}
+
+.filterProfileInfo, .filterFrom, .filterTo {
+  display: inline-block;
+  margin-right: 20px;
+  height: 70px;
+  width: 175px;
+  vertical-align: top;
+  padding-top: 8px;
+}
+.filterProfileInfo {
+  padding-top: 18px;
+}
+.filterFrom {
+  margin-right: 10px;
+}
+.filterTo {
+  width: 195px;
+  margin-right: 0;
+}
+.filterArrow {
+  background: url(../assets/right-arrow.png) no-repeat;
+  -webkit-background-size: 50px; 
+  -moz-background-size: 50px;
+  -o-background-size: 50px;
+  background-size: 50px;
+  display: inline-block;
+  width: 70px;
+  height: 46px;
 }
 
 /*# sourceMappingURL=main.css.map */

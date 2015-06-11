@@ -6,10 +6,6 @@ window.SkillsStatsChartView = Backbone.View.extend({
 
   render: function() {
 
-
-    //this.model: {total: 1832, Ruby on Rails: 28, Pair Programming: 2}
-
-
     var skills = [];
     var skillsNames = [];
     var skillsPercentages = [];
@@ -54,7 +50,12 @@ window.SkillsStatsChartView = Backbone.View.extend({
     skillsNames = skills.map(function(skillCombo) {
       return skillCombo[0];
     });
+
+    var maxPercentage = 0;
     skillsPercentages = skills.map(function(skillCombo) {
+      if(skillCombo[1] > maxPercentage) {
+        maxPercentage = skillCombo[1];
+      }
       return skillCombo[1];
     });
 
@@ -64,8 +65,7 @@ window.SkillsStatsChartView = Backbone.View.extend({
       chart: {
         renderTo: this.$el,
         type: 'bar',
-        polar: true,
-        marginLeft: 150,
+        polar: true
       },
       tooltip: {
         pointFormat: "{point.y:.2f}%"
@@ -80,7 +80,7 @@ window.SkillsStatsChartView = Backbone.View.extend({
       },
       yAxis: {
         min: 0,
-        max: 20,
+        max: maxPercentage + 1,
         lineWidth: 0,
         minorGridLineWidth: 0,
         gridLineWidth: 0,
