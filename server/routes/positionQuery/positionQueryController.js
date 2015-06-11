@@ -126,7 +126,7 @@ module.exports = {
                 headline: object.headline
               }
               if(profile.picURL === null) {
-                profile.picURL = 'http://bridgesprep.org/wp-content/uploads/2013/10/Facebook-no-profile-picture-icon-620x389.jpg';
+                profile.picURL = 'http://free.clipartof.com/76-Free-Cute-Cartoon-Monkey-Clipart-Illustration.png';
               }
               var val = object[property];
               result[subject][val] = result[subject][val] || [];
@@ -334,7 +334,7 @@ module.exports = {
           }
 
           if(filteredProfile.picURL === null){
-            filteredProfile.picURL = 'http://bridgesprep.org/wp-content/uploads/2013/10/Facebook-no-profile-picture-icon-620x389.jpg'
+            filteredProfile.picURL = 'http://free.clipartof.com/76-Free-Cute-Cartoon-Monkey-Clipart-Illustration.png'
           }
         }
 
