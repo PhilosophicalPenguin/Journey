@@ -30,6 +30,22 @@ module.exports = {
       obj = {};
       var skills_ids = [];
 
+      var profileCheck = function(profileCheckCallback) {
+
+        Profile.forge({
+          'profile_name': person.full_name[0]
+        })
+        .fetch()
+        .then(function(profile) {
+          if (profile === null) { 
+            profileCheckCallback(false, false);
+          }
+          else {
+            profileCheckCallback(false, true);
+          }
+        });        
+      }
+
       var getSkills = function(getSkillsCallback) {
         async.eachSeries(person.skills, function(skillName, nextSkill) {
 
@@ -161,6 +177,7 @@ module.exports = {
 
           }).catch(function(err) {
             console.log(err);
+            throw err;
           })
       };
 
@@ -390,31 +407,42 @@ module.exports = {
         });
       };
 
-      var getSkillsAsync = Promise.promisify(getSkills),
-        getIndustryIDAsync = Promise.promisify(getIndustryID),
-        getCurrentPositionIDAsync = Promise.promisify(getCurrentPositionID),
-        getCompanyIDAsync = Promise.promisify(getCompanyID),
-        createProfileAsync = Promise.promisify(createProfile),
-        createEducationMilestonesAsync = Promise.promisify(createEducationMilestones),
-        createExperienceMilestonesAsync = Promise.promisify(createExperienceMilestones);
+      var getSkillsAsync                  = Promise.promisify(getSkills),
+          getIndustryIDAsync              = Promise.promisify(getIndustryID),
+          getCurrentPositionIDAsync       = Promise.promisify(getCurrentPositionID),
+          getCompanyIDAsync               = Promise.promisify(getCompanyID),
+          createProfileAsync              = Promise.promisify(createProfile),
+          createEducationMilestonesAsync  = Promise.promisify(createEducationMilestones),
+          createExperienceMilestonesAsync = Promise.promisify(createExperienceMilestones),
+          profileCheckAsync               = Promise.promisify(profileCheck);
 
-      getSkillsAsync().then(function() {
-        return getCompanyIDAsync();
-      }).then(function() {
-        return getIndustryIDAsync();
-      }).then(function() {
-        return getCurrentPositionIDAsync();
-      }).then(function() {
-        return createProfileAsync();
-      }).then(function() {
-        return createEducationMilestonesAsync();
-      }).then(function() {
-        return createExperienceMilestonesAsync();
-      }).then(function() {
-        console.log('Finished importing profile to database. Name of profile:', person.full_name[0]);
-        callbackNext(); // Go to next person
-      })
-    });
 
+      profileCheckAsync().then(function(found){
+        
+        if(found) {
+          callbackNext();
+        }
+        else {
+          getSkillsAsync().then(function(){
+            return getCompanyIDAsync();
+          }).then(function() {
+            return getIndustryIDAsync();
+          }).then(function() {
+            return getCurrentPositionIDAsync();
+          }).then(function() {
+            return createProfileAsync();
+          }).then(function() {
+            return createEducationMilestonesAsync();
+          }).then(function() {
+            return createExperienceMilestonesAsync();
+          }).then(function() {
+            console.log('Finished importing profile to database. Name of profile:', person.full_name[0]);
+            callbackNext(); // Go to next person
+          });
+        }
+      });
+
+    }); // End of eachSeries loop
+    console.log('Import Fin!');
   }
 }

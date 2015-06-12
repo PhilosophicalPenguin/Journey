@@ -30,15 +30,13 @@ window.JourneyView = Backbone.View.extend({
     }
     var allCurrentPositions = this.model.attributes.positions.positionsSummary;
 
-    console.log('allCurrentPositions', this.model);
-
     this.$el.find('.destination').hide();
     var navigationModel = new NavigationModel(currentPosition, allCurrentPositions);
-    var navigationView = new NavigationView({ model: navigationModel });
+    var navigationView  = new NavigationView({ model: navigationModel });
 
     this.listenTo(navigationModel, 'ChangedToField', function(position) {
       navigationModel = new NavigationModel(position, allCurrentPositions);
-      navigationView = new NavigationView({ model: navigationModel });
+      navigationView  = new NavigationView({ model: navigationModel });
     });
   },
 
@@ -48,8 +46,6 @@ window.JourneyView = Backbone.View.extend({
 
     new NavBarView();
     new AutocompleteView ({model: app});
-
-    console.log('in the journey heres the model', this.model);
 
     this.$el.append('<div class="container journeyView"><div class="row"><div class="col-md-8 innerJourney"></div></div></div>');
     this.$el.find('.innerJourney').append(

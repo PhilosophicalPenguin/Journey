@@ -191,6 +191,7 @@ th {
 }
 .ui-menu-item:hover {
   background-color: #E9E9E9;
+  cursor: pointer;
 }
 .ui-state-focus {
   background-color: #E9E9E9;
@@ -222,13 +223,11 @@ th {
   position: absolute;
   left:-999em;
 }
-
 .profiles {
   padding: 0;
   margin-top: 20px;
   list-style: none;
 }
-
 .profiles li {
   min-height: 60px;
   margin-bottom: 15px;
@@ -256,21 +255,6 @@ th {
   font-weight: 600;
   margin-top: 4px;
 }
-#profile-card {
-  width: 250px;
-  margin: 20px;
-  padding: 25px;
-  border-radius: 4px;
-  background: url(../assets/bg-blue.jpg) no-repeat center center fixed;
-}
-
-#profile-card div {
-  margin: 15px;
-  padding: 15px;
-  border-radius: 4px;
-  background-color: white;
-}
-
 .hideCol {
   display: none;
 }
@@ -290,11 +274,6 @@ th {
   width: 370px;
 }
 
-
-.timeline-svg {
-  left : 10%;
-  position : relative;
-}
 /* FILTER NAVIGATION */
 #navigation {
   font-size: 1.5em;
@@ -427,6 +406,38 @@ th {
   display: inline-block;
   width: 70px;
   height: 46px;
+}
+
+/* PROFILE */
+.profileContainer {
+  margin-top: 90px;
+}
+#profile-card {
+  height: 100px;
+}
+#profile-card img {
+  width: 100px;
+  border-radius: 3px;
+  float: left;
+}
+.profileCardInfo {
+  display: inline-block;
+  margin-left: 15px;
+}
+.profileCardInfo h1, .profileCardInfo h2 {
+  margin: 0;
+  font-size: 1.5em;
+}
+.profileCardInfo h1 {
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+/* PROFILE TIMELINE */
+
+.timeline-svg {
+  position : relative;
+  background-color: #F5F5DC;
 }
 
 /*# sourceMappingURL=main.css.map */
