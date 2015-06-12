@@ -59,6 +59,7 @@ button:focus, .btn:focus {outline:0;}
     border: 1px solid #FFF;
     padding: 15px 20px;
     font-size: 1.8em;
+    background-color: rgba(0, 0, 0, 0.18);
     border-radius: 3px; }
   .splashPage input:focus {
     outline: none; }
