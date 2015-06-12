@@ -410,14 +410,14 @@ th {
   margin-right: 0;
 }
 .filterArrow {
-  background: url(../assets/right-arrow.png) no-repeat;
+  background: url(../assets/orange-right-arrow.png) no-repeat;
   -webkit-background-size: 50px;
   -moz-background-size: 50px;
   -o-background-size: 50px;
   background-size: 50px;
   display: inline-block;
   width: 70px;
-  height: 46px;
+  height: 30px;
 }
 
 /* PROFILE */
