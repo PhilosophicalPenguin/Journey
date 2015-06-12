@@ -26,7 +26,12 @@ var ProfileView = Backbone.View.extend({
       timeline_Items.push( experienceToTimelineItemModel(experiences[j]) );
     }
 
-    timeline_Items.sort(function(a,b) { return b.dates.start - a.dates.start; });
+    timeline_Items.sort(function(a,b) { 
+      if(b.dates.start === a.dates.start && b.dates.end !== a.dates.end){
+        return b.dates.end - a.dates.end; 
+      } 
+      return b.dates.start - a.dates.start; 
+    });
     //create the TimelineModel to give to the TimelineView in render
     this.timelineModel = new TimelineModel({collection : timeline_Items} );
     this.render();
