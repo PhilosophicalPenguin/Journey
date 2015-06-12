@@ -95,6 +95,10 @@ module.exports = {
           });
       }
 
+
+
+
+
       var getIndustryID = function(getIndustryIDCallback) {
         var industryLabel = person.industry[0];
         Industry.forge({
@@ -149,10 +153,13 @@ module.exports = {
           .then(function(profile) {
             if (profile === null) {
               //create profile
+
+              console.log("PERSON: ", person);
               Profile.forge({
                   'profile_name': person.full_name[0],
                   'profileURL': person.url,
                   'picURL': person.current_photo_link,
+                  'currentPosition_startDate': person.current_position_start_date[0],
                   'headline': person.headline[0],
                   'currentLocation': person.location[0],
                   'currentPosition_id': obj.positionID,

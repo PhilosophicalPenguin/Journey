@@ -72,7 +72,7 @@ window.PositionsStatsChartView = Backbone.View.extend({
                 categories: names,
                 labels: {
                   style: {
-                    fontSize: '14px'
+                    fontSize: '16px'
                   }
                 }
               },

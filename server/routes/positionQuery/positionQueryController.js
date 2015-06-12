@@ -307,8 +307,10 @@ module.exports = {
       .andWhere({ position_id: fromID })
       .then(function(data) {
 
+
         for(var i = 0; i < data.length; i++) {
           var profile = data[i];
+        console.log("PROFILE IN GET FILTER PROFILES", profile);
           var filteredProfile = {
             id:                 profile.profile_id,
             name:               profile.profile_name,
@@ -317,7 +319,7 @@ module.exports = {
             currentPositionID:  profile.currentPosition_id,
             currentCompany:     profile.currentCompany_id,
             currentLocation:    profile.currentLocation,
-            // currentStart:
+            currentStart:       profile.currentPosition_startDate, 
             filteredPosition:   profile.position_name,
             filteredCompany:    profile.company_name,
             filteredStart:      parseInt(profile.start_date),
