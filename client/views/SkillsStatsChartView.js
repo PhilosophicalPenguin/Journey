@@ -1,8 +1,8 @@
 window.SkillsStatsChartView = Backbone.View.extend({
 
-    initialize: function(){
-        this.render();
-    },
+  initialize: function(){
+      this.render();
+  },
 
   render: function() {
 
@@ -113,7 +113,6 @@ window.SkillsStatsChartView = Backbone.View.extend({
                 this.update({
                   color: '#fe5800'
                 });
-
               }
             } // this.update({ color: '#fe5800' }, true, false);
           }
