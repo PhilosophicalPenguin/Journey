@@ -75,7 +75,7 @@ window.SkillsStatsChartView = Backbone.View.extend({
         categories: skillsNames,
         labels: {
           style: {
-              fontSize:'14px'
+              fontSize:'16px'
           }
         }
       },

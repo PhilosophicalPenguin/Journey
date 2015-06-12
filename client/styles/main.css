@@ -277,6 +277,7 @@ th {
 }
 
 .rightCol {
+  margin-right: -7.5%;
   top: 90px;
   bottom: 0;
   position: fixed;
@@ -465,6 +466,10 @@ th {
 .timeline-svg {
   position : relative;
   background-color: #F5F5DC;
+}
+
+.innerJourney {
+  margin-left:2.5%;
 }
 
 /*# sourceMappingURL=main.css.map */
