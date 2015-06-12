@@ -88,6 +88,7 @@ db.knex.schema.hasTable('profiles').then(function(exists) {
       profile.string('picURL', 200).defaultTo('http://bridgesprep.org/wp-content/uploads/2013/10/Facebook-no-profile-picture-icon-620x389.jpg');
       profile.string('currentLocation', 100);
       profile.string('headline', 200);
+      profile.integer('currentPosition_startDate');
       profile.integer('currentPosition_id');
       profile.integer('currentCompany_id');
       profile.integer('industry_id');

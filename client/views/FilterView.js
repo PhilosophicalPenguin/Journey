@@ -15,15 +15,17 @@ window.FilterView = Backbone.View.extend({
 
   render: function() {
 
+    console.log("THIS.MODEL IN FILTERVIEW: ", this.model);
+
     var name          =   this.model.get('name'),
-        picURL        =   this.model.get('picURL'),
+        picURL        =   this.model.get('picURL') || 'http://bridgesprep.org/wp-content/uploads/2013/10/Facebook-no-profile-picture-icon-620x389.jpg',
         location      =   this.model.get('currentLocation'),
         fromPosition  =   this.model.get('filteredPosition'),
         fromCompany   =   this.model.get('filteredCompany'),
         fromStart     =   this.model.get('filteredStart'),
         fromEnd       =   this.model.get('filteredEnd'),
         toPosition    =   this.model.get('headline'),
-        toStart       =   2009;
+        toStart       =   this.model.get('currentStart');
 
     // append DOM elements to the $el property
     return this.$el.append(

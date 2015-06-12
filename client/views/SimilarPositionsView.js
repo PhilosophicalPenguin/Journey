@@ -5,8 +5,6 @@ var SimilarPositionsView = Backbone.View.extend({
 
 	initialize: function(){
 
-		// console.log("similar positions view initialized! model looks like: ", this.model);
-
 		this.render();
 	},
 
@@ -24,9 +22,12 @@ var SimilarPositionsView = Backbone.View.extend({
 			return JSON.stringify(position)
 		})
 
-		// console.log("previousPositions", previousPositions);
+		console.log("previousPositions", previousPositions);
 
+		if(previousPositions.length > 0){
+			
 		this.$el.append("<h2> Similar Positions </h2>")
+		}
 
 
 		return this.$el.append(previousPositions.map(function(position){
