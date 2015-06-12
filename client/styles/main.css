@@ -410,14 +410,21 @@ th {
   margin-right: 0;
 }
 .filterArrow {
-  background: url(../assets/orange-right-arrow.png) no-repeat;
-  -webkit-background-size: 50px;
-  -moz-background-size: 50px;
-  -o-background-size: 50px;
-  background-size: 50px;
+  background: url(../assets/black-right-arrow.png) no-repeat;
+  -webkit-background-size: 35px;
+  -moz-background-size: 35px;
+  -o-background-size: 35px;
+  background-size: 35px;
   display: inline-block;
   width: 70px;
   height: 30px;
+  margin-top: 30px;
+}
+.about-the-team {
+  color: white;
+  font-size: 15px;
+  background: transparent;
+  float: right;
 }
 
 /* PROFILE */

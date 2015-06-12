@@ -6,7 +6,6 @@ var ClientRouter = Backbone.Router.extend({
         'profile/:id': 'viewProfile',
         'filter/:toID/:fromID': 'viewPaths',
         'about': 'about'
-
     },
 
     home: function() {
@@ -52,11 +51,10 @@ var ClientRouter = Backbone.Router.extend({
         console.log('got to about');
         $("#mainContent").empty();
 
-        var aboutUsCollection = new AboutUsCollection(aboutUsData);
-        var aboutUsCollectionView = new AboutUsCollectionView( { collection: aboutUsCollection } );
+        var aboutUsTemplateBootstrap = new AboutUsTemplateBootstrap();
+        // var aboutUsCollectionView = new AboutUsCollectionView( { collection: aboutUsCollection } );
 
-        console.log('aboutUsCollection', aboutUsCollection);
-        console.log('aboutUsCollectionView', aboutUsCollectionView);
+
     }
 
 });

@@ -10,6 +10,7 @@
   <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css' rel="stylesheet" />
   <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700' rel='stylesheet' type='text/css'>
   <link href="styles/main.css" rel="stylesheet">
+  <link href="styles/AboutUs.css" rel="stylesheet">
   <!-- COMMENT TO SEE IF IT GOES INTO NEW INDEX -->
 </head>
 
@@ -27,9 +28,6 @@
             </form>
           </div>
         </div>
-      </div>
-      <div class='about'>
-      About
       </div>
     </div>
   </div>
@@ -57,6 +55,7 @@
 
   <!-- ABOUT US DATA -->
   <script src="AboutUsData.js"></script>
+  <script src="views/AboutUsTemplateBootstrap.js"></script>
 
   <script src="models/AboutUsModel.js"></script>
   <script src="collections/AboutUsCollection.js"></script>
@@ -103,13 +102,8 @@
   <script src="views/ProfileView.js"></script>
   <script src="views/NavigationView.js"></script>
 
-
-  <script src="views/AboutUsView.js"></script>
-  <script src="views/AboutUsCollectionView.js"></script>
-
-
   <!-- ROUTER -->
-  <script src= "ClientRouter.js"></script>
+  <script src= "clientRouter.js"></script>
 
   <script>
   $(function() {
@@ -123,7 +117,7 @@
       appView.discoverPathsView.journeyClickHandler(e);
     });
 
-    $(".about").click(function(e){
+    $(".about-the-team").click(function(e){
       clientRouter.navigate("about", {trigger: true});
     })
 

@@ -1,5 +1,4 @@
 html{
-
   /*background: url(../assets/bg-darkblue.jpg) no-repeat center center fixed;*/
   background: #002B5E;
 }
@@ -10,7 +9,7 @@ html{
 
 }
 
-h1 {
+h1.aboutUs{
   color: white;
   width: 300px;
   display: block;
