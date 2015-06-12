@@ -105,6 +105,7 @@ var ProfileView = Backbone.View.extend({
     });
   }
 });
+
 /*
  * degreeToTimelineItemModel - massages the data given into
  *                    the format a TimelineModel should be
