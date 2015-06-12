@@ -10,7 +10,7 @@ var TimeBlockView = Backbone.View.extend({
         
         var heightToWidthRatio = 0.50;
 
-        this.width = Math.max(this.model.get('text')['1'].length, this.model.get('text')['2'].length, 11);
+        this.width = Math.max(this.model.text['1'].length, this.model.text['2'].length, 11);
         this.width = this.width * (this.fontSize * heightToWidthRatio) + this.padding * 2;
 
         this.height = this.fontSize * 3 + this.padding * 2;
@@ -27,7 +27,7 @@ var TimeBlockView = Backbone.View.extend({
         var x = this.options.cellX;
         var y = this.options.cellY - this.fontSize;
         var color = 'aliceblue';
-        if(this.model.get('type') === 'Education') {
+        if(this.model.type === 'Education') {
             color = 'navajowhite';
         }
 
@@ -61,15 +61,15 @@ var TimeBlockView = Backbone.View.extend({
     render : function () {
         this.renderCell();
         //transform date information into a string
-        var dates = this.model.get('dates');
+        var dates = this.model.dates;
         //render a single year if start and end are equal else "STARTYEAR - ENDYEAR"
         var strDates = dates.start.toString();
         if(dates.start !== dates.end) {
             strDates += ' - ' + dates.end;
         }
 
-        var textLine1 = this.model.get('text')['1'];
-        var textLine2 = this.model.get('text')['2'];
+        var textLine1 = this.model.text['1'];
+        var textLine2 = this.model.text['2'];
         
         var x = this.options.cellX;
         var y = this.options.cellY;
