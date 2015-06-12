@@ -88,62 +88,62 @@ window.AboutUsTemplateBootstrap = Backbone.View.extend({
           <div class="col-md-12"> \
             <h1 class="aboutUs"> Tech Stack </h1> \
             <ul class="techStack"> \
-              <li class="backbone techstack"> \
+              <li class="backbone"> \
                 <a href="http://github.com"> \
                  <img class="techStackImg" src="assets/backbone.png"> \
                 </a> \
               </li> \
-              <li class="nodejs techStack"> \
+              <li class="nodejs"> \
                 <a href="http://github.com"> \
                   <img class="techStackImg" src="assets/nodejs.png"> \
               </a> \
               </li> \
-              <li class="express techStack"> \
+              <li class="express"> \
                 <a href="http://github.com"> \
                   <img class="techStackImg" src="assets/express.png"> \
               </a> \
               </li> \
-              <li class="MySQL techStack"> \
+              <li class="MySQL"> \
                 <a href="http://github.com"> \
                   <img class="techStackImg" src="assets/MySQL.png"> \
                 </a> \
               </li> \
-              <li class="knex techStack"> \
+              <li class="knex"> \
                 <a href="http://github.com"> \
                   <img class="techStackImg" src="assets/knex.png"> \
               </a> \
               </li> \
-              <li class="bookshelf techStack"> \
+              <li class="bookshelf"> \
                 <a href="http://github.com"> \
                   <img class="techStackImg" src="assets/bookshelf.png"> \
               </a> \
               </li> \
-              <li class="highcharts techStack"> \
+              <li class="highcharts"> \
                 <a href="http://github.com"> \
-                  <img class="techStackImg" src="assets/highcharts.svg"> \
+                  <img class="techStackImg" src="assets/highcharts.png"> \
               </a> \
               </li> \
-              <li class="d3 techStack"> \
+              <li class="d3"> \
                 <a href="http://github.com"> \
                   <img class="techStackImg" src="assets/d3.png"> \
               </a> \
               </li> \
-              <li class="python techStack"> \
+              <li class="python"> \
                 <a href="http://github.com"> \
                   <img class="techStackImg" src="assets/python.png"> \
               </a> \
               </li> \
-              <li class="gulp techStack"> \
+              <li class="gulp"> \
                 <a href="http://github.com"> \
                   <img class="techStackImg" src="assets/gulp.png"> \
               </a> \
               </li> \
-              <li class="gulp techStack"> \
+              <li class="gulp"> \
                 <a href="http://github.com"> \
                   <img class="techStackImg" src="assets/jasmine.svg"> \
               </a> \
               </li> \
-              <li class="scrapy techStack"> \
+              <li class="scrapy"> \
                 <a href="http://github.com"> \
                   <img class="techStackImg" src="assets/scrapy.png"> \
                 </a> \
