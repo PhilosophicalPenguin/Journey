@@ -32,7 +32,7 @@ button:focus, .btn:focus {outline:0;}
 }
 
 .splashBack{
-  background: url(../assets/bg-darkblue.jpg) no-repeat center center fixed;
+  background: url(../assets/bg-fastroad2.jpg) no-repeat center center fixed;
   height:100vh;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -46,8 +46,8 @@ button:focus, .btn:focus {outline:0;}
     font-family: 'Expletus Sans', cursive;
     font-weight: 400;
     font-size: 12em;
-    color: #EAD121;
-    margin-top: 45px;
+    color: white;
+    margin-top: 100px;
     }
   .splashPage h2 {
     font-size: 2em;
