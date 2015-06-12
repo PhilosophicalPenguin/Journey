@@ -423,8 +423,16 @@ th {
 .about-the-team {
   color: white;
   font-size: 15px;
-  background: transparent;
-  float: right;
+  text-align: right;
+  margin-top: 20%;
+  background-color: black;
+  height: 35px
+}
+
+.about-the-team-text {
+  margin-right: 5%;
+  margin-top: 50px;
+  vertical-align: middle
 }
 
 /* PROFILE */
