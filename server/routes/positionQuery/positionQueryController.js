@@ -88,7 +88,7 @@ module.exports = {
         } else { //found the position requested
           var positionID  =   position.attributes.id;
           var filterID    =   request.query.filter;
-          
+
           // creates object to store stats
           var result = {
             position_name : position.attributes.position_name,
@@ -126,17 +126,17 @@ module.exports = {
                 headline: object.headline
               }
               if(profile.picURL === null) {
-                profile.picURL = 'http://bridgesprep.org/wp-content/uploads/2013/10/Facebook-no-profile-picture-icon-620x389.jpg';
+                profile.picURL = 'http://free.clipartof.com/76-Free-Cute-Cartoon-Monkey-Clipart-Illustration.png';
               }
               var val = object[property];
               result[subject][val] = result[subject][val] || [];
               result[subject][val].push(profile);
               ++result[subject].total;
-              
+
               if(subject === 'positions'){
 
                 var positionID    = object.position_id;
-                var positionName  = object.position_name; 
+                var positionName  = object.position_name;
 
                 result[subject].positionsSummary[positionName] = positionID;
               }
@@ -180,10 +180,10 @@ module.exports = {
                 result.degreesAndFields[val].push(profile);
                 result.degreesAndFields.total++;
               }
-            
+
             forEach(data, tallyDegreeAndField);
             getEducationStatsCB();
-            
+
             });
           };
 
@@ -270,7 +270,7 @@ module.exports = {
         var key           = tempObj[positionID],
             val           = positionID,
             positionToAdd = {};
-        
+
         var newVal = parseInt(val);
         fromPositions[key] = newVal;
       }
@@ -296,7 +296,7 @@ module.exports = {
         positionNames[target + 'ID'] = id;
         callback();
       });
-    } 
+    }
 
     var getFilterProfiles = function(callback) {
       db.knex.from('expMilestones')
@@ -328,11 +328,16 @@ module.exports = {
               result[profile.profile_id] = filteredProfile;
             }
           }
+
           else if(!result[profile.profile_id]) {
-            result[profile.profile_id] = filteredProfile; 
+            result[profile.profile_id] = filteredProfile;
+          }
+
+          if(filteredProfile.picURL === null){
+            filteredProfile.picURL = 'http://free.clipartof.com/76-Free-Cute-Cartoon-Monkey-Clipart-Illustration.png'
           }
         }
-      
+
         for (var key in result) {
           resultArr.push(result[key]);
         }

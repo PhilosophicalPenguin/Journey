@@ -223,11 +223,17 @@ th {
   outline: none;
 }
 
+.ui-state-focus {
+  background:#E9E9E9;
+  outline:none;
+}
+
 .ui-helper-hidden-accessible {
   display: none;
   position: absolute;
   left:-999em;
 }
+
 .profiles {
   padding: 0;
   margin-top: 20px;
@@ -260,6 +266,7 @@ th {
   font-weight: 600;
   margin-top: 4px;
 }
+
 .hideCol {
   display: none;
 }
@@ -302,15 +309,15 @@ th {
 }
 
 :-moz-placeholder { /* Firefox 18- */
-   font-weight: normal;  
+   font-weight: normal;
 }
 
 ::-moz-placeholder {  /* Firefox 19+ */
-   font-weight: normal;  
+   font-weight: normal;
 }
 
-:-ms-input-placeholder {  
-   font-weight: normal;  
+:-ms-input-placeholder {
+   font-weight: normal;
 }
 
 .filterField {
@@ -322,7 +329,7 @@ th {
 }
 .showAll {
   background: url(../assets/triangle-down.png) no-repeat;
-  -webkit-background-size: 15px; 
+  -webkit-background-size: 15px;
   -moz-background-size: 15px;
   -o-background-size: 15px;
   background-size: 15px;
@@ -403,14 +410,29 @@ th {
   margin-right: 0;
 }
 .filterArrow {
-  background: url(../assets/right-arrow.png) no-repeat;
-  -webkit-background-size: 50px; 
-  -moz-background-size: 50px;
-  -o-background-size: 50px;
-  background-size: 50px;
+  background: url(../assets/black-right-arrow.png) no-repeat;
+  -webkit-background-size: 35px;
+  -moz-background-size: 35px;
+  -o-background-size: 35px;
+  background-size: 35px;
   display: inline-block;
   width: 70px;
-  height: 46px;
+  height: 30px;
+  margin-top: 30px;
+}
+.about-the-team {
+  color: white;
+  font-size: 15px;
+  text-align: right;
+  margin-top: 20%;
+  background-color: black;
+  height: 35px
+}
+
+.about-the-team-text {
+  margin-right: 5%;
+  margin-top: 50px;
+  vertical-align: middle
 }
 
 /* PROFILE */

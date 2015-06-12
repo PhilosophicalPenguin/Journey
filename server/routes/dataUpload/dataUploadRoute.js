@@ -311,7 +311,7 @@ module.exports = {
 
 
         }, function done() {
-          outerCallback(false); // Done with the loop over the education list array          
+          outerCallback(false); // Done with the loop over the education list array
         });
       };
 
@@ -403,7 +403,7 @@ module.exports = {
           });
 
         }, function done() {
-          outerCallback(false); // Done with the loop over the experience list array          
+          outerCallback(false); // Done with the loop over the experience list array
         });
       };
 

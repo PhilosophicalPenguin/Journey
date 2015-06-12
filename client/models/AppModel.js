@@ -2,8 +2,8 @@ window.AppModel = Backbone.Model.extend ({
 
     url: '/api/queryPositions/getPositions',
 
-    ourHardCode : [ { position_name: 'Entertainment Lawyer', position_image: '../assets/entertainment-lawyer.jpg'}, 
-                    { position_name: 'Product Manager',      position_image: '../assets/product-manager.jpg'     }, 
+    ourHardCode : [ { position_name: 'Entertainment Lawyer', position_image: '../assets/entertainment-lawyer.jpg'},
+                    { position_name: 'Product Manager',      position_image: '../assets/product-manager.jpg'     },
                     { position_name: 'Data Scientist',       position_image: '../assets/data-scientist.jpg'      }],
 
     parse: function(response) {

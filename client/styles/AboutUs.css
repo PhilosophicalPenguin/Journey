@@ -1,0 +1,139 @@
+html{
+  /*background: url(../assets/bg-darkblue.jpg) no-repeat center center fixed;*/
+  background: #002B5E;
+}
+
+.aboutUs {
+  /*background: url(../assets/bg-darkblue.jpg) no-repeat center center fixed*/
+  background: #002B5E;
+
+}
+
+h1.aboutUs{
+  color: white;
+  width: 300px;
+  display: block;
+  margin: 100px auto 50px;
+  font-size: 42px;
+  text-align: center
+
+}
+
+.memberpic {
+  width: 200px;
+  height: 200px;
+  border: 5px solid white;
+  border-radius: 50%;
+}
+
+.techStackImg {
+  height: 150px;
+
+}
+
+
+.col-md-3 {
+  display: inline;
+  color: white;
+  font-size: 22px;
+  padding-left: 0px;
+  padding-right: 0px;
+
+}
+
+.row.no-pad {
+  margin-right:0;
+  margin-left:0;
+}
+.row.no-pad > [class*='col-'] {
+  padding-right:0;
+  padding-left:0;
+}
+
+.techStack li, .profileCol li{
+  height:100px;
+  width:350px;
+  display: inline;
+  float: left;
+  border: 5px solid white;
+  margin: 5px 5px 5px 5px;
+  padding: 15px 15px 15px 15px;
+}
+
+.techStack img, .profileCol img {
+  max-width:100%;
+  max-height:100%;
+  margin:auto;
+  display:block;
+}
+.profileCol li {
+  height:40px;
+  width:40px;
+  display: inline;
+  border: 3px solid white;
+  background-color: #f6f6f6;
+  margin: 2 2 2 2;
+  padding: 0 0 0 0;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+ul {
+  list-style-type: none;
+
+}
+
+.nodejs {
+  background-color: #fefdfb
+}
+
+.express {
+  background-color: #fefdfb
+}
+
+.knex {
+  background-color: #fefdfb
+}
+
+.d3 {
+  background-color: #fefdfb
+}
+
+.bookshelf{
+  background-color: #fefdfb
+}
+
+.highcharts {
+  background-color: #fefdfb
+}
+
+.gulp {
+  background-color: #fefdfb
+}
+
+.MySQL {
+  background-color: #fefdfb
+}
+
+.backbone {
+  background-color: #fefdfb
+}
+
+.scrapy {
+  background-color: #fefdfb
+}
+
+.python {
+  background-color: #fefdfb
+}
+
+.profileCol p {
+  margin-top: 10px;
+
+}
+
+.profileCol ul li:first-child {
+  margin-left: 25px;
+}
+

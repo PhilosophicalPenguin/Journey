@@ -6,8 +6,6 @@ window.AutocompleteView = Backbone.View.extend({
 
   initialize: function() {
 
-    var thisEl = this.$el;
-
     this.$el.autocomplete({
       source: this.model.get('availablePositions'),
     });

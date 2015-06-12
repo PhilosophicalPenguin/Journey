@@ -4,7 +4,8 @@ var ClientRouter = Backbone.Router.extend({
         '': 'home',
         'journey/:id': 'viewJourney',
         'profile/:id': 'viewProfile',
-        'filter/:toID/:fromID': 'viewPaths'
+        'filter/:toID/:fromID': 'viewPaths',
+        'about': 'about'
     },
 
     home: function() {
@@ -44,9 +45,19 @@ var ClientRouter = Backbone.Router.extend({
           var filtersCollectionView = new FiltersCollectionView({ collection: filtersCollection });
           $('.innerJourneyContent').append(filtersCollectionView.el);
         });
+    },
+
+    about: function() {
+        console.log('got to about');
+        $("#mainContent").empty();
+
+        var aboutUsTemplateBootstrap = new AboutUsTemplateBootstrap();
+        // var aboutUsCollectionView = new AboutUsCollectionView( { collection: aboutUsCollection } );
+
+
     }
 
 });
 
-var clientRouter = new ClientRouter();
+window.clientRouter = new ClientRouter();
 Backbone.history.start();
