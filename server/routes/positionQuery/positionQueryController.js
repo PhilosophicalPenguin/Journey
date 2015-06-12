@@ -237,32 +237,6 @@ module.exports = {
             return getSkillStatsAsync()
           })
           .then(function() {
-
-            function RemoveDuplicates(object) {
-              return _.object(_.map(object, function(val, key) {
-                val = _.uniq(val, false, function(item) {
-                    return JSON.stringify(item)
-                });
-                return [key, val]
-              }));
-            };
-
-            function tally(object) {
-              object.total = 0;
-              for(var item in object) {
-                if(item !== 'total') {
-                  object.total += object[item].length;
-                }
-              }
-             }
-
-             for(var keyR in result) {
-              if(keyR !== 'position_name' && keyR !== 'positions') {
-                result[keyR] = RemoveDuplicates(result[keyR]);
-                tally(result[keyR]);
-              }
-             }
-
             response.json(result);
         });
 

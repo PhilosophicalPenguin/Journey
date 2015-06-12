@@ -34,9 +34,6 @@ module.exports = {
         withRelated: ['currentPosition', 'currentCompany', 'industry']
       })
       .then(function(profile) {
-        console.log('profile!!!', profile.relations);
-
-        console.log("SCOTT MYERS LOOKS LIKE : ", profile);
 
         var attributes  =   profile.attributes;
         var relations   =   profile.relations;
@@ -71,6 +68,7 @@ module.exports = {
           profile_id: profileID
         })
         .then(function(degrees) {
+          console.log('degrees from getProfile', degrees);
           for (var i = 0; i < degrees.length; i++) {
             
             var degree = degrees[i];
@@ -156,29 +154,18 @@ module.exports = {
 
   getProfilesFromIndustry: function(request, response){
 
-    console.log("getProfiles query works");
     var industryName = request.query.industryName;
 
-    console.log(industryName);
-
     db.knex
-        .select('profiles.id', 'headline', 'profile_name', 'picURL')
-        .from('industries')
-        .innerJoin('profiles', 'industries.id', 'profiles.industry_id')
-        .where({
-           industry_name: industryName
-        })
-        .then(function(data){
-          response.json(data)
-        })
-
-
+    .select('profiles.id', 'headline', 'profile_name', 'picURL')
+    .from('industries')
+    .innerJoin('profiles', 'industries.id', 'profiles.industry_id')
+    .where({
+       industry_name: industryName
+    })
+    .then(function(data){
+      response.json(data)
+    });
   }
 
-
-
-
-
-
-
-}
+};

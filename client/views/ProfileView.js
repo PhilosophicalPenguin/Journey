@@ -13,7 +13,6 @@ var ProfileView = Backbone.View.extend({
       },
 
       goBack: function() {
-        console.log('go back called!');
         window.history.back();
       },
 
@@ -22,11 +21,25 @@ var ProfileView = Backbone.View.extend({
         // console.log("Profile View modlel", this.model);
 
         this.$el.children().detach();
-        this.$el.append(new NavBarView().render());
-        this.$el.append('<div id="profile-card"></div>');
-        this.$el.append('<div class="backButton">Back</div>');
+        new NavBarView();
+        new AutocompleteView ({model: app});
+        
+        $('#mainContent').append('<div class="container profileContainer"></div>');
+        var $outerContainer = $('.profileContainer');
+        
+        $outerContainer.append('<div class="row"></div>');
+        var $mainRow =  $('.row'); 
+        
+        $mainRow.append('<div class="col-md-8 leftCol">');
+        $mainRow.append('<div class="col-md-4 rightCol">');
+        var $leftCol = $('.leftCol');
+        var $rightCol = $('.rightCol');
+
+        $leftCol.append('<div id="profile-card"></div>');
+        // $leftCol.append('<div class="backButton">Back</div>');
         new ProfileCardView( { model : this.model } );
-        this.$el.append('<div id="timeline-div"></div>');
+        
+        $leftCol.append('<div id="timeline-div"></div>');
         new TimelineView( { model : this.model } );
 
         
@@ -51,8 +64,6 @@ var ProfileView = Backbone.View.extend({
                     person.headline = '';
                 }
             })
-
-            console.log("people passed in to new thumbnails collection view in ProfileView.js", people)
 
             var similarPeopleThumbnailCollection = new ThumbnailsCollection(people);
             var similarPeopleThumbnailsCollectionView = new ThumbnailsCollectionView({collection: similarPeopleThumbnailCollection});

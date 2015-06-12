@@ -155,6 +155,7 @@ db.knex.schema.hasTable('eduMilestones').then(function(exists) {
   if (!exists) {
     return knex.schema.createTable('eduMilestones', function (eduMilestone) {
       eduMilestone.increments('id').primary();
+      // eduMilestone.unique(['profile_id', 'degree_id', 'fieldOfStudy_id', 'school_id']);
       eduMilestone.integer('profile_id');
       eduMilestone.integer('degree_id');
       eduMilestone.integer('fieldOfStudy_id');
@@ -173,6 +174,7 @@ db.knex.schema.hasTable('expMilestones').then(function(exists) {
   if (!exists) {
     return knex.schema.createTable('expMilestones', function (expMilestone) {
       expMilestone.increments('id').primary();
+      // expMilestone.unique(['profile_id', 'company_id', 'position_id']);
       expMilestone.integer('profile_id');
       expMilestone.integer('company_id');
       expMilestone.integer('position_id');

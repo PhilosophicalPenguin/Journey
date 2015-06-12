@@ -30,15 +30,13 @@ window.JourneyView = Backbone.View.extend({
     }
     var allCurrentPositions = this.model.attributes.positions.positionsSummary;
 
-    console.log('allCurrentPositions', this.model);
-
     this.$el.find('.destination').hide();
     var navigationModel = new NavigationModel(currentPosition, allCurrentPositions);
-    var navigationView = new NavigationView({ model: navigationModel });
+    var navigationView  = new NavigationView({ model: navigationModel });
 
     this.listenTo(navigationModel, 'ChangedToField', function(position) {
       navigationModel = new NavigationModel(position, allCurrentPositions);
-      navigationView = new NavigationView({ model: navigationModel });
+      navigationView  = new NavigationView({ model: navigationModel });
     });
   },
 
@@ -48,8 +46,6 @@ window.JourneyView = Backbone.View.extend({
 
     new NavBarView();
     new AutocompleteView ({model: app});
-
-    console.log('in the journey heres the model', this.model);
 
     this.$el.append('<div class="container journeyView"><div class="row"><div class="col-md-8 innerJourney"></div></div></div>');
     this.$el.find('.innerJourney').append(
@@ -73,6 +69,7 @@ window.JourneyView = Backbone.View.extend({
 
     this.$el.find('.innerJourneyContent').append('<div id="skillsDiv"></div>');
     var newSkillsView = new SkillsView({model: this.model});
+    // this.$el.find('.row').append('<div class="col-md-4"><div class="sectionTitles"><h2>Software Engineers with</h2><h1>MA Computer Science degrees</h1></div></div>');
 
     this.$el.find('.row').append(
       '<div class="col-md-4 rightCol">' + 
@@ -102,6 +99,6 @@ window.JourneyView = Backbone.View.extend({
     this.$el.find('.featuredHeader h1').removeClass('offsetHeader');
     this.$el.find('.featuredHeader h2').removeClass('hideCol');
 
-  },
+  }
 
 });

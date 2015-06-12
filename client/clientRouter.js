@@ -8,6 +8,7 @@ var ClientRouter = Backbone.Router.extend({
     },
 
     home: function() {
+
         // var appView = new AppView();
         // $(".mainContent").html(appView.el);
     },
@@ -26,6 +27,7 @@ var ClientRouter = Backbone.Router.extend({
     },
 
     viewProfile: function(id) {
+
         var profileModel = new ProfileModel(id);
 
         this.listenTo(profileModel, 'RecievedData', function() {
