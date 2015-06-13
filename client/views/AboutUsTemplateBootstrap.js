@@ -89,64 +89,40 @@ window.AboutUsTemplateBootstrap = Backbone.View.extend({
             <h1 class="aboutUs"> Tech Stack </h1> \
             <ul class="techStack"> \
               <li class="backbone"> \
-                <a href="http://github.com"> \
-                 <img class="techStackImg" src="assets/backbone.png"> \
-                </a> \
+                <img class="techStackImg" src="assets/backbone.png"> \
               </li> \
               <li class="nodejs"> \
-                <a href="http://github.com"> \
                   <img class="techStackImg" src="assets/nodejs.png"> \
-              </a> \
               </li> \
               <li class="express"> \
-                <a href="http://github.com"> \
                   <img class="techStackImg" src="assets/express.png"> \
-              </a> \
               </li> \
               <li class="MySQL"> \
-                <a href="http://github.com"> \
                   <img class="techStackImg" src="assets/MySQL.png"> \
-                </a> \
               </li> \
               <li class="knex"> \
-                <a href="http://github.com"> \
                   <img class="techStackImg" src="assets/knex.png"> \
-              </a> \
               </li> \
               <li class="bookshelf"> \
-                <a href="http://github.com"> \
                   <img class="techStackImg" src="assets/bookshelf.png"> \
-              </a> \
               </li> \
               <li class="highcharts"> \
-                <a href="http://github.com"> \
                   <img class="techStackImg" src="assets/highcharts.png"> \
-              </a> \
               </li> \
               <li class="d3"> \
-                <a href="http://github.com"> \
                   <img class="techStackImg" src="assets/d3.png"> \
-              </a> \
               </li> \
               <li class="python"> \
-                <a href="http://github.com"> \
                   <img class="techStackImg" src="assets/python.png"> \
-              </a> \
               </li> \
               <li class="gulp"> \
-                <a href="http://github.com"> \
                   <img class="techStackImg" src="assets/gulp.png"> \
-              </a> \
               </li> \
               <li class="gulp"> \
-                <a href="http://github.com"> \
                   <img class="techStackImg" src="assets/jasmine.svg"> \
-              </a> \
               </li> \
               <li class="scrapy"> \
-                <a href="http://github.com"> \
                   <img class="techStackImg" src="assets/scrapy.png"> \
-                </a> \
               </li> \
             </ul> \
           </div> \

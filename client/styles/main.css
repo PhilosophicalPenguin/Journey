@@ -211,7 +211,7 @@ th {
   border-radius: 5px;
   border: 1px solid white;
   height: 40px;
-  width: 280px;
+  width: 333px;
   font-size:14px;
   background-color: #003778;
   color: white;
@@ -277,7 +277,6 @@ th {
 }
 
 .rightCol {
-  margin-right: -7.5%;
   top: 90px;
   bottom: 0;
   position: fixed;
@@ -422,21 +421,32 @@ th {
   margin-top: 30px;
 }
 .about-the-team {
-  color: white;
+  color: #FFF;
   font-size: 15px;
   text-align: right;
   margin-top: 20%;
-  background-color: black;
-  height: 35px
+  background-color: #1C1E22;;
+  height: 45px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 
 .about-the-team-text {
-  margin-right: 5%;
-  margin-top: 50px;
-  vertical-align: middle
+  vertical-align: middle;
+  position: absolute;
+  right: 80px;
+  top: 13px;
+}
+.about-the-team-text:hover {
+  cursor: pointer;
+  color: #598CC7;
 }
 
 /* PROFILE */
+.leftCol {
+  margin-top: 10px;
+}
 .profileContainer {
   margin-top: 90px;
 }
@@ -452,24 +462,52 @@ th {
   display: inline-block;
   margin-left: 15px;
 }
-.profileCardInfo h1, .profileCardInfo h2 {
+.profileCardInfo h1 {
+  font-weight: bold;
+  margin: 0;
+  margin-bottom: 4px;
+  font-size: 2.2em;
+}
+.profileCardInfo h2 {
   margin: 0;
   font-size: 1.5em;
 }
-.profileCardInfo h1 {
-  font-weight: bold;
-  margin-bottom: 4px;
-}
 
 /* PROFILE TIMELINE */
-
 .timeline-svg {
   position : relative;
-  background-color: #F5F5DC;
+  background-color: white;
 }
 
-.innerJourney {
-  margin-left:2.5%;
+
+/* SIMILAR POSITIONS */
+.similarPositions {
+  padding: 0;
+  list-style: none;
+  margin-top: 10px;
+  margin-bottom: 50px;
+}
+.similarPositions li {
+  font-size: 1.5em;
+  margin-bottom: 8px;
+}
+.similarPositions li a {
+  color: #002B5E;
+}
+.similarPositions li a:hover {
+  text-decoration: none;
+  color: #337AB7;
+}
+
+.rightColHeading {
+  color: #002B5E;
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid #002B5E;
+  padding-bottom: 15px;
+  font-size: 2em;
+  margin-top: 10px;
+  font-weight: bold;
 }
 
 /*# sourceMappingURL=main.css.map */
