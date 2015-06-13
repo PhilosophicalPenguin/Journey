@@ -14,12 +14,12 @@ var forEach = function() {
 };
 
 module.exports = {
-  
+
   // Method to retrieve profile information and relevant education & experience milestones, and skills
   getProfile: function(request, response) {
     var resultProfile = {
       degrees: [],
-      experiences: [], 
+      experiences: [],
       skills: []
     };
 
@@ -39,7 +39,7 @@ module.exports = {
         var relations   =   profile.relations;
 
         if(attributes.picURL === null) {
-          attributes.picURL = 'http://bridgesprep.org/wp-content/uploads/2013/10/Facebook-no-profile-picture-icon-620x389.jpg';
+          attributes.picURL = 'http://clipartist.net/RSS/openclipart.org/2012/June/monkey_face_cartoon-999px.png';
         }
 
         resultProfile.id                =     attributes.id;
@@ -51,7 +51,7 @@ module.exports = {
         resultProfile.currentCompany    =     relations.currentCompany.attributes.company_name;
         resultProfile.currentPosition   =     relations.currentPosition.attributes.position_name;
         resultProfile.industry          =     relations.industry.attributes.industry_name;
-          
+
       })
       .then(function() {
         getProfileDetailsCB();
@@ -70,7 +70,7 @@ module.exports = {
         .then(function(degrees) {
           console.log('degrees from getProfile', degrees);
           for (var i = 0; i < degrees.length; i++) {
-            
+
             var degree = degrees[i];
 
             var milestone = {
@@ -98,7 +98,7 @@ module.exports = {
         })
         .then(function(experiences) {
           for (var i = 0; i < experiences.length; i++) {
-            
+
             var experience = experiences[i];
 
             var milestone = {
@@ -119,7 +119,7 @@ module.exports = {
     var getSkills = function(getSkillsCB) {
       db.knex.from('profiles_skills')
         .innerJoin('skills', 'profiles_skills.skill_id', 'skills.id')
-        .where('profiles_skills.profile_id', profileID)  
+        .where('profiles_skills.profile_id', profileID)
         .then(function(skills) {
           for (var i = 0; i < skills.length; i++) {
           var skill = skills[i];
@@ -135,7 +135,7 @@ module.exports = {
     var getEducationAsync         =   Promise.promisify(getEducation);
     var getExperienceAsync        =   Promise.promisify(getExperience);
     var getSkillsAsync            =   Promise.promisify(getSkills);
-    
+
     getProfileDetailsAsync()
     .then(function() {
       return getEducationAsync();
@@ -148,7 +148,7 @@ module.exports = {
     })
     .then(function() {
       console.log('Returning profile of: ' + resultProfile.name + '. Profile ID: ' + resultProfile.id);
-      response.json(resultProfile);    
+      response.json(resultProfile);
     })
   },
 

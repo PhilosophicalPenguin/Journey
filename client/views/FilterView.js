@@ -18,7 +18,7 @@ window.FilterView = Backbone.View.extend({
     console.log("THIS.MODEL IN FILTERVIEW: ", this.model);
 
     var name          =   this.model.get('name'),
-        picURL        =   this.model.get('picURL') || 'http://bridgesprep.org/wp-content/uploads/2013/10/Facebook-no-profile-picture-icon-620x389.jpg',
+        picURL        =   this.model.get('picURL') || 'http://clipartist.net/RSS/openclipart.org/2012/June/monkey_face_cartoon-999px.png',
         location      =   this.model.get('currentLocation'),
         fromPosition  =   this.model.get('filteredPosition'),
         fromCompany   =   this.model.get('filteredCompany'),
