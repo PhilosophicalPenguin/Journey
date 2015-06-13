@@ -27,11 +27,11 @@ var ProfileView = Backbone.View.extend({
       timeline_Items.push( experienceToTimelineItemModel(experiences[j]) );
     }
 
-    timeline_Items.sort(function(a,b) { 
+    timeline_Items.sort(function(a,b) {
       if(b.dates.start === a.dates.start && b.dates.end !== a.dates.end){
-        return b.dates.end - a.dates.end; 
-      } 
-      return b.dates.start - a.dates.start; 
+        return b.dates.end - a.dates.end;
+      }
+      return b.dates.start - a.dates.start;
     });
     //create the TimelineModel to give to the TimelineView in render
     this.timelineModel = new TimelineModel({collection : timeline_Items} );
@@ -59,10 +59,10 @@ var ProfileView = Backbone.View.extend({
 
     $('#mainContent').append('<div class="container profileContainer"></div>');
     var $outerContainer = $('.profileContainer');
-    
+
     $outerContainer.append('<div class="row"></div>');
-    var $mainRow =  $('.row'); 
-    
+    var $mainRow =  $('.row');
+
     $mainRow.append('<div class="col-md-8 leftCol">');
     $mainRow.append('<div class="col-md-4 rightCol">');
     var $leftCol = $('.leftCol');

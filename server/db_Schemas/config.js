@@ -1,4 +1,4 @@
-/* FROM HEADCOUNT APP (will help differetiate between local DB and hosted DB): 
+/* FROM HEADCOUNT APP (will help differetiate between local DB and hosted DB):
   var knex =  !process.env.DATABASE_URL ? require('./local_config.js') : require('knex')({
   client: 'pg',
   connection: process.env.DATABASE_URL
@@ -31,7 +31,7 @@ db.knex.schema.hasTable('degrees').then(function(exists) {
   if (!exists) {
     return knex.schema.createTable('degrees', function (degree) {
       degree.increments('id').primary();
-      degree.string('degree_name', 100).unique();      
+      degree.string('degree_name', 100).unique();
       degree.timestamps();
     }).then(function (table) {
       console.log('Degrees table created.');
@@ -85,7 +85,7 @@ db.knex.schema.hasTable('profiles').then(function(exists) {
       profile.increments('id').primary();
       profile.string('profileURL', 200).unique();
       profile.string('profile_name', 100);
-      profile.string('picURL', 200).defaultTo('http://bridgesprep.org/wp-content/uploads/2013/10/Facebook-no-profile-picture-icon-620x389.jpg');
+      profile.string('picURL', 200).defaultTo('http://clipartist.net/RSS/openclipart.org/2012/June/monkey_face_cartoon-999px.png');
       profile.string('currentLocation', 100);
       profile.string('headline', 200);
       profile.integer('currentPosition_startDate');
