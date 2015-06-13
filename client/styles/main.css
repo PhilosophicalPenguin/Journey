@@ -383,7 +383,7 @@ button:focus, .btn:focus {outline:0;}
   font-size: 15px;
   text-align: right;
   margin-top: 20%;
-  background-color: #1C1E22;;
+  background-color: rgba(28, 30, 34, 0.5);
   height: 45px;
   position: absolute;
   bottom: 0;
@@ -393,7 +393,7 @@ button:focus, .btn:focus {outline:0;}
 .about-the-team-text {
   vertical-align: middle;
   position: absolute;
-  right: 80px;
+  right: 120px;
   top: 13px;
 }
 .about-the-team-text a {
@@ -403,7 +403,7 @@ button:focus, .btn:focus {outline:0;}
 
 .about-the-team-text a:hover {
   cursor: pointer;
-  color: #598CC7;
+  color: grey;
 }
 
 /* PROFILE */
