@@ -91,11 +91,6 @@ gulp.task('minify-css', function() {
     .pipe(gulp.dest(distributeDirectory));
 });
 
-// gulp.task('copy', function() {
-//   return gulp.src('client/index.html')
-//     .pipe(gulp.dest(distributeDirectory));
-// });
-
 gulp.task('copy-assets', function() {
   return gulp.src('client/assets/*')
     .pipe(gulp.dest('./dist/assets'));
