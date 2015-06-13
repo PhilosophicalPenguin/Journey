@@ -5,11 +5,10 @@ var ClientRouter = Backbone.Router.extend({
         'journey/:id': 'viewJourney',
         'profile/:id': 'viewProfile',
         'filter/:toID/:fromID': 'viewPaths',
-        'about': 'about'
     },
 
     home: function() {
-        
+
 
         // var appView = new AppView();
         // $(".mainContent").html(appView.el);
@@ -48,16 +47,6 @@ var ClientRouter = Backbone.Router.extend({
           var filtersCollectionView = new FiltersCollectionView({ collection: filtersCollection });
           $('.innerJourneyContent').append(filtersCollectionView.el);
         });
-    },
-
-    about: function() {
-        console.log('got to about');
-        $("#mainContent").empty();
-
-        var aboutUsTemplateBootstrap = new AboutUsTemplateBootstrap();
-        // var aboutUsCollectionView = new AboutUsCollectionView( { collection: aboutUsCollection } );
-
-
     }
 
 });

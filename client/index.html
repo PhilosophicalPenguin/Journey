@@ -30,7 +30,7 @@
         </div>
       </div>
         <footer class='about-the-team'>
-           <span class='about-the-team-text'> About the Team </span>
+           <span class="about-the-team-text"><a href="about.html">About the Team</a></span>
         </footer>
     </div>
   </div>
@@ -113,15 +113,6 @@
     window.appView = new AppView({
       model: app
     });
-
-    $(".onePath").click(function(e) {
-      appView.discoverPathsView.journeyClickHandler(e);
-    });
-
-    $(".about-the-team").click(function(e){
-      clientRouter.navigate("about", {trigger: true});
-    })
-
 
   });
   </script>
