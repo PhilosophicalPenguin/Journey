@@ -101,20 +101,34 @@ gulp.task('compressAndConcat', ['lint', 'server-test'], function() {
     .pipe(gulp.dest(distributeDirectory));
 });
 
-gulp.task('minify-css', function() {
-  return gulp.src('client/styles/*.css')
+gulp.task('minify-main-css', function() {
+  return gulp.src('client/styles/main.css')
     .pipe(minifyCss())
     .pipe(rename('style.min.css'))
     .pipe(gulp.dest(distributeDirectory));
 });
+
+gulp.task('minify-aboutus-css', function() {
+  return gulp.src('client/styles/AboutUs.css')
+    .pipe(minifyCss())
+    .pipe(rename('aboutus.min.css'))
+    .pipe(gulp.dest(distributeDirectory));
+});
+
 
 gulp.task('copy-assets', function() {
   return gulp.src('client/assets/*')
     .pipe(gulp.dest('./dist/assets'));
 });
 
-gulp.task('process', function () {
+gulp.task('process-index', function () {
   return gulp.src('client/index.html')
+   .pipe(processhtml())
+   .pipe(gulp.dest('./dist'));
+});
+
+gulp.task('process-aboutus', function () {
+  return gulp.src('client/about.html')
    .pipe(processhtml())
    .pipe(gulp.dest('./dist'));
 });
@@ -132,6 +146,6 @@ gulp.task('watch', function() {
 
 // gulp.task('test', ['start-nodemon']);
 
-gulp.task('deploy', ['compressAndConcat', 'minify-css', 'copy-assets', 'process']);
+gulp.task('deploy', ['compressAndConcat', 'minify-main-css', 'minify-aboutus-css', 'copy-assets', 'process-index', 'process-aboutus']);
 
 

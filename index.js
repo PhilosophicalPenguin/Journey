@@ -8,13 +8,13 @@ var path = require('path');
 
 var port = process.env.PORT || 3000;
 
-// if(process.env.PORT) {
-//   app.use(express.static(__dirname + '/dist'));
-// }
-// else {
-//  app.use(express.static(__dirname + '/client')); 
-// }
-app.use(express.static(__dirname + '/dist'));
+if(process.env.PORT) {
+  app.use(express.static(__dirname + '/dist'));
+}
+else {
+ app.use(express.static(__dirname + '/client')); 
+}
+// app.use(express.static(__dirname + '/dist'));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
