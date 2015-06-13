@@ -6,11 +6,13 @@ var TimelineModel = Backbone.Model.extend({
   */
   initialize : function() {
     var context = this;
-    console.log('identify', this);
+    var itemSpacing = 80;
+    var borderBuffer = 100;
 
-    this.set('width', 1000);
-    this.set('height', 1200);
-    this.set('borderBuffer', 75);
+    this.set('itemSpacing', itemSpacing);
+    this.set('borderBuffer', borderBuffer);
+    this.set('width', 700);
+    this.set('height', borderBuffer * 2 + itemSpacing * this.get('collection').length);
     this.set('xMidpoint', Math.floor(this.get('width') / 2));
 
     this.set('oldestYear', Infinity);
@@ -43,11 +45,8 @@ var TimelineModel = Backbone.Model.extend({
     var midpoint = this.get('xMidpoint');
     var borderBuffer = this.get('borderBuffer');
 
-    var topYStop = Math.floor(borderBuffer / 2);
+    var topYStop = Math.floor(borderBuffer / 8);
     var capArmLength = 75;
-
-    var topPerpendicular     = lineSegement(midpoint - capArmLength, topYStop,
-                                            midpoint + capArmLength, topYStop);
 
     var presentEndOfTimeline = lineSegement(midpoint, topYStop,
                                             midpoint, borderBuffer);
@@ -58,16 +57,17 @@ var TimelineModel = Backbone.Model.extend({
     var mainLine             = lineSegement(midpoint, borderBuffer,
                                             midpoint, this.get('height') - borderBuffer);
 
-    this.set('topPerpendicular', topPerpendicular);
-    this.set('presentEndOfTimeline', presentEndOfTimeline);
-    this.set('pastEndOfTimeline', pastEndOfTimeline);
-    this.set('mainLine', mainLine);
+    this.set('presentEndOfTimeline',  presentEndOfTimeline);
+    this.set('pastEndOfTimeline',     pastEndOfTimeline);
+    this.set('mainLine',              mainLine);
   },
 
   positionTimelineItems : function() {
     var lineLength = this.get('mainLine')[1].y - this.get('mainLine')[0].y;
     var context =  this;
     var branchLength = 75;
+    var borderBuffer = this.get('borderBuffer');
+    var itemSpacing = this.get('itemSpacing');
     this.get('collection').forEach(function (timeItem, index, timeItemsCollection) {
       var offset = branchLength;
       if(timeItem.type !== "Education") {
@@ -75,7 +75,7 @@ var TimelineModel = Backbone.Model.extend({
       }
 
       var x = context.get('xMidpoint') - offset;
-      var y = (lineLength * (index / timeItemsCollection.length)) + context.get('borderBuffer');
+      var y = index * itemSpacing + borderBuffer;
       timeItem.position = { 'x' : x, 'y' : y };
     });
   }

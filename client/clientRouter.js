@@ -9,6 +9,7 @@ var ClientRouter = Backbone.Router.extend({
     },
 
     home: function() {
+        
 
         // var appView = new AppView();
         // $(".mainContent").html(appView.el);
@@ -33,6 +34,7 @@ var ClientRouter = Backbone.Router.extend({
 
         this.listenTo(profileModel, 'RecievedData', function() {
             $('#mainContent').empty();
+            window.scrollTo(0, 0);
             var profileView = new ProfileView( { model : profileModel } );
         });
     },
@@ -42,6 +44,7 @@ var ClientRouter = Backbone.Router.extend({
 
         this.listenTo(filtersCollection, 'RecievedData', function() {
           $('.innerJourneyContent').empty();
+            window.scrollTo(0, 0);
           var filtersCollectionView = new FiltersCollectionView({ collection: filtersCollection });
           $('.innerJourneyContent').append(filtersCollectionView.el);
         });

@@ -6,19 +6,18 @@
 .aboutUs {
   /*background: url(../assets/bg-darkblue.jpg) no-repeat center center fixed*/
   background: #002B5E;
-
+  padding-bottom: 80px;
 }
 
 h1.aboutUs{
   color: white;
   width: 300px;
   display: block;
-  margin: 100px auto 50px;
+  margin: 100px auto 0px;
   font-size: 42px;
   text-align: center
 
 }
-
 .memberpic {
   width: 200px;
   height: 200px;

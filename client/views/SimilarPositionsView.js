@@ -24,23 +24,15 @@ var SimilarPositionsView = Backbone.View.extend({
 
 		console.log("previousPositions", previousPositions);
 
-		if(previousPositions.length > 0){
-			
-		this.$el.append("<h2> Similar Positions </h2>")
-		}
-
+		if(previousPositions.length > 0){ 
+      $('#similarpositions-div').append('<div class="rightColHeading">Similar Positions</div>');
+    }
 
 		return this.$el.append(previousPositions.map(function(position){
-			return ('<a href="' + "viewJourney/#" + position[1] + '"> <li class=similarposition>' +  position[0] + '</li> </a>')
+			console.log('position number!', position[1]);
+			return ('<li class=similarposition><a href="#journey/' + position[1] + '"> ' +  position[0] + '</a> </li>')
 		}))
 
 	}
-
-
-
-
-
-
-
 
 })

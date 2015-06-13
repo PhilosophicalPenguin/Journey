@@ -17,7 +17,7 @@ var TimeBlockView = Backbone.View.extend({
 
         
         if(this.options.leftOfTimeline) {
-            this.options.cellX -= this.width
+            this.options.cellX -= 20;
         }
 
         this.render();
@@ -48,10 +48,11 @@ var TimeBlockView = Backbone.View.extend({
 
     renderText : function(x, y, text) {
         var svgContainer = d3.select(this.el);
-        svgContainer
+        
+        return svgContainer
             .append('text')
             .attr('x', x + this.padding)
-            .attr('y', y + this.padding)
+            .attr('y', y-this.fontSize+3)
             .text(text)
             .attr('font-family', 'sans-serif')
             .attr('font-size', this.options.font_size)
@@ -59,7 +60,7 @@ var TimeBlockView = Backbone.View.extend({
     },
 
     render : function () {
-        this.renderCell();
+        // this.renderCell();
         //transform date information into a string
         var dates = this.model.dates;
         //render a single year if start and end are equal else "STARTYEAR - ENDYEAR"
@@ -73,11 +74,16 @@ var TimeBlockView = Backbone.View.extend({
         
         var x = this.options.cellX;
         var y = this.options.cellY;
-        //render the text
-        this.renderText(x, y,                     strDates);
-        this.renderText(x, y + this.fontSize,     textLine1)
-        this.renderText(x, y + this.fontSize * 2, textLine2)
-
-        
+        var line_0 = this.renderText(x, y,                     strDates)
+                        .attr('font-style', 'italic');
+        var line_1 = this.renderText(x, y + this.fontSize,     textLine1)
+                        .attr('font-weight', 'bold');
+        var line_2 = this.renderText(x, y + this.fontSize * 2, textLine2);
+        if(this.model.type === 'Education') {
+            line_0.attr('text-anchor','end');
+            line_1.attr('text-anchor','end');
+            line_2.attr('text-anchor','end');
+        }
+        // render the text
     }
 });
