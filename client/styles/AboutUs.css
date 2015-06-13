@@ -1,4 +1,3 @@
-
 .aboutUs {
   background: #002B5E;
   padding-bottom: 80px;
@@ -11,7 +10,6 @@ h1.aboutUs{
   margin: 100px auto 0px;
   font-size: 42px;
   text-align: center
-
 }
 
 .memberpic {
@@ -23,9 +21,7 @@ h1.aboutUs{
 
 .techStackImg {
   height: 150px;
-
 }
-
 
 .col-md-3 {
   display: inline;
@@ -33,7 +29,6 @@ h1.aboutUs{
   font-size: 22px;
   padding-left: 0px;
   padding-right: 0px;
-
 }
 
 .row.no-pad {
