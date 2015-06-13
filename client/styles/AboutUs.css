@@ -1,10 +1,5 @@
-/*html{
-  background: url(../assets/bg-darkblue.jpg) no-repeat center center fixed;
-  background: #002B5E;
-}*/
 
 .aboutUs {
-  /*background: url(../assets/bg-darkblue.jpg) no-repeat center center fixed*/
   background: #002B5E;
   padding-bottom: 80px;
 }
@@ -135,4 +130,5 @@ ul {
 .profileCol ul li:first-child {
   margin-left: 25px;
 }
+
 

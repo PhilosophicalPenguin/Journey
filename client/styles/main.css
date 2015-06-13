@@ -420,7 +420,7 @@ th {
   height: 30px;
   margin-top: 30px;
 }
-.about-the-team {
+a {
   color: #FFF;
   font-size: 15px;
   text-align: right;
@@ -438,7 +438,7 @@ th {
   right: 80px;
   top: 13px;
 }
-.about-the-team-text:hover {
+a:hover {
   cursor: pointer;
   color: #598CC7;
 }
