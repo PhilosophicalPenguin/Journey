@@ -65,7 +65,7 @@ window.EducationChartView = Backbone.View.extend({
                 context.model.set('positionFilter', this.name);   //Other
 
                 if(this.name === "Other"){
-                  context.model.createNewThumbnails(context.model.get('degreesAndFields')["Other_"].slice(0, 10));                
+                  context.model.createNewThumbnails(context.model.get('degreesAndFields').Other_.slice(0, 10));                
                 } else {
                   context.model.createNewThumbnails(context.model.get('degreesAndFields')[this.name.replace(" in ", "_")].slice(0, 10));                
                 }

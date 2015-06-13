@@ -17,7 +17,6 @@ describe('Journey Server', function() {
         });
     });
 
-
     it('should have totals that equal the sum of the stats', function(done) {
         request('http://localhost:3000/api/queryPositions/getStats?id=9', function(error, response, body) {
             body = JSON.parse(body);
@@ -99,9 +98,7 @@ describe('Journey Server', function() {
     it('should get all previous positions for any given current position', function(done) {
         request('http://localhost:3000/api/profiles/getProfile?id=1', function(error, response, body) {
             body = JSON.parse(body);
-
             expect(body).toBeObject();
-
             expect(body.degrees).toBeArray();
             expect(body.experiences).toBeArray();
             expect(body.skills).toBeArray();
@@ -111,9 +108,6 @@ describe('Journey Server', function() {
             expect(body.pic).toBeString();
             expect(body.location).toBeString();
             expect(body.headline).toBeString();
-
-
-
             done();
         });
     });
@@ -132,10 +126,5 @@ describe('Journey Server', function() {
             done();
         });
     });
-
-
-
-
-
 
 });

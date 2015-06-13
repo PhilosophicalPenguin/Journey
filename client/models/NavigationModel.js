@@ -22,7 +22,7 @@ window.NavigationModel = Backbone.Model.extend({
     
     for(var key in positionsToAll) {
       context.get('positionsToNames').push(key);
-    };
+    }
 
   },
   

@@ -68,7 +68,7 @@ module.exports = {
           profile_id: profileID
         })
         .then(function(degrees) {
-          console.log('degrees from getProfile', degrees);
+          // console.log('degrees from getProfile', degrees);
           for (var i = 0; i < degrees.length; i++) {
 
             var degree = degrees[i];
@@ -147,7 +147,7 @@ module.exports = {
       return getSkillsAsync();
     })
     .then(function() {
-      console.log('Returning profile of: ' + resultProfile.name + '. Profile ID: ' + resultProfile.id);
+      // console.log('Returning profile of: ' + resultProfile.name + '. Profile ID: ' + resultProfile.id);
       response.json(resultProfile);
     })
   },

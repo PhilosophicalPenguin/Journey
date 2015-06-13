@@ -4,14 +4,15 @@
 <head>
   <title>Journey</title>
   <link rel="shortcut icon" type="image/png" href="assets/favicon.png"/>
-  <!-- <link href='http://fonts.googleapis.com/css?family=Galdeano' rel='stylesheet' type='text/css'> -->
-  <!-- <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'> -->
   <link href='http://fonts.googleapis.com/css?family=Expletus+Sans:600' rel='stylesheet' type='text/css'>
   <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css' rel="stylesheet" />
   <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700' rel='stylesheet' type='text/css'>
+  
+  <!-- build:css style.min.css -->
   <link href="styles/main.css" rel="stylesheet">
   <link href="styles/AboutUs.css" rel="stylesheet">
-  <!-- COMMENT TO SEE IF IT GOES INTO NEW INDEX -->
+  <!-- /build -->
+  
 </head>
 
 <body id="thewholebody">
@@ -34,77 +35,62 @@
         </footer>
     </div>
   </div>
-  <!-- DEPENDENCIES -->
-  <!-- script src="jquery.min.js"></script>
-  <script src="underscore-min.js"></script>
-  <script src="backbone-min.js"></script>
-  <script src="highcharts.js"></script>
-  <script src="highcharts-more.js"></script>
-  <script src="highcharts-3d.js"></script>
-  <script src="d3.min.js"></script>-->
-
+  
+  <!-- build:js app.min.js -->
   <script src= "bower_components/jquery/dist/jquery.js"></script>
-	<script src= "bower_components/underscore/underscore.js"></script>
-	<script src= "bower_components/backbone/backbone.js"></script>
+  <script src= "bower_components/jquery-ui/jquery-ui.js"></script>
+  <script src= "bower_components/underscore/underscore.js"></script>
+  <script src= "bower_components/backbone/backbone.js"></script>
   <script src= "bower_components/highcharts-release/highcharts.js"></script>
   <script src= "bower_components/highcharts-release/highcharts-3d.js"></script>
   <script src= "bower_components/highcharts-release/highcharts-more.js"></script>
-  <script src= "bower_components/d3/d3.min.js"></script>
+  <script src= "bower_components/d3/d3.js"></script>
 
-  <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-
-  <!-- ALL OUR JS IN ONE FILE -->
-  <!--script src="all.min.js"></script-->
-
-  <!-- ABOUT US DATA -->
-  <script src="views/AboutUsTemplateBootstrap.js"></script>
-
+  <script src="models/AppModel.js"></script>
   <script src="models/AboutUsModel.js"></script>
-  <script src="collections/AboutUsCollection.js"></script>
+  <script src="models/PositionModel.js"></script>
   <script src="models/ProfileModel.js"></script>
   <script src="models/FilterModel.js"></script>
   <script src="models/ThumbnailModel.js"></script>
-  <script src="collections/ThumbnailsCollection.js"></script>
-  <script src="views/SimilarPositionsView.js"></script>
   <script src="models/SimilarPeopleModel.js"></script>
-  <script src="models/PositionModel.js"></script>
-  <script src="collections/PositionsCollection.js"></script>
-  <script src="collections/FiltersCollection.js"></script>
   <script src="models/NavigationModel.js"></script>
-  <script src="models/AppModel.js"></script>
-
-  <script src="views/AutocompleteView.js"></script>
-  <script src="views/NavBarView.js"></script>
-  <script src="views/ThumbnailView.js"></script>
-  <script src="views/ThumbnailsCollectionView.js"></script>
-  <script src="views/FilterView.js"></script>
-  <script src="views/FiltersCollectionView.js"></script>
-
-
   <script src="models/TimelineItemModel.js"></script>
   <script src="collections/TimelineItemsCollection.js"></script>
   <script src="models/TimelineModel.js"></script>
 
+  <script src="collections/AboutUsCollection.js"></script>
+  <script src="collections/ThumbnailsCollection.js"></script>
+  <script src="collections/PositionsCollection.js"></script>
+  <script src="collections/FiltersCollection.js"></script>
 
-  <script src="views/TimeBlockView.js"></script>
-  <script src="views/TimelineView.js"></script>
-  <script src="views/DiscoverPathsView.js"></script>
-  <script src="views/PositionsCollectionView.js"></script>
-  <script src="views/PositionView.js"></script>
   <script src="views/AppView.js"></script>
+  <script src="views/DiscoverPathsView.js"></script>
+  <script src="views/AboutUsTemplateBootstrap.js"></script>
+  <script src="views/AutocompleteView.js"></script>
+  <script src="views/NavBarView.js"></script>
+  <script src="views/NavigationView.js"></script>
+  <script src="views/JourneyView.js"></script>
+  <script src="views/ThumbnailView.js"></script>
+  <script src="views/ThumbnailsCollectionView.js"></script>
+  <script src="views/PositionView.js"></script>
+  <script src="views/PositionsCollectionView.js"></script>
   <script src="views/PositionsStatsChartView.js"></script>
   <script src="views/ExperienceView.js"></script>
   <script src="views/EducationChartView.js"></script>
   <script src="views/EducationView.js"></script>
   <script src="views/SkillsStatsChartView.js"></script>
   <script src="views/SkillsView.js"></script>
-  <script src="views/JourneyView.js"></script>
+  <script src="views/FilterView.js"></script>
+  <script src="views/FiltersCollectionView.js"></script>
+  <script src="views/TimeBlockView.js"></script>
+  <script src="views/TimelineView.js"></script>
+  <script src="views/SimilarPositionsView.js"></script>
   <script src="views/ProfileCardView.js"></script>
   <script src="views/ProfileView.js"></script>
-  <script src="views/NavigationView.js"></script>
 
-  <!-- ROUTER -->
-  <script src= "clientRouter.js"></script>
+  <script src="clientRouter.js"></script>
+  <!-- /build -->
+  
 
   <script>
   $(function() {

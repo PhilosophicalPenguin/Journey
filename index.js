@@ -6,19 +6,15 @@ var dataUploadRoute = require('./server/routes/dataUpload/dataUploadRoute.js');
 var multipart = require('connect-multiparty');
 var path = require('path');
 
-// require('require/server').mount(app);
-// var mongoose = require('mongoose')
-// var db_port = process.env.MONGOLAB_URI || 'mongodb://localhost/socialstocks';
-// mongoose.connect(db_port);
-// require('./middleware.js')(app, express);
-
 var port = process.env.PORT || 3000;
 
-// app.set('views', '/dist');
-// app.set('view engine', 'jade');
-
-app.use(express.static(__dirname + '/client'));
-// app.use(express.static(path.join(__dirname, './client')));
+if(process.env.PORT) {
+  app.use(express.static(__dirname + '/dist'));
+}
+else {
+ app.use(express.static(__dirname + '/client')); 
+}
+// app.use(express.static(__dirname + '/dist'));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
