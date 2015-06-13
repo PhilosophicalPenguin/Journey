@@ -106,4 +106,9 @@ gulp.task('watch', function() {
   gulp.watch([jsSrcFiles, './client/index.html', './client/styles/main.css'], ['lint', 'build']);
 });
 
-gulp.task('build', ['compressAndConcat', 'minify-css', 'copy-assets', 'process']);
+gulp.task('build', []);
+
+gulp.task('deploy', ['compressAndConcat', 'minify-css', 'copy-assets', 'process']);
+
+
+
