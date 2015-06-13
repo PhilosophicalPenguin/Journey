@@ -6,7 +6,11 @@ var gulp        = require('gulp'),
     rename      = require('gulp-rename'),
     minifyCss   = require('gulp-minify-css'),
     jasmine     = require('gulp-jasmine'),
-    nodemon     = require('gulp-nodemon');
+    nodemon     = require('gulp-nodemon'),
+    reporters   = require('jasmine-reporters');
+    // server      = require('./index.js');
+    
+    // server = require('http').createServer(app);
 
 var targetClientSourceFiles = './client/**/*.js',
     ignoreBower             = '!./client/bower_components/**/*',
@@ -79,12 +83,18 @@ gulp.task('lint', function() {
     .pipe(jshint.reporter('fail'));
 });
 
-gulp.task('server-test', function () {
-    return gulp.src('spec/test.js')
-      .pipe(jasmine());
+gulp.task('server-test', ['lint'], function () {
+    
+    return gulp.src('spec/serverSpec.js')
+      .pipe(jasmine({
+          reporter: new reporters.TapReporter()
+        }));
+      // .on('end', function () {
+      //   server.close();
+      // });
 });
 
-gulp.task('compressAndConcat', ['lint'], function() {
+gulp.task('compressAndConcat', ['lint', 'server-test'], function() {
   return gulp.src(dependencies.concat(jsSrcFiles))
     .pipe(concat('app.min.js'))
     .pipe(uglify())
@@ -109,7 +119,7 @@ gulp.task('process', function () {
    .pipe(gulp.dest('./dist'));
 });
 
-gulp.task('start-nodemon', function () {
+gulp.task('start-nodemon', ['lint', 'server-test'], function () {
   nodemon({
     script: 'index.js',
     ext: 'js'
@@ -120,7 +130,7 @@ gulp.task('watch', function() {
   gulp.watch([jsSrcFiles, './client/index.html', './client/styles/main.css'], ['build']);
 });
 
-gulp.task('test', ['lint', 'start-nodemon']);
+// gulp.task('test', ['start-nodemon']);
 
 gulp.task('deploy', ['compressAndConcat', 'minify-css', 'copy-assets', 'process']);
 
