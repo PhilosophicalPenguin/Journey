@@ -33,7 +33,7 @@ var TimelineView = Backbone.View.extend({
       .attr('font-family', 'sans-serif')
       .attr('font-weight', 'bold')
       .attr('font-size', '1.5em')
-      .attr('fill', 'black')
+      .attr('fill', 'black');
 
     this.SVG
       .append('text')
@@ -43,7 +43,7 @@ var TimelineView = Backbone.View.extend({
       .attr('font-family', 'sans-serif')
       .attr('font-weight', 'bold')
       .attr('font-size', '1.5em')
-      .attr('fill', 'black')
+      .attr('fill', 'black');
 
   },
 

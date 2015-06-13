@@ -26,16 +26,16 @@ window.NavigationView = Backbone.View.extend({
   },
 
   showMenu: function() {
-    console.log('showMenu invoked!!!');
     $(".navigateFrom").autocomplete( "widget" ).is( ":visible" );
   },
 
   renderNav: function(e, ui) {
+    var navTo;
     if(ui === undefined){
-      var navTo = $("#navigateTo").val();
+      navTo = $("#navigateTo").val();
     }
     else {
-      var navTo = ui.item.value;
+      navTo = ui.item.value;
     }
 
     var toPositions = this.model.get('positionsToAll');

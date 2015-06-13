@@ -95,7 +95,7 @@ var ProfileView = Backbone.View.extend({
 
       people.forEach(function(person){
         if(person.picURL === null){
-            person.picURL = 'http://bridgesprep.org/wp-content/uploads/2013/10/Facebook-no-profile-picture-icon-620x389.jpg'
+            person.picURL = 'http://bridgesprep.org/wp-content/uploads/2013/10/Facebook-no-profile-picture-icon-620x389.jpg';
         }
 
         var similarPeopleThumbnailCollection      = new ThumbnailsCollection(people);

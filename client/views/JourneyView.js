@@ -27,7 +27,7 @@ window.JourneyView = Backbone.View.extend({
     var currentPosition = {
       id:   this.model.attributes.position_id,
       name: this.model.attributes.position_name
-    }
+    };
     var allCurrentPositions = this.model.attributes.positions.positionsSummary;
 
     this.$el.find('.destination').hide();
