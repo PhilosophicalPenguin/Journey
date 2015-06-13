@@ -154,12 +154,24 @@ module.exports = {
             if (profile === null) {
               //create profile
 
+              var inputYear = person.current_position_start_date[0];
+
+              if(inputYear === ''){
+                inputYear = '2009'
+              } else if(typeof inputYear === 'number'){
+                inputYear = String(inputYear)
+              }
+
+              var numberReplaced = parseInt((inputYear.replace(/[^0-9]/g, '')));
+
+
+
               console.log("PERSON: ", person);
               Profile.forge({
                   'profile_name': person.full_name[0],
                   'profileURL': person.url,
                   'picURL': person.current_photo_link,
-                  'currentPosition_startDate': person.current_position_start_date[0],
+                  'currentPosition_startDate': numberReplaced,
                   'headline': person.headline[0],
                   'currentLocation': person.location[0],
                   'currentPosition_id': obj.positionID,

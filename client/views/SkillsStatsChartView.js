@@ -96,6 +96,7 @@ window.SkillsStatsChartView = Backbone.View.extend({
       plotOptions: {
         dataLabels: {
           enabled: true,
+          width: '200px'
         },
         series: {
           groupPadding: 0.1,
