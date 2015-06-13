@@ -13,6 +13,7 @@ h1.aboutUs{
   text-align: center
 
 }
+
 .memberpic {
   width: 200px;
   height: 200px;
@@ -131,4 +132,25 @@ ul {
   margin-left: 25px;
 }
 
+.nav-to-home {
+  font-size: 40px;
+  font-family: 'Expletus Sans', sans-serif;
+  position: absolute;
+  margin-top: 2%;
+}
+
+.nav-to-home-text {
+  vertical-align: middle;
+  position: absolute;
+}
+
+.nav-to-home-text a {
+  cursor: pointer;
+  color: white;
+}
+.nav-to-home-text a:hover {
+  cursor: pointer;
+  color: #598CC7;
+  text-decoration: none
+}
 

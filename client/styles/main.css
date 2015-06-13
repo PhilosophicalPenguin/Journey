@@ -378,7 +378,7 @@ button:focus, .btn:focus {outline:0;}
   height: 30px;
   margin-top: 30px;
 }
-.about-the-team a {
+.about-the-team {
   color: #FFF;
   font-size: 15px;
   text-align: right;
@@ -396,7 +396,12 @@ button:focus, .btn:focus {outline:0;}
   right: 80px;
   top: 13px;
 }
-.about-the-team a:hover {
+.about-the-team-text a {
+  cursor: pointer;
+  color: white;
+}
+
+.about-the-team-text a:hover {
   cursor: pointer;
   color: #598CC7;
 }
