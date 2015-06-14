@@ -166,9 +166,6 @@ module.exports = {
 
               var numberReplaced = parseInt((inputYear.replace(/[^0-9]/g, '')));
 
-
-
-              console.log("PERSON: ", person);
               Profile.forge({
                   'profile_name': person.full_name[0],
                   'profileURL': person.url,
@@ -464,6 +461,5 @@ module.exports = {
       });
 
     }); // End of eachSeries loop
-    console.log('Import Fin!');
   }
 }

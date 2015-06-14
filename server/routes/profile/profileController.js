@@ -36,7 +36,9 @@ module.exports = {
         resultProfile.headline          =     attributes.headline;
         resultProfile.currentCompany    =     relations.currentCompany.attributes.company_name;
         resultProfile.currentPosition   =     relations.currentPosition.attributes.position_name;
+        resultProfile.currentStart      =     attributes.currentPosition_startDate;
         resultProfile.industry          =     relations.industry.attributes.industry_name;
+        resultProfile.industryID        =     attributes.industry_id;
 
       })
       .then(function() {
@@ -152,6 +154,18 @@ module.exports = {
     .then(function(data){
       response.json(data)
     });
+  },
+
+  getSimilarPositionsFromIndustry: function(request, response){
+    var industryID = request.query.id;
+
+    new Profile({'industry_id': industryID}).fetchAll({
+        withRelated: ['currentPosition']
+      })
+      .then(function(data) {
+        console.log('profile!!!', data);
+        response.json(data)
+      });
   }
 
 };

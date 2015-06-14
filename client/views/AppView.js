@@ -6,7 +6,6 @@ window.AppView = Backbone.View.extend({
         
         var context = this;
         this.listenTo(this.model, 'positionsReceived', function(){
-            context.discoverPathsView = new DiscoverPathsView({ collection : context.model.get('positionsCollection') });
             context.render();
         });
     },

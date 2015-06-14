@@ -29,7 +29,6 @@ var SimilarPositionsView = Backbone.View.extend({
     }
 
 		return this.$el.append(previousPositions.map(function(position){
-			console.log('position number!', position[1]);
 			return ('<li class=similarposition><a href="#journey/' + position[1] + '"> ' +  position[0] + '</a> </li>');
 		}));
 

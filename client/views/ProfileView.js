@@ -18,7 +18,25 @@ var ProfileView = Backbone.View.extend({
     for(var i = 0; i < degrees.length; ++i) {
       //use method to massage data into timeline item model
       timeline_Items.push( degreeToTimelineItemModel( degrees[i] ) );
-    }
+    };
+
+    var currentYear = new Date().getFullYear();
+    console.log('this.model', this.model);
+
+    var currentPosition = {
+      type: 'Experience',
+      dates: {
+        start: this.model.get('currentStart'),
+        end: currentYear
+      },
+      image: './assets/briefcase.png',
+      text: {
+        '1': this.model.get('currentPosition'),
+        '2': this.model.get('currentCompany'),
+      }
+    };
+
+    timeline_Items.push(currentPosition);
 
     var experiences = this.model.get('experiences');
     //iterate over experience creating timeline item models

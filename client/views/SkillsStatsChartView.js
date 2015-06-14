@@ -74,6 +74,7 @@ window.SkillsStatsChartView = Backbone.View.extend({
       xAxis: {
         categories: skillsNames,
         labels: {
+          width: '100px',
           style: {
               fontSize:'16px'
           }
@@ -96,7 +97,7 @@ window.SkillsStatsChartView = Backbone.View.extend({
       plotOptions: {
         dataLabels: {
           enabled: true,
-          width: '200px'
+          width: '100px'
         },
         series: {
           groupPadding: 0.1,
