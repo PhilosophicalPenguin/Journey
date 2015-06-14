@@ -85,7 +85,7 @@ window.JourneyView = Backbone.View.extend({
 
 
     console.log('this model within viewJourney', this.model);
-    var featuredPeople = [this.model.get('currentPositionHolders')['people']];
+    var featuredPeople = [this.model.get('currentPositionHolders').people];
     this.drawThumbnails(featuredPeople);
     this.$el.find('.featuredHeader').addClass('offsetSectionTitles');
     this.$el.find('.featuredHeader h1').addClass('offsetHeader');

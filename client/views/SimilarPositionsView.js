@@ -16,7 +16,7 @@ var SimilarPositionsView = Backbone.View.extend({
 		var positions = this.model.get('similarPositions');
 
 		for(var key in positions) {
-			previousPositions.push([positions[key], key])
+			previousPositions.push([positions[key], key]);
 		}
 
 		console.log('previousPositions', previousPositions);

@@ -18,7 +18,7 @@ var ProfileView = Backbone.View.extend({
     for(var i = 0; i < degrees.length; ++i) {
       //use method to massage data into timeline item model
       timeline_Items.push( degreeToTimelineItemModel( degrees[i] ) );
-    };
+    }
 
     var currentYear = new Date().getFullYear();
     console.log('this.model', this.model);
