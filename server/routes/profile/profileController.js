@@ -3,16 +3,6 @@ var Profile   =   require('../../db_Schemas/models/profile');
 var db        =   require('../../db_Schemas/config');
 var Promise   =   require("bluebird");
 
-var forEach = function() {
-  var list = arguments[0]; // grab the collection
-  for (var i = 0; i < list.length; i++) { // iterate over collection
-    for (var j = 1; j < arguments.length; j++) { // iterate over callbacks arguments[1] .. arguments[n]
-
-      arguments[j](list[i], i, list);
-    }
-  }
-};
-
 module.exports = {
 
   // Method to retrieve profile information and relevant education & experience milestones, and skills
@@ -37,10 +27,6 @@ module.exports = {
 
         var attributes  =   profile.attributes;
         var relations   =   profile.relations;
-
-        if(attributes.picURL === null) {
-          attributes.picURL = 'http://clipartist.net/RSS/openclipart.org/2012/June/monkey_face_cartoon-999px.png';
-        }
 
         resultProfile.id                =     attributes.id;
         resultProfile.name              =     attributes.profile_name;
