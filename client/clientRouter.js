@@ -8,10 +8,6 @@ var ClientRouter = Backbone.Router.extend({
     },
 
     home: function() {
-
-
-        // var appView = new AppView();
-        // $(".mainContent").html(appView.el);
     },
 
     viewJourney: function(id) {
@@ -39,14 +35,26 @@ var ClientRouter = Backbone.Router.extend({
     },
 
     viewPaths: function(toID, fromID) {
-        var filtersCollection = new FiltersCollection(fromID, toID);
 
-        this.listenTo(filtersCollection, 'RecievedData', function() {
-          $('.innerJourneyContent').empty();
-            window.scrollTo(0, 0);
-          var filtersCollectionView = new FiltersCollectionView({ collection: filtersCollection });
-          $('.innerJourneyContent').append(filtersCollectionView.el);
+        var positionModel = new PositionModel(null, toID);
+
+        this.listenTo(positionModel, 'RecievedStats', function() {
+            $("#mainContent").empty();
+            var journeyView = new JourneyView({
+                model: positionModel
+            });
+
+            var filtersCollection = new FiltersCollection(fromID, toID);
+
+            this.listenTo(filtersCollection, 'RecievedData', function() {
+              $('.innerJourneyContent').empty();
+              window.scrollTo(0, 0);
+              var filtersCollectionView = new FiltersCollectionView({ collection: filtersCollection });
+              $('.innerJourneyContent').append(filtersCollectionView.el);
+            });
         });
+
+        positionModel.retrieveStats();
     }
 
 });

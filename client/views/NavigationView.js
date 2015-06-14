@@ -75,7 +75,7 @@ window.NavigationView = Backbone.View.extend({
       '<div class="filterField fromField ui-widget">' +
         '<label for="navigateFrom">From:</label>' +
         '<input class="navigateFrom" placeholder="Your current job...">' +
-        '<div class="showAll"></div>' +
+        // '<div class="showAll"></div>' + 
       '</div>' +
       
       '<div class="filterField">' +
