@@ -93,6 +93,12 @@ button:focus, .btn:focus {outline:0;}
   font-size: 1.8em;
   font-weight: 600;
 }
+
+.totalPeople {
+  font-size: 1.5em;
+  margin-top: 10px;
+  font-style: italic;
+}
 .sectionTitles {
   border-bottom: 1px solid #002B5E;
   padding-bottom: 15px;

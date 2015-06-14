@@ -158,13 +158,40 @@ module.exports = {
 
   getSimilarPositionsFromIndustry: function(request, response){
     var industryID = request.query.id;
+    var positions = {};
 
-    new Profile({'industry_id': industryID}).fetchAll({
-        withRelated: ['currentPosition']
-      })
+    Profile
+      .where({industry_id: industryID})
+      .fetchAll({withRelated: ['currentPosition']})
       .then(function(data) {
-        console.log('profile!!!', data);
-        response.json(data)
+
+        var hashMap = {};
+
+        data.forEach(function(profile){
+          var currentPositionID = profile.relations.currentPosition.attributes.id;
+          var currentPositionName = profile.relations.currentPosition.attributes.position_name;
+
+          if(hashMap[currentPositionID] === undefined){
+            hashMap[currentPositionID] = {
+              'id': currentPositionID,
+              'name': currentPositionName,
+              'count': 1
+            }
+          } else {
+            hashMap[currentPositionID]["count"]++;
+          }
+
+        });
+        
+        for(var hashKey in hashMap){
+          if(hashMap[hashKey].count >= 5){
+            positions[hashKey] = hashMap[hashKey]['name']
+          }
+        };
+
+      })
+      .then(function(){
+        response.json(positions);
       });
   }
 

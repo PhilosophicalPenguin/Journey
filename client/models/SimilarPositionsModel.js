@@ -10,7 +10,9 @@ var SimilarPositionsModel = Backbone.Model.extend({
 
     parse : function(data) {
         
-        this.set('similarPositions', data.slice(0, 10));
+        console.log('data before parse on similar positions model', data);
+
+        this.set('similarPositions', data);
         this.trigger('similarPositionsReceived');
 
     }

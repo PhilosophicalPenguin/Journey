@@ -61,6 +61,8 @@ window.JourneyView = Backbone.View.extend({
       '<div class="innerJourneyContent"></div>'
     );
     
+    this.$el.find('.innerJourneyContent').append('<div class="totalPeople">Based on data from ' + this.model.get('currentPositionHolders').people.length + ' ' + this.model.get('position_name') + 's</div>');
+
     this.$el.find('.innerJourneyContent').append('<div id="educationDiv"></div>');
     var newEducationView = new EducationView({model : this.model });
 
@@ -81,7 +83,9 @@ window.JourneyView = Backbone.View.extend({
       '</div>'
     );
 
-    var featuredPeople = [this.model.get('positions')[this.model.get('position_name')]];
+
+    console.log('this model within viewJourney', this.model);
+    var featuredPeople = [this.model.get('currentPositionHolders')['people']];
     this.drawThumbnails(featuredPeople);
     this.$el.find('.featuredHeader').addClass('offsetSectionTitles');
     this.$el.find('.featuredHeader h1').addClass('offsetHeader');
@@ -90,6 +94,7 @@ window.JourneyView = Backbone.View.extend({
 
   drawThumbnails: function(peopleToDraw){
 
+    console.log('Draw thumbnails called!!!');
     var newThumbnailsCollection = new ThumbnailsCollection(peopleToDraw[0]);
     var newThumbnailsCollectionView = new ThumbnailsCollectionView({collection: newThumbnailsCollection});
 

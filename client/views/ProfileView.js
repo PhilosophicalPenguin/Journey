@@ -98,8 +98,12 @@ var ProfileView = Backbone.View.extend({
 
     $rightCol.append('<div id="similarpositions-div"></div>');
 
-    var newSimilarPositionsView = new SimilarPositionsView({model: this.model});
-    this.$el.find("#similarpositions-div").append(newSimilarPositionsView.el);
+    var similarPositionsModel = new SimilarPositionsModel(this.model.get('industryID'));
+    this.listenTo(similarPositionsModel, 'similarPositionsReceived', function() {
+      var similarPositionsView  = new SimilarPositionsView({model: similarPositionsModel});
+      this.$el.find("#similarpositions-div").append(similarPositionsView.el);
+    });
+
 
     $rightCol.append('<div id="similarprofiles-div"><div class="rightColHeading">Similar Profiles</div></div>');
 

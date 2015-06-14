@@ -57,7 +57,7 @@ db.knex.schema.hasTable('schools').then(function(exists) {
   if (!exists) {
     return knex.schema.createTable('schools', function (school) {
       school.increments('id').primary();
-      school.string('school_name', 300).unique();
+      school.string('school_name', 250).unique();
       school.timestamps();
     }).then(function (table) {
       console.log('Schools table created.');
