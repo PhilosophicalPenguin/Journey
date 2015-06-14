@@ -3,9 +3,7 @@
   "version": "0.0.0",
   "description": "career path router",
   "main": "index.js",
-  "scripts": {
-    "gulp server-test"
-    },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "https://github.com/PhilosophicalPenguin/Journey.git"

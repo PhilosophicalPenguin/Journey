@@ -15,7 +15,6 @@ else {
  app.use(express.static(__dirname + '/client')); 
 }
 
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 

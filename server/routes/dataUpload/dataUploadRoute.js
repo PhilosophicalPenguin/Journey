@@ -16,6 +16,8 @@ var degreeBucket = require('./degreeBucket');
 var Promise = require("bluebird");
 var async = require("async");
 
+var DEFAULT_PIC = 'http://clipartist.net/RSS/openclipart.org/2012/June/monkey_face_cartoon-999px.png';
+
 module.exports = {
   parseUploadedData: function(req, res) {
     var data_dump_profiles = JSON.parse(fs.readFileSync(req.files.jsondata.path, "utf8"));
@@ -170,7 +172,7 @@ module.exports = {
               Profile.forge({
                   'profile_name': person.full_name[0],
                   'profileURL': person.url,
-                  'picURL': person.current_photo_link,
+                  'picURL': person.current_photo_link || DEFAULT_PIC,
                   'currentPosition_startDate': numberReplaced,
                   'headline': person.headline[0],
                   'currentLocation': person.location[0],
