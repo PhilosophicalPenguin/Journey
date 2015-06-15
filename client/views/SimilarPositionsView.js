@@ -4,14 +4,11 @@ var SimilarPositionsView = Backbone.View.extend({
 	className:"similarPositions",
 
 	initialize: function(){
-
 		this.render();
 	},
 
 	render: function(){
 
-		
-		console.log('this.model from similarpositionsView', this.model);
 		var previousPositions = [];
 		var positions = this.model.get('similarPositions');
 
@@ -19,11 +16,9 @@ var SimilarPositionsView = Backbone.View.extend({
 			previousPositions.push([positions[key], key]);
 		}
 
-		console.log('previousPositions', previousPositions);
-		previousPositions.splice(0,5);
-		// previousPositions = _.uniq(previousPositions, false, function(position){
-		// 	return JSON.stringify(position);
-		// });
+		console.log('previousPositions before splice', previousPositions);
+		previousPositions = previousPositions.splice(0,5);
+		console.log('previousPositions after', previousPositions);
 
 		if(previousPositions.length > 0){ 
       $('#similarpositions-div').append('<div class="rightColHeading">Similar Positions</div>');

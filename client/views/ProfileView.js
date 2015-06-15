@@ -21,7 +21,6 @@ var ProfileView = Backbone.View.extend({
     }
 
     var currentYear = new Date().getFullYear();
-    console.log('this.model', this.model);
 
     var currentPosition = {
       type: 'Experience',
