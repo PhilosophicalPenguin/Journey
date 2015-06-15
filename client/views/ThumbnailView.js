@@ -20,7 +20,7 @@ window.ThumbnailView = Backbone.View.extend({
         var name    = this.model.get('name') || this.model.get('profile_name');
         var id      = this.model.get('id');
         var picURL  = this.model.get('picURL');
-        var headline =  this.model.get('headline');
+        var headline =  this.model.get('headline') || "";
 
         //append DOM elements to the $el property
 

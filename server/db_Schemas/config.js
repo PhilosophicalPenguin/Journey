@@ -57,7 +57,7 @@ db.knex.schema.hasTable('schools').then(function(exists) {
   if (!exists) {
     return knex.schema.createTable('schools', function (school) {
       school.increments('id').primary();
-      school.string('school_name', 100).unique();
+      school.string('school_name', 250).unique();
       school.timestamps();
     }).then(function (table) {
       console.log('Schools table created.');
@@ -83,7 +83,7 @@ db.knex.schema.hasTable('profiles').then(function(exists) {
   if (!exists) {
     return knex.schema.createTable('profiles', function (profile) {
       profile.increments('id').primary();
-      profile.string('profileURL', 200).unique();
+      profile.string('profileURL', 200);
       profile.string('profile_name', 100);
       profile.string('picURL', 200).defaultTo('http://clipartist.net/RSS/openclipart.org/2012/June/monkey_face_cartoon-999px.png');
       profile.string('currentLocation', 100);

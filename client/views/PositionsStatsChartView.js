@@ -6,7 +6,6 @@ window.PositionsStatsChartView = Backbone.View.extend({
       this.render();
     },
 
-
     render: function() {
         var data = [];
         var names = []; //an array of tuples
@@ -28,12 +27,9 @@ window.PositionsStatsChartView = Backbone.View.extend({
             }
         }
 
-        //data[0]: [position, percentage]
         data.sort(function(a, b) {
-            return a[1] < b[1];
+            return b[1] - a[1];
         });
-
-
 
         var res = data.splice(0, 10);
 
@@ -41,7 +37,6 @@ window.PositionsStatsChartView = Backbone.View.extend({
             names.push(res[i][0]);
             percentages.push(res[i][1]);
         }
-
 
         var context = this;
 

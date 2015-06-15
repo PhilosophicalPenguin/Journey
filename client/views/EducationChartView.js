@@ -17,20 +17,29 @@ window.EducationChartView = Backbone.View.extend({
           if (key === 'Other_') {
             name = 'Other';
           }
+          if (key === 'Master_') {
+            name = 'Master';
+          }
+          if (key === 'MBA_') {
+            name = 'MBA';
+          }
+          if (key === 'Bachelor_') {
+            name = 'Bachelor';
+          }
           educationData.push([name, this.model.get('degreesAndFields')[key].length]);
         }
       }
     }
-
+    
     educationData.sort(function(a, b) {
-      return a[1] < b[1];
+      return b[1] - a[1];
     });
-    educationData = educationData.splice(0, 10);
 
+    educationData = educationData.splice(0, 8);
     var context = this;
     var chart = {
       chart: {
-        marginLeft: 30,
+        marginLeft: 0,
         type: 'pie',
         options3d: {
           enabled: false,
@@ -51,7 +60,7 @@ window.EducationChartView = Backbone.View.extend({
       },
       plotOptions: {
         pie: {
-          size: '70%',
+          size: '68%',
           innerSize: 50,
           depth: 45,
           allowPointSelect: true,
@@ -79,10 +88,10 @@ window.EducationChartView = Backbone.View.extend({
             format: '{point.name}: {point.percentage:.1f}%',
             color: '#606060',
             style: {
-              width: '200px',
+              width: '270px',
               connectorPadding: 250,
               padding: '50px',
-              lineHeight: '20px',
+              lineHeight: '16px',
               fontSize: '16px',
               fontWeight: 'normal'
             }

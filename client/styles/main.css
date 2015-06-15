@@ -31,6 +31,13 @@ button:focus, .btn:focus {outline:0;}
   padding: 0;
 }
 
+.container {
+  width: 1280px;
+}
+
+::-webkit-scrollbar { 
+    display: none; 
+}
 .splashBack{
   background: url(../assets/bg-fastroad2.jpg) no-repeat center center fixed;
   height:100vh;
@@ -55,7 +62,7 @@ button:focus, .btn:focus {outline:0;}
     margin: 50px 0 20px; }
   .splashPage input {
     background: none;
-    width: 90%;
+    width: 78%;
     border: 1px solid #FFF;
     padding: 15px 20px;
     font-size: 1.8em;
@@ -85,6 +92,12 @@ button:focus, .btn:focus {outline:0;}
 .journeyView h3 {
   font-size: 1.8em;
   font-weight: 600;
+}
+
+.totalPeople {
+  font-size: 1.5em;
+  margin-top: 10px;
+  font-style: italic;
 }
 .sectionTitles {
   border-bottom: 1px solid #002B5E;
@@ -135,10 +148,6 @@ button:focus, .btn:focus {outline:0;}
   overflow-y: scroll;
   overflow-x: hidden;
   width: 100px;
-}
-
-/*header autocomplete dropdown*/
-.ui-autocomplete {
   border: 1px solid #002B5E;
   -moz-border-radius: 0px;
   -webkit-border-radius: 0px 0px 3px 3px;
@@ -175,6 +184,7 @@ button:focus, .btn:focus {outline:0;}
   color: white;
   padding-left: 15px;
   z-index: 10;
+  margin-right: 55px;
 }
 
 .ui-autocomplete-input:focus {

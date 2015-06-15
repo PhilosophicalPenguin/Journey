@@ -65,6 +65,11 @@ var TimeBlockView = Backbone.View.extend({
         var dates = this.model.dates;
         //render a single year if start and end are equal else "STARTYEAR - ENDYEAR"
         var strDates = dates.start.toString();
+        var currentYear = new Date().getFullYear();
+        if(dates.end === currentYear) {
+            dates.end = 'present';
+        }
+
         if(dates.start !== dates.end) {
             strDates += ' - ' + dates.end;
         }

@@ -36,7 +36,9 @@ module.exports = {
         resultProfile.headline          =     attributes.headline;
         resultProfile.currentCompany    =     relations.currentCompany.attributes.company_name;
         resultProfile.currentPosition   =     relations.currentPosition.attributes.position_name;
+        resultProfile.currentStart      =     attributes.currentPosition_startDate;
         resultProfile.industry          =     relations.industry.attributes.industry_name;
+        resultProfile.industryID        =     attributes.industry_id;
 
       })
       .then(function() {
@@ -152,6 +154,45 @@ module.exports = {
     .then(function(data){
       response.json(data)
     });
+  },
+
+  getSimilarPositionsFromIndustry: function(request, response){
+    var industryID = request.query.id;
+    var positions = {};
+
+    Profile
+      .where({industry_id: industryID})
+      .fetchAll({withRelated: ['currentPosition']})
+      .then(function(data) {
+
+        var hashMap = {};
+
+        data.forEach(function(profile){
+          var currentPositionID = profile.relations.currentPosition.attributes.id;
+          var currentPositionName = profile.relations.currentPosition.attributes.position_name;
+
+          if(hashMap[currentPositionID] === undefined){
+            hashMap[currentPositionID] = {
+              'id': currentPositionID,
+              'name': currentPositionName,
+              'count': 1
+            }
+          } else {
+            hashMap[currentPositionID]["count"]++;
+          }
+
+        });
+        
+        for(var hashKey in hashMap){
+          if(hashMap[hashKey].count >= 5){
+            positions[hashKey] = hashMap[hashKey]['name']
+          }
+        };
+
+      })
+      .then(function(){
+        response.json(positions);
+      });
   }
 
 };

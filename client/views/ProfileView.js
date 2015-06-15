@@ -20,6 +20,23 @@ var ProfileView = Backbone.View.extend({
       timeline_Items.push( degreeToTimelineItemModel( degrees[i] ) );
     }
 
+    var currentYear = new Date().getFullYear();
+
+    var currentPosition = {
+      type: 'Experience',
+      dates: {
+        start: this.model.get('currentStart'),
+        end: currentYear
+      },
+      image: './assets/briefcase.png',
+      text: {
+        '1': this.model.get('currentPosition'),
+        '2': this.model.get('currentCompany'),
+      }
+    };
+
+    timeline_Items.push(currentPosition);
+
     var experiences = this.model.get('experiences');
     //iterate over experience creating timeline item models
     for(var j = 0; j < experiences.length; ++j) {
@@ -80,8 +97,12 @@ var ProfileView = Backbone.View.extend({
 
     $rightCol.append('<div id="similarpositions-div"></div>');
 
-    var newSimilarPositionsView = new SimilarPositionsView({model: this.model});
-    this.$el.find("#similarpositions-div").append(newSimilarPositionsView.el);
+    var similarPositionsModel = new SimilarPositionsModel(this.model.get('industryID'));
+    this.listenTo(similarPositionsModel, 'similarPositionsReceived', function() {
+      var similarPositionsView  = new SimilarPositionsView({model: similarPositionsModel});
+      this.$el.find("#similarpositions-div").append(similarPositionsView.el);
+    });
+
 
     $rightCol.append('<div id="similarprofiles-div"><div class="rightColHeading">Similar Profiles</div></div>');
 

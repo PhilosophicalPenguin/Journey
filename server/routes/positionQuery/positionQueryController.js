@@ -14,25 +14,29 @@ module.exports = {
       .innerJoin('positions', 'profiles.currentPosition_id', 'positions.id')
       .then(function(profiles) {
 
-        var positions = {};
-        var positionArray = [];
+        var positionsHash = {}
 
-        helpers.forEach(profiles, function(profile) {
-        var positionID = profile.currentPosition_id,
-        positionName = profile.position_name
-
-        // if position is not in object, add it as a key: value --> positionID: positionName
-        if (!positions[positionID] && positionName != null) {
-          positions[positionID] = positionName;
+        for(var i = 0; i < profiles.length; i++) {
+          var currentPosID = profiles[i].currentPosition_id
+          
+          if(positionsHash[currentPosID] === undefined) {
+            positionsHash[currentPosID] = {
+              position_id: currentPosID,
+              position_name: profiles[i].position_name,
+              count: 1
+            }
+          }
+          else {
+            positionsHash[currentPosID].count++;
+          }
         }
 
-        });
+        var positionArray = [];
 
-        for (var key in positions) {
-          positionArray.push({
-            "position_id"   : parseInt(key),
-            "position_name" : positions[key]
-          });
+        for(var key in positionsHash) {
+          if(positionsHash[key].count >= 5) {
+            positionArray.push(positionsHash[key]);
+          }
         }
 
         response.json(positionArray);
@@ -81,6 +85,9 @@ module.exports = {
           // creates object to store stats
           var result = {
             position_name : position.attributes.position_name,
+            currentPositionHolders: {
+              people: []
+            },
             degreesAndFields: {
               total: 0
             },
@@ -101,6 +108,25 @@ module.exports = {
           var tallyPositions      = makeTally('positions',        'position_name',       result);
           var tallySkills         = makeTally('skills',           'skill_name',          result);
 
+          var getCurrentPositionHolders = function(callback) {
+            Profile
+              .where({currentPosition_id: positionID})
+              .fetchAll({withRelated: ['currentPosition']})
+              .then(function(data){
+
+                data.models.forEach(function(person){
+                  var obj = {
+                    id:         person.attributes.id,
+                    name:       person.attributes.profile_name,
+                    picURL:     person.attributes.picURL,
+                    headline:   person.attributes.headline
+                  }
+                  result.currentPositionHolders.people.push(obj);
+                });
+
+                callback();
+              })
+          };
 
           var recordEducationStats = function(getEducationStatsCB) {
             queries.getEducationStats(positionID, function(data) {
@@ -128,7 +154,7 @@ module.exports = {
             });
           }
 
-
+          var getCurrentPositionHoldersAsync  = Promise.promisify(getCurrentPositionHolders);
           var getEducationStatsAsync  = Promise.promisify(recordEducationStats);
           var getExperienceStatsAsync = Promise.promisify(recordExperienceStats);
           var getSkillStatsAsync      = Promise.promisify(recordSkillStats);
@@ -138,7 +164,10 @@ module.exports = {
             return getExperienceStatsAsync()
           })
           .then(function() {
-            return getSkillStatsAsync()
+            return getCurrentPositionHoldersAsync();
+          })
+          .then(function() {
+            return getSkillStatsAsync();
           })
           .then(function() {
             response.json(result);
