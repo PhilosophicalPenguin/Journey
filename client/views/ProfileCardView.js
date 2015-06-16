@@ -5,8 +5,11 @@ var ProfileCardView = Backbone.View.extend({
   },
 
   render: function() {
+
+    var picURL = this.model.get('pic') || '../assets/monkey.png'
+
     this.$el.append(
-      '<img src="' + this.model.get('pic') + '" alt="Profile picture">' +
+      '<img src="' + picURL + '" alt="Profile picture">' +
       '<div class="profileCardInfo">' +
         '<h1>' + this.model.get('name') + '</h1>' +
         '<h2>' + this.model.get('currentPosition') + ' at ' + this.model.get('currentCompany') + '</h2>' +
