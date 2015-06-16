@@ -145,15 +145,15 @@ module.exports = {
     var industryName = request.query.industryName;
 
     db.knex
-    .select('profiles.id', 'headline', 'profile_name', 'picURL')
-    .from('industries')
-    .innerJoin('profiles', 'industries.id', 'profiles.industry_id')
-    .where({
-       industry_name: industryName
-    })
-    .then(function(data){
-      response.json(data)
-    });
+      .select('profiles.id', 'headline', 'profile_name', 'picURL')
+      .from('industries')
+      .innerJoin('profiles', 'industries.id', 'profiles.industry_id')
+      .where({
+         industry_name: industryName
+      })
+      .then(function(data){
+        response.json(data);
+      });
   },
 
   getSimilarPositionsFromIndustry: function(request, response){

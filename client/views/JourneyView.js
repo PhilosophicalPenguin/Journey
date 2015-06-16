@@ -76,33 +76,27 @@ window.JourneyView = Backbone.View.extend({
     this.$el.find('.row').append(
       '<div class="col-md-4 rightCol">' + 
         '<div class="sectionTitles featuredHeader">' + 
-          '<h2 class="hideCol">'+ this.model.get('position_name') + 's with</h2>' +
-          '<h1 class="">Featured ' + this.model.get('position_name') + 's</h1>' +
+          '<h2>'+ this.model.get('position_name') + 's with</h2>' +
+          '<h1 class="">' + this.model.get('position_name') + '</h1>' +
         '</div>' +
         '<div class="profilesColumn"></div>' +
       '</div>'
     );
 
-
-    console.log('this model within viewJourney', this.model);
     var featuredPeople = [this.model.get('currentPositionHolders').people];
     this.drawThumbnails(featuredPeople);
-    this.$el.find('.featuredHeader').addClass('offsetSectionTitles');
-    this.$el.find('.featuredHeader h1').addClass('offsetHeader');
-    this.$el.find('.featuredHeader h2').addClass('hideCol');
+    this.$el.find('.featuredHeader h2').text('Featured Profiles');
   },
 
   drawThumbnails: function(peopleToDraw){
 
-    console.log('Draw thumbnails called!!!');
     var newThumbnailsCollection = new ThumbnailsCollection(peopleToDraw[0]);
     var newThumbnailsCollectionView = new ThumbnailsCollectionView({collection: newThumbnailsCollection});
 
     this.$el.find('.profilesColumn').append(newThumbnailsCollectionView.el);
     this.$el.find('.featuredHeader h1').text(this.model.get('positionFilter'));
-    this.$el.find('.featuredHeader').removeClass('offsetSectionTitles');
     this.$el.find('.featuredHeader h1').removeClass('offsetHeader');
-    this.$el.find('.featuredHeader h2').removeClass('hideCol');
+    this.$el.find('.featuredHeader h2').html(this.model.get('position_name') + 's with');
 
   }
 

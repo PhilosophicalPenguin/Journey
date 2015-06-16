@@ -106,7 +106,6 @@ var ProfileView = Backbone.View.extend({
 
     $rightCol.append('<div id="similarprofiles-div"><div class="rightColHeading">Similar Profiles</div></div>');
 
-
     var context = this;
     var newSimilarPeopleModel = new SimilarPeopleModel(this.model.get('industry'));
 
@@ -114,15 +113,14 @@ var ProfileView = Backbone.View.extend({
 
       var people = newSimilarPeopleModel.get('similarPeople');
 
-      people.forEach(function(person){
-        if(person.picURL === null){
-            person.picURL = 'http://bridgesprep.org/wp-content/uploads/2013/10/Facebook-no-profile-picture-icon-620x389.jpg';
+      for (var i = 0; i < people.length; i++) {
+        if(people[i].profile_name === context.model.get('name')){
+            people.splice(i, 1);
         }
-
-        var similarPeopleThumbnailCollection      = new ThumbnailsCollection(people);
-        var similarPeopleThumbnailsCollectionView = new ThumbnailsCollectionView({collection: similarPeopleThumbnailCollection});
-        $rightCol.append(similarPeopleThumbnailsCollectionView.el);
-      });
+      }
+      var similarPeopleThumbnailCollection      = new ThumbnailsCollection(people);
+      var similarPeopleThumbnailsCollectionView = new ThumbnailsCollectionView({collection: similarPeopleThumbnailCollection});
+      $rightCol.append(similarPeopleThumbnailsCollectionView.el);
     });
   }
 });

@@ -6,8 +6,6 @@ describe('Journey Server', function() {
 
     it('should respond with stats relating to a position', function(done) {
         request('http://localhost:3000/api/queryPositions/getStats?id=9', function(error, response, body) {
-            expect(body).toContain('fieldsOfStudy');
-            expect(body).toContain('schools');
             expect(body).toContain('degreesAndFields');
             expect(body).toContain('companies');
             expect(body).toContain('position_name');

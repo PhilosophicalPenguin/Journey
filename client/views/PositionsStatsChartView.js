@@ -40,8 +40,24 @@ window.PositionsStatsChartView = Backbone.View.extend({
 
         var context = this;
 
-        // console.log("xAxis categories passed to table:", names);
-        // console.log("yAxis percentages passed to table:", percentages);
+        function shuffle(array) {
+          var currentIndex = array.length,
+              temporaryValue, randomIndex;
+
+          // While there remain elements to shuffle...
+          while (0 !== currentIndex) {
+
+            // Pick a remaining element...
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex -= 1;
+
+            // And swap it with the current element.
+            temporaryValue = array[currentIndex];
+            array[currentIndex] = array[randomIndex];
+            array[randomIndex] = temporaryValue;
+          }
+          return array;
+        }
 
         var previousPoint = null;
         var chart = {
@@ -95,7 +111,9 @@ window.PositionsStatsChartView = Backbone.View.extend({
                     events: {
                       click: function(event) {
                         context.model.set('positionFilter', this.category);
-                        context.model.createNewThumbnails(context.model.get('positions')[this.category].slice(0, 10));
+                        var profilesColumn = shuffle(context.model.get('positions')[this.category]);
+                        context.model.createNewThumbnails(profilesColumn);
+
                         if (previousPoint) {
                           previousPoint.update({
                             color: '#7cb5ec'

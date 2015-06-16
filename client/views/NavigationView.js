@@ -8,11 +8,19 @@ window.NavigationView = Backbone.View.extend({
     this.render();
 
     this.$el.find("#navigateTo").autocomplete({
-      source: this.model.attributes.positionsToNames
+      source: this.model.attributes.positionsToNames,
+      // minLength: 0
     });
+    //  .focus(function(){
+    //   $(this).autocomplete('search', '');
+    // });
 
     this.$el.find(".navigateFrom").autocomplete({
-      source: this.model.attributes.positionsFromNames
+      source: this.model.attributes.positionsFromNames,
+      minLength: 0
+    })
+    .focus(function(){
+      $(this).autocomplete('search', '');
     });
 
   },
@@ -22,6 +30,9 @@ window.NavigationView = Backbone.View.extend({
     'keyup' : 'checkVal',
     'change #navigateTo' : 'renderNav',
     'autocompleteselect #navigateTo': 'renderNav',
+    'autocompleteselect' : function(){
+      $('.showPaths').removeAttr("disabled");
+    },
     'click .showAll' : 'showMenu'
   },
 

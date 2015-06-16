@@ -28,7 +28,6 @@ window.AppModel = Backbone.Model.extend ({
 
         this.listenTo(this.get('positionsCollection'), 'view', function(position) {
             var id = position.get('position_id');
-            console.log('view heard by appmodel', id, position);
             clientRouter.navigate("journey/" + id, true);
         });
     },
