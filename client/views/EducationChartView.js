@@ -30,6 +30,25 @@ window.EducationChartView = Backbone.View.extend({
         }
       }
     }
+
+    function shuffle(array) {
+      var currentIndex = array.length,
+          temporaryValue, randomIndex;
+
+      // While there remain elements to shuffle...
+      while (0 !== currentIndex) {
+
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+      }
+      return array;
+    }
     
     educationData.sort(function(a, b) {
       return b[1] - a[1];
@@ -68,15 +87,23 @@ window.EducationChartView = Backbone.View.extend({
           point: {
             events: {
               click: function(event) {
-                console.log('this from edu', this);
-                console.log("this.name: ", this.name);
-                console.log("context.model.get('degreesAndFields')", context.model.get('degreesAndFields'));
+                
                 context.model.set('positionFilter', this.name);   //Other
 
                 if(this.name === "Other"){
-                  context.model.createNewThumbnails(context.model.get('degreesAndFields').Other_.slice(0, 10));                
-                } else {
-                  context.model.createNewThumbnails(context.model.get('degreesAndFields')[this.name.replace(" in ", "_")].slice(0, 10));                
+                  context.model.createNewThumbnails(shuffle(context.model.get('degreesAndFields').Other_));
+                }
+                else if (this.name === "Bachelor") {
+                  context.model.createNewThumbnails(shuffle(context.model.get('degreesAndFields').Bachelor_));
+                }
+                else if (this.name === "Master") {
+                  context.model.createNewThumbnails(shuffle(context.model.get('degreesAndFields').Master_));
+                }
+                else if (this.name === "MBA") {
+                  context.model.createNewThumbnails(shuffle(context.model.get('degreesAndFields').MBA_)); 
+                }
+                else {
+                  context.model.createNewThumbnails(shuffle(context.model.get('degreesAndFields')[this.name.replace(" in ", "_")]));
                 }
 
               }

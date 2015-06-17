@@ -6,8 +6,30 @@ window.AutocompleteView = Backbone.View.extend({
 
   initialize: function() {
 
+    var termTemplate = "<span class='ui-autocomplete-term'>%s</span>";
+
+    var context = this;
+
     this.$el.autocomplete({
       source: this.model.get('availablePositions'),
+      minLength: 0,
+      open: function(e,ui) {
+        var
+          acData      = $(this).data('ui-autocomplete'),
+          styledTerm  = termTemplate.replace('%s', acData.term);
+          
+          acData
+            .menu
+            .element
+            .find('li')
+            .each(function() {
+              var me = $(this);
+              me.html( me.text().replace(acData.term, styledTerm) );
+            });
+        }
+    })
+    .focus(function(){
+      $(this).autocomplete('search', '');
     });
 
     // wait until positions received from the server
@@ -23,7 +45,11 @@ window.AutocompleteView = Backbone.View.extend({
       // set the source for the autocomplete widget to available positions
       this.$el.autocomplete({
         source: this.model.get('availablePositions'),
+        minLength: 0
+      }).focus(function(){
+        $(this).autocomplete('search', '');
       });
+      
     });
 
 

@@ -17,12 +17,17 @@ module.exports = {
         var positionsHash = {}
 
         for(var i = 0; i < profiles.length; i++) {
-          var currentPosID = profiles[i].currentPosition_id
+          var currentPosID    = profiles[i].currentPosition_id;
+          var currentPosName  = profiles[i].position_name;
           
+          if(currentPosName !== null) {
+            currentPosName = currentPosName.toLowerCase();
+          }
+                    
           if(positionsHash[currentPosID] === undefined) {
             positionsHash[currentPosID] = {
               position_id: currentPosID,
-              position_name: profiles[i].position_name,
+              position_name: currentPosName,
               count: 1
             }
           }
@@ -38,7 +43,6 @@ module.exports = {
             positionArray.push(positionsHash[key]);
           }
         }
-
         response.json(positionArray);
       });
   },
@@ -79,8 +83,9 @@ module.exports = {
             errorMessage: 'That position does not exist in our database.'
           });
         } else { //found the position requested
-          var positionID  =   position.attributes.id;
-          var filterID    =   request.query.filter;
+          var positionID    =   position.attributes.id;
+          var posName  =   position.attributes.position_name;
+          var filterID      =   request.query.filter;
 
           // creates object to store stats
           var result = {
@@ -102,6 +107,8 @@ module.exports = {
               total: 0
             }
           };
+
+          result['positions'].positionsSummary[posName] = positionID;
 
           var tallyDegreeAndField = makeTally('degreesAndFields', 'degreeAndField_name', result);
           var tallyCompanies      = makeTally('companies',        'company_name',        result);
@@ -161,6 +168,8 @@ module.exports = {
 
 
           getEducationStatsAsync().then(function() {
+
+            // result[subject].positionsSummary[positionName] = positionID;
             return getExperienceStatsAsync()
           })
           .then(function() {
@@ -238,10 +247,9 @@ module.exports = {
       .andWhere({ position_id: fromID })
       .then(function(data) {
 
-
         for(var i = 0; i < data.length; i++) {
           var profile = data[i];
-        console.log("PROFILE IN GET FILTER PROFILES", profile);
+
           var filteredProfile = {
             id:                 profile.profile_id,
             name:               profile.profile_name,

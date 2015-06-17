@@ -57,7 +57,7 @@ button:focus, .btn:focus {outline:0;}
     margin-top: 100px;
     }
   .splashPage h2 {
-    font-size: 2em;
+    font-size: 2.5em;
     text-align: center;
     margin: 50px 0 20px; }
   .splashPage input {
@@ -79,8 +79,9 @@ button:focus, .btn:focus {outline:0;}
   margin: 50px 0 100px;
   border-top: 1px solid #C5C5C5;
   padding-top: 50px; }
-  .discoverPaths h2 {
-    margin-bottom: 30px; }
+.discoverPaths h2 {
+  margin-bottom: 30px;
+}
 
 
 /* JOURNEY VIEW */
@@ -102,7 +103,6 @@ button:focus, .btn:focus {outline:0;}
 .sectionTitles {
   border-bottom: 1px solid #002B5E;
   padding-bottom: 15px;
-  height: 60px;
 }
 .sectionTitles h1 {
   font-size: 2.3em;
@@ -168,7 +168,10 @@ button:focus, .btn:focus {outline:0;}
 .ui-state-focus {
   background-color: #E9E9E9;
   outline: none;
-
+}
+.ui-autocomplete-term {
+  font-weight: bold;
+  color: #252551;
 }
 
 .header-search.ui-autocomplete-input {
@@ -323,9 +326,8 @@ button:focus, .btn:focus {outline:0;}
 }
 .filteredPaths li {
   cursor: pointer;
-  height: 100px;
   border-bottom: 1px solid #E7E7E7;
-  padding: 15px 10px;
+  padding: 15px 10px 15px;
 }
 .filteredPaths li:hover {
   background-color: #EDEDED;
@@ -350,6 +352,9 @@ button:focus, .btn:focus {outline:0;}
   font-style: italic;
   font-weight: 300;
 }
+.filteredPaths h4 {
+  font-weight: bold;
+}
 .clearResults {
   display: inline-block;
   float: right;
@@ -362,7 +367,6 @@ button:focus, .btn:focus {outline:0;}
 .filterProfileInfo, .filterFrom, .filterTo {
   display: inline-block;
   margin-right: 20px;
-  height: 70px;
   width: 175px;
   vertical-align: top;
   padding-top: 8px;
@@ -372,6 +376,9 @@ button:focus, .btn:focus {outline:0;}
 }
 .filterFrom {
   margin-right: 10px;
+}
+.filterfromposition {
+  font-weight: bold;
 }
 .filterTo {
   width: 195px;

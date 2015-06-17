@@ -15,8 +15,6 @@ window.FilterView = Backbone.View.extend({
 
   render: function() {
 
-    console.log("THIS.MODEL IN FILTERVIEW: ", this.model);
-
     var name          =   this.model.get('name'),
         picURL        =   this.model.get('picURL') || 'http://clipartist.net/RSS/openclipart.org/2012/June/monkey_face_cartoon-999px.png',
         location      =   this.model.get('currentLocation'),
@@ -36,7 +34,7 @@ window.FilterView = Backbone.View.extend({
       '</div>' +
 
       '<div class="filterFrom">' +
-        '<h2>' + fromPosition + '</h2>' +
+        '<h4>' + fromPosition + '</h4>' +
         '<h2>' + fromCompany + '</h2>' +
         '<h3>' + fromStart + ' - ' + fromEnd + '</h3>' +
       '</div>' +
@@ -44,12 +42,11 @@ window.FilterView = Backbone.View.extend({
       '<div class="filterArrow"></div>' +
 
       '<div class="filterTo">' +
-        '<h2>' + toPosition + '</h2>' +
+        '<h4>' + toPosition + '</h4>' +
         '<h3>' + toStart + ' - ' + 'present</h3>' +
       '</div>'
 
       );
-
   },
 
   sendToProfile: function() {

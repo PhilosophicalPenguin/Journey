@@ -15,7 +15,6 @@ window.NavigationModel = Backbone.Model.extend({
       currentPosition:      currentPosition.name
     });
 
-    console.log('allPositions!!!', allPositions);
     var context = this;
 
     var positionsToAll    = this.get('positionsToAll');
@@ -30,14 +29,12 @@ window.NavigationModel = Backbone.Model.extend({
     this.set('positionsFromAll', data);
 
     var positionsFromAll  = this.get('positionsFromAll');
-
     for(var key in positionsFromAll) {
       this.get('positionsFromNames').push(key);
     }
   },
 
   fetchFilter: function(fromName, toName) {
-    console.log('this model!!!', toName);
     var toID = this.get('positionsToAll')[toName];
     var fromID = this.get('positionsFromAll')[fromName];
 
